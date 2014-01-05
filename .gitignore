@@ -129,8 +129,10 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # SQL Server files
-Mundialito/App_Data/*.mdf
-Mundialito/App_Data/*.ldf
+#App_Data/*.mdf
+#App_Data/*.ldf
+*.mdf
+*.ldf
 
 
 #LightSwitch generated files
