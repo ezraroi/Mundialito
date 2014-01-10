@@ -6,27 +6,32 @@ angular.module('mundialitoApp')
         restrict: 'A',
         link: function ($scope, element, attrs) {
             var prevDisp = element.css('display')
-                , userRole
+                , userRole = ""
                 , accessLevel;
 
             $scope.user = Security.user;
             $scope.$watch('user', function (user) {
-                if (user.roles)
+                if ((user === undefined) || (user === null)) {
+                    userRole = "Public"
+                } else if (user.roles) {
                     userRole = user.roles;
+                } else {
+                    userRole = "Public"
+                }
                 updateCSS();
             }, true);
 
             attrs.$observe('accessLevel', function (al) {
-                if (al) accessLevel = $scope.$eval(al);
+                if (al) accessLevel = al;
                 updateCSS();
             });
 
             function updateCSS() {
                 if (userRole && accessLevel) {
-                    if (!Auth.authorize(accessLevel, userRole))
-                        element.css('display', 'none');
-                    else
+                    if (userRole === accessLevel)
                         element.css('display', prevDisp);
+                    else
+                        element.css('display', 'none');
                 }
             }
         }

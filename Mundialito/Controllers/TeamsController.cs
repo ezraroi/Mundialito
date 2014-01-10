@@ -46,7 +46,9 @@ namespace Mundialito.Controllers
         [Authorize(Roles = "Admin")]
         public Team PostTeam(Team team)
         {
-            return teamsRepository.InsertTeam(team);
+            var res = teamsRepository.InsertTeam(team);
+            teamsRepository.Save();
+            return res;
         }
 
     }

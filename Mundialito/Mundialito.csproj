@@ -231,6 +231,7 @@
     <Content Include="App\Controllers\JoinCtrl.js" />
     <Content Include="App\Controllers\LoginCtrl.js" />
     <Content Include="App\Controllers\ManageCtrl.js" />
+    <Content Include="App\Controllers\TeamsCtrl.js" />
     <Content Include="App\Directives\accessLevel.js" />
     <Content Include="App\Directives\confirmPassword.js" />
     <Content Include="App\Services\Alert.js" />
@@ -239,8 +240,10 @@
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\flags.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Img\flagsp.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -644,6 +647,7 @@
     <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\_Teams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

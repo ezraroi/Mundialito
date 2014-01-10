@@ -1,0 +1,36 @@
+﻿<script type="text/ng-template" id="/teams">
+    <div class="container" ng-controller="TeamsCtrl">
+        <br/>
+        <br/>
+        <div class="row" ng-hide="message == null">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <p class="lead"><i class="fa fa-spin fa-spinner fa-lg"></i>  <span ng-bind="message"></span></p>
+            </div>
+        </div>
+        <div class="row" ng-show="message == null">
+            <div class="col-md-10">
+                <div class="list-group">
+                    <a href="/teams/{{team.TeamId}}" class="list-group-item" ng-repeat="team in teams">
+                        <span class="pull-right"><img ng-src="{{team.Flag}}" style="width: 60%;" /></span>
+                        {{team.Name}} ({{team.ShortName}})
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" ng-show="message == null" data-access-level="Admin">
+            <!--<div class="row" ng-show="message == null" ng-show="security.user.roles = 'Admin'">-->
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Add New Team</div>
+                    <div class="panel-body">
+                        <form name="addTeamForm" ng-submit="addTeam()">
+                            <auto:fields fields="schema" data="team"></auto:fields>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block col-md-1" ng-class="{'btn-primary':addTeamForm.$valid}" tabindex="100">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
