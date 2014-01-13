@@ -1,10 +1,10 @@
 ﻿'use strict';
 angular.module('mundialitoApp')
-.factory('ErrorHandler', ['$rootScope', 'Alert', function ($rootScope, Alert) {
+.factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', function ($rootScope, $log, Alert) {
     var ErrorHandler = this;
 
     ErrorHandler.handle = function (data, status, headers, config) {
-        console.log(data);
+        $log.log(data);
         var message = [];
         if (data.message) {
             message.push("<strong>" + data.message + "</strong>");

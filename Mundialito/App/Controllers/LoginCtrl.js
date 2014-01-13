@@ -1,6 +1,9 @@
 ﻿angular.module('mundialitoApp')
-.controller('LoginCtrl', ['$scope', 'security', function ($scope, Security) {
+.controller('LoginCtrl', ['$scope', '$rootScope' , 'security', function ($scope, $rootScope, Security) {
     Security.redirectAuthenticated('/');
+
+    $rootScope.mundialitoApp.authenticating = false;
+
     var LoginModel = function () {
         return {
             username: '',
@@ -12,10 +15,11 @@
     $scope.user = new LoginModel();
     $scope.login = function () {
         if (!$scope.loginForm.$valid) return;
-        $scope.message = "Processing Login...";
-        Security.login(angular.copy($scope.user)).catch(function (data) {
-            $scope.message = null;
+        $rootScope.mundialitoApp.message = "Processing Login...";
+        Security.login(angular.copy($scope.user)).finally(function () {
+            $rootScope.mundialitoApp.message = null;
         });
+        
     }
     $scope.schema = [
             { property: 'username', type: 'text', attr: { ngMinlength: 4, required: true } },

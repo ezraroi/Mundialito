@@ -1,0 +1,51 @@
+﻿<script type="text/ng-template" id="/teams/id">
+    <div class="container" ng-controller="TeamCtrl">
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-10 col-xs-10">
+                <div class="media">
+                    <span class="pull-left">
+                        <img class="media-object" ng-src="{{team.Logo}}">
+                    </span>
+                    <div class="media-body">
+                        <h4>{{team.Name}} ({{team.ShortName}})</h4>
+                        <button type="button" class="btn btn-info btn-xs" data-access-level="Admin" ng-click="showEditForm = !showEditForm">
+                            <i class="fa fa-pencil-square-o"></i> <span mundialito-toggle-text true-label="Hide Edit Form" false-label="Edit Team" varieble="showEditForm">Edit Team</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-xs-2">
+                <span class="pull-right">
+                    <img class="media-object" ng-src="{{team.Flag}}">
+                </span>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row" data-access-level="Admin" ng-show="showEditForm" cg-busy="{tracker:'editTeam'}">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Edit Team Details</div>
+                    <div class="panel-body">
+                        <form name="editTeamForm">
+                            <auto:fields fields="schema" data="updatedTeam"></auto:fields>
+                            <button type="submit" edit-team-button class="btn btn-primary btn-lg btn-block" ng-class="{'btn-primary':editTeamForm.$valid}" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-success" cg-busy="{tracker:'getTeamGames'}">
+                    <div class="panel-heading">Games</div>
+                    <div class="panel-body">
+                        <mundialito-games info="games"></mundialito-games>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</script>

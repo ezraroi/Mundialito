@@ -5,6 +5,7 @@ using System.Web.Http;
 using Mundialito.DAL.Teams;
 using Mundialito.Models;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Mundialito.Controllers
 {
@@ -37,7 +38,7 @@ namespace Mundialito.Controllers
         }
 
         [Route("{id}/Games")]
-        public IEnumerable<Game>  GetTeamGames(int id)
+        public IEnumerable<Game> GetTeamGames(int id)
         {
             return teamsRepository.GetTeamGames(id);
         }
@@ -49,6 +50,23 @@ namespace Mundialito.Controllers
             var res = teamsRepository.InsertTeam(team);
             teamsRepository.Save();
             return res;
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public Team PutTeam(int id,Team team)
+        {
+            teamsRepository.UpdateTeam(team);
+            teamsRepository.Save();
+            return team;
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public void DeleteTeam(int id)
+        {
+            teamsRepository.DeleteTeam(id);
+            teamsRepository.Save();
         }
 
     }

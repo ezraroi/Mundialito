@@ -14,18 +14,14 @@ namespace Mundialito.Models
         public Team AwayTeam { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
 
-        [Required]
-        [DataType(DataType.Time)]
-        public TimeSpan Time { get; set; }
-
         [Range(0,10)]
-        public int HomeScore { get; set; }
+        public int? HomeScore { get; set; }
 
         [Range(0, 10)]
-        public int AwayScore { get; set; }
+        public int? AwayScore { get; set; }
 
         [Required]
         public Stadium Stadium { get; set; }
@@ -36,7 +32,16 @@ namespace Mundialito.Models
             {
                 var date = DateTime.Now.Date;
                 var time = DateTime.Now.TimeOfDay;
-                return (Date > date) || (Date == date && Time > time);
+                return (Date.Date > date) || (Date.Date == date && Date.TimeOfDay > time);
+            }
+        }
+
+        public bool IsPendingUpdate
+        {
+            get
+            {
+                if (IsOpen) return false;
+                return HomeScore == null && AwayScore == null;
             }
         }
 
@@ -46,6 +51,8 @@ namespace Mundialito.Models
             {
                 if (!IsOpen)
                 {
+                    if (IsPendingUpdate)
+                        return "Pending Update";
                     if (HomeScore == AwayScore) return "X";
                     if (HomeScore > AwayScore) return "1";
                     return "2";

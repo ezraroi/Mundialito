@@ -41,8 +41,7 @@ namespace Mundialito.DAL
                 AwayTeam = mTelAviv,
                 HomeScore = 3,
                 AwayScore = 0,
-                Time = DateTime.Now.TimeOfDay,
-                Date = DateTime.Now.Date,
+                Date = DateTime.Now,
                 Stadium = new Stadium
                 {
                     Capacity = 15000,
@@ -56,8 +55,7 @@ namespace Mundialito.DAL
                 AwayTeam = mTelAviv,
                 HomeScore = 0,
                 AwayScore = 0,
-                Time = DateTime.Now.TimeOfDay,
-                Date = DateTime.Now.Date.AddDays(2),
+                Date = DateTime.Now.AddDays(2),
                 Stadium = stadium
             });
         }

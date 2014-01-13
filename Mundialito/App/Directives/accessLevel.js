@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 angular.module('mundialitoApp')
-.directive('accessLevel', ['security', function (Security) {
+.directive('accessLevel', ['$log','security', function ($log,Security) {
     return {
         restrict: 'A',
         link: function ($scope, element, attrs) {
@@ -9,18 +9,30 @@ angular.module('mundialitoApp')
                 , userRole = ""
                 , accessLevel;
 
-            $scope.user = Security.user;
-            $scope.$watch('user', function (user) {
-                if ((user === undefined) || (user === null)) {
-                    userRole = "Public"
-                } else if (user.roles) {
-                    userRole = user.roles;
-                } else {
-                    userRole = "Public"
-                }
-                updateCSS();
-            }, true);
+            
+            $scope.$watch(
+              function () {
+                  return Security.user;
+              },
 
+              function (newValue, oldValue) {
+                  
+                  if (newValue == oldValue)
+                      return;
+                  $scope.user = newValue;
+                  if (($scope.user === undefined) || ($scope.user === null)) {
+                      userRole = "Public"
+                  } else if ($scope.user.roles) {
+                      $log.debug('Security.user has been changed:' + $scope.user.userName);
+                      userRole = $scope.user.roles;
+                  } else {
+                      userRole = "Public"
+                  }
+                  updateCSS();
+              },
+              true
+            );
+           
             attrs.$observe('accessLevel', function (al) {
                 if (al) accessLevel = al;
                 updateCSS();

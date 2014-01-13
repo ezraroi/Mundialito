@@ -6,71 +6,47 @@ using Mundialito.Models;
 
 namespace Mundialito.DAL.Teams
 {
-    public class TeamsRepository : ITeamsRepository
+    public class TeamsRepository : GenericRepository<Team>,ITeamsRepository
     {
-        private readonly MundialitoContext context = new MundialitoContext();
-        private bool disposed = false;
+
+        public TeamsRepository()
+            : base(new MundialitoContext())
+        {
+        }
 
         #region Implementation of ITeamsRepository
 
         public IEnumerable<Team> GetTeams()
         {
-            return context.Teams;
+            return Get();
         }
 
         public IEnumerable<Game> GetTeamGames(int teamId)
         {
-            return context.Games.Where(game => game.HomeTeam.TeamId == teamId || game.AwayTeam.TeamId == teamId).Include(game => game.AwayTeam).Include(game => game.HomeTeam);
+            return Context.Games.Where(game => game.HomeTeam.TeamId == teamId || game.AwayTeam.TeamId == teamId).Include(game => game.AwayTeam).Include(game => game.HomeTeam).Include(game => game.Stadium);
         }
 
         public Team GetTeam(int teamId)
         {
-            return context.Teams.Find(teamId);
+            return GetByID(teamId);
         }
 
         public Team InsertTeam(Team team)
         {
-            return context.Teams.Add(team);
+            return Insert(team);
         }
 
         public void DeleteTeam(int teamId)
         {
-            var team = GetTeam(teamId);
-            context.Teams.Remove(team);
+            Delete(teamId);
         }
 
         public void UpdateTeam(Team team)
         {
-            context.Entry(team).State = EntityState.Modified; 
+            Update(team);
         }
-
-        public void Save()
-        {
-            context.SaveChanges(); 
-        }
-
+       
         #endregion
-
-        #region Implementation of IDisposable
-        
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        } 
-
-        #endregion
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            disposed = true;
-        }
+       
     }
 }

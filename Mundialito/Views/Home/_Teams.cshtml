@@ -2,31 +2,39 @@
     <div class="container" ng-controller="TeamsCtrl">
         <br/>
         <br/>
-        <div class="row" ng-hide="message == null">
-            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                <p class="lead"><i class="fa fa-spin fa-spinner fa-lg"></i>  <span ng-bind="message"></span></p>
-            </div>
-        </div>
-        <div class="row" ng-show="message == null">
+        <div class="row">
             <div class="col-md-10">
-                <div class="list-group">
-                    <a href="/teams/{{team.TeamId}}" class="list-group-item" ng-repeat="team in teams">
-                        <span class="pull-right"><img ng-src="{{team.Flag}}" style="width: 60%;" /></span>
-                        {{team.Name}} ({{team.ShortName}})
-                    </a>
+                <div class="list-group" cg-busy="{tracker:'getTeams'}">
+                    <div class=" row" ng-repeat="team in teams | orderBy:Name">
+                        <div class="col-md-11 col-xs-11">
+                            <a href="/teams/{{team.TeamId}}" class="list-group-item">
+                                <span class="pull-left"><img ng-src="{{team.Flag}}" style="width: 60%;" /></span>
+                                {{team.Name}} ({{team.ShortName}})
+                            </a>
+                        </div>
+                        <div class="col-md-1 col-xs-1" data-access-level="Admin">
+                            <button type="button" title="Delete Team" class="btn btn-default btn-xs" delete-team-button tabindex="100"><i class="fa fa-times-circle"></i></button>
+                        </div>
+                    </div>
+                    <div class="row" data-access-level="Admin">
+                        <div class="col-md-11 col-xs-11" ng-click="showNewTeam = true">
+                            <a href="" class="list-group-item">
+                                <i class="fa fa-plus-circle"></i> Add New Team
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="row" ng-show="message == null" data-access-level="Admin">
-            <!--<div class="row" ng-show="message == null" ng-show="security.user.roles = 'Admin'">-->
+        <div class="row" data-access-level="Admin" ng-show="showNewTeam" cg-busy="{tracker:'addTeam'}">
             <div class="col-md-10">
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">Add New Team</div>
                     <div class="panel-body">
-                        <form name="addTeamForm" ng-submit="addTeam()">
+                        <form name="addTeamForm">
                             <auto:fields fields="schema" data="team"></auto:fields>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block col-md-1" ng-class="{'btn-primary':addTeamForm.$valid}" tabindex="100">Add</button>
+                            <button type="submit" add-team-button class="btn btn-primary btn-lg btn-block" ng-class="{'btn-primary':addTeamForm.$valid}" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
                         </form>
                     </div>
                 </div>

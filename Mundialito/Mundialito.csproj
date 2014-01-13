@@ -231,13 +231,20 @@
     <Content Include="App\Controllers\JoinCtrl.js" />
     <Content Include="App\Controllers\LoginCtrl.js" />
     <Content Include="App\Controllers\ManageCtrl.js" />
+    <Content Include="App\Controllers\TeamCtrl.js" />
     <Content Include="App\Controllers\TeamsCtrl.js" />
     <Content Include="App\Directives\accessLevel.js" />
     <Content Include="App\Directives\confirmPassword.js" />
+    <Content Include="App\Directives\gamesDirectives.js" />
+    <Content Include="App\Directives\mundialitoDirectives.js" />
+    <Content Include="App\Directives\teamsDirectives.js" />
+    <Content Include="App\gamesTemplate.html" />
     <Content Include="App\Services\Alert.js" />
     <Content Include="App\Services\ErrorHandler.js" />
+    <Content Include="App\Services\TeamsService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
+    <Content Include="Content\angular-busy.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flags.css" />
@@ -310,6 +317,10 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-busy.js" />
+    <Content Include="Scripts\angular-busy.min.js">
+      <DependentUpon>angular-busy.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
@@ -363,6 +374,9 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\angular-busy.min.js.map">
+      <DependentUpon>angular-busy.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
@@ -621,6 +635,10 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\promise-tracker.js" />
+    <Content Include="Scripts\promise-tracker.min.js">
+      <DependentUpon>promise-tracker.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ui-bootstrap-0.9.0.js" />
@@ -628,6 +646,7 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.min.js" />
     <Content Include="Scripts\WebApiTestClient.js" />
+    <Content Include="App\gameTemplate.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -648,6 +667,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\_Teams.cshtml" />
+    <Content Include="Views\Home\_Team.cshtml" />
+    <Content Include="Scripts\promise-tracker.min.js.map">
+      <DependentUpon>promise-tracker.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

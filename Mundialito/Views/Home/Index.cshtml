@@ -14,8 +14,8 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="loading" ng-show="mundialitoApp.loading"><h3><i class="fa fa-spin fa-spinner fa-lg"></i>  Loading Mundialito...</h3></div>
-    <div class="body-content ng-cloak" ng-hide="mundialitoApp.loading">
+    <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating"><h3><i class="fa fa-spin fa-spinner fa-lg"></i>  Loading Mundialito...</h3></div>
+    <div class="body-content ng-cloak" ng-hide="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -38,23 +38,27 @@
                                 <span class="glyphicon glyphicon-user"></span> {{security.user.userName}} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/manage"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
+                                <li><a href="/manage"><span class="glyphicon glyphicon-cog"></span> Account</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#" ng-click="security.logout()"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                                <li><a href="#" ng-click="security.logout()"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <section id="body" ng-view></section>
+        <section id="body" ng-view ng-hide="mundialitoApp.message != null"></section>
         <footer>
             <div class="container">
                 <span>&copy; @DateTime.Now.Year - Mundialito</span><span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
             </div>
         </footer>
     </div>
-
+    <div class="row" ng-show="mundialitoApp.message != null">
+        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top: 10px;">
+            <h3 class="text-center"><i class="fa fa-spin fa-spinner fa-lg"></i>  <span ng-bind="mundialitoApp.message"></span></h3>
+        </div>
+    </div>
     <div class="appAlerts ng-cloak">
         <alert ng-repeat="alert in alerts" type="alert.type" close="alert.close(alert, $index)">
             <span class="message" ng-bind-html="alert.message"></span>
@@ -67,9 +71,11 @@
     @Html.Partial("_Manage")
     @Html.Partial("_Register")
     @Html.Partial("_Teams")
+    @Html.Partial("_Team")
     <!-- End Templates -->
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularBootstrap")
+    @Scripts.Render("~/bundles/external")
     @Scripts.Render("~/bundles/app")
 </body>
 </html>

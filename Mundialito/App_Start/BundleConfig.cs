@@ -19,6 +19,7 @@ namespace Mundialito
             //Angular
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                                "~/Scripts/angular.js",
+                               "~/Scripts/angular-animate.js",
                                "~/Scripts/angular-sanitize.js",
                                "~/Scripts/angular-resource.js",
                                "~/Scripts/angular-route.js"
@@ -39,13 +40,21 @@ namespace Mundialito
                     .IncludeDirectory("~/App/Services", "*.js")
             );
 
+            // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            // External Libs
+            bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                      "~/Scripts/promise-tracker.js",
+                      "~/Scripts/angular-busy.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
+                      "~/Content/flags.css",
+                      "~/Content/angular-busy.min.css",
                       "~/Content/site.css"));
         }
     }

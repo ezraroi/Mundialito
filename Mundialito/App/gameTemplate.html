@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-md-2">
+        <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}
+    </div>
+    <div class="col-md-2">
+        <span ng-if="game.IsOpen">
+            Unplayed
+        </span>
+        <span ng-if="!game.IsOpen">
+            {{game.HomeScore}} - {{game.AwayScore}} ({{game.Mark}})
+        </span>
+    </div>
+    <div class="col-md-2">
+        <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+    </div>
+    <div class="col-md-2">
+        {{game.Date | date:'MM/dd/yyyy @ h:mma' }}
+    </div>
+    <div class="col-md-2">
+        <a href="stadium/{{game.Stadium.StadiumId}}">{{game.Stadium.Name}} Stadium</a>
+    </div>
+</div>

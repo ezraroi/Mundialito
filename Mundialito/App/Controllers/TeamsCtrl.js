@@ -1,38 +1,34 @@
 ﻿angular.module('mundialitoApp')
-.controller('TeamsCtrl', ['$scope', '$http' ,'security', 'Alert', function ($scope, $http ,Security, Alert) {
+.controller('TeamsCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', 'Alert', function ($scope, $rootScope, $log, TeamsService, Security, Alert) {
 
     Security.authenticate();
 
-    $http.get('api/teams').success(function (data) {
-        $scope.teams = data;
-    });
+    var getTeams = function () {
+        TeamsService.getTeams().success(function (data, status, headers, config) {
+            $log.debug("TeamsService.getTeams Success (" + status + "): " + angular.toJson(data));
+            $scope.teams = data;
+            $scope.showNewTeam = false;
+        });
+    }
+
+    $scope.showNewTeam = false;
 
     var Team = function () {
         return {
-            name: '',
-            flag: '',
-            logo: '',
-            shortname: ''
+            Name: '',
+            Flag: '',
+            Logo: '',
+            ShortName: ''
         }
     }
+    
+    getTeams();
 
-    $scope.addTeam = function () {
-        if (!$scope.addTeamForm.$valid) return;
-        $scope.message = "Adding new team...";
-        $http({ method: 'POST', url: 'api/teams', data: $scope.team }).success(function () {
-            Alert.new('success', 'Added new team successfully', 2000);
-            $scope.message = null;
-            $http.get('api/teams').success(function (data) {
-                $scope.teams = data;
-            });
-        });
-    }
+    $scope.$on('refreshTeams', function () {
+        getTeams();
+    });
+
     $scope.team = new Team();
 
-    $scope.schema = [
-            { property: 'name', label: 'Name', type: 'text', attr: { required: true } },
-            { property: 'flag', label: 'Flag', type: 'url', attr: { required: true } },
-            { property: 'logo', label: 'Logo', type: 'url', attr: { required: true } },
-            { property: 'shortname', type: 'text', attr: { ngMaxlength: 3, ngMinlength: 3, required: true } },
-    ];
+    $scope.schema = TeamsService.schema;
 }]);

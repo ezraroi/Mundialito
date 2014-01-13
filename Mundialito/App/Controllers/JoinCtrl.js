@@ -1,6 +1,9 @@
 ﻿angular.module('mundialitoApp')
-.controller('JoinCtrl', ['$scope', 'security', '$modal', function ($scope, Security, $modal) {
+.controller('JoinCtrl', ['$scope','$rootScope', 'security', '$modal', function ($scope,$rootScope, Security, $modal) {
     Security.redirectAuthenticated('/');
+
+    $rootScope.mundialitoApp.authenticating = false;
+
     var User = function () {
         return {
             firstname: '',
@@ -15,12 +18,10 @@
     $scope.user = new User();
     $scope.join = function () {
         if (!$scope.joinForm.$valid) return;
-        $scope.message = "Processing Registration...";
-        Security.register(angular.copy($scope.user)).then(function () {
-            //Success
-        }, function (data) {
-            $scope.message = null;
-        })
+        $rootScope.mundialitoApp.message = "Processing Registration...";
+        Security.register(angular.copy($scope.user)).finally(function () {
+            $rootScope.mundialitoApp.message = null;
+        });
     };
     $scope.schema = [
             { property: 'firstname', label: 'First Name', type: 'text', attr: { required: true } },
