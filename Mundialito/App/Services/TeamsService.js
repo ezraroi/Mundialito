@@ -1,25 +1,25 @@
 ﻿'use strict';
 
 angular.module('mundialitoApp')
-.factory('TeamsService', ['$rootScope', '$http' , function ($rootScope, $http) {
+.factory('TeamsService', ['$http' , function ($http) {
     var TeamsApi = {
         getTeams: function () {
             return $http.get("api/teams", { tracker: 'getTeams' });
         },
         addTeam: function (teamData) {
-            return $http.post("api/teams", {  tracker: 'addTeam', data: teamData });
+            return $http.post("api/teams", teamData, {  tracker: 'addTeam'});
         },
         editTeam: function (teamData) {
-            return $http.put("api/teams/" + teamData.TeamId, { tracker: 'editTeam', data: teamData });
+            return $http.put("api/teams/" + teamData.TeamId, teamData, { tracker: 'editTeam'});
         },
         deleteTeam: function (teamId) {
-            return $http.delete("api/teams/" + teamId, { tracker: 'deleteTeam', method: 'DELETE' });
+            return $http.delete("api/teams/" + teamId, { tracker: 'deleteTeam'});
         },
         getTeam: function (teamId) {
-            return $http.get("api/teams/" + teamId, { tracker: 'getTeam', method: 'GET' });
+            return $http.get("api/teams/" + teamId, { tracker: 'getTeam'});
         },
         getTeamGames: function(teamId) {
-            return $http.get("api/teams/" + teamId + "/games", { tracker: 'getTeamGames', method: 'GET' });
+            return $http.get("api/teams/" + teamId + "/games", { tracker: 'getTeamGames' });
         },
         schema : [
                 { property: 'Name', label: 'Name', type: 'text', attr: { required: true } },

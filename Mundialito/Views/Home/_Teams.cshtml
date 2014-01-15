@@ -3,30 +3,28 @@
         <br/>
         <br/>
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-11 col-xs-10">
                 <div class="list-group" cg-busy="{tracker:'getTeams'}">
-                    <div class=" row" ng-repeat="team in teams | orderBy:Name">
-                        <div class="col-md-11 col-xs-11">
-                            <a href="/teams/{{team.TeamId}}" class="list-group-item">
-                                <span class="pull-left"><img ng-src="{{team.Flag}}" style="width: 60%;" /></span>
-                                {{team.Name}} ({{team.ShortName}})
-                            </a>
+                    <a href="/teams/{{team.TeamId}}" class="list-group-item" ng-repeat="team in teams">
+                        <span class="pull-left"><img ng-src="{{team.Flag}}" style="width: 55%;" /></span>
+                        {{team.Name}} ({{team.ShortName}})
+                        <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                    </a>
+                    <a href="" class="list-group-item" data-access-level="Admin">
+                        <div class="col-md-12" ng-click="showNewTeam = true">
+                            <i class="fa fa-plus-circle"></i> Add New Team
                         </div>
-                        <div class="col-md-1 col-xs-1" data-access-level="Admin">
-                            <button type="button" title="Delete Team" class="btn btn-default btn-xs" delete-team-button tabindex="100"><i class="fa fa-times-circle"></i></button>
-                        </div>
-                    </div>
-                    <div class="row" data-access-level="Admin">
-                        <div class="col-md-11 col-xs-11" ng-click="showNewTeam = true">
-                            <a href="" class="list-group-item">
-                                <i class="fa fa-plus-circle"></i> Add New Team
-                            </a>
-                        </div>
-                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-1 col-xs-2" data-access-level="Admin">
+                <div class="list-group">
+                    <a href="" title="Delete Team" delete-team-button class="list-group-item text-center" ng-repeat="team in teams">
+                        <i class="fa fa-times-circle admin-remove"></i>
+                    </a>
                 </div>
             </div>
         </div>
-        
         <div class="row" data-access-level="Admin" ng-show="showNewTeam" cg-busy="{tracker:'addTeam'}">
             <div class="col-md-10">
                 <div class="panel panel-info">

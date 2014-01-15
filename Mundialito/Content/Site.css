@@ -62,3 +62,7 @@ input.ng-invalid.ng-dirty, textarea.ng-invalid.ng-dirty, select.ng-invalid.ng-di
 .ng-cloak {
     display: none;
 }
+
+.admin-remove {
+    color: red;
+}

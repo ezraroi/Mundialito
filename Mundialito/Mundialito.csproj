@@ -227,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Controllers\GamesCtrl.js" />
     <Content Include="App\Controllers\HomeCtrl.js" />
     <Content Include="App\Controllers\JoinCtrl.js" />
     <Content Include="App\Controllers\LoginCtrl.js" />
@@ -241,6 +242,7 @@
     <Content Include="App\gamesTemplate.html" />
     <Content Include="App\Services\Alert.js" />
     <Content Include="App\Services\ErrorHandler.js" />
+    <Content Include="App\Services\GamesService.js" />
     <Content Include="App\Services\TeamsService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
@@ -646,7 +648,6 @@
     <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.9.0.min.js" />
     <Content Include="Scripts\WebApiTestClient.js" />
-    <Content Include="App\gameTemplate.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -671,6 +672,7 @@
     <Content Include="Scripts\promise-tracker.min.js.map">
       <DependentUpon>promise-tracker.js</DependentUpon>
     </Content>
+    <Content Include="Views\Home\_Games.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,18 @@
+﻿<script type="text/ng-template" id="/games">
+    <div class="container" ng-controller="GamesCtrl">
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-success" cg-busy="{tracker:'getGames'}">
+                    <div class="panel-heading">
+                        All Games
+                    </div>
+                    <div class="panel-body">
+                        <mundialito-games info="games"></mundialito-games>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

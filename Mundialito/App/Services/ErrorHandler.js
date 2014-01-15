@@ -6,19 +6,19 @@ angular.module('mundialitoApp')
     ErrorHandler.handle = function (data, status, headers, config) {
         $log.log(data);
         var message = [];
-        if (data.message) {
-            message.push("<strong>" + data.message + "</strong>");
+        if (data.Message) {
+            message.push("<strong>" + data.Message + "</strong>");
         }
-        if (data.modelState) {
-            angular.forEach(data.modelState, function (errors, key) {
+        if (data.ModelState) {
+            angular.forEach(data.ModelState, function (errors, key) {
                 message.push(errors);
             });
         }
-        if (data.exceptionMessage) {
-            message.push(data.exceptionMessage);
+        if (data.ExceptionMessage) {
+            message.push(data.ExceptionMessage);
         }
-        if (data.error_description) {
-            message.push(data.error_description);
+        if (data.Error_description) {
+            message.push(data.Error_description);
         }
         Alert.new('danger', message.join('<br/>'));
     }

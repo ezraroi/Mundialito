@@ -1,5 +1,5 @@
 ﻿angular.module('mundialitoApp')
-.controller('TeamsCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', 'Alert', function ($scope, $rootScope, $log, TeamsService, Security, Alert) {
+.controller('TeamsCtrl', ['$scope', '$log', 'TeamsService', 'security', 'Alert', function ($scope, $log, TeamsService, Security, Alert) {
 
     Security.authenticate();
 

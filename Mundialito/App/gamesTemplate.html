@@ -1,3 +1,56 @@
-﻿<div ng-repeat="game in games">
-    <mundialito-game info="game"></mundialito-game>
+﻿<!--
+<div class="row">
+    <div class="col-md-2 col-md-offset-10">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="view_filter" class="col-md-3 control-label">Filter:</label>
+                <div class="col-md-9">
+                    <select name="view_filter" ng-model="filterOpt" id="class_type" class="form-control input-sm" ng-options="opt for opt in filterOptions"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+-->
+<div class="row">
+    <!-- Normal Panel -->
+    <div class="col-md-11 col-xs-10">
+        <div class="list-group">
+            <a href="/games/{{game.GameId}}" class="list-group-item" ng-repeat="game in games">
+                <div class="row">
+                        <div class="col-md-2">
+                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}
+                        </div>
+                        <div class="col-md-2">
+                            <span ng-if="game.IsOpen">
+                                Unplayed
+                            </span>
+                            <span ng-if="!game.IsOpen">
+                                {{game.HomeScore}} - {{game.AwayScore}} ({{game.Mark}})
+                            </span>
+                        </div>
+                        <div class="col-md-2">
+                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+                        </div>
+                        <div class="col-md-3">
+                            {{game.Date | date:'MM/dd/yyyy @ h:mma' }}
+                        </div>
+                    <div class="col-md-3">
+                        {{game.Stadium.Name}}
+                        <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- End of Normal Panel -->
+    <!-- Admin Panel-->
+    <div class="col-md-1 col-xs-2" data-access-level="Admin">
+        <div class="list-group">
+            <a href="" title="Delete Game" class="list-group-item text-center" ng-repeat="game in games">
+                <i class="fa fa-times-circle admin-remove"></i>
+            </a>
+        </div>
+    </div>
+    <!-- End of Admin Panel-->
 </div>

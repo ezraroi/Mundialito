@@ -16,9 +16,6 @@ angular.module('mundialitoApp')
               },
 
               function (newValue, oldValue) {
-                  
-                  if (newValue == oldValue)
-                      return;
                   $scope.user = newValue;
                   if (($scope.user === undefined) || ($scope.user === null)) {
                       userRole = "Public"
