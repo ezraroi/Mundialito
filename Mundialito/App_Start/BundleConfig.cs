@@ -38,6 +38,7 @@ namespace Mundialito
                     .IncludeDirectory("~/App/Controllers", "*.js")
                     .IncludeDirectory("~/App/Directives", "*.js")
                     .IncludeDirectory("~/App/Services", "*.js")
+                    .IncludeDirectory("~/App/Filters", "*.js")
             );
 
             // Bootstrap

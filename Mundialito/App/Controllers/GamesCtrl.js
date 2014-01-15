@@ -7,6 +7,7 @@
         $scope.games = data;
     });
 
+    $scope.gamesFilter = "OnlyOpen";
     
     
 }]);

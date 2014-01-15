@@ -239,6 +239,7 @@
     <Content Include="App\Directives\gamesDirectives.js" />
     <Content Include="App\Directives\mundialitoDirectives.js" />
     <Content Include="App\Directives\teamsDirectives.js" />
+    <Content Include="App\Filters\gamesFilter.js" />
     <Content Include="App\gamesTemplate.html" />
     <Content Include="App\Services\Alert.js" />
     <Content Include="App\Services\ErrorHandler.js" />

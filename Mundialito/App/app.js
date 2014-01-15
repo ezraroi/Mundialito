@@ -1,4 +1,4 @@
-﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker'])
+﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute','ngAnimate','ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker'])
 .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider) {
     $locationProvider.html5Mode(true);
     $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";

@@ -1,11 +1,12 @@
 ﻿'use strict';
 
 angular.module('mundialitoApp')
-.directive('mundialitoGames', ['$scope', 'TeamsService', function ($scope, TeamsService) {
+.directive('mundialitoGames', ['TeamsService', function (TeamsService) {
     return {
         restrict: "E",
         scope: {
-            games: '=info'
+            games: '=info',
+            gamesType: '=filter'
         },
         templateUrl: "App/gamesTemplate.html"
     };
