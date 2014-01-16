@@ -28,7 +28,6 @@ namespace Mundialito
             //Angular Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/angularBootstrap").Include(
                                "~/Scripts/ui-bootstrap-tpls-{version}.js",
-                               "~/Scripts/angular-spa-security.js",
                                "~/Scripts/autoFields-bootstrap.js"
             ));
 
@@ -43,13 +42,13 @@ namespace Mundialito
 
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/jquery-1.10.2.js",
                       "~/Scripts/bootstrap-select.min.js"));
                       //"~/Scripts/bootstrap.js",
                       //"~/Scripts/respond.js"));
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                      "~/Scripts/angular-spa-security.js",
                       "~/Scripts/promise-tracker.js",
                       "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/angular-busy.js"));
