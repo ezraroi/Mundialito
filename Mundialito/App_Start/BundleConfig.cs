@@ -43,12 +43,15 @@ namespace Mundialito
 
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/jquery-1.10.2.js",
+                      "~/Scripts/bootstrap-select.min.js"));
+                      //"~/Scripts/bootstrap.js",
+                      //"~/Scripts/respond.js"));
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
                       "~/Scripts/promise-tracker.js",
+                      "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/angular-busy.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -56,6 +59,7 @@ namespace Mundialito
                       "~/Content/font-awesome.css",
                       "~/Content/flags.css",
                       "~/Content/angular-busy.min.css",
+                      "~/Content/bootstrap-select.min.css",
                       "~/Content/site.css"));
         }
     }

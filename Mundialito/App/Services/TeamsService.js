@@ -21,6 +21,14 @@ angular.module('mundialitoApp')
         getTeamGames: function(teamId) {
             return $http.get("api/teams/" + teamId + "/games", { tracker: 'getTeamGames' });
         },
+        getEmptyTeamObject: function() {
+            return {
+                Name: '',
+                Flag: '',
+                Logo: '',
+                ShortName: ''
+            }
+        },
         schema : [
                 { property: 'Name', label: 'Name', type: 'text', attr: { required: true } },
                 { property: 'Flag', label: 'Flag', type: 'url', attr: { required: true } },

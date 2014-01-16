@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>AngularJs.SPA.Security</id>
-    <version>1.1</version>
+    <version>1.1.1</version>
     <title>Angular JS SPA Security Provider</title>
     <authors>Justin Maier</authors>
     <owners>Justin Maier</owners>
@@ -13,8 +13,7 @@
 
 Check the project site for more details and demos.</description>
     <summary>Angular JS Security Provider for the MVC5 SPA template</summary>
-    <releaseNotes>Added 3rd Party Support</releaseNotes>
-    <copyright />
+    <releaseNotes>Added option to use popups to authenticate.</releaseNotes>
     <language />
     <tags>angularjs angular security spa provider</tags>
     <dependencies>

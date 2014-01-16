@@ -17,8 +17,8 @@ angular.module('mundialitoApp')
         if (data.ExceptionMessage) {
             message.push(data.ExceptionMessage);
         }
-        if (data.Error_description) {
-            message.push(data.Error_description);
+        if (data.error_description) {
+            message.push(data.error_description);
         }
         Alert.new('danger', message.join('<br/>'));
     }

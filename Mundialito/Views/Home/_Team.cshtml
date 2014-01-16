@@ -31,7 +31,7 @@
                     <div class="panel-body">
                         <form name="editTeamForm">
                             <auto:fields fields="schema" data="updatedTeam"></auto:fields>
-                            <button type="submit" edit-team-button class="btn btn-primary btn-lg btn-block" ng-class="{'btn-primary':editTeamForm.$valid}" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
+                            <button type="submit" edit-team-button class="btn btn-primary btn-lg btn-block" ng-disabled="editTeamForm.$invalid" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
                         </form>
                     </div>
                 </div>

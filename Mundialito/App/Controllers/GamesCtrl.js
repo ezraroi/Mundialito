@@ -3,11 +3,10 @@
     Security.authenticate();
     
     GamesService.getGames().success(function (data, status, headers, config) {
-        $log.debug("GamesService.getGames (" + status + "): " + angular.toJson(data));
+        $log.debug("GamesCtrl: GamesService.getGames (" + status + "): " + angular.toJson(data));
         $scope.games = data;
     });
-
-    $scope.gamesFilter = "OnlyOpen";
-    
+    $scope.gamesFilter = "All";
+   
     
 }]);

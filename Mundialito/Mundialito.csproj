@@ -248,6 +248,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\angular-busy.min.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flags.css" />
@@ -320,6 +321,10 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-bootstrap-select.js" />
+    <Content Include="Scripts\angular-bootstrap-select.min.js">
+      <DependentUpon>angular-bootstrap-select.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-busy.js" />
     <Content Include="Scripts\angular-busy.min.js">
       <DependentUpon>angular-busy.js</DependentUpon>
@@ -345,6 +350,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\autoFields-bootstrap.js" />
     <Content Include="Scripts\autoFields-bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -363,12 +369,10 @@
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-resource.min.js.map" />
     <Content Include="Scripts\angular-loader.min.js.map" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-spa-security.min.js.map">
       <DependentUpon>angular-spa-security.js</DependentUpon>
     </Content>
@@ -379,6 +383,11 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Scripts\angular-busy.min.js.map">
       <DependentUpon>angular-busy.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-bootstrap-select.min.js.map">
+      <DependentUpon>angular-bootstrap-select.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />

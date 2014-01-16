@@ -11,7 +11,7 @@
                         <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
                     </a>
                     <a href="" class="list-group-item" data-access-level="Admin">
-                        <div class="col-md-12" ng-click="showNewTeam = true">
+                        <div class="col-md-12" ng-click="addNewTeam()">
                             <i class="fa fa-plus-circle"></i> Add New Team
                         </div>
                     </a>
@@ -25,14 +25,14 @@
                 </div>
             </div>
         </div>
-        <div class="row" data-access-level="Admin" ng-show="showNewTeam" cg-busy="{tracker:'addTeam'}">
+        <div class="row" data-access-level="Admin" ng-show="newTeam">
             <div class="col-md-10">
                 <div class="panel panel-info">
                     <div class="panel-heading">Add New Team</div>
                     <div class="panel-body">
                         <form name="addTeamForm">
-                            <auto:fields fields="schema" data="team"></auto:fields>
-                            <button type="submit" add-team-button class="btn btn-primary btn-lg btn-block" ng-class="{'btn-primary':addTeamForm.$valid}" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
+                            <auto:fields fields="schema" data="newTeam"></auto:fields>
+                            <button type="submit" add-team-button ng-model="newTeam" class="btn btn-primary btn-lg btn-block" ng-disabled="addTeamForm.$invalid" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
                         </form>
                     </div>
                 </div>

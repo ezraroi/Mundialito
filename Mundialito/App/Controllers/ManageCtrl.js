@@ -22,9 +22,9 @@
         var newPassword = angular.copy($scope.changingPassword);
         $scope.changingPassword = null;
         Security.changePassword(newPassword).then(function () {
-            //Success
+            Alert.new('success', "Password was changed sucessfully" ,3000);
         }, function () {
-            //Error
+            Alert.new('danger', "Failed to change password");
             $scope.changingPassword = newPassword;
         });
     }

@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <section id="body" ng-view ng-hide="mundialitoApp.message != null"></section>
+        <section id="body" ng-view ng-animate="enter" ng-hide="mundialitoApp.message != null"></section>
         <footer>
             <div class="container">
                 <span>&copy; @DateTime.Now.Year - Mundialito</span><span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
@@ -75,9 +75,11 @@
     @Html.Partial("_Team")
     @Html.Partial("_Games")
     <!-- End Templates -->
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angularBootstrap")
     @Scripts.Render("~/bundles/external")
     @Scripts.Render("~/bundles/app")
+    
 </body>
 </html>

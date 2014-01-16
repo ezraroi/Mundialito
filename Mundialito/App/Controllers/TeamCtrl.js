@@ -8,19 +8,22 @@
     $scope.showEditForm = false;
 
     TeamsService.getTeam(teamId).success(function (data, status, headers, config) {
-        $log.debug("TeamsService.getTeam Success (" + status + "):" + angular.toJson(data));
+        $log.debug("TeamCtrl: TeamsService.getTeam Success (" + status + "):" + angular.toJson(data));
         $scope.team = data;
         $scope.updatedTeam = angular.copy($scope.team);
     });
 
     TeamsService.getTeamGames(teamId).success(function (data, status, headers, config) {
-        $log.debug("TeamsService.getTeamGames (" + status + "): " + angular.toJson(data));
+        $log.debug("TeamCtrl: TeamsService.getTeamGames (" + status + "): " + angular.toJson(data));
         $scope.games = data;
     });
 
-    $scope.$on('refreshTeams', function () {
+    var refreshTeamsBind = $scope.$on('refreshTeams', function () {
+        $log.debug("TeamCtrl: got 'refreshTeams' event");
         $scope.updatedTeam = angular.copy($scope.team);
     });
+
+    $scope.$on('$destroy', refreshTeamsBind);
 
     $scope.schema = TeamsService.schema;
     

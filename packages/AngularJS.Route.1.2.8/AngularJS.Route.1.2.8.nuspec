@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>AngularJS.Route</id>
-    <version>1.2.6</version>
+    <version>1.2.8</version>
     <title>AngularJS Route</title>
     <authors>John Papa, Scott Allen, Jeremy Likness</authors>
     <owners>John Papa, Scott Allen, Jeremy Likness</owners>
@@ -13,12 +13,10 @@
     <summary>AngularJS. HTML enhanced for web apps!
 
 AngularJS.Route contains the Angular Route module</summary>
-    <releaseNotes />
-    <copyright />
     <language>en-US</language>
     <tags>angular angularjs</tags>
     <dependencies>
-      <dependency id="AngularJS.Core" version="1.2.6" />
+      <dependency id="AngularJS.Core" version="1.2.8" />
     </dependencies>
   </metadata>
 </package>

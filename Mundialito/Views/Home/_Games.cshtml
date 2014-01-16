@@ -6,7 +6,14 @@
             <div class="col-md-12">
                 <div class="panel panel-success" cg-busy="{tracker:'getGames'}">
                     <div class="panel-heading">
-                        All Games
+                        <div class="row">
+                            <div class="col-md-3 col-xs-12">
+                                <select class="selectpicker show-tick" ng-model="gamesFilter" data-header="Filter Games">
+                                    <option value="All" data-icon="fa fa-list" selected="selected">All Games</option>
+                                    <option value="OnlyOpen" data-icon="fa fa-folder-open">Only Open</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <mundialito-games info="games" filter="gamesFilter"></mundialito-games>

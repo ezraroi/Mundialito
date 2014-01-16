@@ -11,7 +11,7 @@
                 <form name="manageForm" ng-submit="updatePassword()" ng-show="changingPassword">
                     <auto:fields fields="changePasswordSchema" data="changingPassword"></auto:fields>
                     <div class="btn-group btn-group-justified">
-                        <a href="" class="btn btn-primary" ng-class="{'btn-primary':manageForm.$valid}" tabindex="100" ng-click="updatePassword()">Save</a>
+                        <a href="" class="btn btn-primary" ng-disabled="manageForm.$invalid" tabindex="100" ng-click="updatePassword()">Save</a>
                         <a href="" ng-click="cancel()" class="btn btn-default" tabindex="101">Cancel</a>
                     </div>
                 </form>

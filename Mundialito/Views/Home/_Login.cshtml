@@ -5,7 +5,7 @@
                 <h2>Login</h2>
                 <form name="loginForm" ng-submit="login()">
                     <auto:fields fields="schema" data="user"></auto:fields>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-class="{'btn-primary':loginForm.$valid}" tabindex="100"><i class="fa fa-sign-in"></i> Login</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="loginForm.$invalid" tabindex="100"><i class="fa fa-sign-in"></i> Login</button>
                 </form>
                 <p class="small text-muted gutter-top text-center">Don't have an account? <a href="/join">Register now!</a></p>
                 <hr />
