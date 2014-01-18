@@ -50,8 +50,20 @@ namespace Mundialito.Controllers
         [Authorize(Roles = "Admin")]
         public Game PostGame(Game game)
         {
-            return gamesRepository.InsertGame(game);
+            if (game.AwayTeam.TeamId == game.HomeTeam.TeamId)
+                throw new ArgumentException("Home team and Away team can not be the same team");
+            var res = gamesRepository.InsertGame(game);
+            gamesRepository.Save();
+            return res;
         }
-        
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public void DeleteGame(int id)
+        {
+            gamesRepository.DeleteGame(id);
+            gamesRepository.Save();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using Mundialito.Models;
+using System.Linq;
 using System.Web.Http;
 
 namespace Mundialito.DAL.Games
@@ -17,7 +18,7 @@ namespace Mundialito.DAL.Games
 
         public IEnumerable<Game> GetGames()
         {
-            return Get().Include(game => game.HomeTeam).Include(game => game.AwayTeam).Include(game => game.Stadium);
+            return Get().Include(game => game.HomeTeam).Include(game => game.AwayTeam).Include(game => game.Stadium).OrderBy(game => game.Date);
         }
 
         public Game GetGame(int gameId)
@@ -27,6 +28,9 @@ namespace Mundialito.DAL.Games
 
         public Game InsertGame(Game game)
         {
+            Context.Teams.Attach(game.AwayTeam);
+            Context.Teams.Attach(game.HomeTeam);
+            Context.Stadium.Attach(game.Stadium);
             return Insert(game);
         }
 

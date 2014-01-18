@@ -10,10 +10,8 @@
                         {{team.Name}} ({{team.ShortName}})
                         <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
                     </a>
-                    <a href="" class="list-group-item" data-access-level="Admin">
-                        <div class="col-md-12" ng-click="addNewTeam()">
+                    <a href="" class="list-group-item" data-access-level="Admin" ng-click="addNewTeam()">
                             <i class="fa fa-plus-circle"></i> Add New Team
-                        </div>
                     </a>
                 </div>
             </div>
@@ -28,7 +26,7 @@
         <div class="row" data-access-level="Admin" ng-show="newTeam">
             <div class="col-md-10">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Add New Team</div>
+                    <div class="panel-heading"><i class="fa fa-plus"></i> Add New Team</div>
                     <div class="panel-body">
                         <form name="addTeamForm">
                             <auto:fields fields="schema" data="newTeam"></auto:fields>

@@ -34,27 +34,31 @@ namespace Mundialito
             //App
             bundles.Add(new ScriptBundle("~/bundles/app")
                     .IncludeDirectory("~/App/", "*.js")
-                    .IncludeDirectory("~/App/Controllers", "*.js")
-                    .IncludeDirectory("~/App/Directives", "*.js")
-                    .IncludeDirectory("~/App/Services", "*.js")
-                    .IncludeDirectory("~/App/Filters", "*.js")
+                    .IncludeDirectory("~/App/Accounts", "*.js")
+                    .IncludeDirectory("~/App/Games", "*.js")
+                    .IncludeDirectory("~/App/General", "*.js")
+                    .IncludeDirectory("~/App/Stadiums", "*.js")
+                    .IncludeDirectory("~/App/Teams", "*.js")
             );
 
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap-select.min.js"));
-                      //"~/Scripts/bootstrap.js",
                       //"~/Scripts/respond.js"));
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                      "~/Scripts/moment.js",
                       "~/Scripts/angular-spa-security.js",
                       "~/Scripts/promise-tracker.js",
+                      "~/Scripts/datetimepicker.js",
                       "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/angular-busy.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/datetimepicker.css",
                       "~/Content/font-awesome.css",
                       "~/Content/flags.css",
                       "~/Content/angular-busy.min.css",

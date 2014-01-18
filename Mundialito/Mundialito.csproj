@@ -227,30 +227,34 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
-    <Content Include="App\Controllers\GamesCtrl.js" />
-    <Content Include="App\Controllers\HomeCtrl.js" />
-    <Content Include="App\Controllers\JoinCtrl.js" />
-    <Content Include="App\Controllers\LoginCtrl.js" />
-    <Content Include="App\Controllers\ManageCtrl.js" />
-    <Content Include="App\Controllers\TeamCtrl.js" />
-    <Content Include="App\Controllers\TeamsCtrl.js" />
-    <Content Include="App\Directives\accessLevel.js" />
-    <Content Include="App\Directives\confirmPassword.js" />
-    <Content Include="App\Directives\gamesDirectives.js" />
-    <Content Include="App\Directives\mundialitoDirectives.js" />
-    <Content Include="App\Directives\teamsDirectives.js" />
-    <Content Include="App\Filters\gamesFilter.js" />
+    <Content Include="App\Games\GamesCtrl.js" />
+    <Content Include="App\General\HomeCtrl.js" />
+    <Content Include="App\Accounts\JoinCtrl.js" />
+    <Content Include="App\Accounts\LoginCtrl.js" />
+    <Content Include="App\Accounts\ManageCtrl.js" />
+    <Content Include="App\Teams\TeamCtrl.js" />
+    <Content Include="App\Teams\TeamsCtrl.js" />
+    <Content Include="App\General\accessLevel.js" />
+    <Content Include="App\General\confirmPassword.js" />
+    <Content Include="App\Games\gamesDirectives.js" />
+    <Content Include="App\General\mundialitoDirectives.js" />
+    <Content Include="App\Teams\teamsDirectives.js" />
+    <Content Include="App\Games\gamesFilter.js" />
     <Content Include="App\gamesTemplate.html" />
-    <Content Include="App\Services\Alert.js" />
-    <Content Include="App\Services\ErrorHandler.js" />
-    <Content Include="App\Services\GamesService.js" />
-    <Content Include="App\Services\TeamsService.js" />
+    <Content Include="App\General\Alert.js" />
+    <Content Include="App\General\ErrorHandler.js" />
+    <Content Include="App\Games\GamesService.js" />
+    <Content Include="App\Stadiums\StadiumsService.js" />
+    <Content Include="App\Teams\TeamsService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\angular-busy.min.css" />
     <Content Include="Content\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datetimepicker.css" />
     <Content Include="Content\flags.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -343,7 +347,9 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-spa-security.js" />
-    <Content Include="Scripts\angular-spa-security.min.js" />
+    <Content Include="Scripts\angular-spa-security.min.js">
+      <DependentUpon>angular-spa-security.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
@@ -351,8 +357,6 @@
     <Content Include="Scripts\autoFields-bootstrap.js" />
     <Content Include="Scripts\autoFields-bootstrap.min.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
@@ -366,6 +370,12 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientReferences.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientDialogs.cshtml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\datetimepicker.js" />
+    <Content Include="Scripts\datetimepicker.min.js">
+      <DependentUpon>datetimepicker.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
@@ -373,9 +383,6 @@
     <Content Include="Scripts\angular-loader.min.js.map" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular-spa-security.min.js.map">
-      <DependentUpon>angular-spa-security.js</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -388,6 +395,15 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Scripts\angular-bootstrap-select.min.js.map">
       <DependentUpon>angular-bootstrap-select.js</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\angular-spa-security.min.js.map">
+      <DependentUpon>angular-spa-security.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\datetimepicker.min.js.map">
+      <DependentUpon>datetimepicker.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -647,6 +663,10 @@
     <Content Include="Scripts\knockout-2.2.1.debug.js" />
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js">
+      <DependentUpon>moment.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\promise-tracker.js" />
     <Content Include="Scripts\promise-tracker.min.js">
       <DependentUpon>promise-tracker.js</DependentUpon>
@@ -683,14 +703,14 @@
       <DependentUpon>promise-tracker.js</DependentUpon>
     </Content>
     <Content Include="Views\Home\_Games.cshtml" />
+    <Content Include="Scripts\moment.min.js.map">
+      <DependentUpon>moment.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

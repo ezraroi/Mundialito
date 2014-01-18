@@ -18,7 +18,7 @@ namespace Mundialito.DAL.Stadiums
 
         public IEnumerable<Stadium> GetStadiums()
         {
-            return Get();
+            return Get().OrderBy(stadium => stadium.Name);
         }
 
         public Stadium GetStadium(int stadiumId)

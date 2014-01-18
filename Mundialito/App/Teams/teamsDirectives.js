@@ -6,11 +6,13 @@ angular.module('mundialitoApp')
         restrict: "A",
         link: function (scope, element, attrs) {
             element.bind("click", function () {
-                TeamsService.deleteTeam(scope.team.TeamId).success(function (data, status, headers, config) {
-                    $log.log("Team " + scope.team.TeamId + " was deleted");
-                    Alert.new('success', 'Team was deleted successfully', 2000);
-                    $rootScope.$emit("refreshTeams");
-                });
+                if (confirm("Are you sure you want to delete " + scope.team.Name + " ?") == true) {
+                    TeamsService.deleteTeam(scope.team.TeamId).success(function (data, status, headers, config) {
+                        $log.log("Team " + scope.team.TeamId + " was deleted");
+                        Alert.new('success', 'Team was deleted successfully', 2000);
+                        $rootScope.$emit("refreshTeams");
+                    });
+                }
             });
         }
     };

@@ -51,7 +51,17 @@
         <section id="body" ng-view ng-animate="enter" ng-hide="mundialitoApp.message != null"></section>
         <footer>
             <div class="container">
-                <span>&copy; @DateTime.Now.Year - Mundialito</span><span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>&copy; @DateTime.Now.Year - Mundialito</span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-center"><a href="https://github.com/ezraroi/Mundialito" target="_self">Mundilaito at <i class="fa fa-github"></i> GitHub</a></span>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
