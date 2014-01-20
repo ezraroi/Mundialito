@@ -73,20 +73,25 @@
                     <div class="panel-heading"><i class="fa fa-clock-o"></i> Pending Update Games</div>
                     <div class="panel-body">
                         <div class="row" ng-repeat="game in pendingUpdateGames">
-                            <div class="col-md-3 text-center">
-                                {{game.HomeTeam.Name}}
-                            </div>
-                            <div class="col-md-2">
-                                <input type="number" required min="0" />
-                            </div>
-                            <div class="col-md-3 text-center">
-                                {{game.AwayTeam.Name}}
-                            </div>
-                            <div class="col-md-2">
-                                <input type="number" required min="0" />
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i></button>
+                            <div class="col-md-12">
+                                <form class="form-horizontal" name="updateGame_{{game.GameId}}">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
+                                            <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i>{{game.HomeTeam.Name}}</div>
+                                        </label>
+                                        <div class="col-md-2">
+                                            <input id="{{game.HomeTeam.TeamId}}" type="number" ng-model="game.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                                        </div>
+                                        <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
+                                            <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i>{{game.AwayTeam.Name}}</div>
+                                        </label>
+                                        <div class="col-md-2">
+                                            <input id="{{game.AwayTeam.TeamId}}" ng-model="game.AwayScore" type="number" class="form-control" placeholder="Away Team Score" required min="0">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" update-game-button ng-model="game" class="btn btn-success btn-block" ng-disabled="updateGame_{{game.GameId}}.$invalid"><i class="fa fa-save"></i></button>
+                                        </div>
+                                </form>
                             </div>
                         </div>
                     </div>

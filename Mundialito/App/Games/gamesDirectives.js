@@ -15,6 +15,7 @@ angular.module('mundialitoApp')
 .directive('addGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
     return {
         restrict: "A",
+        requeire: '^ngModel',
         link: function (scope, element, attrs) {
             element.bind("click", function () {
                 scope.newGame.AwayTeam = angular.fromJson(scope.newGame.AwayTeam);
@@ -41,6 +42,22 @@ angular.module('mundialitoApp')
                         $rootScope.$emit("refreshGames");
                     });
                 }
+            });
+        }
+    };
+}])
+.directive('updateGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
+    return {
+        restrict: "A",
+        requeire: '^ngModel',
+        link: function (scope, element, attrs) {
+            element.bind("click", function () {
+                GamesService.editGame(scope.game).success(function (data, status, headers, config) {
+                    $log.log("Game " + data.GameId + " was updated");
+                    Alert.new('success', 'Game was updated successfully', 2000);
+                    $rootScope.$emit("refreshGames");
+                });
+
             });
         }
     };

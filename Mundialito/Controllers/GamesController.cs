@@ -57,6 +57,15 @@ namespace Mundialito.Controllers
             return res;
         }
 
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public Game PutGame(int id, Game game)
+        {
+            gamesRepository.UpdateGame(game);
+            gamesRepository.Save();
+            return game;
+        }
+
         [HttpDelete]
         [Authorize(Roles = "Admin")]
         public void DeleteGame(int id)

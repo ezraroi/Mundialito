@@ -20,6 +20,7 @@ angular.module('mundialitoApp')
 .directive('addTeamButton', ['$rootScope', '$log', 'TeamsService', 'Alert', function ($rootScope, $log, TeamsService, Alert) {
     return {
         restrict: "A",
+        requeire: '^ngModel',
         link: function (scope, element, attrs) {
             element.bind("click", function () {
                 TeamsService.addTeam(scope.newTeam).success(function (data, status, headers, config) {

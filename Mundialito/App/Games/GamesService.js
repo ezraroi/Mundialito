@@ -19,6 +19,7 @@ angular.module('mundialitoApp')
             return $http.get("api/games/" + gameId, { tracker: 'getGame' });
         },
 
+
         getEmptyGameObject: function() {
             return {
                 HomeTeam: '',
