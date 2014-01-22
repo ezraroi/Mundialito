@@ -7,13 +7,11 @@
         TeamsService.getTeams().success(function (data, status, headers, config) {
             $log.debug("TeamsCtrl: TeamsService.getTeams Success (" + status + "): " + angular.toJson(data));
             $scope.teams = data;
-            $scope.showNewTeam = false;
         });
     }
 
+    $scope.showNewTeam = false;
     $scope.newTeam = null;
-    
-    getTeams();
 
     $scope.addNewTeam = function () {
         $scope.newTeam = TeamsService.getEmptyTeamObject();

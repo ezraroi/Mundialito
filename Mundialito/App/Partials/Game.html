@@ -1,0 +1,42 @@
+﻿<div class="container" ng-controller="GameCtrl">
+<br />
+<br />
+<div class="row">
+    <div class="col-md-6 well">
+        <div class="row">
+            <div class="col-md-12">
+                <div ng-if="!game.IsOpen">
+                    <h3>
+                        <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} {{game.HomeScore}} - {{game.AwayScore}}
+                        <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+                    </h3>
+                </div>
+                <div ng-if="game.IsOpen">
+                    <h3>
+                        <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} -
+                        <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i>
+                        <span ng-show="game.IsPendingUpdate" class="label label-info"><i class="fa fa-clock-o"></i> Pending Update</span>
+                    </h3>
+                </div>
+                        
+                <h4>{{game.Stadium.Name}} Stadium</h4>
+                <h4>{{game.Date | date}}</h4><br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-info btn-xs" data-access-level="Admin" ng-click="showEditForm = !showEditForm">
+                    <i class="fa fa-pencil-square-o"></i> <span mundialito-toggle-text true-label="Hide Edit Form" false-label="Edit Game" varieble="showEditForm">Edit Game</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        Statistics Graph
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        Users Beats
+    </div>
+</div>

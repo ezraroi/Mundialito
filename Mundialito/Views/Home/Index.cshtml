@@ -14,7 +14,15 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating"><h3><i class="fa fa-spin fa-spinner fa-lg"></i>  Loading Mundialito...</h3></div>
+    <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating">
+        <div class="text-center">
+            <h3><i class="fa fa-spin fa-spinner fa-lg"></i> Loading...</h3>
+        </div>
+        <div class="progress progress-striped active">
+            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            </div>
+        </div>
+    </div>
     <div class="body-content ng-cloak" ng-hide="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
@@ -75,15 +83,6 @@
             <span class="message" ng-bind-html="alert.message"></span>
         </alert>
     </div>
-
-    <!-- Templates -->
-    @Html.Partial("_Home")
-    @Html.Partial("_Login")
-    @Html.Partial("_Manage")
-    @Html.Partial("_Register")
-    @Html.Partial("_Teams")
-    @Html.Partial("_Team")
-    @Html.Partial("_Games")
     <!-- End Templates -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -91,6 +90,6 @@
     @Scripts.Render("~/bundles/angularBootstrap")
     @Scripts.Render("~/bundles/external")
     @Scripts.Render("~/bundles/app")
-    
+
 </body>
 </html>

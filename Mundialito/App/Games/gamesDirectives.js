@@ -9,7 +9,7 @@ angular.module('mundialitoApp')
             gamesType: '=filter',
             onAdd: '&'
         },
-        templateUrl: "App/gamesTemplate.html"
+        templateUrl: "App/Partials/Templates/gamesTemplate.html"
     };
 })
 .directive('addGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {

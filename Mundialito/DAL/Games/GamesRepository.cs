@@ -23,7 +23,7 @@ namespace Mundialito.DAL.Games
 
         public Game GetGame(int gameId)
         {
-            return GetByID(gameId);
+            return Get().Include(game => game.HomeTeam).Include(game => game.AwayTeam).Include(game => game.Stadium).SingleOrDefault(game => game.GameId == gameId);
         }
 
         public Game InsertGame(Game game)

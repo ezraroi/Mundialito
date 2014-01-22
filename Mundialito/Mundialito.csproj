@@ -227,11 +227,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Games\GameCtrl.js" />
     <Content Include="App\Games\GamesCtrl.js" />
     <Content Include="App\General\HomeCtrl.js" />
     <Content Include="App\Accounts\JoinCtrl.js" />
     <Content Include="App\Accounts\LoginCtrl.js" />
     <Content Include="App\Accounts\ManageCtrl.js" />
+    <Content Include="App\Partials\Home.html" />
+    <Content Include="App\Partials\Login.html" />
     <Content Include="App\Teams\TeamCtrl.js" />
     <Content Include="App\Teams\TeamsCtrl.js" />
     <Content Include="App\General\accessLevel.js" />
@@ -240,7 +243,7 @@
     <Content Include="App\General\mundialitoDirectives.js" />
     <Content Include="App\Teams\teamsDirectives.js" />
     <Content Include="App\Games\gamesFilter.js" />
-    <Content Include="App\gamesTemplate.html" />
+    <Content Include="App\Partials\Templates\gamesTemplate.html" />
     <Content Include="App\General\Alert.js" />
     <Content Include="App\General\ErrorHandler.js" />
     <Content Include="App\Games\GamesService.js" />
@@ -688,24 +691,23 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\_Home.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\_Login.cshtml" />
-    <Content Include="Views\Home\_Manage.cshtml" />
-    <Content Include="Views\Home\_Register.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\_Teams.cshtml" />
-    <Content Include="Views\Home\_Team.cshtml" />
     <Content Include="Scripts\promise-tracker.min.js.map">
       <DependentUpon>promise-tracker.js</DependentUpon>
     </Content>
-    <Content Include="Views\Home\_Games.cshtml" />
     <Content Include="Scripts\moment.min.js.map">
       <DependentUpon>moment.js</DependentUpon>
     </Content>
+    <Content Include="App\Partials\Game.html" />
+    <Content Include="App\Partials\Games.html" />
+    <Content Include="App\Partials\Manage.html" />
+    <Content Include="App\Partials\Register.html" />
+    <Content Include="App\Partials\Team.html" />
+    <Content Include="App\Partials\Teams.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,8 +11,6 @@
     };
 
     var init = function () {
-        getGames();
-
         TeamsService.getTeams().success(function (data, status, headers, config) {
             $log.debug("GamesCtrl: TeamsService.getTeams Success (" + status + "): " + angular.toJson(data));
             $scope.teams = data;
