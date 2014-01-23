@@ -15,6 +15,8 @@ namespace Mundialito
     {
         protected void Application_Start()
         {
+            BundleTable.EnableOptimizations = false;
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
