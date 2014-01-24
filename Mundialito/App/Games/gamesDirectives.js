@@ -49,12 +49,12 @@ angular.module('mundialitoApp')
 .directive('updateGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
     return {
         restrict: "A",
-        requeire: '^ngModel',
         link: function (scope, element, attrs) {
             element.bind("click", function () {
-                GamesService.editGame(scope.game).success(function (data, status, headers, config) {
+                GamesService.editGame(scope.updatedGame).success(function (data, status, headers, config) {
                     $log.log("Game " + data.GameId + " was updated");
                     Alert.new('success', 'Game was updated successfully', 2000);
+                    scope.game = data;
                     $rootScope.$emit("refreshGames");
                 });
 

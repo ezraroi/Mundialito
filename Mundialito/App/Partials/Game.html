@@ -1,8 +1,8 @@
 ﻿<div class="container" ng-controller="GameCtrl">
 <br />
 <br />
-<div class="row">
-    <div class="col-md-6 well">
+<div class="row well">
+    <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
                 <div ng-if="!game.IsOpen">
@@ -31,8 +31,49 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        Statistics Graph
+    <div class="col-md-6 ">
+        <div class="row">
+            <div class="col-md-12">
+                Statistics Graph
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" data-access-level="Admin" ng-show="showEditForm" cg-busy="{tracker:'editGame'}">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-pencil-square-o"></i> Edit Game Details</div>
+            <div class="panel-body">
+                <form role="form" name="editGameForm" novalidate>
+
+                    <div class="form-group select">
+                        <div class="form-group">
+                            <label for="HomeScore">{{game.HomeTeam.Name}} Score</label>
+                            <input id="HomeScore" type="number" ng-model="updatedGame.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="AwayScore">{{game.AwayTeam.Name}} Score</label>
+                            <input id="AwayScore" type="number" ng-model="updatedGame.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
+                        </div>
+                        <div class="dropdown">
+                            <label for="Date">Date & Time</label>
+                            <a class="dropdown-toggle" id="dateToggleSelect" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group">
+                                    <input type="text" id="Date" class="form-control" data-ng-model="updatedGame.Date" required>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="updatedGame.Date" data-datetimepicker-config="{ dropdownSelector: 'dateToggleSelect'}"></datetimepicker>
+                            </ul>
+                        </div>
+                        </div>
+                    <button type="submit" update-game-button class="btn btn-primary btn-lg btn-block" ng-disabled="editGameForm.$invalid" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">

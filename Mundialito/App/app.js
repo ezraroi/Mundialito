@@ -117,13 +117,23 @@
         security.authenticate();
     }
    
+    $rootScope.$on('$locationChangeStart', function (event) {
+        $log.debug('$locationChangeStart');
+        $rootScope.mundialitoApp.loading = true;
+    });
+    $rootScope.$on('$locationChangeSuccess', function (event) {
+        $log.debug('$locationChangeSuccess');
+        $rootScope.mundialitoApp.params = angular.copy($route.current.params);
+        $rootScope.mundialitoApp.loading = false;
+    });
+
     $rootScope.$on("$routeChangeStart", function (event, next, current) {
         $log.debug('$routeChangeStart');
-        $rootScope.mundialitoApp.loading = true;
+        $rootScope.mundialitoApp.message = "Loading...";
     });
     $rootScope.$on("$routeChangeSuccess", function (event, current, previous) {
         $log.debug('$routeChangeSuccess');
-        $rootScope.mundialitoApp.loading = false;
+        $rootScope.mundialitoApp.message = null;
     });
 
 }]);

@@ -26,9 +26,9 @@
     <div class="row" data-access-level="Admin" ng-show="showEditForm" cg-busy="{tracker:'editTeam'}">
         <div class="col-md-12">
             <div class="panel panel-info">
-                <div class="panel-heading">Edit Team Details</div>
+                <div class="panel-heading"><i class="fa fa-pencil-square-o"></i> Edit Team Details</div>
                 <div class="panel-body">
-                    <form name="editTeamForm">
+                    <form name="editTeamForm" novalidate>
                         <auto:fields fields="schema" data="updatedTeam"></auto:fields>
                         <button type="submit" edit-team-button class="btn btn-primary btn-lg btn-block" ng-disabled="editTeamForm.$invalid" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
                     </form>

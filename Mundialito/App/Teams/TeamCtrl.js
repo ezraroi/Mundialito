@@ -3,13 +3,14 @@
 
     Security.authenticate();
     $scope.showEditForm = false;
+    $scope.updatedTeam = angular.copy($scope.team);
 
     TeamsService.getTeamGames($scope.teamId).success(function (data, status, headers, config) {
         $log.debug("TeamCtrl: TeamsService.getTeamGames (" + status + "): " + angular.toJson(data));
         $scope.games = data;
     });
 
-    var refreshTeamsBind = $scope.$on('refreshTeams', function () {
+    var refreshTeamsBind = $rootScope.$on('refreshTeams', function () {
         $log.debug("TeamCtrl: got 'refreshTeams' event");
         $scope.updatedTeam = angular.copy($scope.team);
     });

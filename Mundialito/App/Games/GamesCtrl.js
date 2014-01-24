@@ -21,16 +21,11 @@
             $scope.stadiums = data;
         });
     };
-
     init();
 
     $scope.pendingUpdateGames = [];
-
     $scope.newGame = null;
-
     $scope.gamesFilter = "All";
-
-    $scope.schema = GamesService.schema;
 
     $scope.addNewGame = function () {
         $log.debug('GamesCtrl: addNewGame cliked');
