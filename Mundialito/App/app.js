@@ -1,4 +1,4 @@
-﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute','ngAnimate','ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker','angular-bootstrap-select','angular-bootstrap-select.extra','ui.bootstrap.datetimepicker'])
+﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'angular-bootstrap-select', 'angular-bootstrap-select.extra', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives'])
 .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider) {
     $locationProvider.html5Mode(true);
     $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
@@ -93,7 +93,8 @@
         redirectTo: '/'
     });
 }])
-.run(['$rootScope', '$log', 'security', '$route', function ($rootScope, $log, security, $route) {
+.run(['$rootScope', '$log', 'security', '$route', '$location', function ($rootScope, $log, security, $route, $location) {
+    $rootScope.location = $location;
     $rootScope.mundialitoApp = {
         params: null,
         loading: true,

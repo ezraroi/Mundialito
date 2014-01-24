@@ -8,7 +8,8 @@ namespace Mundialito.DAL
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<Stadium> Stadium { get; set; }
+        public DbSet<Stadium> Stadiums { get; set; }
+        public DbSet<Bet> Bets { get; set; }
 
         public MundialitoContext()
             : base("DefaultConnection")

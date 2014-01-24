@@ -54,6 +54,7 @@ namespace Mundialito
                       "~/Scripts/promise-tracker.js",
                       "~/Scripts/datetimepicker.js",
                       "~/Scripts/angular-bootstrap-select.js",
+                      "~/Scripts/facebookPluginDirectives.js",
                       "~/Scripts/angular-busy.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -23,7 +23,7 @@ namespace Mundialito.DAL.Stadiums
 
         public Stadium GetStadium(int stadiumId)
         {
-            return Context.Stadium.Where(stadium => stadium.StadiumId == stadiumId).Include(stadium => stadium.Games).SingleOrDefault();
+            return Context.Stadiums.Where(stadium => stadium.StadiumId == stadiumId).Include(stadium => stadium.Games).SingleOrDefault();
         }
 
         public Stadium InsertStadium(Stadium stadium)

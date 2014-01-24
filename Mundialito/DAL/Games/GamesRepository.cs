@@ -30,7 +30,7 @@ namespace Mundialito.DAL.Games
         {
             Context.Teams.Attach(game.AwayTeam);
             Context.Teams.Attach(game.HomeTeam);
-            Context.Stadium.Attach(game.Stadium);
+            Context.Stadiums.Attach(game.Stadium);
             return Insert(game);
         }
 

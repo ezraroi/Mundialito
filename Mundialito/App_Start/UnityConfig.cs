@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Practices.Unity;
 using Mundialito.Controllers;
+using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
@@ -32,6 +33,7 @@ namespace Mundialito
             container.RegisterType<ITeamsRepository, TeamsRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGamesRepository, GamesRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IStadiumsRepository, StadiumsRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IBetsRepository, BetsRepository>(new HierarchicalLifetimeManager());
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

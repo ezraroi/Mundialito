@@ -14,6 +14,16 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=194077084133490";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="text-center">
             <h3><i class="fa fa-spin fa-spinner fa-lg"></i> Loading Mundialito...</h3>

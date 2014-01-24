@@ -9,6 +9,7 @@ using Mundialito.DAL;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
 using Mundialito.Models;
+using Mundialito.DAL.Bets;
 
 namespace Mundialito.Controllers
 {
@@ -16,14 +17,21 @@ namespace Mundialito.Controllers
     public class GamesController : ApiController
     {
         private readonly IGamesRepository gamesRepository;
+        private readonly IBetsRepository betsRepository;
 
-        public GamesController(IGamesRepository gamesRepository, ITeamsRepository teamsRepository)
+        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository)
         {
             if (gamesRepository == null)
             {
                 throw new ArgumentNullException("gamesRepository");
             }
             this.gamesRepository = gamesRepository;
+
+            if (betsRepository == null)
+            {
+                throw new ArgumentNullException("betsRepository");
+            }
+            this.betsRepository = betsRepository;
         }
 
         public IEnumerable<Game> Get()
@@ -37,6 +45,12 @@ namespace Mundialito.Controllers
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
             return item; 
+        }
+
+        [Route("{id}/Bets")]
+        public IEnumerable<Bet> GetGameBets(int id)
+        {
+            return betsRepository.GetGameBets(id);
         }
 
         [Route("Open")]
@@ -76,3 +90,4 @@ namespace Mundialito.Controllers
 
     }
 }
+

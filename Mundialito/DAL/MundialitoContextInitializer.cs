@@ -20,25 +20,25 @@ namespace Mundialito.DAL
 
         private static void SetupDefaultData(MundialitoContext context)
         {
-            var haifa = new Team { Name = "Maccabi Haifa", ShortName = "HFA", Flag = "http://www.fifa.com/imgml/flags/reflected/m/POR.png", Logo = "http://www.fifa.com/imgml/logos/xs/POR.gif"};
-            var mTelAviv = new Team { Name = "Maccabi Tel Aviv", ShortName = "MTV" , Logo = "http://www.fifa.com/imgml/logos/xs/POR.gif" , Flag = "http://www.fifa.com/imgml/flags/reflected/m/POR.png"};
-            var hapoel = new Team { Name = "Hapoel Tel Aviv", ShortName = "HTV", Logo = "http://www.fifa.com/imgml/logos/xs/POR.gif", Flag = "http://www.fifa.com/imgml/flags/reflected/m/POR.png" };
+            var eng = new Team { Name = "England", ShortName = "ENG", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/logos/xs/ENG.gif" };
+            var ita = new Team { Name = "Italy", ShortName = "ITA", Logo = "http://www.fifa.com/imgml/logos/xs/ITA.gif", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ITA.png" };
+            var uru = new Team { Name = "Uruguay", ShortName = "URU", Logo = "http://www.fifa.com/imgml/logos/xs/URU.gif", Flag = "http://www.fifa.com/imgml/flags/reflected/m/URU.png" };
 
-            context.Teams.Add(haifa);
-            context.Teams.Add(mTelAviv);
-            context.Teams.Add(hapoel);
+            context.Teams.Add(eng);
+            context.Teams.Add(ita);
+            context.Teams.Add(uru);
 
             var stadium = new Stadium
             {
                 Capacity = 15000,
                 Name = "Blomfiled"
             };
-            context.Stadium.Add(stadium);
+            context.Stadiums.Add(stadium);
 
             context.Games.Add(new Game
             {
-                HomeTeam = haifa,
-                AwayTeam = mTelAviv,
+                HomeTeam = eng,
+                AwayTeam = ita,
                 HomeScore = 3,
                 AwayScore = 0,
                 Date = DateTime.Now,
@@ -51,8 +51,8 @@ namespace Mundialito.DAL
 
             context.Games.Add(new Game
             {
-                HomeTeam = haifa,
-                AwayTeam = mTelAviv,
+                HomeTeam = eng,
+                AwayTeam = ita,
                 HomeScore = 0,
                 AwayScore = 0,
                 Date = DateTime.Now.AddDays(2),
