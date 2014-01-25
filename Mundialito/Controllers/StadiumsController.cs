@@ -4,10 +4,12 @@ using System.Data.Entity.Core;
 using System.Web.Http;
 using Mundialito.DAL.Stadiums;
 using Mundialito.Models;
+using Mundialito.DAL.Games;
 
 namespace Mundialito.Controllers
 {
     [RoutePrefix("api/Stadiums")]
+    [Authorize]
     public class StadiumsController : ApiController
     {
 

@@ -10,14 +10,20 @@ using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
 using Mundialito.Models;
 using Mundialito.DAL.Bets;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Diagnostics;
+using Mundialito.DAL.Accounts;
 
 namespace Mundialito.Controllers
 {
     [RoutePrefix("api/Games")]
+    [Authorize]
     public class GamesController : ApiController
     {
         private readonly IGamesRepository gamesRepository;
         private readonly IBetsRepository betsRepository;
+        private readonly UserManager<MundialitoUser> usersManager = new UserManager<MundialitoUser>(new UserStore<MundialitoUser>(new MundialitoContext()));
 
         public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository)
         {
@@ -48,9 +54,23 @@ namespace Mundialito.Controllers
         }
 
         [Route("{id}/Bets")]
-        public IEnumerable<Bet> GetGameBets(int id)
+        public IEnumerable<BetViewModel> GetGameBets(int id)
         {
-            return betsRepository.GetGameBets(id);
+            return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item));
+        }
+
+        [Route("{id}/MyBet/")]
+        public BetViewModel GetGameUserBet(int id)
+        {
+            var game = GetGameByID(id);
+            var uid = User.Identity.GetUserId();
+            var item =  betsRepository.GetGameBets(id).SingleOrDefault(bet => bet.User.Id == uid);
+            if (item == null)
+            {
+                Trace.TraceInformation("No bet found for game {0} and user {1}, creating empty Bet", game.GameId, uid);
+                return new BetViewModel() { BetId = -1, Game = new BetGame() { GameId = id } };
+            }
+            return new BetViewModel(item); 
         }
 
         [Route("Open")]

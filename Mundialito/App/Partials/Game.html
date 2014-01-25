@@ -9,13 +9,15 @@
                         <h3>
                             <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} {{game.HomeScore}} - {{game.AwayScore}}
                             <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+                            <span ng-show="game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-clock-o"></i> Pending Update</span>
+                            <span ng-show="!game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-lock"></i> Closed for betting</span>
                         </h3>
                     </div>
                     <div ng-if="game.IsOpen">
                         <h3>
                             <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} -
-                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i>
-                            <span ng-show="game.IsPendingUpdate" class="label label-info"><i class="fa fa-clock-o"></i> Pending Update</span>
+                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+                            <span ng-show="game.IsOpen" class="label label-info pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
                         </h3>
                     </div>
                         
@@ -45,7 +47,6 @@
                 <div class="panel-heading"><i class="fa fa-pencil-square-o"></i> Edit Game Details</div>
                 <div class="panel-body">
                     <form role="form" name="editGameForm" novalidate>
-
                         <div class="form-group select">
                             <div class="form-group">
                                 <label for="HomeScore">{{game.HomeTeam.Name}} Score</label>
@@ -78,15 +79,38 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            Your Bet
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="fa fa-user"></i> Your Bet</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" novalidate name="userBetFrom">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
+                                <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}</div>
+                            </label>
+                            <div class="col-md-2">
+                                <input id="{{userBet.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                            </div>
+                            <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
+                                <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}</div>
+                            </label>
+                            <div class="col-md-2">
+                                <input id="{{userBet.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-success btn-block" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-success">
-                <div class="panel-heading"><i class="fa fa-money"></i> Users Bets</div>
+            <div class="panel panel-success" cg-busy="{tracker:'getGameBets'}">
+                <div class="panel-heading"><i class="fa fa-money"></i> Other Users Bets</div>
                 <div class="panel-body">
-                    
+
                 </div>
             </div>
         </div>

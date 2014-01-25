@@ -6,10 +6,12 @@ using Mundialito.DAL.Teams;
 using Mundialito.Models;
 using System.Diagnostics;
 using System.Threading;
+using Mundialito.DAL.Games;
 
 namespace Mundialito.Controllers
 {
     [RoutePrefix("api/Teams")]
+    [Authorize]
     public class TeamsController : ApiController
     {
         private readonly ITeamsRepository teamsRepository;

@@ -1,4 +1,5 @@
-﻿using Mundialito.Models;
+﻿using Mundialito.DAL.Accounts;
+using Mundialito.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -37,6 +38,9 @@ namespace Mundialito.DAL.Bets
 
         public Bet InsertBet(Bet bet)
         {
+            // TODO - Check the status of the attched items, force that the items are not new
+            Context.Games.Attach(bet.Game);
+            Context.Users.Attach(bet.User);
             return Insert(bet);
         }
 

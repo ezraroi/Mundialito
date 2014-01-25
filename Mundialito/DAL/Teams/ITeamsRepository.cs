@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mundialito.Models;
+using Mundialito.DAL.Games;
 
 namespace Mundialito.DAL.Teams
 {

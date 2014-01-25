@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mundialito.Models;
+using Mundialito.DAL.Games;
 
 namespace Mundialito.Tests.Models
 {

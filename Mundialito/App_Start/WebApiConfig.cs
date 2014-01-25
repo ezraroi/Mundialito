@@ -32,7 +32,7 @@ namespace Mundialito
             config.Filters.Add(new MundialitoValidationModelAttribute());
 
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Include;
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
             //config.Formatters.JsonFormatter.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;

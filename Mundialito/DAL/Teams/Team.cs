@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mundialito.Models
+namespace Mundialito.DAL.Teams
 {
     public class Team
     {

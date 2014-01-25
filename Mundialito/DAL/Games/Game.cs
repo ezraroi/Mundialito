@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Mundialito.DAL.Stadiums;
+using Mundialito.DAL.Teams;
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mundialito.Models
+namespace Mundialito.DAL.Games
 {
     public class Game
     {

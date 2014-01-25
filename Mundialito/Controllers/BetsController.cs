@@ -3,6 +3,8 @@ using Mundialito.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +13,7 @@ using System.Web.Http;
 namespace Mundialito.Controllers
 {
     [RoutePrefix("api/Bets")]
+    [Authorize]
     public class BetsController : ApiController
     {
         private readonly IBetsRepository betsRepository;
@@ -24,34 +27,44 @@ namespace Mundialito.Controllers
             this.betsRepository = betsRepository;
         }
 
-        public IEnumerable<Bet> GetAllBets()
+        public IEnumerable<BetViewModel> GetAllBets()
         {
-            return betsRepository.GetBets();
+            return betsRepository.GetBets().Select(item => new BetViewModel(item));
         }
 
-        public Bet GetBetById(int id)
+        public BetViewModel GetBetById(int id)
         {
             var item = betsRepository.GetBet(id);
 
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Bet with id '{0}' not found", id));
-            return item;
+            return new BetViewModel(item);
         }
 
         [HttpPost]
-        public Bet PostBet(Bet bet)
+        public NewBetModel PostBet(NewBetModel bet)
         {
-            // TODO - Validate that current logged user is creating the bet
-            var res = betsRepository.InsertBet(bet);
+            var newBet = new Bet();
+            newBet.User.Id = User.Identity.GetUserId();
+            newBet.Game.GameId = bet.GameId;
+            newBet.HomeScore = bet.HomeScore;
+            newBet.AwayScore = bet.AwayScore;
+            var res = betsRepository.InsertBet(newBet);
             betsRepository.Save();
-            return res;
+            bet.BetId = res.BetId;
+            return bet;
         }
 
         [HttpPut]
-        public Bet PutTeam(int id, Bet bet)
+        public UpdateBetModel UpdateBet(int id, UpdateBetModel bet)
         {
-            // TODO - Validate that current logged user is updating the bet
-            betsRepository.UpdateBet(bet);
+            AuthorizeAction(id);
+
+            var betToUpdate = new Bet();
+            betToUpdate.BetId = id;
+            betToUpdate.HomeScore = bet.HomeScore;
+            betToUpdate.AwayScore = bet.AwayScore;
+            betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();
             return bet;
         }
@@ -59,9 +72,19 @@ namespace Mundialito.Controllers
         [HttpDelete]
         public void DeleteBet(int id)
         {
+            AuthorizeAction(id);
             betsRepository.DeleteBet(id);
             betsRepository.Save();
         }
-        
+
+        private void AuthorizeAction(int id)
+        {
+            var originalBet = betsRepository.GetBet(id);
+            if (originalBet == null)
+                throw new ObjectNotFoundException(string.Format("Bet with id '{0}' not found", id));
+
+            if (originalBet.User.Id != User.Identity.GetUserId())
+                throw new UnauthorizedAccessException("You can not add bet of another user");
+        }
     }
 }

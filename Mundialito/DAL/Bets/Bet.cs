@@ -1,13 +1,27 @@
-﻿using System;
+﻿using Mundialito.DAL.Accounts;
+using Mundialito.DAL.Games;
+using Mundialito.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Mundialito.Models
+namespace Mundialito.DAL.Bets
 {
     public class Bet
     {
+        public Bet()
+        {
+
+        }
+
+        public Bet(MundialitoUser user, Game game)
+        {
+            User = user;
+            Game = game;
+        }
+
         public int BetId { get; set; }
 
         [Required]
@@ -23,6 +37,14 @@ namespace Mundialito.Models
         [Required]
         [Range(0, 10)]
         public int AwayScore { get; set; }
+
+        public Boolean IsOpen
+        {
+            get
+            {
+                return Game.IsOpen;
+            }
+        }
 
         public String Mark
         {

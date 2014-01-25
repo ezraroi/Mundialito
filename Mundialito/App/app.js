@@ -45,8 +45,9 @@
     }).
     when('/games/:gameId', {
         templateUrl: 'App/Partials/Game.html',
-        controller: function ($scope, $log, $routeParams, game) {
+        controller: function ($scope, $log, $routeParams, game, userBet) {
             $scope.game = angular.copy(game);
+            $scope.userBet = angular.copy(userBet);
             $scope.gameId = $routeParams.gameId;
         },
         resolve: {
@@ -58,7 +59,16 @@
                     deferred.resolve(data);
                 });
                 return deferred.promise;
-            }
+            },
+            userBet: function ($q, $route, $log, BetsService) {
+                var deferred = $q.defer();
+                var gameId = $route.current.params.gameId;
+                BetsService.getUserBetOnGame(gameId).success(function (data, status, headers, config) {
+                    $log.debug("resolve: BetsService.getUserBetOnGame Success (" + status + "):" + angular.toJson(data));
+                    deferred.resolve(data);
+                });
+                return deferred.promise;
+            },
         }
     }).
     when('/games', {

@@ -19,13 +19,16 @@ namespace Mundialito.Filters
             {
                 status = HttpStatusCode.NotFound;
             }
+            else if (context.Exception is UnauthorizedAccessException)
+            {
+                status = HttpStatusCode.Forbidden;
+            }
             else if (context.Exception is ArgumentException)
             {
                 status = HttpStatusCode.BadRequest;
             }
 
             context.Response = context.Request.CreateErrorResponse(status, context.Exception);
-            //context.Response = new HttpResponseMessage(status) {Content = new  StringContent(context.Exception.Message)};
         }
 
         

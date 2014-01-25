@@ -38,6 +38,7 @@ namespace Mundialito
                     .IncludeDirectory("~/App/Games", "*.js")
                     .IncludeDirectory("~/App/General", "*.js")
                     .IncludeDirectory("~/App/Stadiums", "*.js")
+                    .IncludeDirectory("~/App/Bets", "*.js")
                     .IncludeDirectory("~/App/Teams", "*.js")
             );
 

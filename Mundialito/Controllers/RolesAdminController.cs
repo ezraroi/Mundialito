@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL;
+using Mundialito.DAL.Accounts;
 using Mundialito.Models;
 using System;
 using System.Collections.Generic;

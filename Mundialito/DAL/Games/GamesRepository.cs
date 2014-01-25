@@ -28,6 +28,7 @@ namespace Mundialito.DAL.Games
 
         public Game InsertGame(Game game)
         {
+            // TODO - Check the status of the attched items, force that the items are not new
             Context.Teams.Attach(game.AwayTeam);
             Context.Teams.Attach(game.HomeTeam);
             Context.Stadiums.Attach(game.Stadium);

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Mundialito.DAL.Games;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mundialito.Models
+namespace Mundialito.DAL.Stadiums
 {
     public class Stadium
     {

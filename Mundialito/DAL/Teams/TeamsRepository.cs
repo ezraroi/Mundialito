@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Mundialito.Models;
+using Mundialito.DAL.Games;
 
 namespace Mundialito.DAL.Teams
 {
