@@ -5,24 +5,14 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-12">
-                    <div ng-if="!game.IsOpen">
+                    <div >
                         <h3>
-                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} {{game.HomeScore}} - {{game.AwayScore}}
-                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
-                            <span ng-show="game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-clock-o"></i> Pending Update</span>
-                            <span ng-show="!game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-lock"></i> Closed for betting</span>
-                        </h3>
+                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} <span ng-if="!game.IsOpen">{{game.HomeScore}} - {{game.AwayScore}}</span><span ng-if="game.IsOpen"> - </span>
+    <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+</h3>
                     </div>
-                    <div ng-if="game.IsOpen">
-                        <h3>
-                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} -
-                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
-                            <span ng-show="game.IsOpen" class="label label-info pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
-                        </h3>
-                    </div>
-                        
                     <h4>{{game.Stadium.Name}} Stadium</h4>
-                    <h4>{{game.Date | date}}</h4><br />
+                    <h4>{{game.Date | date:'dd/MM/yy @ h:mma'}}</h4><br />
                 </div>
             </div>
             <div class="row">
@@ -70,7 +60,7 @@
                                     <datetimepicker data-ng-model="updatedGame.Date" data-datetimepicker-config="{ dropdownSelector: 'dateToggleSelect'}"></datetimepicker>
                                 </ul>
                             </div>
-                            </div>
+                        </div>
                         <button type="submit" update-game-button class="btn btn-primary btn-lg btn-block" ng-disabled="editGameForm.$invalid" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
                     </form>
                 </div>
@@ -80,9 +70,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-user"></i> Your Bet</div>
+                <div class="panel-heading">
+                    <i class="fa fa-user"></i> Your Bet
+                    <span ng-show="game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-clock-o"></i> Pending Update</span>
+                    <span ng-show="!game.IsPendingUpdate && !game.IsOpen" class="label label-danger pull-right"><i class="fa fa-lock"></i> Closed for betting</span>
+                    <span ng-show="game.IsOpen" class="label label-success pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
+                </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" novalidate name="userBetFrom">
+                    <div ng-if="!game.IsOpen && userBet.BetId == -1" class="text-danger">
+                        <i class="fa fa-warning"></i> You haven't placed a bet on this game and it is already closed for betting
+                    </div>
+                    <form class="form-horizontal" novalidate name="userBetFrom" ng-if="userBet.BetId != -1 || game.IsOpen">
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
                                 <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}</div>
@@ -96,8 +94,11 @@
                             <div class="col-md-2">
                                 <input id="{{userBet.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                             </div>
-                            <div class="col-md-2">
-                                <button type="submit" class="btn btn-success btn-block" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                            <div class="col-md-2 text-center" ng-if="game.IsOpen">
+                                <button type="submit" class="btn btn-success" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                            </div>
+                            <div class="col-md-2" ng-if="!userBet.IsOpenForBetting">
+                                <span class="badge" ng-class="{'bade-danger': userBet.Points == 0, 'bade-warning': userBet.Points == 3, 'bade-success': userBet.Points > 3, 'bade-info': userBet.Points == 'NA'}">{{userBet.Points}}</span>
                             </div>
                         </div>
                     </form>
@@ -115,14 +116,14 @@
             </div>
         </div>
     </div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading"><i class="fa fa-facebook-square"></i> Facebook Comments</div>
                 <div class="panel-body">
-                    <div class="fb-comments" data-href="{{location.absUrl()}}" data-numposts="10" data-colorscheme="light"></div>
+                    <div class="fb-comments" data-href="#CURRENT_PAGE#" data-numposts="10" data-colorscheme="light"></div>
                 </div>
             </div>
         </div>

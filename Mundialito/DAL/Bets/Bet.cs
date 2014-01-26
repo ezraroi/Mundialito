@@ -38,11 +38,21 @@ namespace Mundialito.DAL.Bets
         [Range(0, 10)]
         public int AwayScore { get; set; }
 
-        public Boolean IsOpen
+        public int? Points { get; set; }
+
+        public Boolean IsOpenForBetting
         {
             get
             {
                 return Game.IsOpen;
+            }
+        }
+
+        public Boolean IsResolved
+        {
+            get
+            {
+                return !IsOpenForBetting && !Game.IsPendingUpdate;
             }
         }
 

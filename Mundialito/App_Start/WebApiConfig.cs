@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Mundialito.Filters;
+using System.Web.Http.Cors;
 
 namespace Mundialito
 {

@@ -4,10 +4,11 @@
     module = angular.module('FacebookPluginDirectives', []);
 
     createDirective = function (name) {
-        return module.directive(name, function () {
+        return module.directive(name, function ($location) {
             return {
                 restrict: 'C',
                 link: function (scope, element, attributes) {
+                    element.parent()[0].innerHTML = element.parent()[0].innerHTML.replace("#CURRENT_PAGE#", $location.absUrl().toString());
                     return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
                 }
             };

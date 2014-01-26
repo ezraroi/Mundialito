@@ -23,6 +23,9 @@ namespace Mundialito.Models
             BetId = bet.BetId;
             HomeScore = bet.HomeScore;
             AwayScore = bet.AwayScore;
+            IsOpenForBetting = bet.IsOpenForBetting;
+            IsResolved = bet.IsResolved;
+            Points = bet.Points.HasValue ? (bet.Points.Value.ToString()) : (IsResolved ?  "0"  : "NA");
             Game = new BetGame(bet.Game);
             User = new BetUser(bet.User);
         }
@@ -33,11 +36,15 @@ namespace Mundialito.Models
 
         public int AwayScore { get; set; }
 
+        public String Points { get; set; }
+
         public BetUser User { get; set;}
 
         public BetGame Game { get; set; }
 
-        public Boolean IsOpen { get; set; }
+        public Boolean IsOpenForBetting { get; set; }
+
+        public Boolean IsResolved { get; set; }
     }
 
     public class BetUser
