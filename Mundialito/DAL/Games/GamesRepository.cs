@@ -16,23 +16,23 @@ namespace Mundialito.DAL.Games
         {
         }
 
-        public IEnumerable<Game> GetGames()
+        public IEnumerable<IGame> GetGames()
         {
             return Get().Include(game => game.HomeTeam).Include(game => game.AwayTeam).Include(game => game.Stadium).OrderBy(game => game.Date);
         }
 
-        public Game GetGame(int gameId)
+        public IGame GetGame(int gameId)
         {
             return Get().Include(game => game.HomeTeam).Include(game => game.AwayTeam).Include(game => game.Stadium).SingleOrDefault(game => game.GameId == gameId);
         }
 
-        public Game InsertGame(Game game)
+        public IGame InsertGame(IGame game)
         {
             // TODO - Check the status of the attched items, force that the items are not new
             Context.Teams.Attach(game.AwayTeam);
             Context.Teams.Attach(game.HomeTeam);
             Context.Stadiums.Attach(game.Stadium);
-            return Insert(game);
+            return (IGame)Insert((Game)game);
         }
 
         public void DeleteGame(int gameId)
@@ -40,9 +40,9 @@ namespace Mundialito.DAL.Games
             Delete(gameId);
         }
 
-        public void UpdateGame(Game game)
+        public void UpdateGame(IGame game)
         {
-            Update(game);
+            Update((Game)game);
         }
 
         #endregion

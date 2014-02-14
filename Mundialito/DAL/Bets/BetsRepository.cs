@@ -14,6 +14,7 @@ namespace Mundialito.DAL.Bets
         public BetsRepository()
             : base(new MundialitoContext())
         {
+            
         }
 
         public IEnumerable<Bet> GetBets()

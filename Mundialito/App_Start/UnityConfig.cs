@@ -8,6 +8,7 @@ using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
+using Mundialito.Logic;
 using Mundialito.Models;
 using System.Web.Http;
 using Unity.WebApi;
@@ -34,7 +35,8 @@ namespace Mundialito
             container.RegisterType<IGamesRepository, GamesRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IStadiumsRepository, StadiumsRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IBetsRepository, BetsRepository>(new HierarchicalLifetimeManager());
-
+            container.RegisterType<IBetValidator, BetValidator>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IUserProvider, UserProvider>(new ContainerControlledLifetimeManager());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

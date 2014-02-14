@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>AngularJs.AutoFields.Bootstrap</id>
+    <version>0.6.0</version>
+    <title>Angular JS AutoFields Bootstrap</title>
+    <authors>Justin Maier</authors>
+    <owners>Justin Maier</owners>
+    <projectUrl>https://github.com/JustMaier/angular-autoFields-bootstrap</projectUrl>
+    <iconUrl>https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Why waste time developing and bloating your templates with repetative form html. Instead just specify a schema for the form, and the model you want to bind it to and you're done!
+
+Check the project site for details and examples.</description>
+    <summary>Automatically generates form fields based on a schema and binds them to an object</summary>
+    <releaseNotes>Added enhanced validation &amp; support for validation messages.</releaseNotes>
+    <language />
+    <tags>angularjs angular form bootstrap automation templating</tags>
+    <dependencies>
+      <dependency id="angularjs" version="1.2.2" />
+      <dependency id="Angular.UI.Bootstrap" version="0.10.1" />
+    </dependencies>
+  </metadata>
+</package>

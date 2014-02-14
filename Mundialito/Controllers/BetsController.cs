@@ -9,22 +9,41 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Mundialito.Logic;
+using Mundialito.DAL.Games;
+using Mundialito.DAL.Accounts;
 
 namespace Mundialito.Controllers
 {
+    // TODO - Add bet validator logic and test it
     [RoutePrefix("api/Bets")]
     [Authorize]
     public class BetsController : ApiController
     {
         private readonly IBetsRepository betsRepository;
+        private readonly IBetValidator betValidator;
+        private readonly IUserProvider userProvider;
+        private readonly IUserProvider userProivider;
 
-        public BetsController(IBetsRepository betsRepository )
+        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, IUserProvider userProivider)
         {
             if (betsRepository == null)
             {
                 throw new ArgumentNullException("betsRepository"); 
             }
             this.betsRepository = betsRepository;
+
+            if (betValidator == null)
+            {
+                throw new ArgumentNullException("betValidator"); 
+            }
+            this.betValidator = betValidator;
+
+            if (userProivider == null)
+            {
+                throw new ArgumentNullException("userProivider");
+            }
+            this.userProivider = userProivider;
         }
 
         public IEnumerable<BetViewModel> GetAllBets()
@@ -45,10 +64,13 @@ namespace Mundialito.Controllers
         public NewBetModel PostBet(NewBetModel bet)
         {
             var newBet = new Bet();
-            newBet.User.Id = User.Identity.GetUserId();
+            newBet.User = new MundialitoUser();
+            newBet.User.Id = userProivider.UserId;
+            newBet.Game = new Game();
             newBet.Game.GameId = bet.GameId;
             newBet.HomeScore = bet.HomeScore;
             newBet.AwayScore = bet.AwayScore;
+            betValidator.ValidateNewBet(newBet);
             var res = betsRepository.InsertBet(newBet);
             betsRepository.Save();
             bet.BetId = res.BetId;
@@ -58,12 +80,11 @@ namespace Mundialito.Controllers
         [HttpPut]
         public UpdateBetModel UpdateBet(int id, UpdateBetModel bet)
         {
-            AuthorizeAction(id);
-
             var betToUpdate = new Bet();
             betToUpdate.BetId = id;
             betToUpdate.HomeScore = bet.HomeScore;
             betToUpdate.AwayScore = bet.AwayScore;
+            betValidator.ValidateUpdateBet(betToUpdate);
             betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();
             return bet;
@@ -72,19 +93,10 @@ namespace Mundialito.Controllers
         [HttpDelete]
         public void DeleteBet(int id)
         {
-            AuthorizeAction(id);
+            betValidator.ValidateDeleteBet(id, userProivider.UserId);
             betsRepository.DeleteBet(id);
             betsRepository.Save();
         }
-
-        private void AuthorizeAction(int id)
-        {
-            var originalBet = betsRepository.GetBet(id);
-            if (originalBet == null)
-                throw new ObjectNotFoundException(string.Format("Bet with id '{0}' not found", id));
-
-            if (originalBet.User.Id != User.Identity.GetUserId())
-                throw new UnauthorizedAccessException("You can not add bet of another user");
-        }
+        
     }
 }

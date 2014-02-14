@@ -40,12 +40,12 @@ namespace Mundialito.Controllers
             this.betsRepository = betsRepository;
         }
 
-        public IEnumerable<Game> Get()
+        public IEnumerable<IGame> Get()
         {
             return gamesRepository.GetGames();
         }
 
-        public Game GetGameByID(int id)
+        public IGame GetGameByID(int id)
         {
             var item = gamesRepository.GetGame(id);
             if (item == null)
@@ -74,7 +74,7 @@ namespace Mundialito.Controllers
         }
 
         [Route("Open")]
-        public IEnumerable<Game> GetOpenGames()
+        public IEnumerable<IGame> GetOpenGames()
         {
             return
                 gamesRepository.GetGames().Where(game => game.IsOpen);
@@ -82,7 +82,7 @@ namespace Mundialito.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public Game PostGame(Game game)
+        public IGame PostGame(IGame game)
         {
             if (game.AwayTeam.TeamId == game.HomeTeam.TeamId)
                 throw new ArgumentException("Home team and Away team can not be the same team");

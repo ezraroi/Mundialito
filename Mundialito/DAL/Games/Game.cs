@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mundialito.DAL.Games
 {
-    public class Game
+    public class Game : IGame
     {
         public int GameId { get; set; }
 
