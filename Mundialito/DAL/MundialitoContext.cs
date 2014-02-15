@@ -23,7 +23,7 @@ namespace Mundialito.DAL
         public DbSet<Bet> Bets { get; set; }
 
         public MundialitoContext()
-            : base("name=AzureConnection")
+            : base("DefaultConnection")
         {
         }
 
