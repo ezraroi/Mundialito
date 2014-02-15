@@ -12,10 +12,10 @@ using System.Web.Http;
 using Mundialito.Logic;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Accounts;
+using System.Diagnostics;
 
 namespace Mundialito.Controllers
 {
-    // TODO - Add bet validator logic and test it
     [RoutePrefix("api/Bets")]
     [Authorize]
     public class BetsController : ApiController
@@ -72,6 +72,7 @@ namespace Mundialito.Controllers
             newBet.AwayScore = bet.AwayScore;
             betValidator.ValidateNewBet(newBet);
             var res = betsRepository.InsertBet(newBet);
+            Trace.TraceInformation("Posting new Bet: {0}", newBet);
             betsRepository.Save();
             bet.BetId = res.BetId;
             return bet;
@@ -87,12 +88,14 @@ namespace Mundialito.Controllers
             betValidator.ValidateUpdateBet(betToUpdate);
             betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();
+            Trace.TraceInformation("Updating Bet: {0}", betToUpdate);
             return bet;
         }
 
         [HttpDelete]
         public void DeleteBet(int id)
         {
+            Trace.TraceInformation("Deleting Bet {0}", id);
             betValidator.ValidateDeleteBet(id, userProivider.UserId);
             betsRepository.DeleteBet(id);
             betsRepository.Save();

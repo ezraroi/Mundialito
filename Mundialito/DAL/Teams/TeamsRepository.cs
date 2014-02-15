@@ -22,7 +22,7 @@ namespace Mundialito.DAL.Teams
             return Get().OrderBy(team => team.Name);
         }
 
-        public IEnumerable<IGame> GetTeamGames(int teamId)
+        public IEnumerable<Game> GetTeamGames(int teamId)
         {
             return Context.Games.Where(game => game.HomeTeam.TeamId == teamId || game.AwayTeam.TeamId == teamId).Include(game => game.AwayTeam).Include(game => game.HomeTeam).Include(game => game.Stadium).OrderBy(game => game.Date);
         }

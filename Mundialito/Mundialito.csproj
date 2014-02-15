@@ -240,7 +240,6 @@
     <Compile Include="DAL\Bets\BetsRepository.cs" />
     <Compile Include="DAL\Bets\IBetsRepository.cs" />
     <Compile Include="DAL\Games\GamesRepository.cs" />
-    <Compile Include="DAL\Games\IGame.cs" />
     <Compile Include="DAL\Games\IGamesRepository.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\MundialitoContext.cs" />
@@ -255,7 +254,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoCContainer.cs" />
+    <Compile Include="Logic\BetsResolver.cs" />
     <Compile Include="Logic\BetValidator.cs" />
+    <Compile Include="Logic\IBetsResolver.cs" />
     <Compile Include="Logic\IBetValidator.cs" />
     <Compile Include="Logic\IUserProvider.cs" />
     <Compile Include="Logic\UserProvider.cs" />
@@ -430,9 +431,6 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\angular-busy.min.js.map">
-      <DependentUpon>angular-busy.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular-bootstrap-select.min.js.map">
       <DependentUpon>angular-bootstrap-select.js</DependentUpon>
     </Content>
@@ -709,6 +707,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Scripts\angular-busy.min.js.map">
+      <DependentUpon>angular-busy.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />

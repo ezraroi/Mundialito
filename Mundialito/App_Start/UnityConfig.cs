@@ -36,6 +36,7 @@ namespace Mundialito
             container.RegisterType<IStadiumsRepository, StadiumsRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IBetsRepository, BetsRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IBetValidator, BetValidator>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IBetsResolver, BetsResolver>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUserProvider, UserProvider>(new ContainerControlledLifetimeManager());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

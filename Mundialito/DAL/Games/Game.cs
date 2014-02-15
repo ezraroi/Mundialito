@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mundialito.DAL.Games
 {
-    public class Game : IGame
+    public class Game 
     {
         public int GameId { get; set; }
 
@@ -47,6 +47,14 @@ namespace Mundialito.DAL.Games
             }
         }
 
+        public bool IsBetResolved
+        {
+            get
+            {
+                return !IsOpen && !IsPendingUpdate;
+            }
+        }
+
         public String Mark
         {
             get
@@ -61,6 +69,11 @@ namespace Mundialito.DAL.Games
                 }
                 return "Not Played";
             }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Game ID = {0}, {1} - {2}", GameId, HomeTeam.Name, AwayTeam.Name);
         }
     }
 }

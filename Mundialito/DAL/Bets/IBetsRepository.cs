@@ -1,4 +1,5 @@
 ﻿using Mundialito.DAL.Accounts;
+using Mundialito.DAL.Games;
 using Mundialito.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Mundialito.DAL.Bets
         IEnumerable<Bet> GetUserBets(string userId);
 
         IEnumerable<Bet> GetGameBets(int gameId);
-
+        
         Bet GetBet(int betId);
         Bet InsertBet(Bet bet);
         void DeleteBet(int betId);

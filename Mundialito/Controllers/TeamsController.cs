@@ -40,7 +40,7 @@ namespace Mundialito.Controllers
         }
 
         [Route("{id}/Games")]
-        public IEnumerable<IGame> GetTeamGames(int id)
+        public IEnumerable<Game> GetTeamGames(int id)
         {
             return teamsRepository.GetTeamGames(id);
         }

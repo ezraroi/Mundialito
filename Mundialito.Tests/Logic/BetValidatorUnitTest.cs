@@ -34,7 +34,7 @@ namespace Mundialito.Tests.Logic
         {
             var betsRepository = new Mock<IBetsRepository>();
             var gamesRepository = new Mock<IGamesRepository>();
-            CreateClosedGame(gamesRepository);
+            CreateClosedGame();
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             var newBet = new Bet();
@@ -50,9 +50,8 @@ namespace Mundialito.Tests.Logic
         {
             var betsRepository = new Mock<IBetsRepository>();
             var gamesRepository = new Mock<IGamesRepository>();
-            var pendingUpdateGame = new Mock<IGame>();
-            pendingUpdateGame.SetupGet(game => game.IsPendingUpdate).Returns(true);
-            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(pendingUpdateGame.Object);
+            var game = CreatePendingUpdateGame();
+            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game);
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             var newBet = new Bet();
@@ -69,7 +68,8 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.GetGameBets(It.IsAny<int>())).Returns(new List<Bet> { new Bet() { BetId = 1, User = new MundialitoUser() { Id = "1"} } });
 
             var gamesRepository = new Mock<IGamesRepository>();
-            CreateOpenGame(gamesRepository);
+            var game = CreateOpenGame();
+            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game);;
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             var newBet = new Bet();
@@ -87,7 +87,8 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.GetGameBets(It.IsAny<int>())).Returns(new List<Bet> { new Bet() { BetId = 1, User = new MundialitoUser() { Id = "1" } } });
 
             var gamesRepository = new Mock<IGamesRepository>();
-            CreateOpenGame(gamesRepository);
+            var game = CreateOpenGame();
+            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             var newBet = new Bet();
@@ -119,7 +120,8 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.GetBet(It.IsAny<int>())).Returns(new Bet() { BetId = 1 });
 
             var gamesRepository = new Mock<IGamesRepository>();
-            CreateClosedGame(gamesRepository);
+            var game = CreateClosedGame();
+            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             var betToUpdate = new Bet();
@@ -196,27 +198,34 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.GetBet(It.IsAny<int>())).Returns(new Bet() { BetId = 1, User = new MundialitoUser() { Id = "1" }, Game = new Game() { Date = DateTime.Now.Subtract(TimeSpan.FromDays(1)) } });
 
             var gamesRepository = new Mock<IGamesRepository>();
-            CreateClosedGame(gamesRepository);
+            var game = CreateClosedGame();
+            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object);
             betValidator.ValidateDeleteBet(1, "1");
         }
 
-        private static void CreateClosedGame(Mock<IGamesRepository> gamesRepository)
+        private static Game CreateClosedGame()
         {
-            var closedGame = new Mock<IGame>();
-            closedGame.SetupGet(game => game.IsOpen).Returns(false);
-            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(closedGame.Object);
+            var closedGame = new Game();
+            closedGame.Date = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+            closedGame.HomeScore = closedGame.AwayScore = 1;
+            return closedGame;
         }
 
-        private static void CreateOpenGame(Mock<IGamesRepository> gamesRepository)
+        private static Game CreateOpenGame()
         {
-            var game = new Mock<IGame>();
-            game.SetupGet(g => g.IsPendingUpdate).Returns(false);
-            game.SetupGet(g => g.IsOpen).Returns(true);
-            gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game.Object);
+            var game = new Game();
+            game.Date = DateTime.Now.Add(TimeSpan.FromDays(1));
+            return game;
         }
 
-        
+        private static Game CreatePendingUpdateGame()
+        {
+            var pendingUpdateGame = new Game();
+            pendingUpdateGame.Date = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+            return pendingUpdateGame;
+        }
+
     }
 }

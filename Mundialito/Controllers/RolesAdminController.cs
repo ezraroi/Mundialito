@@ -17,7 +17,6 @@ namespace Mundialito.Controllers
     [Authorize(Roles = "Admin")]
     public class RolesAdminController : ApiController
     {
-
         public UserManager<MundialitoUser> UserManager { get; private set; }
         public RoleManager<IdentityRole> RoleManager { get; private set; }
 
