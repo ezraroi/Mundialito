@@ -710,6 +710,7 @@
     <Content Include="Scripts\angular-busy.min.js.map">
       <DependentUpon>angular-busy.js</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\mundialito.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
