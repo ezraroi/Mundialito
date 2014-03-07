@@ -5,7 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
-
+.idea
 # Build results
 
 [Dd]ebug/

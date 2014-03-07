@@ -1,7 +1,8 @@
 ﻿angular.module('mundialitoApp')
-.controller('TeamCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', 'Alert', function ($scope, $rootScope, $log, TeamsService, Security, Alert) {
-
+.controller('TeamCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', '$routeParams', 'team', function ($scope, $rootScope, $log, TeamsService, Security, $routeParams, team) {
     Security.authenticate();
+    $scope.team = angular.copy(team);
+    $scope.teamId = $routeParams.teamId;
     $scope.showEditForm = false;
     $scope.updatedTeam = angular.copy($scope.team);
 

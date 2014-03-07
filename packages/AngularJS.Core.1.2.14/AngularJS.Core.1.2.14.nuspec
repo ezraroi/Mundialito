@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>AngularJS.Core</id>
+    <version>1.2.14</version>
+    <title>AngularJS Core</title>
+    <authors>John Papa, Scott Allen, Jeremy Likness</authors>
+    <owners>John Papa, Scott Allen, Jeremy Likness</owners>
+    <projectUrl>http://angularjs.org/</projectUrl>
+    <iconUrl>https://secure.gravatar.com/avatar/6e1b5ab3ef1593413f1bee4e5a6e6ae7?s=140&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>See the AngularJS.* packages for other Angular modules</description>
+    <summary>AngularJS. HTML enhanced for web apps!
+
+AngularJS.Core contains the core Angular files and the angular.mocks for unit testing.</summary>
+    <language>en-US</language>
+    <tags>angular angularjs</tags>
+  </metadata>
+</package>
