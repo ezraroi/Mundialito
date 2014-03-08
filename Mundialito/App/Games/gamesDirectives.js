@@ -15,13 +15,15 @@ angular.module('mundialitoApp')
 .directive('addGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
     return {
         restrict: "A",
-        requeire: '^ngModel',
-        link: function (scope, element, attrs) {
+        scope : {
+            game : '='
+        },
+        link: function (scope, element) {
             element.bind("click", function () {
-                scope.newGame.AwayTeam = angular.fromJson(scope.newGame.AwayTeam);
-                scope.newGame.HomeTeam = angular.fromJson(scope.newGame.HomeTeam);
-                scope.newGame.Stadium = angular.fromJson(scope.newGame.Stadium);
-                GamesService.addGame(scope.newGame).success(function (data, status, headers, config) {
+                scope.game.AwayTeam = angular.fromJson(scope.game.AwayTeam);
+                scope.game.HomeTeam = angular.fromJson(scope.game.HomeTeam);
+                scope.game.Stadium = angular.fromJson(scope.game.Stadium);
+                GamesService.addGame(scope.game).success(function (data) {
                     $log.log("Game " + data.GameId + " was added");
                     Alert.new('success', 'Game was added successfully', 2000);
                     $rootScope.$emit("refreshGames");
@@ -33,10 +35,10 @@ angular.module('mundialitoApp')
 .directive('deleteGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
     return {
         restrict: "A",
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
             element.bind("click", function () {
                 if (confirm("Are you sure you want to delete the game?") == true) {
-                    GamesService.deleteGame(scope.game.GameId).success(function (data, status, headers, config) {
+                    GamesService.deleteGame(scope.game.GameId).success(function (data) {
                         $log.log("Game " + data.GameId + " was deleted");
                         Alert.new('success', 'Game was deleted successfully', 2000);
                         $rootScope.$emit("refreshGames");
@@ -49,9 +51,9 @@ angular.module('mundialitoApp')
 .directive('updateGameButton', ['$rootScope', '$log', 'GamesService', 'Alert', function ($rootScope, $log, GamesService, Alert) {
     return {
         restrict: "A",
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
             element.bind("click", function () {
-                GamesService.editGame(scope.updatedGame).success(function (data, status, headers, config) {
+                GamesService.editGame(scope.updatedGame).success(function (data) {
                     $log.log("Game " + data.GameId + " was updated");
                     Alert.new('success', 'Game was updated successfully', 2000);
                     scope.game = data;

@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    <!-- Add Game -->
     <div class="row" data-access-level="Admin" ng-show="newGame">
         <div class="col-md-12">
             <div class="panel panel-info">
@@ -60,12 +61,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <button type="submit" add-game-button ng-model="newGame" class="btn btn-primary btn-lg btn-block" ng-disabled="addGameForm.$invalid" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
+                        <button type="button" add-game-button game="newGame" class="btn btn-primary btn-lg btn-block" ng-disabled="addGameForm.$invalid" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <!-- End of Add Game -->
     <div class="row" data-access-level="Admin" ng-show="pendingUpdateGames.length > 0" cg-busy="{tracker:'editGame'}">
         <div class="col-md-12">
             <div class="panel panel-collapse panel-primary">

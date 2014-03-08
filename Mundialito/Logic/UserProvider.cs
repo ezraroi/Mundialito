@@ -14,7 +14,7 @@ namespace Mundialito.Logic
     public class UserProvider : IUserProvider
     {
         private readonly ApiController controller;
-                public UserProvider(ApiController controller)
+        public UserProvider(ApiController controller)
         {
             this.controller = controller;
         }

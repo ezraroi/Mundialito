@@ -22,7 +22,6 @@ namespace Mundialito.Controllers
     {
         private readonly IBetsRepository betsRepository;
         private readonly IBetValidator betValidator;
-        private readonly IUserProvider userProvider;
         private readonly IUserProvider userProivider;
 
         public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, IUserProvider userProivider)

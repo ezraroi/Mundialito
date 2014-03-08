@@ -282,6 +282,7 @@
     <Content Include="App\Accounts\JoinCtrl.js" />
     <Content Include="App\Accounts\LoginCtrl.js" />
     <Content Include="App\Accounts\ManageCtrl.js" />
+    <Content Include="App\Partials\angular-busy.html" />
     <Content Include="App\Partials\Home.html" />
     <Content Include="App\Partials\Login.html" />
     <Content Include="App\Teams\TeamCtrl.js" />

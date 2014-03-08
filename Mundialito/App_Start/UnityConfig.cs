@@ -25,12 +25,6 @@ namespace Mundialito
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
-
-            container.RegisterType<TeamsController>();
-            container.RegisterType<GamesController>();
-            container.RegisterType<StadiumsController>();
-            container.RegisterType<AccountController>(new InjectionConstructor());
-            //container.RegisterType<RolesAdminController>();
             container.RegisterType<ITeamsRepository, TeamsRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IGamesRepository, GamesRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<IStadiumsRepository, StadiumsRepository>(new HierarchicalLifetimeManager());
@@ -38,6 +32,14 @@ namespace Mundialito
             container.RegisterType<IBetValidator, BetValidator>(new ContainerControlledLifetimeManager());
             container.RegisterType<IBetsResolver, BetsResolver>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUserProvider, UserProvider>(new ContainerControlledLifetimeManager());
+            /*
+            container.RegisterType<BetsController>();
+            container.RegisterType<TeamsController>();
+            container.RegisterType<GamesController>();
+            container.RegisterType<StadiumsController>();
+            container.RegisterType<RolesAdminController>();
+            */
+            container.RegisterType<AccountController>(new InjectionConstructor());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

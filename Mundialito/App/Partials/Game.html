@@ -31,6 +31,7 @@
             </div>
         </div>
     </div>
+    <!-- Edit Panel -->
     <div class="row" data-access-level="Admin" ng-show="showEditForm" cg-busy="{tracker:'editGame'}">
         <div class="col-md-12">
             <div class="panel panel-info">
@@ -67,6 +68,7 @@
             </div>
         </div>
     </div>
+    <!-- End of Edit Panel -->
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -83,19 +85,21 @@
                     <form class="form-horizontal" novalidate name="userBetFrom" ng-if="userBet.BetId != -1 || game.IsOpen">
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
-                                <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}</div>
+                                <div class="text-center">
+                                    <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}
+                                </div>
                             </label>
                             <div class="col-md-2">
-                                <input id="{{userBet.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                                <input name="{{game.HomeTeam.TeamId}}" id="{{game.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
                             </div>
                             <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
                                 <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}</div>
                             </label>
                             <div class="col-md-2">
-                                <input id="{{userBet.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
+                                <input name="{{game.AwayTeam.TeamId}}" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                             </div>
                             <div class="col-md-2 text-center" ng-if="game.IsOpen">
-                                <button type="submit" class="btn btn-success" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                                <button type="button" save-bet-button bet="userBet" class="btn btn-success" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
                             </div>
                             <div class="col-md-2" ng-if="!userBet.IsOpenForBetting">
                                 <span class="badge" ng-class="{'bade-danger': userBet.Points == 0, 'bade-warning': userBet.Points == 3, 'bade-success': userBet.Points > 3, 'bade-info': userBet.Points == 'NA'}">{{userBet.Points}}</span>
@@ -106,18 +110,20 @@
             </div>
         </div>
     </div>
+    <!-- Other users bets -->
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-success" cg-busy="{tracker:'getGameBets'}">
                 <div class="panel-heading"><i class="fa fa-money"></i> Other Users Bets</div>
                 <div class="panel-body">
-
                 </div>
             </div>
         </div>
     </div>
+    <!-- End of Other users bets -->
     <br />
     <br />
+    <!-- Facebook Comments -->
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">
@@ -128,4 +134,5 @@
             </div>
         </div>
     </div>
+    <!-- End of Facebook Comments -->
 </div>

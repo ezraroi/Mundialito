@@ -8,6 +8,9 @@ angular.module('mundialitoApp')
         },
         getGameBets: function (gameId) {
             return $http.get("api/games/" + gameId + "/Bets", { tracker: 'getGameBets' });
+        },
+        addBetOnGame: function(betData) {
+            return $http.post("api/bets/", betData, { tracker: 'addBetOnGame' });
         }
     };
     return BetsApi;
