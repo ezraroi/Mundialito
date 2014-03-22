@@ -8,7 +8,7 @@ angular.module('mundialitoApp').directive('saveBetButton', ['$log', 'BetsService
         },
         link: function (scope, element) {
             element.bind("click", function () {
-                BetsService.addBetOnGame(scope.newGame).success(function (data) {
+                BetsService.addBetOnGame(scope.bet).success(function (data) {
                     $log.log('Bet ' + data.BetId + ' was added');
                     Alert.new('success', 'Bet was added successfully', 2000);
                 });
