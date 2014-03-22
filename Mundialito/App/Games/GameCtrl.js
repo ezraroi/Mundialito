@@ -3,6 +3,7 @@
     Security.authenticate();
     $scope.game = game;
     $scope.userBet = userBet;
+    $scope.userBet.GameId = $routeParams.gameId;
     $scope.gameId = $routeParams.gameId;
     $scope.showEditForm = false;
     $scope.updatedGame = angular.copy($scope.game);

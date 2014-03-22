@@ -76,7 +76,7 @@ namespace Mundialito.Controllers
             if (item == null)
             {
                 Trace.TraceInformation("No bet found for game {0} and user {1}, creating empty Bet", game.GameId, uid);
-                return new BetViewModel() { BetId = -1, Game = new BetGame() { GameId = id } };
+                return new BetViewModel() { BetId = -1, IsOpenForBetting = true, IsResolved = false, Game = new BetGame() { GameId = id } };
             }
             return new BetViewModel(item); 
         }

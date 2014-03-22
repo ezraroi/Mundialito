@@ -11,6 +11,9 @@ angular.module('mundialitoApp')
         },
         addBetOnGame: function(betData) {
             return $http.post("api/bets/", betData, { tracker: 'addBetOnGame' });
+        },
+        updateBetOnGame: function(data) {
+            return $http.put("api/bets/" + data.BetId, data, { tracker: 'updateBetOnGame' });
         }
     };
     return BetsApi;

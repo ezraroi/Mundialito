@@ -8,10 +8,18 @@ angular.module('mundialitoApp').directive('saveBetButton', ['$log', 'BetsService
         },
         link: function (scope, element) {
             element.bind("click", function () {
-                BetsService.addBetOnGame(scope.bet).success(function (data) {
-                    $log.log('Bet ' + data.BetId + ' was added');
-                    Alert.new('success', 'Bet was added successfully', 2000);
-                });
+                if (scope.BetId !== -1) {
+                    BetsService.updateBetOnGame(scope.bet).success(function (data) {
+                        $log.log('Bet ' + data.BetId + ' was updated');
+                        Alert.new('success', 'Bet was updated successfully', 2000);
+                    });
+                } else {
+                    BetsService.addBetOnGame(scope.bet).success(function (data) {
+                        $log.log('Bet ' + data.BetId + ' was added');
+                        Alert.new('success', 'Bet was added successfully', 2000);
+                    });
+                }
+
             });
         }
     };

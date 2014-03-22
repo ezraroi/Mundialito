@@ -29,7 +29,7 @@ namespace Mundialito.DAL.Bets
 
         public IEnumerable<Bet> GetGameBets(int gameId)
         {
-            return Context.Bets.Where(bet => bet.Game.GameId == gameId).Include(bet => bet.User).Include(bet => bet.Game);
+            return Context.Bets.Where(bet => bet.Game.GameId == gameId).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam);
         }
 
         public Bet GetBet(int betId)
