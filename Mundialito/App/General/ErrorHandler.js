@@ -3,14 +3,14 @@ angular.module('mundialitoApp')
 .factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', function ($rootScope, $log, Alert) {
     var ErrorHandler = this;
 
-    ErrorHandler.handle = function (data, status, headers, config) {
+    ErrorHandler.handle = function (data) {
         $log.log(data);
         var message = [];
         if (data.Message) {
             message.push("<strong>" + data.Message + "</strong>");
         }
         if (data.ModelState) {
-            angular.forEach(data.ModelState, function (errors, key) {
+            angular.forEach(data.ModelState, function (errors) {
                 message.push(errors);
             });
         }
@@ -19,6 +19,10 @@ angular.module('mundialitoApp')
         }
         if (data.error_description) {
             message.push(data.error_description);
+        }
+        if (message === '') {
+            message.push("<strong>General Error</strong>")
+            message.push("Looks like the server is down, please try again in few minutes")
         }
         Alert.new('danger', message.join('<br/>'));
     }

@@ -68,7 +68,10 @@ namespace Mundialito.DAL
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            dbSet.Attach(entityToUpdate);
+            if (Context.Entry(entityToUpdate).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToUpdate);
+            }
             Context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 

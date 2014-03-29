@@ -8,7 +8,7 @@ angular.module('mundialitoApp').directive('saveBetButton', ['$log', 'BetsService
         },
         link: function (scope, element) {
             element.bind("click", function () {
-                if (scope.BetId !== -1) {
+                if (scope.bet.BetId !== -1) {
                     BetsService.updateBetOnGame(scope.bet).success(function (data) {
                         $log.log('Bet ' + data.BetId + ' was updated');
                         Alert.new('success', 'Bet was updated successfully', 2000);

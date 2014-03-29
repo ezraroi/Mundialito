@@ -24,14 +24,13 @@ namespace Mundialito
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
-            // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<ITeamsRepository, TeamsRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IGamesRepository, GamesRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IStadiumsRepository, StadiumsRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IBetsRepository, BetsRepository>(new HierarchicalLifetimeManager());
-            container.RegisterType<IBetValidator, BetValidator>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IBetsResolver, BetsResolver>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IUserProvider, UserProvider>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ITeamsRepository, TeamsRepository>();
+            container.RegisterType<IGamesRepository, GamesRepository>();
+            container.RegisterType<IStadiumsRepository, StadiumsRepository>();
+            container.RegisterType<IBetsRepository, BetsRepository>();
+            container.RegisterType<IBetValidator, BetValidator>();
+            container.RegisterType<IBetsResolver, BetsResolver>();
+            container.RegisterType<IUserProvider, UserProvider>();
             /*
             container.RegisterType<BetsController>();
             container.RegisterType<TeamsController>();

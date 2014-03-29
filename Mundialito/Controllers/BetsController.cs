@@ -84,6 +84,10 @@ namespace Mundialito.Controllers
             betToUpdate.BetId = id;
             betToUpdate.HomeScore = bet.HomeScore;
             betToUpdate.AwayScore = bet.AwayScore;
+            betToUpdate.Game = new Game();
+            betToUpdate.Game.GameId = bet.GameId;
+            betToUpdate.User = new MundialitoUser();
+            betToUpdate.User.Id = userProivider.UserId;
             betValidator.ValidateUpdateBet(betToUpdate);
             betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();

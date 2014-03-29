@@ -96,6 +96,9 @@ namespace Mundialito.Models
         }
 
         [Required]
+        public int GameId { get; set; }
+
+        [Required]
         [Range(0, 10)]
         public int HomeScore { get; set; }
 

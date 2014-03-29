@@ -23,7 +23,8 @@ namespace Mundialito.DAL
         public DbSet<Bet> Bets { get; set; }
 
         public MundialitoContext()
-            : base("DefaultConnection")
+            //: base("DefaultConnection")
+            : base(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=DefaultConnection;Integrated Security=True")
         {
         }
 
