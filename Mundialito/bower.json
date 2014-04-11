@@ -1,0 +1,20 @@
+{
+  "name": "Mundialito",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ezraroi/Mundialito",
+  "authors": [
+    "ezraroi <ezraroi@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Scripts/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "n3-charts.line-chart": "~1.0.4"
+  }
+}
