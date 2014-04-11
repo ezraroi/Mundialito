@@ -1,28 +1,37 @@
-﻿angular.module('mundialitoApp').controller('GamesCtrl', ['$scope', '$rootScope', '$filter', '$log', 'GamesService', 'security', 'games','teams','stadiums', function ($scope, $rootScope, $filter, $log, GamesService, Security, games, teams, stadiums) {
+﻿angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesManager','security','games','teams','stadiums','Alert',function ($scope,$log, GamesManager, Security, games, teams, stadiums, Alert) {
     Security.authenticate();
     $scope.newGame = null;
     $scope.gamesFilter = "All";
     $scope.games = games;
     $scope.teams = teams;
     $scope.stadiums = stadiums;
-    $scope.pendingUpdateGames = $filter('pendingUpdateGamesFilter')(games);
 
     $scope.addNewGame = function () {
-        $log.debug('GamesCtrl: addNewGame clicked');
         $('.selectpicker').selectpicker('refresh');
-        $scope.newGame = GamesService.getEmptyGameObject();
+        $scope.newGame = GamesManager.getEmptyGameObject();
     };
 
-    var refreshGamesBind = $rootScope.$on('refreshGames', function () {
-        $log.debug("GamesCtrl: got 'refreshGames' event");
-        GamesService.getGames().success(function (data, status) {
-            $scope.games = data;
-            $scope.pendingUpdateGames = $filter('pendingUpdateGamesFilter')(data);
-            $log.debug("GamesCtrl: GamesService.getGames (" + status + "): " + angular.toJson(data));
-            $scope.newGame = null;
+    $scope.saveNewGame = function() {
+        GamesManager.addGame($scope.newGame).then(function(data) {
+            Alert.new('success', 'Game was updated successfully', 2000);
+            $scope.newGame = GamesManager.getEmptyGameObject();
+            $scope.games.push(data);
         });
+    };
 
-    });
+    $scope.isPendingUpdate = function() {
+        return function( item ) {
+            return item.IsPendingUpdate;
+        };
+    };
 
-    $scope.$on('$destroy', refreshGamesBind);
+    $scope.updateGame = function(game) {
+        if  ((angular.isDefined(game.Stadium.Games)) && (game.Stadium.Games != null)) {
+            delete game.Stadium.Games;
+        }
+        game.update().success(function(data) {
+            Alert.new('success', 'Game was updated successfully', 2000);
+            GamesManager.setGame(data);
+        })
+    };
 }]);

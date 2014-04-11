@@ -1,99 +1,95 @@
-﻿<div class="container">
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-success" cg-busy="{tracker:'getGames'}">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-md-3 col-xs-12">
-                            <select class="selectpicker show-tick" ng-model="gamesFilter" data-header="Filter Games">
-                                <option value="All" data-icon="fa fa-list" selected="selected">All Games</option>
-                                <option value="OnlyOpen" data-icon="fa fa-folder-open">Only Open</option>
-                            </select>
-                        </div>
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success" cg-busy="{tracker:'getGames'}">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-3 col-xs-12">
+                        <select class="selectpicker show-tick" ng-model="gamesFilter" data-header="Filter Games">
+                            <option value="All" data-icon="fa fa-list" selected="selected">All Games</option>
+                            <option value="OnlyOpen" data-icon="fa fa-folder-open">Only Open</option>
+                        </select>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <mundialito-games info="games" filter="gamesFilter" on-add="addNewGame()"></mundialito-games>
-                </div>
+            </div>
+            <div class="panel-body">
+                <mundialito-games info="games" filter="gamesFilter" on-add="addNewGame()"></mundialito-games>
             </div>
         </div>
     </div>
-    <!-- Add Game -->
-    <div class="row" data-access-level="Admin" ng-show="newGame">
-        <div class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-heading"><i class="fa fa-plus"></i> Add New Game</div>
-                <div class="panel-body">
-                    <form role="form" name="addGameForm" novalidate>
-                        <div class="form-group select">
-                            <label for="HomeTeam">Home Team</label>
-                            <select id="HomeTeam" class="selectpicker show-tick form-control" ng-model="newGame.HomeTeam" data-header="Home Team" required>
-                                <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group select">
-                            <label for="AwayTeam">Away Team</label>
-                            <select id="AwayTeam" class="selectpicker show-tick form-control" ng-model="newGame.AwayTeam" data-header="Away Team" required>
-                                <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group select">
-                            <label for="Stadium">Stadium</label>
-                            <select id="Stadium" class="selectpicker show-tick form-control" ng-model="newGame.Stadium" data-header="Stadium" required>
-                                <option ng-repeat="stadium in stadiums" value="{{stadium}}">{{stadium.Name}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group select">
-                            <div class="dropdown">
-                                <label for="Date">Date & Time</label>
-                                <a class="dropdown-toggle my-toggle-select" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                    <div class="input-group">
-                                        <input type="text" id="Date" class="form-control" data-ng-model="newGame.Date" required>
+</div>
+<!-- Add Game -->
+<div class="row" data-access-level="Admin" ng-show="newGame">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-plus"></i> Add New Game</div>
+            <div class="panel-body">
+                <form role="form" name="addGameForm" novalidate>
+                    <div class="form-group select">
+                        <label for="HomeTeam">Home Team</label>
+                        <select id="HomeTeam" class="selectpicker show-tick form-control" ng-model="newGame.HomeTeam" data-header="Home Team" required>
+                            <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group select">
+                        <label for="AwayTeam">Away Team</label>
+                        <select id="AwayTeam" class="selectpicker show-tick form-control" ng-model="newGame.AwayTeam" data-header="Away Team" required>
+                            <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group select">
+                        <label for="Stadium">Stadium</label>
+                        <select id="Stadium" class="selectpicker show-tick form-control" ng-model="newGame.Stadium" data-header="Stadium" required>
+                            <option ng-repeat="stadium in stadiums" value="{{stadium}}">{{stadium.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group select">
+                        <div class="dropdown">
+                            <label for="Date">Date & Time</label>
+                            <a class="dropdown-toggle my-toggle-select" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group">
+                                    <input type="text" id="Date" class="form-control" data-ng-model="newGame.Date" required>
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </span>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <datetimepicker data-ng-model="newGame.Date" data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select'}"></datetimepicker>
-                                </ul>
-                            </div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="newGame.Date" data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select'}"></datetimepicker>
+                            </ul>
                         </div>
-                        <button type="button" add-game-button game="newGame" class="btn btn-primary btn-lg btn-block" ng-disabled="addGameForm.$invalid" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
-                    </form>
-                </div>
+                    </div>
+                    <button type="button" ng-click="saveNewGame()" class="btn btn-primary btn-lg btn-block" ng-disabled="addGameForm.$invalid" tabindex="100"><i class="fa fa-plus-circle"></i> Add</button>
+                </form>
             </div>
         </div>
     </div>
-    <!-- End of Add Game -->
-    <div class="row" data-access-level="Admin" ng-show="pendingUpdateGames.length > 0" cg-busy="{tracker:'editGame'}">
-        <div class="col-md-12">
-            <div class="panel panel-collapse panel-primary">
-                <div class="panel-heading"><i class="fa fa-clock-o"></i> Pending Update Games</div>
-                <div class="panel-body">
-                    <div class="row" ng-repeat="updatedGame in pendingUpdateGames">
-                        <div class="col-md-12">
-                            <form class="form-horizontal" novalidate name="updateGame_{{updatedGame.GameId}}">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="{{updatedGame.HomeTeam.TeamId}}">
-                                        <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}</div>
-                                    </label>
-                                    <div class="col-md-2">
-                                        <input id="{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
-                                    </div>
-                                    <label class="col-md-3 control-label" for="{{updatedGame.AwayTeam.TeamId}}">
-                                        <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}</div>
-                                    </label>
-                                    <div class="col-md-2">
-                                        <input id="{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" placeholder="Away Team Score" required min="0">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="submit" update-game-button class="btn btn-success btn-block" ng-disabled="updateGame_{{updatedGame.GameId}}.$invalid"><i class="fa fa-save"></i></button>
-                                    </div>
-                            </form>
-                        </div>
+</div>
+<!-- End of Add Game -->
+<div class="row" data-access-level="Admin" cg-busy="{tracker:'editGame'}">
+    <div class="col-md-12">
+        <div class="panel panel-collapse panel-primary">
+            <div class="panel-heading"><i class="fa fa-clock-o"></i> Pending Update Games</div>
+            <div class="panel-body">
+                <div class="row" ng-repeat="updatedGame in games | filter:isPendingUpdate()">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" novalidate name="updateGame_{{updatedGame.GameId}}">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="{{updatedGame.HomeTeam.TeamId}}">
+                                    <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}</div>
+                                </label>
+                                <div class="col-md-2">
+                                    <input id="{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                                </div>
+                                <label class="col-md-3 control-label" for="{{updatedGame.AwayTeam.TeamId}}">
+                                    <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}</div>
+                                </label>
+                                <div class="col-md-2">
+                                    <input id="{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" placeholder="Away Team Score" required min="0">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" ng-click="updateGame(updatedGame)" game="updatedGame" class="btn btn-success btn-block" ng-disabled="updateGame_{{updatedGame.GameId}}.$invalid"><i class="fa fa-save"></i></button>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>

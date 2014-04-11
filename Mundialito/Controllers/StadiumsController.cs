@@ -5,6 +5,7 @@ using System.Web.Http;
 using Mundialito.DAL.Stadiums;
 using Mundialito.Models;
 using Mundialito.DAL.Games;
+using System.Diagnostics;
 
 namespace Mundialito.Controllers
 {
@@ -48,7 +49,27 @@ namespace Mundialito.Controllers
         [HttpPost]
         public Stadium PostStadium(Stadium stadium)
         {
-            return stadiumsRepository.InsertStadium(stadium);
+            var res = stadiumsRepository.InsertStadium(stadium);
+            stadiumsRepository.Save();
+            return res;
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        public Stadium PutStadium(int id, Stadium stadium)
+        {
+            stadiumsRepository.UpdateStadium(stadium);
+            stadiumsRepository.Save();
+            return stadium;
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public void DeleteStadium(int id)
+        {
+            Trace.TraceInformation("Deleting Stadium {0}", id);
+            stadiumsRepository.DeleteStadium(id);
+            stadiumsRepository.Save();
         }
 
     }

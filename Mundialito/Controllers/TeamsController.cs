@@ -67,6 +67,7 @@ namespace Mundialito.Controllers
         [Authorize(Roles = "Admin")]
         public void DeleteTeam(int id)
         {
+            Trace.TraceInformation("Deleting Team {0}", id);
             teamsRepository.DeleteTeam(id);
             teamsRepository.Save();
         }

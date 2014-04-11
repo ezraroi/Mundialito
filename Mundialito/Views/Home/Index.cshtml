@@ -12,17 +12,23 @@
     <base href="/" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div id="fb-root"></div>
     <script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=194077084133490";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=194077084133490";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
     <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="text-center">
@@ -46,6 +52,7 @@
                         <li active-nav><a href="/"><i class="fa fa-tachometer"></i> Dashbord</a></li>
                         <li active-nav><a href="/teams"><i class="fa fa-users"></i> Teams</a></li>
                         <li active-nav><a href="/games"><i class="fa fa-gamepad"></i> Games</a></li>
+                        <li active-nav><a href="/stadiums"><i class="fa fa-home"></i> Stadiums</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -62,33 +69,35 @@
                 </div>
             </div>
         </div>
-        <section id="body" ng-view ng-animate="enter" ng-hide="mundialitoApp.message != null"></section>
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <span>&copy; @DateTime.Now.Year - Mundialito</span>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="text-center"><a href="https://github.com/ezraroi/Mundialito" target="_self">Mundilaito at <i class="fa fa-github"></i> GitHub</a></span>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
+        <div class="container" ng-hide="mundialitoApp.message != null">
+            <section id="body" ng-view ng-animate="enter"></section>
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span>&copy; @DateTime.Now.Year - Mundialito</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="text-center"><a href="https://github.com/ezraroi/Mundialito" target="_self">Mundilaito at <i class="fa fa-github"></i> GitHub</a></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="pull-right"><a href="/help" target="_self">Mundialito REST API</a></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-    </div>
-    <div class="ng-cloak" ng-show="mundialitoApp.message">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top: 10px;">
-                <h4 class="text-center"><i class="fa fa-spin fa-spinner fa-lg"></i>  <span ng-bind="mundialitoApp.message"></span></h4>
-            </div>
+            </footer>
         </div>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
-                <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        <div class="ng-cloak" ng-show="mundialitoApp.message">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" style="margin-top: 10px;">
+                    <h4 class="text-center"><i class="fa fa-spin fa-spinner fa-lg"></i>  <span ng-bind="mundialitoApp.message"></span></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                    </div>
                 </div>
             </div>
         </div>

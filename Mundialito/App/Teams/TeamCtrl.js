@@ -1,23 +1,16 @@
 ﻿angular.module('mundialitoApp')
-.controller('TeamCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', '$routeParams', 'team', function ($scope, $rootScope, $log, TeamsService, Security, $routeParams, team) {
+.controller('TeamCtrl', ['$scope', '$log', 'TeamsManager', 'security', 'team', 'games', 'Alert', function ($scope, $log, TeamsManager, Security, team, games, Alert) {
     Security.authenticate();
-    $scope.team = angular.copy(team);
-    $scope.teamId = $routeParams.teamId;
+    $scope.team = team;
+    $scope.games = games;
     $scope.showEditForm = false;
-    $scope.updatedTeam = angular.copy($scope.team);
 
-    TeamsService.getTeamGames($scope.teamId).success(function (data, status, headers, config) {
-        $log.debug("TeamCtrl: TeamsService.getTeamGames (" + status + "): " + angular.toJson(data));
-        $scope.games = data;
-    });
+    $scope.updateTeam = function() {
+        $scope.team.update().success(function() {
+            Alert.new('success', 'Team was updated successfully', 2000);
+        })
+    };
 
-    var refreshTeamsBind = $rootScope.$on('refreshTeams', function () {
-        $log.debug("TeamCtrl: got 'refreshTeams' event");
-        $scope.updatedTeam = angular.copy($scope.team);
-    });
-
-    $scope.$on('$destroy', refreshTeamsBind);
-
-    $scope.schema = TeamsService.schema;
+    $scope.schema =  TeamsManager.getTeamSchema();
     
 }]);

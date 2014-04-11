@@ -15,12 +15,12 @@ angular.module('mundialitoApp')
                   return Security.user;
               },
 
-              function (newValue, oldValue) {
+              function (newValue) {
                   $scope.user = newValue;
                   if (($scope.user === undefined) || ($scope.user === null)) {
                       userRole = "Public"
                   } else if ($scope.user.roles) {
-                      $log.debug('Security.user has been changed:' + $scope.user.userName);
+                      //$log.debug('Security.user has been changed:' + $scope.user.userName);
                       userRole = $scope.user.roles;
                   } else {
                       userRole = "Public"
@@ -50,7 +50,7 @@ angular.module('mundialitoApp')
 angular.module('mundialitoApp').directive('activeNav', ['$location', function ($location) {
     return {
         restrict: 'A',
-        link: function (scope, element, attrs) {
+        link: function (scope, element) {
             var nestedA = element.find('a')[0];
             var path = nestedA.href;
 

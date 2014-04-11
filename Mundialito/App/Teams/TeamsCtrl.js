@@ -1,24 +1,29 @@
 ﻿angular.module('mundialitoApp')
-.controller('TeamsCtrl', ['$scope', '$rootScope', '$log', 'TeamsService', 'security', 'teams', function ($scope, $rootScope, $log, TeamsService, Security, teams) {
+.controller('TeamsCtrl', ['$scope', '$log', 'TeamsManager', 'security', 'teams', 'Alert', function ($scope, $log, TeamsManager, Security, teams, Alert) {
     Security.authenticate();
     $scope.teams = teams;
     $scope.showNewTeam = false;
     $scope.newTeam = null;
 
     $scope.addNewTeam = function () {
-        $scope.newTeam = TeamsService.getEmptyTeamObject();
-    }
+        $scope.newTeam = TeamsManager.getEmptyTeamObject();
+    };
 
-    var refreshTeamsBind = $rootScope.$on('refreshTeams', function () {
-        $log.debug("TeamsCtrl: got 'refreshTeams' event");
-        TeamsService.getTeams().success(function (data) {
-            $scope.teams = teams;
+    $scope.saveNewTeam = function() {
+        TeamsManager.addTeam($scope.newTeam).then(function(data) {
+            Alert.new('success', 'Team was added successfully', 2000);
+            $scope.newTeam = null;
+            $scope.teams.push(data);
         });
-        $scope.newTeam = null;
-        
-    });
+    };
 
-    $scope.$on('$destroy', refreshTeamsBind);
+    $scope.deleteTeam = function(team) {
+        var scope = team;
+        team.delete().success(function() {
+            Alert.new('success', 'Team was deleted successfully', 2000);
+            $scope.teams.splice($scope.teams.indexOf(scope),1);
+        })
+    };
 
-    $scope.schema = TeamsService.schema;
+    $scope.schema =  TeamsManager.getTeamSchema();
 }]);

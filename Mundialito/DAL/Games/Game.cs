@@ -32,8 +32,8 @@ namespace Mundialito.DAL.Games
         {
             get
             {
-                var date = DateTime.Now.Date;
-                var time = DateTime.Now.TimeOfDay;
+                var date = DateTime.Now.ToUniversalTime().Date;
+                var time = DateTime.Now.ToUniversalTime().TimeOfDay;
                 return (Date.Date > date) || (Date.Date == date && Date.TimeOfDay > time);
             }
         }
@@ -42,7 +42,8 @@ namespace Mundialito.DAL.Games
         {
             get
             {
-                if (IsOpen) return false;
+                if (IsOpen) 
+                    return false;
                 return HomeScore == null && AwayScore == null;
             }
         }
@@ -73,7 +74,7 @@ namespace Mundialito.DAL.Games
 
         public override string ToString()
         {
-            return string.Format("Game ID = {0}, {1} - {2}", GameId, HomeTeam.Name, AwayTeam.Name);
+            return string.Format("Game ID = {0}, {1} - {2}", GameId, HomeTeam != null ? HomeTeam.Name : "Unknown", AwayTeam != null ? AwayTeam.Name : "Unknown");
         }
     }
 }

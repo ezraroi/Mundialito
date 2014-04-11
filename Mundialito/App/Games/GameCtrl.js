@@ -1,22 +1,20 @@
 ﻿angular.module('mundialitoApp')
-.controller('GameCtrl', ['$scope', '$rootScope', '$log', '$routeParams', 'security', 'BetsService', 'game', 'userBet', function ($scope, $rootScope, $log, $routeParams, Security, BetsService, game, userBet) {
+.controller('GameCtrl', ['$scope', '$rootScope', '$log','security', 'BetsService', 'game', 'userBet','Alert', function ($scope, $rootScope, $log, Security, BetsService, game, userBet, Alert) {
     Security.authenticate();
     $scope.game = game;
     $scope.userBet = userBet;
-    $scope.userBet.GameId = $routeParams.gameId;
-    $scope.gameId = $routeParams.gameId;
+    $scope.userBet.GameId = game.GameId;
     $scope.showEditForm = false;
-    $scope.updatedGame = angular.copy($scope.game);
 
     BetsService.getGameBets($scope.game.GameId).success(function (data, status) {
         $log.debug("GameCtrl: BetsService.getGameBets Success (" + status + "): " + angular.toJson(data));
         $scope.gameBets = data;
     });
 
-    var refreshGamesBind = $rootScope.$on('refreshGames', function () {
-        $log.debug("GameCtrl: got 'refreshGames' event");
-        $scope.updatedGame = $scope.game;
-    });
+    $scope.updateGame = function() {
+        $scope.game.update().success(function() {
+            Alert.new('success', 'Game was added successfully', 2000);
+        })
+    };
 
-    $scope.$on('$destroy', refreshGamesBind);
 }]);

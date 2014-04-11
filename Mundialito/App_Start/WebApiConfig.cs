@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Mundialito.Filters;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Converters;
 
 namespace Mundialito
 {
@@ -36,6 +37,9 @@ namespace Mundialito
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Include;
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            config.Formatters.JsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+            config.Formatters.JsonFormatter.SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
+            config.Formatters.JsonFormatter.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
             //config.Formatters.JsonFormatter.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
             //config.Formatters.JsonFormatter.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
 
