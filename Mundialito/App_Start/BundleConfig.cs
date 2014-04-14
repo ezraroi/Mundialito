@@ -46,7 +46,6 @@ namespace Mundialito
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap-select.min.js"));
-                      //"~/Scripts/respond.js"));
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
@@ -56,6 +55,7 @@ namespace Mundialito
                       "~/Scripts/datetimepicker.js",
                       "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/facebookPluginDirectives.js",
+                      "~/Scripts/bower_components/underscore/underscore.js",
                       "~/Scripts/angular-busy.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

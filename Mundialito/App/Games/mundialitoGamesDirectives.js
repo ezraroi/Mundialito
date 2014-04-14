@@ -9,7 +9,7 @@ angular.module('mundialitoApp').directive('mundialitoGames',['Alert', function (
             showOnly : '=',
             onAdd: '&'
         },
-        templateUrl: 'App/Partials/Templates/gamesTemplate.html',
+        templateUrl: 'App/Games/gamesTemplate.html',
         link : function($scope) {
             $scope.deleteGame = function(game) {
                 var scope = game;

@@ -8,10 +8,11 @@
 
         $routeProvider.
             when('/', {
-                templateUrl: 'App/Partials/Home.html'
+                templateUrl: 'App/Dashboard/Dashboard.html',
+                controller: 'DashboardCtrl'
             }).
             when('/teams', {
-                templateUrl: 'App/Partials/Teams.html',
+                templateUrl: 'App/Teams/Teams.html',
                 controller: 'TeamsCtrl',
                 resolve: {
                     teams: function (TeamsManager) {
@@ -20,7 +21,7 @@
                 }
             }).
             when('/teams/:teamId', {
-                templateUrl: 'App/Partials/Team.html',
+                templateUrl: 'App/Teams/Team.html',
                 controller: 'TeamCtrl',
                 resolve: {
                     team: function ($route, TeamsManager) {
@@ -34,7 +35,7 @@
                 }
             }).
             when('/games/:gameId', {
-                templateUrl: 'App/Partials/Game.html',
+                templateUrl: 'App/Games/Game.html',
                 controller: 'GameCtrl',
                 resolve: {
                     game: function ($route, GamesManager) {
@@ -53,7 +54,7 @@
                 }
             }).
             when('/games', {
-                templateUrl: 'App/Partials/Games.html',
+                templateUrl: 'App/Games/Games.html',
                 controller: 'GamesCtrl',
                 resolve: {
                     games: function (GamesManager) {
@@ -68,7 +69,7 @@
                 }
             }).
             when('/stadiums/:stadiumId', {
-                templateUrl: 'App/Partials/Stadium.html',
+                templateUrl: 'App/Stadiums/Stadium.html',
                 controller: 'StadiumCtrl',
                 resolve: {
                     stadium: function ($q, $route, StadiumsManager, GamesManager) {
@@ -92,7 +93,7 @@
                 }
             }).
             when('/stadiums', {
-                templateUrl: 'App/Partials/Stadiums.html',
+                templateUrl: 'App/Stadiums/Stadiums.html',
                 controller: 'StadiumsCtrl',
                 resolve: {
                     stadiums : function (StadiumsManager) {
@@ -101,13 +102,13 @@
                 }
             }).
             when('/login', {
-                templateUrl: 'App/Partials/Login.html'
+                templateUrl: 'App/Accounts/Login.html'
             }).
             when('/join', {
-                templateUrl: 'App/Partials/Register.html'
+                templateUrl: 'App/Accounts/Register.html'
             }).
             when('/manage', {
-                templateUrl: 'App/Partials/Manage.html'
+                templateUrl: 'App/Accounts/Manage.html'
             }).
             otherwise({
                 redirectTo: '/'

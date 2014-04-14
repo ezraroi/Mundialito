@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "n3-charts.line-chart": "~1.0.4"
+    "n3-charts.line-chart": "~1.0.4",
+    "underscore": "~1.6.0"
   }
 }
