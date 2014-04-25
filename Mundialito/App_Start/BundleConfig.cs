@@ -25,37 +25,33 @@ namespace Mundialito
                                "~/Scripts/angular-route.js"
             ));
 
-            //Angular Bootstrap
-            bundles.Add(new ScriptBundle("~/bundles/angularBootstrap").Include(
-                               "~/Scripts/ui-bootstrap-tpls-{version}.js",
-                               "~/Scripts/autoFields-bootstrap.js"
-            ));
-
             //App
             bundles.Add(new ScriptBundle("~/bundles/app")
                     .IncludeDirectory("~/App/", "*.js")
                     .IncludeDirectory("~/App/Accounts", "*.js")
+                    .IncludeDirectory("~/App/Bets", "*.js")
+                    .IncludeDirectory("~/App/Dashboard", "*.js")
                     .IncludeDirectory("~/App/Games", "*.js")
                     .IncludeDirectory("~/App/General", "*.js")
                     .IncludeDirectory("~/App/Stadiums", "*.js")
-                    .IncludeDirectory("~/App/Bets", "*.js")
                     .IncludeDirectory("~/App/Teams", "*.js")
             );
 
-            // Bootstrap
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootstrap-select.min.js"));
-
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-select.min.js",
+                      "~/Scripts/ui-bootstrap-tpls-{version}.js",
+                      "~/Scripts/autoFields-bootstrap.js",
                       "~/Scripts/moment.js",
                       "~/Scripts/angular-spa-security.js",
                       "~/Scripts/promise-tracker.js",
                       "~/Scripts/datetimepicker.js",
                       "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/facebookPluginDirectives.js",
-                      "~/Scripts/bower_components/underscore/underscore.js",
+                      "~/App/Lib/underscore.min.js",
+                      "~/App/Lib/d3.min.js",
+                      "~/App/Lib/line-chart.min.js",
                       "~/Scripts/angular-busy.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -1,3 +1,5 @@
-/**
- * Created by asus on 14/04/2014.
- */
+angular.module('mundialitoApp')
+.controller('DashboardCtrl', ['$scope', '$rootScope', '$log', 'security', 'Alert', function ($scope, $rootScope, $log, Security, Alert) {
+    Security.authenticate();
+
+}]);
