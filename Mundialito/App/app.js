@@ -162,4 +162,5 @@
             $rootScope.mundialitoApp.message = null;
         });
 
+        security.authenticate();
     }]);

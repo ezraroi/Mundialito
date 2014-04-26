@@ -1,10 +1,14 @@
 ﻿'use strict';
 angular.module('mundialitoApp')
-.factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', function ($rootScope, $log, Alert) {
+.factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', '$location', function ($rootScope, $log, Alert, $location) {
     var ErrorHandler = this;
 
-    ErrorHandler.handle = function (data) {
+    ErrorHandler.handle = function (data, status) {
         $log.log(data);
+        if (status === 401) {
+            $location.path('/login');
+            return;
+        }
         var message = [];
         if (data.Message) {
             message.push("<strong>" + data.Message + "</strong>");
