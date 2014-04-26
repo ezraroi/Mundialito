@@ -17,7 +17,7 @@ namespace Mundialito.Tests.Controllers
         {
             var betsRepository = new Mock<IBetsRepository>();
             var betValidator = new Mock<IBetValidator>();
-            var userProvider = new Mock<IUserProvider>();
+            var userProvider = new Mock<ILoggedUserProvider>();
             userProvider.SetupGet(user => user.UserId).Returns("1");
             betsRepository.Setup(rep => rep.InsertBet(It.IsAny<Bet>())).Returns(new Bet() { BetId = 1 });
 
@@ -32,7 +32,7 @@ namespace Mundialito.Tests.Controllers
         {
             var betsRepository = new Mock<IBetsRepository>();
             var betValidator = new Mock<IBetValidator>();
-            var userProvider = new Mock<IUserProvider>();
+            var userProvider = new Mock<ILoggedUserProvider>();
             userProvider.SetupGet(user => user.UserId).Returns("1");
 
             var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
@@ -47,7 +47,7 @@ namespace Mundialito.Tests.Controllers
         {
             var betsRepository = new Mock<IBetsRepository>();
             var betValidator = new Mock<IBetValidator>();
-            var userProvider = new Mock<IUserProvider>();
+            var userProvider = new Mock<ILoggedUserProvider>();
             userProvider.SetupGet(user => user.UserId).Returns("1");
 
             var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);

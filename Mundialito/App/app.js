@@ -9,70 +9,74 @@
         $routeProvider.
             when('/', {
                 templateUrl: 'App/Dashboard/Dashboard.html',
-                controller: 'DashboardCtrl'
+                controller: 'DashboardCtrl',
+                resolve: {
+                    games: ['GamesManager', function (GamesManager) {
+                        return GamesManager.loadAllGames();
+                    }]
+                }
             }).
             when('/teams', {
                 templateUrl: 'App/Teams/Teams.html',
                 controller: 'TeamsCtrl',
                 resolve: {
-                    teams: function (TeamsManager) {
+                    teams: ['TeamsManager', function (TeamsManager) {
                         return TeamsManager.loadAllTeams();
-                    }
+                    }]
                 }
             }).
             when('/teams/:teamId', {
                 templateUrl: 'App/Teams/Team.html',
                 controller: 'TeamCtrl',
                 resolve: {
-                    team: function ($route, TeamsManager) {
+                    team: ['$route','TeamsManager',  function ($route, TeamsManager) {
                         var teamId = $route.current.params.teamId;
                         return TeamsManager.getTeam(teamId);
-                    },
-                    games : function ($route, GamesManager) {
+                    }],
+                    games : ['$route','GamesManager', function ($route, GamesManager) {
                         var teamId = $route.current.params.teamId;
                         return GamesManager.getTeamGames(teamId);
-                    }
+                    }]
                 }
             }).
             when('/games/:gameId', {
                 templateUrl: 'App/Games/Game.html',
                 controller: 'GameCtrl',
                 resolve: {
-                    game: function ($route, GamesManager) {
+                    game: ['$route','GamesManager', function ($route, GamesManager) {
                         var gameId = $route.current.params.gameId;
                         return  GamesManager.getGame(gameId);
-
-                    },
-                    userBet: function ($q, $route, BetsService) {
+                    }],
+                    userBet: ['$q','$route','BetsService', function ($q, $route, BetsService) {
                         var deferred = $q.defer();
                         var gameId = $route.current.params.gameId;
                         BetsService.getUserBetOnGame(gameId).success(function (data) {
                             deferred.resolve(data);
                         });
                         return deferred.promise;
-                    }
+                    }]
                 }
             }).
             when('/games', {
                 templateUrl: 'App/Games/Games.html',
                 controller: 'GamesCtrl',
                 resolve: {
-                    games: function (GamesManager) {
+                    games: ['GamesManager', function (GamesManager) {
                         return GamesManager.loadAllGames();
-                    },
-                    teams : function (TeamsManager) {
+                    }],
+                    teams : ['TeamsManager', function (TeamsManager) {
                         return TeamsManager.loadAllTeams();
-                    },
-                    stadiums : function (StadiumsManager) {
+                    }],
+                    stadiums : ['StadiumsManager', function (StadiumsManager) {
                         return StadiumsManager.loadAllStadiums();
-                    }
+                    }]
                 }
             }).
             when('/stadiums/:stadiumId', {
                 templateUrl: 'App/Stadiums/Stadium.html',
                 controller: 'StadiumCtrl',
                 resolve: {
-                    stadium: function ($q, $route, StadiumsManager, GamesManager) {
+                    stadium: ['$q','$route','StadiumsManager','GamesManager',  function ($q, $route, StadiumsManager, GamesManager) {
                         var lastDeferred = $q.defer();
                         var stadiumId = $route.current.params.stadiumId;
                         StadiumsManager.getStadium(stadiumId,true).then(function(stadium){
@@ -89,16 +93,16 @@
                             });
                         });
                         return lastDeferred.promise;
-                    }
+                    }]
                 }
             }).
             when('/stadiums', {
                 templateUrl: 'App/Stadiums/Stadiums.html',
                 controller: 'StadiumsCtrl',
                 resolve: {
-                    stadiums : function (StadiumsManager) {
+                    stadiums : ['StadiumsManager', function (StadiumsManager) {
                         return StadiumsManager.loadAllStadiums();
-                    }
+                    }]
                 }
             }).
             when('/login', {

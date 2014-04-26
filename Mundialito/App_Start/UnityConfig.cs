@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Practices.Unity;
 using Mundialito.Controllers;
+using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Stadiums;
@@ -28,9 +29,11 @@ namespace Mundialito
             container.RegisterType<IGamesRepository, GamesRepository>();
             container.RegisterType<IStadiumsRepository, StadiumsRepository>();
             container.RegisterType<IBetsRepository, BetsRepository>();
+            container.RegisterType<IUsersRepository, UsersRepository>();
             container.RegisterType<IBetValidator, BetValidator>();
             container.RegisterType<IBetsResolver, BetsResolver>();
-            container.RegisterType<IUserProvider, UserProvider>();
+            container.RegisterType<ILoggedUserProvider, LoggedUserProvider>();
+            container.RegisterType<IUsersRetriver, UsersRetriver>();
             /*
             container.RegisterType<BetsController>();
             container.RegisterType<TeamsController>();

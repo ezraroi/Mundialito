@@ -12,9 +12,9 @@ using System.Web.Http;
 
 namespace Mundialito.Logic
 {
-    public class UserProvider : IUserProvider
+    public class LoggedUserProvider : ILoggedUserProvider
     {
-        public UserProvider()
+        public LoggedUserProvider()
         {
             
         }

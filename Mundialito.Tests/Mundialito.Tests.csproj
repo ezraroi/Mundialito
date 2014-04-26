@@ -82,6 +82,7 @@
     <Compile Include="Controllers\BetsControllerUnitTest.cs" />
     <Compile Include="Logic\BetsResolverUnitTest.cs" />
     <Compile Include="Logic\BetValidatorUnitTest.cs" />
+    <Compile Include="Logic\UsersRetriverTest.cs" />
     <Compile Include="Models\GameUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

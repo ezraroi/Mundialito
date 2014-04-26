@@ -22,9 +22,9 @@ namespace Mundialito.Controllers
     {
         private readonly IBetsRepository betsRepository;
         private readonly IBetValidator betValidator;
-        private readonly IUserProvider userProivider;
+        private readonly ILoggedUserProvider userProivider;
 
-        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, IUserProvider userProivider)
+        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProivider)
         {
             if (betsRepository == null)
             {

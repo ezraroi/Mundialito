@@ -237,6 +237,9 @@
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\StadiumsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DAL\Accounts\IUsersRepository.cs" />
+    <Compile Include="DAL\Accounts\UsersRepository.cs" />
     <Compile Include="DAL\Bets\BetsRepository.cs" />
     <Compile Include="DAL\Bets\IBetsRepository.cs" />
     <Compile Include="DAL\Games\GamesRepository.cs" />
@@ -258,8 +261,10 @@
     <Compile Include="Logic\BetValidator.cs" />
     <Compile Include="Logic\IBetsResolver.cs" />
     <Compile Include="Logic\IBetValidator.cs" />
-    <Compile Include="Logic\IUserProvider.cs" />
-    <Compile Include="Logic\UserProvider.cs" />
+    <Compile Include="Logic\ILoggedUserProvider.cs" />
+    <Compile Include="Logic\IUsersRetriver.cs" />
+    <Compile Include="Logic\LoggedUserProvider.cs" />
+    <Compile Include="Logic\UsersRetriver.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="DAL\Bets\Bet.cs" />
@@ -268,6 +273,7 @@
     <Compile Include="DAL\Stadiums\Stadium.cs" />
     <Compile Include="DAL\Teams\Team.cs" />
     <Compile Include="Models\BetsModels.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -490,6 +496,12 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\facebookPluginDirectives.min.js">
+      <DependentUpon>facebookPluginDirectives.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\facebookPluginDirectives.min.js.map">
+      <DependentUpon>facebookPluginDirectives.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mundialito.Logic
 {
-    public interface IUserProvider
+    public interface ILoggedUserProvider
     {
         String UserId { get; }
 

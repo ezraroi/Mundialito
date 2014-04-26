@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Optimization;
 
 namespace Mundialito
@@ -8,6 +9,12 @@ namespace Mundialito
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = false;
+
+            bundles.IgnoreList.Clear();
+            AddDefaultIgnorePatterns(bundles.IgnoreList);
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -39,20 +46,20 @@ namespace Mundialito
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/bootstrap-select.min.js",
                       "~/Scripts/ui-bootstrap-tpls-{version}.js",
-                      "~/Scripts/autoFields-bootstrap.js",
-                      "~/Scripts/moment.js",
-                      "~/Scripts/angular-spa-security.js",
-                      "~/Scripts/promise-tracker.js",
-                      "~/Scripts/datetimepicker.js",
-                      "~/Scripts/angular-bootstrap-select.js",
+                      "~/Scripts/autoFields-bootstrap.min.js",
+                      "~/Scripts/moment.min.js",
+                      "~/Scripts/angular-spa-security.min.js",
+                      "~/Scripts/promise-tracker.min.js",
+                      "~/Scripts/datetimepicker.min.js",
+                      "~/Scripts/angular-bootstrap-select.min.js",
                       "~/Scripts/facebookPluginDirectives.js",
                       "~/App/Lib/underscore.min.js",
                       "~/App/Lib/d3.min.js",
                       "~/App/Lib/line-chart.min.js",
-                      "~/Scripts/angular-busy.js"));
+                      "~/Scripts/angular-busy.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -62,6 +69,17 @@ namespace Mundialito
                       "~/Content/angular-busy.min.css",
                       "~/Content/bootstrap-select.min.css",
                       "~/Content/site.css"));
+        }
+
+        public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)
+        {
+            if (ignoreList == null)
+                throw new ArgumentNullException("ignoreList");
+            ignoreList.Ignore("*.intellisense.js");
+            ignoreList.Ignore("*-vsdoc.js");
+            ignoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
+            //ignoreList.Ignore("*.min.js", OptimizationMode.WhenDisabled);
+            //ignoreList.Ignore("*.min.css", OptimizationMode.WhenDisabled);
         }
     }
 }
