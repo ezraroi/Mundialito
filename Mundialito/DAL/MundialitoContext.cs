@@ -24,7 +24,7 @@ namespace Mundialito.DAL
 
         public MundialitoContext()
             //: base("DefaultConnection")
-            : base(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=DefaultConnection;Integrated Security=True")
+            : base(connectionString)
         {
         }
 
