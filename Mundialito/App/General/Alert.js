@@ -1,7 +1,5 @@
 ﻿'use strict';
-
-angular.module('mundialitoApp')
-.factory('Alert', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+angular.module('mundialitoApp').factory('Alert', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
     var Alert = this;
     var alerts = $rootScope.alerts = [];
 

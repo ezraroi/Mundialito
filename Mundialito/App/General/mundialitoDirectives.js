@@ -1,7 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp')
-.directive('mundialitoToggleText', [function () {
-
+angular.module('mundialitoApp').directive('mundialitoToggleText', [function () {
     function link(scope, element, attrs) {
         var state;
         scope.$watch(attrs.varieble, function (value) {
@@ -14,7 +12,6 @@ angular.module('mundialitoApp')
             element.text(text);
         }
     }
-
     return {
         link: link
     };

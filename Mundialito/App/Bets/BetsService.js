@@ -1,7 +1,5 @@
 ﻿'use strict';
-
-angular.module('mundialitoApp')
-.factory('BetsService', ['$http', function ($http) {
+angular.module('mundialitoApp').factory('BetsService', ['$http', function ($http) {
     var BetsApi = {
         getUserBetOnGame: function(gameId) {
             return $http.get("api/games/" + gameId + "/MyBet", { tracker: 'getUserBetOnGame' });

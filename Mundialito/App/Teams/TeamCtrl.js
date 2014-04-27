@@ -1,6 +1,5 @@
-﻿angular.module('mundialitoApp')
-.controller('TeamCtrl', ['$scope', '$log', 'TeamsManager', 'security', 'team', 'games', 'Alert', function ($scope, $log, TeamsManager, Security, team, games, Alert) {
-    Security.authenticate();
+﻿'use strict';
+angular.module('mundialitoApp').controller('TeamCtrl', ['$scope', '$log', 'TeamsManager', 'team', 'games', 'Alert', function ($scope, $log, TeamsManager, team, games, Alert) {
     $scope.team = team;
     $scope.games = games;
     $scope.showEditForm = false;

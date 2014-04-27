@@ -1,3 +1,4 @@
+'use strict';
 angular.module('mundialitoApp').factory('Stadium', ['$http','$log', function($http,$log) {
     function Stadium(stadiumData) {
         if (stadiumData) {

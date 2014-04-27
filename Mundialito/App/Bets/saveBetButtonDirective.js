@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('mundialitoApp').directive('saveBetButton', ['$log', 'BetsService', 'Alert', function ($log, BetsService, Alert) {
     return {
         restrict: "A",

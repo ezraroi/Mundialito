@@ -1,5 +1,4 @@
 ﻿'use strict';
-
 angular.module('mundialitoApp').directive('mundialitoGames',['Alert', function (Alert) {
     return {
         restrict: 'E',

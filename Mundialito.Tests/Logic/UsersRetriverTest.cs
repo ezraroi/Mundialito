@@ -32,6 +32,47 @@ namespace Mundialito.Tests.Logic
         }
 
         [TestMethod]
+        public void TestGetNotLoggedUser()
+        {
+            var usersRepository = new Mock<IUsersRepository>();
+            var user1 = CreateMundialtoUser("1");
+            usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns(user1);
+
+            var betsRepository = new Mock<IBetsRepository>();
+            var openGame = CreateOpenGame(1);
+            var clsoedGame = CreateClosedGame(2);
+            List<Bet> allBets = new List<Bet>();
+            allBets.Add(new Bet(user1, openGame) { AwayScore = 1, HomeScore = 1 });
+            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
+
+            var usersRetriver = new UsersRetriver(betsRepository.Object, usersRepository.Object);
+            var user = usersRetriver.GetUser("1", false);
+            Assert.AreEqual(1, user.Bets.Count);
+            Assert.IsFalse(user.Bets[0].IsOpenForBetting);
+        }
+
+        [TestMethod]
+        public void TestGetLoggedUser()
+        {
+            var usersRepository = new Mock<IUsersRepository>();
+            var user1 = CreateMundialtoUser("1");
+            usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns(user1);
+
+            var betsRepository = new Mock<IBetsRepository>();
+            var openGame = CreateOpenGame(1);
+            var clsoedGame = CreateClosedGame(2);
+            List<Bet> allBets = new List<Bet>();
+            allBets.Add(new Bet(user1, openGame) { AwayScore = 1, HomeScore = 1 });
+            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
+
+            var usersRetriver = new UsersRetriver(betsRepository.Object, usersRepository.Object);
+            var user = usersRetriver.GetUser("1", true);
+            Assert.AreEqual(2, user.Bets.Count);
+        }
+
+        [TestMethod]
         public void TestGetAllUsers()
         {
             var betsRepository = new Mock<IBetsRepository>();

@@ -1,6 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp')
-.factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', '$location', function ($rootScope, $log, Alert, $location) {
+angular.module('mundialitoApp').factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', '$location', function ($rootScope, $log, Alert, $location) {
     var ErrorHandler = this;
 
     ErrorHandler.handle = function (data, status) {

@@ -1,6 +1,5 @@
-﻿angular.module('mundialitoApp')
-.controller('GameCtrl', ['$scope', '$rootScope', '$log','security', 'BetsService', 'game', 'userBet','Alert', function ($scope, $rootScope, $log, Security, BetsService, game, userBet, Alert) {
-    Security.authenticate();
+﻿'use strict';
+angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$rootScope', '$log', 'BetsService', 'game', 'userBet','Alert', function ($scope, $rootScope, $log, BetsService, game, userBet, Alert) {
     $scope.game = game;
     $scope.userBet = userBet;
     $scope.userBet.GameId = game.GameId;

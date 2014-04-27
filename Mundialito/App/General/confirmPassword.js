@@ -1,5 +1,5 @@
-﻿angular.module('mundialitoApp')
-.directive('confirmPassword', [function () {
+﻿'use strict';
+angular.module('mundialitoApp').directive('confirmPassword', [function () {
     return {
         restrict: 'A',
         require: 'ngModel',

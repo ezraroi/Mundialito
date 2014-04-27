@@ -12,7 +12,7 @@ namespace Mundialito.Tests.Models
         public void IsOpenSimpleTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromMinutes(1));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(1));
 
             Assert.IsFalse(game.IsOpen, "Game should not be open");
         }
@@ -57,7 +57,7 @@ namespace Mundialito.Tests.Models
         public void MarkDrawTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
             game.HomeScore = 1;
             game.AwayScore = 1;
 
@@ -68,7 +68,7 @@ namespace Mundialito.Tests.Models
         public void MarkHomeWinTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
 
             game.HomeScore = 2;
             game.AwayScore = 1;
@@ -80,7 +80,7 @@ namespace Mundialito.Tests.Models
         public void MarkAwayWinTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
 
             game.HomeScore = 1;
             game.AwayScore = 2;
@@ -92,7 +92,7 @@ namespace Mundialito.Tests.Models
         public void MarkNotScoreTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
             
             Assert.AreEqual("Pending Update", game.Mark);
         }

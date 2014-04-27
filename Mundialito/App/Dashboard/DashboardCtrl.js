@@ -1,6 +1,5 @@
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'security','GamesManager', function ($scope, $log, Security, GamesManager) {
-    Security.authenticate();
-
+'use strict';
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'GamesManager', function ($scope, $log, GamesManager) {
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
     });

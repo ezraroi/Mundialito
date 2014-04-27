@@ -1,5 +1,5 @@
-﻿angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesManager','security','games','teams','stadiums','Alert',function ($scope,$log, GamesManager, Security, games, teams, stadiums, Alert) {
-    Security.authenticate();
+﻿'use strict';
+angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesManager','games','teams','stadiums','Alert',function ($scope,$log, GamesManager, games, teams, stadiums, Alert) {
     $scope.newGame = null;
     $scope.gamesFilter = "All";
     $scope.games = games;

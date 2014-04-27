@@ -1,3 +1,4 @@
+'use strict';
 angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','$log', function($http,$q,Game,$log) {
     var gamesManager = {
         _pool: {},

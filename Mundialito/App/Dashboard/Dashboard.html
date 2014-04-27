@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-6 col-xs-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-folder-open"></i> Open Games for Betting</div>
+            <div class="panel-heading"><i class="fa fa-folder-open"></i> Open Games for Betting <span class="pull-right badge">{{(games | filter:isOpenForBetting()).length }}</span></div>
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
                     <a class="list-group-item"  ng-repeat="game in games | filter:isOpenForBetting() | limitTo:10" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
