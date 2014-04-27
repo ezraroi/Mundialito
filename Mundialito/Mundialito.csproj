@@ -296,7 +296,6 @@
     <Content Include="App\Games\GamesManager.js" />
     <Content Include="App\Games\gamesTemplate.html" />
     <Content Include="App\Games\mundialitoGamesDirectives.js" />
-    <Content Include="App\General\HomeCtrl.js" />
     <Content Include="App\Accounts\JoinCtrl.js" />
     <Content Include="App\Accounts\LoginCtrl.js" />
     <Content Include="App\Accounts\ManageCtrl.js" />
@@ -324,7 +323,6 @@
     <Content Include="App\General\Alert.js" />
     <Content Include="App\General\ErrorHandler.js" />
     <Content Include="App\Teams\TeamsManager.js" />
-    <Content Include="App\Teams\TeamsService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\angular-busy.min.css" />
