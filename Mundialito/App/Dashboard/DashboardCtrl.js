@@ -22,7 +22,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'G
 
     $scope.gridOptions = {
         data: 'users',
-        columnDefs: [{field:'Username', displayName:'Name'}, {field:'Points', displayName:'Points'}],
+        columnDefs: [{field:'Name', displayName:'Name'}, {field:'Points', displayName:'Points'}],
         plugins: [new ngGridFlexibleHeightPlugin()],
         multiSelect: false
     };

@@ -35,8 +35,8 @@ namespace Mundialito.Logic
 
         public List<UserModel> GetAllUsers()
         {
-            var users = usersRepository.AllUsers().ToDictionary(user => user, user => new UserModel(user));
-            betsRepository.GetBets().Where(bet => !bet.IsOpenForBetting).ToList().ForEach(bet => users[bet.User].AddBet(new BetViewModel(bet)));
+            var users = usersRepository.AllUsers().ToDictionary(user => user.UserName, user => new UserModel(user));
+            betsRepository.GetBets().Where(bet => !bet.IsOpenForBetting).ToList().ForEach(bet => users[bet.User.UserName].AddBet(new BetViewModel(bet)));
             return users.Values.ToList();
         }
     }

@@ -19,7 +19,7 @@ namespace Mundialito.DAL.Bets
 
         public IEnumerable<Bet> GetBets()
         {
-            return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game);
+            return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam);
         }
 
         public IEnumerable<Bet> GetUserBets(string userId)
