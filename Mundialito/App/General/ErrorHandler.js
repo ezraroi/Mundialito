@@ -1,11 +1,11 @@
 ﻿'use strict';
-angular.module('mundialitoApp').factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', '$location', function ($rootScope, $log, Alert, $location) {
+angular.module('mundialitoApp').factory('ErrorHandler', ['$rootScope', '$log' , 'Alert', '$location','Constants', function ($rootScope, $log, Alert, $location, Constants) {
     var ErrorHandler = this;
 
     ErrorHandler.handle = function (data, status) {
         $log.log(data);
         if (status === 401) {
-            $location.path('/login');
+            $location.path(Constants.LOGIN_PATH);
             return;
         }
         var message = [];

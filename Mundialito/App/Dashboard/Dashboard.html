@@ -48,8 +48,11 @@
     <div class="col-md-12">
         <div class="panel panel-info">
             <div class="panel-heading"><i class="fa fa-table"></i> Table</div>
-            <div class="panel-body">
-                <div class="list-group" cg-busy="{tracker:'getTable'}">
+            <div class="panel-body" cg-busy="{tracker:'getUsers'}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="border: 1px solid rgb(212,212,212);" ng-grid="gridOptions"></div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','$log', function($http,$q,Game,$log) {
+angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','$log','MundialitoUtils', function($http,$q,Game,$log,MundialitoUtils) {
     var gamesManager = {
         _pool: {},
         _retrieveInstance: function(gameId, gameData) {
@@ -13,11 +13,17 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
                 instance = new Game(gameData);
                 this._pool[gameId] = instance;
             }
+            instance.LoadTime = new Date();
             return instance;
         },
         _search: function(gameId) {
             $log.debug('GamesManager: will fetch game ' + gameId + ' from local pool');
-            return this._pool[gameId];
+            var instance = this._pool[gameId];
+            if (MundialitoUtils.shouldRefreshInstance(instance)) {
+                $log.debug('GamesManager: Instance was loaded at ' + instance,LoadTime + ', will reload it from server');
+                return undefined;
+            }
+            return instance;
         },
         _load: function(gameId, deferred) {
             var scope = this;

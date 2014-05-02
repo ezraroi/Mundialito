@@ -1,4 +1,4 @@
-angular.module('mundialitoApp').factory('TeamsManager', ['$http', '$q', 'Team','$log', function($http,$q,Team,$log) {
+angular.module('mundialitoApp').factory('TeamsManager', ['$http', '$q', 'Team','$log','MundialitoUtils', function($http,$q,Team,$log,MundialitoUtils) {
     var teamsManager = {
         _pool: {},
         _retrieveInstance: function(teamId, teamData) {
@@ -12,11 +12,17 @@ angular.module('mundialitoApp').factory('TeamsManager', ['$http', '$q', 'Team','
                 instance = new Team(teamData);
                 this._pool[teamId] = instance;
             }
+            instance.LoadTime = new Date();
             return instance;
         },
         _search: function(teamId) {
             $log.debug('TeamsManager: will fetch team ' + teamId + ' from local pool');
-            return this._pool[teamId];
+            var instance = this._pool[teamId];
+            if (MundialitoUtils.shouldRefreshInstance(instance)) {
+                $log.debug('TeamsManager: Instance was loaded at ' + instance,LoadTime + ', will reload it from server');
+                return undefined;
+            }
+            return instance;
         },
         _load: function(teamId, deferred) {
             var scope = this;

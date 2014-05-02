@@ -1,7 +1,11 @@
 'use strict';
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'GamesManager', function ($scope, $log, GamesManager) {
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'GamesManager','UsersManager', function ($scope, $log, GamesManager, UsersManager) {
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
+    });
+
+    UsersManager.loadAllUsers().then(function(users) {
+        $scope.users = users;
     });
 
     $scope.isOpenForBetting = function() {
@@ -14,6 +18,13 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'G
         return function( item ) {
             return !item.IsOpen && !item.IsPendingUpdate;;
         };
+    };
+
+    $scope.gridOptions = {
+        data: 'users',
+        columnDefs: [{field:'Username', displayName:'Name'}, {field:'Points', displayName:'Points'}],
+        plugins: [new ngGridFlexibleHeightPlugin()],
+        multiSelect: false
     };
 
 }]);

@@ -59,6 +59,8 @@ namespace Mundialito
                       "~/App/Lib/underscore.min.js",
                       "~/App/Lib/d3.min.js",
                       "~/App/Lib/line-chart.min.js",
+                      "~/Scripts/ng-grid.min.js",
+                      "~/App/Lib/ng-grid-flexible-height.js ",
                       "~/Scripts/angular-busy.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -68,6 +70,7 @@ namespace Mundialito
                       "~/Content/flags.css",
                       "~/Content/angular-busy.min.css",
                       "~/Content/bootstrap-select.min.css",
+                      "~/Content/ng-grid.min.css",
                       "~/Content/site.css"));
         }
 

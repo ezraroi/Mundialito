@@ -1,30 +1,36 @@
 'use strict';
-angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','$log', function($http,$q,User,$log) {
+angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','$log','MundialitoUtils', function($http,$q,User,$log,MundialitoUtils) {
     var usersManager = {
         _pool: {},
-        _retrieveInstance: function(gameId, userData) {
-            var instance = this._pool[gameId];
+        _retrieveInstance: function(username, userData) {
+            var instance = this._pool[username];
 
             if (instance) {
-                $log.debug('UsersManager: updating existing instance of user ' + gameId);
+                $log.debug('UsersManager: updating existing instance of user ' + username);
                 instance.setData(userData);
             } else {
-                $log.debug('UsersManager: saving new instance of user ' + gameId);
+                $log.debug('UsersManager: saving new instance of user ' + username);
                 instance = new User(userData);
-                this._pool[gameId] = instance;
+                this._pool[username] = instance;
+            }
+            instance.LoadTime = new Date();
+            return instance;
+        },
+        _search: function(username) {
+            $log.debug('UsersManager: will fetch user ' + username + ' from local pool');
+            var instance = this._pool[username];
+            if (MundialitoUtils.shouldRefreshInstance(instance)) {
+                $log.debug('UsersManager: Instance was loaded at ' + instance,LoadTime + ', will reload it from server');
+                return undefined;
             }
             return instance;
         },
-        _search: function(gameId) {
-            $log.debug('UsersManager: will fetch user ' + gameId + ' from local pool');
-            return this._pool[gameId];
-        },
-        _load: function(gameId, deferred) {
+        _load: function(username, deferred) {
             var scope = this;
-            $log.debug('UsersManager: will fetch user ' + gameId + ' from server');
-            $http.get('api/users/' + gameId, { tracker: 'getUser' })
+            $log.debug('UsersManager: will fetch user ' + username + ' from server');
+            $http.get('api/users/' + username, { tracker: 'getUser' })
                 .success(function(userData) {
-                    var user = scope._retrieveInstance(userData.GameId, userData);
+                    var user = scope._retrieveInstance(userData.Username, userData);
                     deferred.resolve(user);
                 })
                 .error(function() {
@@ -34,16 +40,16 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
 
         /* Public Methods */
         /* Use this function in order to get a user instance by it's id */
-        getUser: function(gameId,fresh) {
+        getUser: function(username,fresh) {
             var deferred = $q.defer();
             var user = undefined;
             if ((!angular.isDefined(fresh) || (!fresh))) {
-                user = this._search(gameId);
+                user = this._search(username);
             }
             if (user) {
                 deferred.resolve(user);
             } else {
-                this._load(gameId, deferred);
+                this._load(username, deferred);
             }
             return deferred.promise;
         },
@@ -57,7 +63,7 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
                 .success(function(usersArray) {
                     var users = [];
                     usersArray.forEach(function(userData) {
-                        var user = scope._retrieveInstance(userData.GameId, userData);
+                        var user = scope._retrieveInstance(userData.Username, userData);
                         users.push(user);
                     });
 
@@ -71,9 +77,9 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
 
         /*  This function is useful when we got somehow the user data and we wish to store it or update the pool and get a user instance in return */
         setUser: function(userData) {
-            $log.debug('UsersManager: will set user ' + userData.GameId + ' to -' + angular.toJson(userData));
+            $log.debug('UsersManager: will set user ' + userData.Username + ' to -' + angular.toJson(userData));
             var scope = this;
-            var user = this._search(userData.GameId);
+            var user = this._search(userData.Username);
             if (user) {
                 user.setData(userData);
             } else {

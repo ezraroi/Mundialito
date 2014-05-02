@@ -1,20 +1,15 @@
-﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'angular-bootstrap-select', 'angular-bootstrap-select.extra', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives'])
+﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'angular-bootstrap-select', 'angular-bootstrap-select.extra', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid'])
     .value('cgBusyTemplateName','App/Partials/angular-busy.html')
-    .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider) {
+    .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider','Constants', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider, Constants) {
         $locationProvider.html5Mode(true);
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.interceptors.push('myHttpInterceptor');
-        securityProvider.urls.login = '/login';
+        securityProvider.urls.login = Constants.LOGIN_PATH;
 
         $routeProvider.
             when('/', {
                 templateUrl: 'App/Dashboard/Dashboard.html',
-                controller: 'DashboardCtrl',
-                resolve: {
-                    games: ['GamesManager', function (GamesManager) {
-                        return GamesManager.loadAllGames();
-                    }]
-                }
+                controller: 'DashboardCtrl'
             }).
             when('/teams', {
                 templateUrl: 'App/Teams/Teams.html',

@@ -286,6 +286,7 @@
     <Content Include="App\app.js" />
     <Content Include="App\Bets\BetsService.js" />
     <Content Include="App\Bets\saveBetButtonDirective.js" />
+    <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />
     <Content Include="App\Dashboard\DashboardCtrl.js" />
     <Content Include="App\Games\Game.html" />
@@ -299,8 +300,10 @@
     <Content Include="App\Accounts\JoinCtrl.js" />
     <Content Include="App\Accounts\LoginCtrl.js" />
     <Content Include="App\Accounts\ManageCtrl.js" />
+    <Content Include="App\General\MundialitoUtils.js" />
     <Content Include="App\Lib\d3.min.js" />
     <Content Include="App\Lib\line-chart.min.js" />
+    <Content Include="App\Lib\ng-grid-flexible-height.js" />
     <Content Include="App\Lib\underscore.js" />
     <Content Include="App\Lib\underscore.min.js">
       <DependentUpon>underscore.js</DependentUpon>
@@ -336,6 +339,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Img\flagsp.png" />
+    <Content Include="Content\ng-grid.css" />
+    <Content Include="Content\ng-grid.min.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -484,6 +489,7 @@
     <Content Include="App\Lib\underscore.min.js.map">
       <DependentUpon>underscore.js</DependentUpon>
     </Content>
+    <Content Include="App\General\activeNavDirective" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -763,6 +769,8 @@
     <Content Include="Scripts\moment.min.js">
       <DependentUpon>moment.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\ng-grid.js" />
+    <Content Include="Scripts\ng-grid.min.js" />
     <Content Include="Scripts\promise-tracker.js" />
     <Content Include="Scripts\promise-tracker.min.js">
       <DependentUpon>promise-tracker.js</DependentUpon>

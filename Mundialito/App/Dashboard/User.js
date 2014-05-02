@@ -12,7 +12,7 @@ angular.module('mundialitoApp').factory('User', [function() {
             angular.extend(this, userData);
         },
         getUrl: function() {
-            return '/users/' + this.GameId;
+            return '/users/' + this.Username;
         }
     };
     return User;
