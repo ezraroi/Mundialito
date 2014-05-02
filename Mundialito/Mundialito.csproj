@@ -489,7 +489,7 @@
     <Content Include="App\Lib\underscore.min.js.map">
       <DependentUpon>underscore.js</DependentUpon>
     </Content>
-    <Content Include="App\General\activeNavDirective" />
+    <Content Include="App\General\activeNavDirective.js" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
