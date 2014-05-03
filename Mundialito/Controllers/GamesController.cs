@@ -25,8 +25,7 @@ namespace Mundialito.Controllers
         private readonly IGamesRepository gamesRepository;
         private readonly IBetsRepository betsRepository;
         private readonly IBetsResolver betsResolver;
-        private readonly UserManager<MundialitoUser> usersManager = new UserManager<MundialitoUser>(new UserStore<MundialitoUser>(new MundialitoContext()));
-
+        
         public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver)
         {
             if (gamesRepository == null)

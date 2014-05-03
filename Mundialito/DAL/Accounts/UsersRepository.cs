@@ -6,23 +6,29 @@ using System.Web;
 
 namespace Mundialito.DAL.Accounts
 {
-    public class UsersRepository : IUsersRepository
+    public class UsersRepository : GenericRepository<MundialitoUser>, IUsersRepository
     {
-        private MundialitoContext context;
-
-        public UsersRepository(MundialitoContext context)
+        public UsersRepository(MundialitoContext context)  : base(context)
         {
-            this.context = context;
+            
         }
 
         public IEnumerable<MundialitoUser> AllUsers()
         {
-            return context.Users;
+            return Context.Users;
         }
 
         public MundialitoUser GetUser(String username)
         {
-            return context.Users.SingleOrDefault(user => user.UserName == username);
+            return Context.Users.SingleOrDefault(user => user.UserName == username);
         }
+
+
+        public void DeleteUser(string id)
+        {
+            Delete(id);
+        }
+
+        
     }
 }

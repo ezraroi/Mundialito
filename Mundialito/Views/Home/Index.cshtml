@@ -61,7 +61,7 @@
                                 <span class="fa fa-user"></span> {{security.user.userName}} <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/me"><span class="fa fa-book"></span> Profile</a></li>
+                                <li><a href="/users/{{security.user.userName}}"><span class="fa fa-book"></span> Profile</a></li>
                                 <li><a href="/manage"><span class="fa fa-cog"></span> Account</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#" ng-click="security.logout()"><span class="fa fa-power-off"></span> Logout</a></li>

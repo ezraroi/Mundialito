@@ -11,6 +11,15 @@
                 templateUrl: 'App/Dashboard/Dashboard.html',
                 controller: 'DashboardCtrl'
             }).
+            when('/manage_users', {
+                templateUrl: 'App/Users/ManageUsers.html',
+                controller: 'ManageUsersCtrl',
+                resolve: {
+                    users : ['UsersManager', function (UsersManager) {
+                        return UsersManager.loadAllUsers();
+                    }]
+                }
+            }).
             when('/teams', {
                 templateUrl: 'App/Teams/Teams.html',
                 controller: 'TeamsCtrl',

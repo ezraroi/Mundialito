@@ -289,8 +289,10 @@
     <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />
     <Content Include="App\Dashboard\DashboardCtrl.js" />
-    <Content Include="App\Dashboard\User.js" />
-    <Content Include="App\Dashboard\UsersManager.js" />
+    <Content Include="App\Users\ManageUsers.html" />
+    <Content Include="App\Users\ManageUsersCtrl.js" />
+    <Content Include="App\Users\User.js" />
+    <Content Include="App\Users\UsersManager.js" />
     <Content Include="App\Games\Game.html" />
     <Content Include="App\Games\Game.js" />
     <Content Include="App\Games\GameCtrl.js" />
