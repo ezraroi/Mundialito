@@ -47,21 +47,23 @@ namespace Mundialito
 
             // External Libs
             bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                      "~/App/Lib/select2.js",
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/bootstrap-select.min.js",
-                      "~/Scripts/ui-bootstrap-tpls-{version}.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
                       "~/Scripts/autoFields-bootstrap.min.js",
                       "~/Scripts/moment.min.js",
                       "~/Scripts/angular-spa-security.min.js",
                       "~/Scripts/promise-tracker.min.js",
                       "~/Scripts/datetimepicker.min.js",
-                      "~/Scripts/angular-bootstrap-select.min.js",
+                      "~/Scripts/angular-bootstrap-select.js",
                       "~/Scripts/facebookPluginDirectives.js",
                       "~/App/Lib/underscore.min.js",
                       "~/App/Lib/d3.min.js",
                       "~/App/Lib/line-chart.min.js",
                       "~/Scripts/ng-grid.min.js",
-                      "~/App/Lib/ng-grid-flexible-height.js ",
+                      "~/App/Lib/ng-grid-flexible-height.js",
+                      "~/App/Lib/angular-select2.js ",
                       "~/Scripts/angular-busy.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -70,7 +72,8 @@ namespace Mundialito
                       "~/Content/font-awesome.css",
                       "~/Content/flags.css",
                       "~/Content/angular-busy.min.css",
-                      "~/Content/bootstrap-select.min.css",
+                      "~/Content/select2.min.css",
+                      "~/Content/select2-bootstrap.min.css",
                       "~/Content/ng-grid.min.css",
                       "~/Content/site.css"));
         }

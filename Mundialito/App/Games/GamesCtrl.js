@@ -13,7 +13,7 @@ angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesM
 
     $scope.saveNewGame = function() {
         GamesManager.addGame($scope.newGame).then(function(data) {
-            Alert.new('success', 'Game was updated successfully', 2000);
+            Alert.new('success', 'Game was added successfully', 2000);
             $scope.newGame = GamesManager.getEmptyGameObject();
             $scope.games.push(data);
         });

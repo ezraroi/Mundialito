@@ -284,11 +284,14 @@
     <Content Include="App\Accounts\Manage.html" />
     <Content Include="App\Accounts\Register.html" />
     <Content Include="App\app.js" />
+    <Content Include="App\Bets\Bet.js" />
+    <Content Include="App\Bets\BetsManager.js" />
     <Content Include="App\Bets\BetsService.js" />
-    <Content Include="App\Bets\saveBetButtonDirective.js" />
     <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />
     <Content Include="App\Dashboard\DashboardCtrl.js" />
+    <Content Include="App\Lib\angular-select2.js" />
+    <Content Include="App\Lib\select2.js" />
     <Content Include="App\Users\ManageUsers.html" />
     <Content Include="App\Users\ManageUsersCtrl.js" />
     <Content Include="App\Users\User.js" />
@@ -301,7 +304,7 @@
     <Content Include="App\Games\GamesManager.js" />
     <Content Include="App\Games\gamesTemplate.html" />
     <Content Include="App\Games\mundialitoGamesDirectives.js" />
-    <Content Include="App\Accounts\JoinCtrl.js" />
+    <Content Include="App\Accounts\RegisterCtrl.js" />
     <Content Include="App\Accounts\LoginCtrl.js" />
     <Content Include="App\Accounts\ManageCtrl.js" />
     <Content Include="App\General\MundialitoUtils.js" />
@@ -333,7 +336,6 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\angular-busy.min.css" />
-    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -343,8 +345,19 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Img\flagsp.png" />
+    <Content Include="Content\Img\select2-spinner.gif" />
+    <Content Include="Content\Img\select2.png" />
+    <Content Include="Content\Img\select2x2.png" />
     <Content Include="Content\ng-grid.css" />
     <Content Include="Content\ng-grid.min.css" />
+    <Content Include="Content\select2-bootstrap.css" />
+    <Content Include="Content\select2-bootstrap.min.css">
+      <DependentUpon>select2-bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.min.css">
+      <DependentUpon>select2.css</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -413,10 +426,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-bootstrap-select.js" />
-    <Content Include="Scripts\angular-bootstrap-select.min.js">
-      <DependentUpon>angular-bootstrap-select.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular-busy.js" />
     <Content Include="Scripts\angular-busy.min.js">
       <DependentUpon>angular-busy.js</DependentUpon>
@@ -438,6 +447,10 @@
     <Content Include="Scripts\angular-spa-security.min.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\autoFields-bootstrap.js" />
@@ -458,9 +471,6 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="Scripts\angular-bootstrap-select.min.js.map">
-      <DependentUpon>angular-bootstrap-select.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\datetimepicker.min.js.map">
       <DependentUpon>datetimepicker.js</DependentUpon>
     </Content>
@@ -782,10 +792,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\WebApiTestClient.js" />
-    <Content Include="Scripts\ui-bootstrap-0.10.0.js" />
-    <Content Include="Scripts\ui-bootstrap-0.10.0.min.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.js" />
-    <Content Include="Scripts\ui-bootstrap-tpls-0.10.0.min.js" />
     <Content Include="Web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

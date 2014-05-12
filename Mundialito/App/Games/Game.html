@@ -73,8 +73,8 @@
             <div class="panel-heading">
                 <i class="fa fa-user"></i> Your Bet
                 <span ng-show="game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-clock-o"></i> Pending Update</span>
-                <span ng-show="!game.IsPendingUpdate && !game.IsOpen" class="label label-danger pull-right"><i class="fa fa-lock"></i> Closed for betting</span>
                 <span ng-show="game.IsOpen" class="label label-success pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
+                <span class="label label-success pull-right"  ng-show="!userBet.IsOpenForBetting && userBet.IsResolved">{{userBet.Points}} Points</span>
             </div>
             <div class="panel-body">
                 <div ng-if="!game.IsOpen && userBet.BetId == -1" class="text-danger">
@@ -88,20 +88,18 @@
                             </div>
                         </label>
                         <div class="col-md-2">
-                            <input name="{{game.HomeTeam.TeamId}}" id="{{game.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                            <input name="{{game.HomeTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
                         </div>
                         <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
                             <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}</div>
                         </label>
                         <div class="col-md-2">
-                            <input name="{{game.AwayTeam.TeamId}}" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
+                            <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                         <div class="col-md-2 text-center" ng-if="game.IsOpen">
-                            <button type="button" save-bet-button bet="userBet" class="btn btn-success" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                            <button type="button" class="btn btn-success" ng-click="updateBet()" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
                         </div>
-                        <div class="col-md-2" ng-if="!userBet.IsOpenForBetting">
-                            <span class="badge" ng-class="{'bade-danger': userBet.Points == 0, 'bade-warning': userBet.Points == 3, 'bade-success': userBet.Points > 3, 'bade-info': userBet.Points == 'NA'}">{{userBet.Points}}</span>
-                        </div>
+
                     </div>
                 </form>
             </div>
@@ -115,7 +113,27 @@
         <div class="panel panel-success" cg-busy="{tracker:'getGameBets'}">
             <div class="panel-heading"><i class="fa fa-money"></i> Other Users Bets</div>
             <div class="panel-body">
-                TODO
+                <div ng-if="game.IsOpen" class="text-info">
+                    <i class="fa fa-info-circle"></i> Other users bets will be displayed once the game will be closed
+                </div>
+                <div ng-if="!game.IsOpen">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <th><i class="fa fa-user"></i> User</th>
+                                <th>Result</th>
+                                <th>Points</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="bet in gameBets">
+                                    <td>{{bet.User.FirstName}} {{bet.User.LastName}}</td>
+                                    <td>{{bet.HomeScore}} - {{bet.AwayScore}}</td>
+                                    <td>{{bet.Points}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

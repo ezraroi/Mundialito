@@ -1,0 +1,20 @@
+'use strict';
+angular.module('mundialitoApp').factory('Bet', ['$http','$log', function($http,$log) {
+    function Bet(betData) {
+        if (betData) {
+            this.setData(betData);
+        }
+        // Some other initializations related to bet
+    };
+
+    Bet.prototype = {
+        setData: function(betData) {
+            angular.extend(this, betData);
+        },
+        update: function() {
+            $log.debug('Bet: Will update bet ' + this.BetId)
+            return $http.put("api/bets/" + this.BetId, this, { tracker: 'updateBet' });
+        }
+    };
+    return Bet;
+}]);

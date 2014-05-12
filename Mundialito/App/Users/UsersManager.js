@@ -19,7 +19,7 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
         _search: function(username) {
             $log.debug('UsersManager: will fetch user ' + username + ' from local pool');
             var instance = this._pool[username];
-            if (MundialitoUtils.shouldRefreshInstance(instance)) {
+            if (angular.isDefined(instance) && MundialitoUtils.shouldRefreshInstance(instance)) {
                 $log.debug('UsersManager: Instance was loaded at ' + instance,LoadTime + ', will reload it from server');
                 return undefined;
             }

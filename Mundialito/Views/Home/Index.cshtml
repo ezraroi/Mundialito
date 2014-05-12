@@ -105,7 +105,7 @@
         </div>
     </div>
     <div class="appAlerts ng-cloak">
-        <alert ng-repeat="alert in alerts" type="alert.type" close="alert.close(alert, $index)">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close(alert, $index)">
             <span class="message" ng-bind-html="alert.message"></span>
         </alert>
     </div>

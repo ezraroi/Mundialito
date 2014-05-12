@@ -4,9 +4,9 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-3 col-xs-12">
-                        <select class="selectpicker show-tick" ng-model="gamesFilter" data-header="Filter Games">
-                            <option value="All" data-icon="fa fa-list" selected="selected">All Games</option>
-                            <option value="OnlyOpen" data-icon="fa fa-folder-open">Only Open</option>
+                        <select ui-select2="{allowClear: false}" class="form-control" ng-model="gamesFilter">
+                            <option value="All" selected="selected">All Games</option>
+                            <option value="OnlyOpen">Only Open</option>
                         </select>
                     </div>
                 </div>
@@ -26,19 +26,19 @@
                 <form role="form" name="addGameForm" novalidate>
                     <div class="form-group select">
                         <label for="HomeTeam">Home Team</label>
-                        <select id="HomeTeam" class="selectpicker show-tick form-control" ng-model="newGame.HomeTeam" data-header="Home Team" required>
+                        <select id="HomeTeam" ui-select2="{allowClear: false}" class="form-control" ng-model="newGame.HomeTeam" required>
                             <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
                         </select>
                     </div>
                     <div class="form-group select">
                         <label for="AwayTeam">Away Team</label>
-                        <select id="AwayTeam" class="selectpicker show-tick form-control" ng-model="newGame.AwayTeam" data-header="Away Team" required>
+                        <select id="AwayTeam" class="form-control" ng-model="newGame.AwayTeam" ui-select2="{allowClear: false}" required>
                             <option ng-repeat="team in teams" value="{{team}}">{{team.Name}}</option>
                         </select>
                     </div>
                     <div class="form-group select">
                         <label for="Stadium">Stadium</label>
-                        <select id="Stadium" class="selectpicker show-tick form-control" ng-model="newGame.Stadium" data-header="Stadium" required>
+                        <select id="Stadium" ui-select2="{allowClear: false}" class="form-control" ng-model="newGame.Stadium" required>
                             <option ng-repeat="stadium in stadiums" value="{{stadium}}">{{stadium.Name}}</option>
                         </select>
                     </div>

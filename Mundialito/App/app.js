@@ -1,4 +1,4 @@
-﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'angular-bootstrap-select', 'angular-bootstrap-select.extra', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid'])
+﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'ui.select2', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid'])
     .value('cgBusyTemplateName','App/Partials/angular-busy.html')
     .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider','Constants', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider, Constants) {
         $locationProvider.html5Mode(true);
@@ -51,13 +51,9 @@
                         var gameId = $route.current.params.gameId;
                         return  GamesManager.getGame(gameId);
                     }],
-                    userBet: ['$q','$route','BetsService', function ($q, $route, BetsService) {
-                        var deferred = $q.defer();
+                    userBet: ['$route','BetsManager', function ($route, BetsManager) {
                         var gameId = $route.current.params.gameId;
-                        BetsService.getUserBetOnGame(gameId).success(function (data) {
-                            deferred.resolve(data);
-                        });
-                        return deferred.promise;
+                        return BetsManager.getUserBetOnGame(gameId);
                     }]
                 }
             }).

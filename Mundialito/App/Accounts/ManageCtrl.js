@@ -1,7 +1,5 @@
-﻿angular.module('mundialitoApp')
-.controller('ManageCtrl', ['$scope', 'security','Alert', function ($scope, Security, Alert) {
-    Security.authenticate();
-
+﻿'use strict';
+angular.module('mundialitoApp').controller('ManageCtrl', ['$scope','Alert', function ($scope, Alert) {
     var ChangePasswordModel = function () {
         return {
             oldPassword: '',
