@@ -18,10 +18,13 @@ namespace Mundialito.DAL.Bets
         IEnumerable<Bet> GetGameBets(int gameId);
         
         Bet GetBet(int betId);
-        Bet InsertBet(Bet bet);
-        void DeleteBet(int betId);
-        void UpdateBet(Bet bet);
-        void Save(); 
 
+        Bet InsertBet(Bet bet);
+
+        void DeleteBet(int betId);
+
+        void UpdateBet(Bet bet);
+
+        void Save(); 
     }
 }

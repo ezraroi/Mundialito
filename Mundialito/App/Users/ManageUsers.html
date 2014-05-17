@@ -1,15 +1,24 @@
 ﻿<h4><i class="fa fa-users"></i> All Users</h4>
 <div class="row">
     <div class="col-md-12">
-        <div class="list-group" cg-busy="{tracker:'getUsers'}">
-            <div  class="list-group-item" ng-repeat="user in users">
-                <div class="btn-group">
-                    <a href="{{user.getUrl()}}" class="btn btn-primary btn-sm" tooltip="View Profile"><i class="fa fa-user"></i></a>
-                    <button ng-show="!user.IsAdmin" type="button" class="btn btn-primary btn-sm" ng-click="user.makeAdmin()" tooltip="Make Admin"><i class="fa fa-gear"></i></button>
-                    <button type="button" class="btn btn-primary btn-sm" ng-click="deleteUser(user)" tooltip="Delete User"><i class="fa fa-times-circle"></i></button>
-                </div>
-                {{user.Name}} ({{user.Username}})
-            </div>
+        <div class="table-responsive">
+            <table class="table table-striped" cg-busy="{tracker:'getUsers'}">
+                <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td><a href="{{user.getUrl()}}">{{user.Name}}</a></td>
+                    <td>{{user.Email}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="deleteUser(user)" tooltip="Delete User"><i class="fa fa-times-circle"></i></button>
+                        <button ng-show="!user.IsAdmin" type="button" class="btn btn-primary btn-sm" ng-click="user.makeAdmin()" tooltip="Make Admin"><i class="fa fa-gear"></i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

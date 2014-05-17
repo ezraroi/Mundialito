@@ -18,6 +18,7 @@ using Mundialito.Providers;
 using Mundialito.Results;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
+using Mundialito.Logic;
 
 namespace Mundialito.Controllers
 {
@@ -326,6 +327,10 @@ namespace Mundialito.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+            if (!PrivateKeyValidator.ValidatePrivateKey(model.PrivateKey, model.Email))
+            {
+                return BadRequest("Invalid private key");
             }
 
             MundialitoUser user = new MundialitoUser

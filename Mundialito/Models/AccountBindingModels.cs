@@ -63,6 +63,10 @@ namespace Mundialito.Models
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Private Key")]
+        public string PrivateKey { get; set; }
     }
 
     public class RegisterExternalBindingModel

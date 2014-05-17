@@ -201,6 +201,8 @@
 				Api.getUserInfo(accessToken()).success(function (user) {
 					Security.user = user;
 					if (securityProvider.events.reloadUser) securityProvider.events.reloadUser(Security, user); // Your Register events
+				}).error(function () {
+				    Security.logout();
 				});
 			}
 

@@ -1,5 +1,5 @@
 ﻿<div class="row well">
-    <div class="col-md-6">
+    <div class="col-md-6 col-xs-12">
         <div class="row">
             <div class="col-md-12">
                 <div >
@@ -9,7 +9,7 @@
                     </h3>
                 </div>
                 <h4>{{game.Stadium.Name}} Stadium</h4>
-                <h4>{{game.Date | date:'dd/MM/yy @ h:mma'}}</h4><br />
+                <h4>{{game.Date | date:'dd/MM/yy @ h:mma'}} <small>(<i class="fa fa-clock-o"></i> Open until {{game.CloseTime | date:'dd/MM/yy @ h:mma'}})</small></h4><br />
             </div>
         </div>
         <div class="row">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 ">
+    <div class="col-md-6 hidden-xs">
         <div class="row">
             <div class="col-md-12">
                 Statistics Graph
@@ -74,34 +74,63 @@
                 <i class="fa fa-user"></i> Your Bet
                 <span ng-show="game.IsPendingUpdate" class="label label-info pull-right"><i class="fa fa-clock-o"></i> Pending Update</span>
                 <span ng-show="game.IsOpen" class="label label-success pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
-                <span class="label label-success pull-right"  ng-show="!userBet.IsOpenForBetting && userBet.IsResolved">{{userBet.Points}} Points</span>
+                <span class="label label-success pull-right"  ng-show="!game.IsOpen && !game.IsPendingUpdate">{{userBet.Points}} Points</span>
             </div>
             <div class="panel-body">
                 <div ng-if="!game.IsOpen && userBet.BetId == -1" class="text-danger">
                     <i class="fa fa-warning"></i> You haven't placed a bet on this game and it is already closed for betting
                 </div>
-                <form class="form-horizontal" novalidate name="userBetFrom" ng-if="userBet.BetId != -1 || game.IsOpen">
+                <form class="form-horizontal" novalidate name="userBetFrom" ng-show="userBet.BetId != -1 || game.IsOpen">
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
-                            <div class="text-center">
-                                <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}}
-                            </div>
+                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input name="{{game.HomeTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
                         </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
-                            <div class="text-center"><i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}</div>
+                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
-                        <div class="col-md-2 text-center" ng-if="game.IsOpen">
-                            <button type="button" class="btn btn-success" ng-click="updateBet()" ng-disabled="userBetFrom.$invalid || !game.IsOpen"><i class="fa fa-save"></i></button>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error' : corners.$error}">
+                        <label class="col-md-3 control-label" for="corners">
+                            Corners
+                        </label>
+                        <div class="col-md-2">
+                            <select id="corners" name="corners" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CornersMark" required placeholder="Game Corners Mark">
+                                <option value="1">1</option>
+                                <option value="X">X</option>
+                                <option value="2">2</option>
+                            </select>
                         </div>
-
+                        <div class="col-md-7">
+                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of corners, <strong>1</strong> - More corners for {{game.HomeTeam.Name}}, <strong>2</strong> - More corners for {{game.AwayTeam.Name}}</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error' : cards.$error}">
+                        <label class="col-md-3 control-label" for="cards">Yellow Cards</label>
+                        <div class="col-md-2">
+                            <select id="cards" name="cards" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CardsMark" required placeholder="Game Cards Mark">
+                                <option value="1">1</option>
+                                <option value="X">X</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of yellow cards, <strong>1</strong> - More yellow cards for {{game.HomeTeam.Name}}, <strong>2</strong> - More yellow cards for {{game.AwayTeam.Name}}</small></span>
+                        </div>
                     </div>
                 </form>
+                <div class="col-md-2 col-xs-6 col-xs-offset-6 col-md-offset-10" ng-if="game.IsOpen">
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-primary" ng-click="updateBet()" ng-disabled="userBetFrom.$invalid && game.IsOpen"><i class="fa fa-save"></i> Save Bet</button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -128,7 +157,7 @@
                                 <tr ng-repeat="bet in gameBets">
                                     <td>{{bet.User.FirstName}} {{bet.User.LastName}}</td>
                                     <td>{{bet.HomeScore}} - {{bet.AwayScore}}</td>
-                                    <td>{{bet.Points}}</td>
+                                    <td><span class="label label-{{bet.getClass()}}" ng-show="bet.IsResolved">{{bet.Points}}</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -142,7 +171,7 @@
 <br />
 <br />
 <!-- Facebook Comments -->
-<div class="row">
+<div class="row hidden-xs">
     <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading"><i class="fa fa-facebook-square"></i> Facebook Comments</div>

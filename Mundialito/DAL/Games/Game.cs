@@ -25,16 +25,30 @@ namespace Mundialito.DAL.Games
         [Range(0, 10)]
         public int? AwayScore { get; set; }
 
+        [StringLength(1)]
+        [RegularExpression("[1X2-]")]
+        public String CornersMark { get; set; }
+
+        [StringLength(1)]
+        [RegularExpression("[1X2-]")]
+        public String CardsMark { get; set; }
+
         [Required]
         public Stadium Stadium { get; set; }
+
+        public DateTime CloseTime
+        {
+            get
+            {
+                return Date.Subtract(TimeSpan.FromMinutes(30));
+            }
+        }
 
         public bool IsOpen 
         {
             get
             {
-                var date = DateTime.Now.ToUniversalTime().Date;
-                var time = DateTime.Now.ToUniversalTime().TimeOfDay;
-                return (Date.Date > date) || (Date.Date == date && Date.TimeOfDay > time);
+                return DateTime.Now.ToUniversalTime() < CloseTime;
             }
         }
 
@@ -42,7 +56,7 @@ namespace Mundialito.DAL.Games
         {
             get
             {
-                if (IsOpen) 
+                if (IsOpen)
                     return false;
                 return HomeScore == null && AwayScore == null;
             }

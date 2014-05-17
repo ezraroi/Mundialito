@@ -7,6 +7,7 @@ using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
+using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -29,18 +30,13 @@ namespace Mundialito
             container.RegisterType<IGamesRepository, GamesRepository>();
             container.RegisterType<IStadiumsRepository, StadiumsRepository>();
             container.RegisterType<IBetsRepository, BetsRepository>();
+            container.RegisterType<IGeneralBetsRepository, GeneralBetsRepository>();
             container.RegisterType<IUsersRepository, UsersRepository>();
             container.RegisterType<IBetValidator, BetValidator>();
             container.RegisterType<IBetsResolver, BetsResolver>();
             container.RegisterType<ILoggedUserProvider, LoggedUserProvider>();
             container.RegisterType<IUsersRetriver, UsersRetriver>();
-            /*
-            container.RegisterType<BetsController>();
-            container.RegisterType<TeamsController>();
-            container.RegisterType<GamesController>();
-            container.RegisterType<StadiumsController>();
-            container.RegisterType<RolesAdminController>();
-            */
+         
             container.RegisterType<AccountController>(new InjectionConstructor());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

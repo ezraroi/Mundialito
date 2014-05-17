@@ -63,7 +63,12 @@ namespace Mundialito.Controllers
         [Route("{id}/Bets")]
         public IEnumerable<BetViewModel> GetGameBets(int id)
         {
-            return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item));
+            var game = gamesRepository.GetGame(id);
+            if (game == null)
+                throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
+            if (game.IsOpen)
+                throw new ArgumentException(String.Format("Game '{0}' is stil open for betting", id));
+            return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item)).OrderByDescending( bet => bet.Points);
         }
 
         [Route("{id}/MyBet/")]

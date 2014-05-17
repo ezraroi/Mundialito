@@ -69,6 +69,8 @@ namespace Mundialito.Controllers
             newBet.Game.GameId = bet.GameId;
             newBet.HomeScore = bet.HomeScore;
             newBet.AwayScore = bet.AwayScore;
+            newBet.CardsMark = bet.CardsMark;
+            newBet.CornersMark = bet.CornersMark;
             betValidator.ValidateNewBet(newBet);
             var res = betsRepository.InsertBet(newBet);
             Trace.TraceInformation("Posting new Bet: {0}", newBet);
@@ -84,6 +86,8 @@ namespace Mundialito.Controllers
             betToUpdate.BetId = id;
             betToUpdate.HomeScore = bet.HomeScore;
             betToUpdate.AwayScore = bet.AwayScore;
+            betToUpdate.CornersMark = bet.CornersMark;
+            betToUpdate.CardsMark = bet.CardsMark;
             betToUpdate.Game = new Game();
             betToUpdate.Game.GameId = bet.GameId;
             betToUpdate.User = new MundialitoUser();

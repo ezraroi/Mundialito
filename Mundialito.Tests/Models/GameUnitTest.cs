@@ -12,7 +12,7 @@ namespace Mundialito.Tests.Models
         public void IsOpenSimpleTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(1));
+            game.Date = DateTime.Now.ToUniversalTime();
 
             Assert.IsFalse(game.IsOpen, "Game should not be open");
         }
@@ -21,7 +21,7 @@ namespace Mundialito.Tests.Models
         public void IsOpenSameDateTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Add(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Add(TimeSpan.FromMinutes(35));
             
             Assert.IsTrue(game.IsOpen, "Game should be open");
         }
@@ -30,7 +30,7 @@ namespace Mundialito.Tests.Models
         public void IsOpenNotSameDateTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Subtract(TimeSpan.FromDays(1)).Add(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromDays(1)).Add(TimeSpan.FromMinutes(5));
 
             Assert.IsFalse(game.IsOpen, "Game should not be open");
         }
@@ -39,7 +39,7 @@ namespace Mundialito.Tests.Models
         public void IsOpenNotSameDateTestPastTime()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Add(TimeSpan.FromDays(1)).Subtract(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Add(TimeSpan.FromDays(1)).Subtract(TimeSpan.FromMinutes(5));
             
             Assert.IsTrue(game.IsOpen, "Game shouldb be open");
         }
@@ -93,7 +93,7 @@ namespace Mundialito.Tests.Models
         {
             var game = new Game();
             game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
-            
+
             Assert.AreEqual("Pending Update", game.Mark);
         }
 

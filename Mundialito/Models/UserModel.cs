@@ -16,10 +16,13 @@ namespace Mundialito.Models
             Name = String.Format("{0} {1}", user.FirstName, user.LastName);
             Points = 0;
             Id = user.Id;
+            Email = user.Email;
         }
 
         public String Id { get; private set; }
 
+        public String Email { get; set; }
+        
         public bool IsAdmin { get; set; }
 
         public String Username { get; set; }
@@ -43,12 +46,12 @@ namespace Mundialito.Models
             bets.Add(bet);
             if (bet.IsResolved)
             {
-                Points += int.Parse(bet.Points);
-                if (bet.Points == "5")
+                Points += bet.Points;
+                if (bet.Points == 5)
                 {
                     Results++;
                 }
-                else if (bet.Points == "3")
+                else if (bet.Points == 3)
                 {
                     Marks++;
                 }

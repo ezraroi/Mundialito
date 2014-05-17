@@ -38,7 +38,21 @@ namespace Mundialito.DAL.Bets
         [Range(0, 10)]
         public int AwayScore { get; set; }
 
+        [Required]
+        [StringLength(1)]
+        [RegularExpression("[1X2]")]
+        public String CornersMark { get; set; }
+
+        [Required]
+        [StringLength(1)]
+        [RegularExpression("[1X2]")]
+        public String CardsMark { get; set; }
+
         public int? Points { get; set; }
+        
+        public Boolean CornersWin { get; set; }
+
+        public Boolean CardsWin { get; set; }
 
         public Boolean IsOpenForBetting
         {

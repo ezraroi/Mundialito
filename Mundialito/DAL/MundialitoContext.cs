@@ -6,6 +6,7 @@ using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Bets;
+using Mundialito.DAL.GeneralBets;
 
 namespace Mundialito.DAL
 {
@@ -21,7 +22,8 @@ namespace Mundialito.DAL
         public DbSet<Team> Teams { get; set; }
         public DbSet<Stadium> Stadiums { get; set; }
         public DbSet<Bet> Bets { get; set; }
-
+        public DbSet<GeneralBet> GeneralBets { get; set; }
+        
         public MundialitoContext()
             //: base("DefaultConnection")
             : base(connectionString)
