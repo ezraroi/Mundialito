@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
+using Mundialito.DAL.GeneralBets;
 using Mundialito.Models;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace Mundialito.Logic
     {
         private IBetsRepository betsRepository;
         private IUsersRepository usersRepository;
+        private IGeneralBetsRepository generalBetsRepository;
 
-        public UsersRetriver(IBetsRepository betsRepository, IUsersRepository usersRepository)
+        public UsersRetriver(IBetsRepository betsRepository, IGeneralBetsRepository generalBetsRepository, IUsersRepository usersRepository)
         {
             this.betsRepository = betsRepository;
             this.usersRepository = usersRepository;
+            this.generalBetsRepository = generalBetsRepository;
         }
 
         public UserModel GetUser(String username, bool isLogged)
@@ -32,6 +35,11 @@ namespace Mundialito.Logic
             }
             var userModel = new UserModel(user);
             betsRepository.GetUserBets(user.Id).Where(bet => isLogged || !bet.IsOpenForBetting).ToList().ForEach(bet => userModel.AddBet(new BetViewModel(bet)));
+            var generalBet = generalBetsRepository.GetUserGeneralBet(username);
+            if (generalBet != null)
+            {
+                userModel.SetGeneralBet(new GeneralBetViewModel(generalBet));
+            }
             return userModel;
         }
 
@@ -39,9 +47,11 @@ namespace Mundialito.Logic
         {
             var users = usersRepository.AllUsers().ToDictionary(user => user.Id, user => new UserModel(user));
             betsRepository.GetBets().Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting).ToList().ForEach(bet => users[bet.User.Id].AddBet(new BetViewModel(bet)));
+            generalBetsRepository.GetGeneralBets().ToList().ForEach(generalBet => 
+            {
+                users[generalBet.User.Id].SetGeneralBet(new GeneralBetViewModel(generalBet));
+            });
             return users.Values.ToList();
         }
-
-        
     }
 }

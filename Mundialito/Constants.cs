@@ -9,5 +9,9 @@ namespace Mundialito
     {
 
         public static DateTime GeneralBetsCloseTime = new DateTime(2014, 6, 12, 0, 0, 0);
+        public static String AdminFirstName = "Roi";
+        public static String AdminLastName = "Ezra";
+        public static String AdminEmail = "ezraroi@gmail.com";
     }
 }
+

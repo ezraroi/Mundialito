@@ -79,9 +79,9 @@ namespace Mundialito.DAL
             //Create User=Admin with password=123456
             var user = new MundialitoUser();
             user.UserName = "Admin";
-            user.FirstName = "Mundialito";
-            user.LastName = "Admin";
-            user.Email = "ezraroi@gmail.com";
+            user.FirstName = Constants.AdminFirstName;
+            user.LastName = Constants.AdminLastName;
+            user.Email = Constants.AdminEmail;
             var adminresult = UserManager.Create(user, "123456");
 
             //Add User Admin to Role Admin

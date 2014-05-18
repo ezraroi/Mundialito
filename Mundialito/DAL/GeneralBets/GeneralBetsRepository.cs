@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -15,12 +16,12 @@ namespace Mundialito.DAL.GeneralBets
 
         public IEnumerable<GeneralBet> GetGeneralBets()
         {
-            return Get();
+            return Context.GeneralBets.Include(bet => bet.User).Include(bet => bet.WinningTeam);
         }
 
         public GeneralBet GetUserGeneralBet(string username)
         {
-            return Context.GeneralBets.SingleOrDefault(bet => bet.User.UserName == username);
+            return Context.GeneralBets.Include(bet => bet.User).Include(bet => bet.WinningTeam).SingleOrDefault(bet => bet.User.UserName == username);
         }
 
         public bool IsGeneralBetExists(string userId)
@@ -30,7 +31,7 @@ namespace Mundialito.DAL.GeneralBets
                
         public GeneralBet GetGeneralBet(int betId)
         {
-            return GetByID(betId);
+            return Context.GeneralBets.Include(bet => bet.User).Include(bet => bet.WinningTeam).SingleOrDefault(bet => bet.GeneralBetId == betId);
         }
 
         public GeneralBet InsertGeneralBet(GeneralBet bet)

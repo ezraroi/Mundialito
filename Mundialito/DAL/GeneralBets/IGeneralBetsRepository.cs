@@ -12,7 +12,7 @@ namespace Mundialito.DAL.GeneralBets
 
         GeneralBet GetGeneralBet(int betId);
 
-        GeneralBet GetUserGeneralBet(String userId);
+        GeneralBet GetUserGeneralBet(String username);
 
         bool IsGeneralBetExists(String userId);
 

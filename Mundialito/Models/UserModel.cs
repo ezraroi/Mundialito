@@ -41,22 +41,36 @@ namespace Mundialito.Models
 
         public int YellowCards { get; private set; }
 
+        public GeneralBetViewModel GeneralBet { get; private set; }
+
+        public void SetGeneralBet(GeneralBetViewModel generalBet)
+        {
+            GeneralBet = generalBet;
+            if (generalBet.IsResolved)
+            {
+                Points += generalBet.Points;
+            }
+        }
+
         public void AddBet(BetViewModel bet)
         {
             bets.Add(bet);
             if (bet.IsResolved)
             {
                 Points += bet.Points;
-                if (bet.Points == 5)
+                if (bet.ResultWin)
                 {
                     Results++;
                 }
-                else if (bet.Points == 3)
+                else if (bet.GameMarkWin)
                 {
                     Marks++;
                 }
+                if (bet.CardsWin)
+                    YellowCards++;
+                if (bet.CornersWin)
+                    Corners++;
             }
         }
-        
     }
 }

@@ -67,7 +67,7 @@ namespace Mundialito.Controllers
             Trace.TraceInformation("Deleting user {0} by {1}", id, loggedUserProvider.UserName);
             usersRepository.DeleteUser(id);
             usersRepository.Save();
-            // Should i delete all bets?
+            // TODO - Should i delete all bets?
         }
 
 

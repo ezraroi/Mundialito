@@ -1,7 +1,11 @@
 'use strict';
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'GamesManager','UsersManager', function ($scope, $log, GamesManager, UsersManager) {
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log', 'GamesManager','UsersManager','security', function ($scope, $log, GamesManager, UsersManager, security) {
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
+    });
+
+    UsersManager.hasGeneralBet(security.user.userName).then(function(data) {
+        $scope.hasOpenBet = data;
     });
 
     UsersManager.loadAllUsers().then(function(users) {

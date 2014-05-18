@@ -54,6 +54,19 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
             return deferred.promise;
         },
 
+        hasGeneralBet : function(username) {
+            var deferred = $q.defer();
+            $log.debug('UsersManager: will check if user ' + username + ' has general bets');
+            $http.get('api/generalbets/has-bet/' + username, { tracker: 'hasGeneralBet' })
+                .success(function(answer) {
+                    deferred.resolve(answer);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+            return deferred.promise;
+        },
+
         /* Use this function in order to get instances of all the users */
         loadAllUsers: function() {
             var deferred = $q.defer();

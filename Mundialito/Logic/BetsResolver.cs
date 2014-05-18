@@ -27,9 +27,16 @@ namespace Mundialito.Logic
             {
                 var points = 0;
                 if (bet.Mark == game.Mark)
+                {
                     points += 3;
+                    bet.GameMarkWin = true;
+                }
                 if ((bet.HomeScore == game.HomeScore) && (bet.AwayScore == game.AwayScore))
-                    points +=2 ;
+                {
+                    points += 2;
+                    bet.ResultWin = true;
+                }
+                    
                 if (game.CardsMark == bet.CardsMark)
                 {
                     points += 1;
@@ -41,7 +48,6 @@ namespace Mundialito.Logic
                     bet.CornersWin = true;
                 }
                 bet.Points = points;
-                
                 betsRepository.UpdateBet(bet);
                 Trace.TraceInformation("{0} of {1} got {2} points", bet, game, points);
             }

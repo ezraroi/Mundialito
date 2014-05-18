@@ -264,9 +264,11 @@
     <Compile Include="IoCContainer.cs" />
     <Compile Include="Logic\BetsResolver.cs" />
     <Compile Include="Logic\BetValidator.cs" />
+    <Compile Include="Logic\DateTimeProvider .cs" />
     <Compile Include="Logic\IBetsResolver.cs" />
     <Compile Include="Logic\IBetValidator.cs" />
     <Compile Include="Logic\ILoggedUserProvider.cs" />
+    <Compile Include="Logic\ITimeProvider.cs" />
     <Compile Include="Logic\IUsersRetriver.cs" />
     <Compile Include="Logic\LoggedUserProvider.cs" />
     <Compile Include="Logic\PrivateKeyValidator.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="DAL\Stadiums\Stadium.cs" />
     <Compile Include="DAL\Teams\Team.cs" />
     <Compile Include="Models\BetsModels.cs" />
+    <Compile Include="Models\GeneralBetsModels.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -292,7 +295,6 @@
     <Content Include="App\app.js" />
     <Content Include="App\Bets\Bet.js" />
     <Content Include="App\Bets\BetsManager.js" />
-    <Content Include="App\Bets\BetsService.js" />
     <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />
     <Content Include="App\Dashboard\DashboardCtrl.js" />

@@ -52,6 +52,10 @@ namespace Mundialito.DAL.Bets
         
         public Boolean CornersWin { get; set; }
 
+        public Boolean GameMarkWin { get; set; }
+
+        public Boolean ResultWin { get; set; }
+
         public Boolean CardsWin { get; set; }
 
         public Boolean IsOpenForBetting
