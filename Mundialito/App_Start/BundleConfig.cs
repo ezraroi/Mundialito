@@ -40,6 +40,7 @@ namespace Mundialito
                     .IncludeDirectory("~/App/Dashboard", "*.js")
                     .IncludeDirectory("~/App/Games", "*.js")
                     .IncludeDirectory("~/App/General", "*.js")
+                    .IncludeDirectory("~/App/GeneralBets", "*.js")
                     .IncludeDirectory("~/App/Stadiums", "*.js")
                     .IncludeDirectory("~/App/Teams", "*.js")
                     .IncludeDirectory("~/App/Users", "*.js")
@@ -57,7 +58,7 @@ namespace Mundialito
                       "~/Scripts/promise-tracker.min.js",
                       "~/Scripts/datetimepicker.min.js",
                       "~/Scripts/angular-bootstrap-select.js",
-                      "~/Scripts/facebookPluginDirectives.js",
+                      "~/Scripts/facebookPluginDirectives.min.js",
                       "~/App/Lib/underscore.min.js",
                       "~/App/Lib/d3.min.js",
                       "~/App/Lib/line-chart.min.js",

@@ -97,6 +97,19 @@
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                     </div>
+                    <div class="form-group" ng-class="{'has-error' : cards.$error}">
+                        <label class="col-md-3 control-label" for="cards">Yellow Cards</label>
+                        <div class="col-md-2">
+                            <select id="cards" name="cards" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CardsMark" required placeholder="Game Cards Mark">
+                                <option value="1">1</option>
+                                <option value="X">X</option>
+                                <option value="2">2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of yellow cards, <strong>1</strong> - More yellow cards for {{game.HomeTeam.Name}}, <strong>2</strong> - More yellow cards for {{game.AwayTeam.Name}}</small></span>
+                        </div>
+                    </div>
                     <div class="form-group" ng-class="{'has-error' : corners.$error}">
                         <label class="col-md-3 control-label" for="corners">
                             Corners
@@ -110,19 +123,6 @@
                         </div>
                         <div class="col-md-7">
                             <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of corners, <strong>1</strong> - More corners for {{game.HomeTeam.Name}}, <strong>2</strong> - More corners for {{game.AwayTeam.Name}}</small></span>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-class="{'has-error' : cards.$error}">
-                        <label class="col-md-3 control-label" for="cards">Yellow Cards</label>
-                        <div class="col-md-2">
-                            <select id="cards" name="cards" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CardsMark" required placeholder="Game Cards Mark">
-                                <option value="1">1</option>
-                                <option value="X">X</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of yellow cards, <strong>1</strong> - More yellow cards for {{game.HomeTeam.Name}}, <strong>2</strong> - More yellow cards for {{game.AwayTeam.Name}}</small></span>
                         </div>
                     </div>
                 </form>

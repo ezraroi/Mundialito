@@ -1,0 +1,135 @@
+﻿<h4><i class="fa fa-user"></i> {{profileUser.Name}} Profile</h4>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-info-circle"></i> User Statistics</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-9 control-label">Points</label>
+                        <div class="col-md-1 col-xs-3">
+                            <p class="form-control-static">{{profileUser.Points}}</p>
+                        </div>
+                        <div class="col-md-8 hidden-xs">
+                            <span class="help-block"><small>Total Points</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-9 control-label">Results</label>
+                        <div class="col-md-1 col-xs-3">
+                            <p class="form-control-static">{{profileUser.Results}}</p>
+                        </div>
+                        <div class="col-md-8 hidden-xs">
+                            <span class="help-block"><small>Number of games that the user guessed the game result</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-9 control-label">Game Marks</label>
+                        <div class="col-md-1 col-xs-3">
+                            <p class="form-control-static">{{profileUser.Marks}}</p>
+                        </div>
+                        <div class="col-md-8 hidden-xs">
+                            <span class="help-block"><small>Number of games that the user guessed the gmae mark (1,X,2)</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-9 control-label">Yellow Cards</label>
+                        <div class="col-md-1 col-xs-3">
+                            <p class="form-control-static">{{profileUser.YellowCards}}</p>
+                        </div>
+                        <div class="col-md-8 hidden-xs">
+                            <span class="help-block"><small>Number of games that the user guessed the game yellow cards mark (1,X,2)</small></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-9 control-label">Corners</label>
+                        <div class="col-md-1 col-xs-3">
+                            <p class="form-control-static">{{profileUser.Corners}}</p>
+                        </div>
+                        <div class="col-md-8 hidden-xs">
+                            <span class="help-block"><small>Number of games that the user guessed the game corners mark (1,X,2)</small></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">General Bet</div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" name="generalBetForm" novalidate ng-hide="noGeneralBetWasSubmitted">
+                    <div class="form-group">
+                        <label class="col-md-3 col-xs-6 control-label">Winning Team</label>
+                        <div class="col-md-4 col-xs-6">
+                            <select ui-select2="{allowClear: false}" class="form-control" ng-model="generalBet.WinningTeamId" ng-readonly="isGeneralBetReadOnly()" required>
+                                <option ng-repeat="team in teams" value="{{team.TeamId}}">{{team.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="goldenBootPlayer" class="col-md-3 col-xs-6 control-label">Golden Boot Player</label>
+                        <div class="col-md-4 col-xs-6">
+                            <input name="goldenBootPlayer" id="goldenBootPlayer" ng-model="generalBet.GoldenBootPlayer" type="text" class="form-control" placeholder="Golden Boot Player" required ng-readonly="isGeneralBetReadOnly()">
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary" ng-click="saveGeneralBet()" ng-disabled="generalBetForm.$invalid" ng-if="!isGeneralBetReadOnly()" tabindex="100"><i class="fa fa-floppy-o"></i> Save</button>
+                    </div>
+                </form>
+                <div ng-if="noGeneralBetWasSubmitted" class="text-info">
+                    <i class="fa fa-info-circle"></i> No general bet was submitted
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">Game Bets</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="list-group" ng-show="userGameBets.length > 0">
+                            <a href="{{userBet.getGameUrl()}}" class="list-group-item" ng-repeat="userBet in userGameBets">
+                                <div class="row">
+                                    <div class="col-md-2 col-xs-1">
+                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
+                                    </div>
+                                    <div class="col-md-2 col-xs-3">
+                                        <div class="text-center">
+                                            <b>{{userBet.HomeScore}} - {{userBet.AwayScore}}</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-xs-1">
+                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2">
+                                        <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> <b>{{userBet.CardsMark}}</b>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2">
+                                        <i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> <b>{{userBet.CornersMark}}</b>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2" ng-if="userBet.IsResolved">
+                                        <i class="fa fa-legal" tooltip="Points"></i> <b>{{userBet.Points}}</b>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2" ng-if="!userBet.IsResolved">
+                                        <i class="fa fa-clock-o" tooltip="Not resolved yet"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div ng-show="userGameBets.length == 0" class="text-info">
+                            <i class="fa fa-info-circle"></i> User didn't bet on any game yet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

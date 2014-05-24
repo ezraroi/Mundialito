@@ -298,11 +298,15 @@
     <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />
     <Content Include="App\Dashboard\DashboardCtrl.js" />
+    <Content Include="App\GeneralBets\GeneralBet.js" />
+    <Content Include="App\GeneralBets\GeneralBetsManager.js" />
     <Content Include="App\Lib\angular-select2.js" />
     <Content Include="App\Lib\select2.js" />
-    <Content Include="App\Users\ManageUsers.html" />
-    <Content Include="App\Users\ManageUsersCtrl.js" />
+    <Content Include="App\Users\ManageApp.html" />
+    <Content Include="App\Users\ManageAppCtrl.js" />
     <Content Include="App\Users\User.js" />
+    <Content Include="App\Users\UserProfile.html" />
+    <Content Include="App\Users\UserProfileCtrl.js" />
     <Content Include="App\Users\UsersManager.js" />
     <Content Include="App\Games\Game.html" />
     <Content Include="App\Games\Game.js" />
@@ -513,7 +517,6 @@
     </Content>
     <Content Include="App\General\activeNavDirective.js" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
-    <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
@@ -522,16 +525,11 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\facebookPluginDirectives.min.js">
-      <DependentUpon>facebookPluginDirectives.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\facebookPluginDirectives.min.js.map">
-      <DependentUpon>facebookPluginDirectives.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\angular-spa-security.min.js.map">
       <DependentUpon>angular-spa-security.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Scripts\facebookPluginDirectives.min.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />

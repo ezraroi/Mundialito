@@ -24,6 +24,11 @@ namespace Mundialito.Logic
             }
         }
 
+        public static String GeneratePrivateKey(String email)
+        {
+            return string.Format("{0}-{1}", Guid.NewGuid(), GetChecksum(email));
+        }
+
         private static int GetChecksum(String email)
         {
             int sum = 0;

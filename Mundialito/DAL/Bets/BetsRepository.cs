@@ -22,14 +22,14 @@ namespace Mundialito.DAL.Bets
             return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam);
         }
 
-        public IEnumerable<Bet> GetUserBets(string userId)
+        public IEnumerable<Bet> GetUserBets(string username)
         {
-            return Context.Bets.Where(bet => bet.User.Id == userId).Include(bet => bet.User).Include(bet => bet.Game);
+            return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam).Where(bet => bet.User.UserName == username);
         }
 
         public IEnumerable<Bet> GetGameBets(int gameId)
         {
-            return Context.Bets.Where(bet => bet.Game.GameId == gameId).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam);
+            return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam).Where(bet => bet.Game.GameId == gameId);
         }
 
         public Bet GetBet(int betId)

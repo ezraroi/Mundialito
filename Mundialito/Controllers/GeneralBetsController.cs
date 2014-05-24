@@ -47,12 +47,18 @@ namespace Mundialito.Controllers
             return generalBetsRepository.GetGeneralBets().Select( bet => new GeneralBetViewModel(bet));
         }
 
-
         [Route("has-bet/{username}")]
         [HttpGet]
         public Boolean HasBet(string username)
         {
             return generalBetsRepository.IsGeneralBetExists(username);
+        }
+
+        [Route("CanSubmitBets")]
+        [HttpGet]
+        public Boolean CanSubmitBets()
+        {
+            return DateTime.UtcNow < Constants.GeneralBetsCloseTime;
         }
 
         [Route("user/{username}")]
@@ -84,9 +90,8 @@ namespace Mundialito.Controllers
             var generalBet = new GeneralBet();
             generalBet.User = new MundialitoUser();
             generalBet.User.Id = userProivider.UserId;
-            generalBet.WinningTeam = new Team();
-            generalBet.WinningTeam.TeamId = newBet.TeamId;
-            generalBet.GoldBootPlayer = newBet.Player;
+            generalBet.WinningTeamId = newBet.WinningTeamId;
+            generalBet.GoldBootPlayer = newBet.GoldenBootPlayer;
             var res = generalBetsRepository.InsertGeneralBet(generalBet);
             Trace.TraceInformation("Posting new General Bet: {0}", generalBet);
             generalBetsRepository.Save();
@@ -103,9 +108,10 @@ namespace Mundialito.Controllers
                 throw new ArgumentException("General bets are already closed for betting");
             var betToUpdate = new GeneralBet();
             betToUpdate.GeneralBetId = id;
-            betToUpdate.WinningTeam = new Team();
-            betToUpdate.WinningTeam.TeamId = bet.TeamId;
-            betToUpdate.GoldBootPlayer = bet.Player;
+            betToUpdate.WinningTeamId = bet.WinningTeamId;
+            betToUpdate.GoldBootPlayer = bet.GoldenBootPlayer;
+            betToUpdate.User = new MundialitoUser();
+            betToUpdate.User.Id = userProivider.UserId;
             generalBetsRepository.UpdateGeneralBet(betToUpdate);
             generalBetsRepository.Save();
             Trace.TraceInformation("Updating General Bet: {0}", betToUpdate);

@@ -1,6 +1,8 @@
 'use strict';
-angular.module('mundialitoApp').controller('ManageUsersCtrl', ['$scope', '$log', 'Alert', 'users', function ($scope, $log, Alert, users) {
+angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', 'Alert', 'users','generalBets','UsersManager', function ($scope, $log, Alert, users, generalBets, UsersManager) {
     $scope.users = users;
+    $scope.generalBets = generalBets;
+    $scope.privateKey = {};
 
     $scope.deleteUser = function(user) {
         var scope = user;
@@ -10,6 +12,14 @@ angular.module('mundialitoApp').controller('ManageUsersCtrl', ['$scope', '$log',
                 $scope.users.splice($scope.users.indexOf(scope), 1);
             })
         }
+    };
+
+    $scope.generateKey = function() {
+        $scope.privateKey.key = '';
+        UsersManager.generatePrivateKey($scope.privateKey.email).then(function(data) {
+            $log.debug('ManageAppCtrl: got private key ' + data);
+            $scope.privateKey.key = data;
+        });
     };
 
     $scope.makeAdmin = function(user) {

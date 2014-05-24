@@ -54,10 +54,10 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
             return deferred.promise;
         },
 
-        hasGeneralBet : function(username) {
+        generatePrivateKey : function(email) {
             var deferred = $q.defer();
-            $log.debug('UsersManager: will check if user ' + username + ' has general bets');
-            $http.get('api/generalbets/has-bet/' + username, { tracker: 'hasGeneralBet' })
+            $log.debug('UsersManager: will generate private key for ' + email);
+            $http.get('api/users/generateprivatekey/' + encodeURIComponent(email) + '/', { tracker: 'generatePrivateKey' })
                 .success(function(answer) {
                     deferred.resolve(answer);
                 })

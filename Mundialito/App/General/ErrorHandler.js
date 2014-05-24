@@ -23,7 +23,7 @@ angular.module('mundialitoApp').factory('ErrorHandler', ['$rootScope', '$log' , 
         if (data.error_description) {
             message.push(data.error_description);
         }
-        if (message === '') {
+        if (message.length === 0) {
             message.push("<strong>General Error</strong>")
             message.push("Looks like the server is down, please try again in few minutes")
         }

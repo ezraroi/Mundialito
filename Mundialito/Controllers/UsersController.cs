@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace Mundialito.Controllers
@@ -49,6 +50,18 @@ namespace Mundialito.Controllers
         public UserModel GetMe()
         {
             return GetUserByUsername(loggedUserProvider.UserName);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("GeneratePrivateKey/{email}")]
+        public HttpResponseMessage GeneratePrivateKey(string email)
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(PrivateKeyValidator.GeneratePrivateKey(email), Encoding.UTF8, "application/json")
+            };
+            return response;
         }
 
         [HttpPost]

@@ -34,7 +34,7 @@ namespace Mundialito.Logic
                 throw new ObjectNotFoundException(string.Format("No such user '{0}'", username));
             }
             var userModel = new UserModel(user);
-            betsRepository.GetUserBets(user.Id).Where(bet => isLogged || !bet.IsOpenForBetting).ToList().ForEach(bet => userModel.AddBet(new BetViewModel(bet)));
+            betsRepository.GetUserBets(user.UserName).Where(bet => isLogged || !bet.IsOpenForBetting).ToList().ForEach(bet => userModel.AddBet(new BetViewModel(bet)));
             var generalBet = generalBetsRepository.GetUserGeneralBet(username);
             if (generalBet != null)
             {

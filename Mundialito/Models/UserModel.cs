@@ -8,7 +8,7 @@ namespace Mundialito.Models
 {
     public class UserModel
     {
-        private List<BetViewModel> bets = new List<BetViewModel>();
+        //private List<BetViewModel> bets = new List<BetViewModel>();
         
         public UserModel(MundialitoUser user)
         {
@@ -31,8 +31,6 @@ namespace Mundialito.Models
 
         public int Points { get; set; }
 
-        public List<BetViewModel> Bets { get { return bets; } }
-
         public int Results { get; private set; }
 
         public int Marks { get; private set; }
@@ -41,11 +39,8 @@ namespace Mundialito.Models
 
         public int YellowCards { get; private set; }
 
-        public GeneralBetViewModel GeneralBet { get; private set; }
-
         public void SetGeneralBet(GeneralBetViewModel generalBet)
         {
-            GeneralBet = generalBet;
             if (generalBet.IsResolved)
             {
                 Points += generalBet.Points;
@@ -54,7 +49,6 @@ namespace Mundialito.Models
 
         public void AddBet(BetViewModel bet)
         {
-            bets.Add(bet);
             if (bet.IsResolved)
             {
                 Points += bet.Points;

@@ -25,6 +25,8 @@ namespace Mundialito.Models
             AwayScore = bet.AwayScore;
             CornersWin = bet.CornersWin;
             CardsWin = bet.CardsWin;
+            CornersMark = bet.CornersMark;
+            CardsMark = bet.CardsMark;
             GameMarkWin = bet.GameMarkWin;
             ResultWin = bet.ResultWin;
             IsOpenForBetting = bet.IsOpenForBetting;
@@ -39,6 +41,10 @@ namespace Mundialito.Models
         public int HomeScore { get; set; }
 
         public int AwayScore { get; set; }
+
+        public String CornersMark { get; set; }
+
+        public String CardsMark { get; set; }
 
         public Boolean CornersWin { get; set; }
 

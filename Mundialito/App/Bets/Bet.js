@@ -15,6 +15,9 @@ angular.module('mundialitoApp').factory('Bet', ['$http','$log', function($http,$
             $log.debug('Bet: Will update bet ' + this.BetId)
             return $http.put('api/bets/' + this.BetId, this, { tracker: 'updateBet' });
         },
+        getGameUrl: function() {
+            return '/games/' + this.Game.GameId;
+        },
         getClass: function() {
             if (this.Points === 7) {
                 return 'success';

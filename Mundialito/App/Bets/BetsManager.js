@@ -90,6 +90,26 @@ angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet','$l
             return deferred.promise;
         },
 
+        getUserBets : function(username) {
+            var deferred = $q.defer();
+            var scope = this;
+            $log.debug('BetsManager: will fetch user ' + username +' bets from server');
+            $http.get('api/bets/user/' + username, { tracker: 'getUserBets' })
+                .success(function(betsArray) {
+                    var bets = [];
+                    betsArray.forEach(function(betData) {
+                        var bet = scope._retrieveInstance(betData.BetId, betData);
+                        bets.push(bet);
+                    });
+
+                    deferred.resolve(bets);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+            return deferred.promise;
+        },
+
         getUserBetOnGame : function(gameId) {
             var deferred = $q.defer();
             var scope = this;
@@ -109,7 +129,7 @@ angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet','$l
             return deferred.promise;
         },
 
-        /*  This function is useful when we got somehow the bet data and we wish to store it or update the pool and get a game instance in return */
+        /*  This function is useful when we got somehow the bet data and we wish to store it or update the pool and get a general bet instance in return */
         setBet: function(betData) {
             $log.debug('BetsManager: will set bet ' + betData.BetId + ' to -' + angular.toJson(betData));
             var scope = this;

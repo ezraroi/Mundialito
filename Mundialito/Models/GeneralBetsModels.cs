@@ -12,19 +12,17 @@ namespace Mundialito.Models
         public GeneralBetViewModel(GeneralBet bet)
         {
             GeneralBetId = bet.GeneralBetId;
-            WinningTeam = bet.WinningTeam.Name;
-            WinningTeamId = bet.WinningTeam.TeamId;
+            WinningTeamId = bet.WinningTeamId;
             GoldenBootPlayer = bet.GoldBootPlayer;
             IsResolved = bet.IsResolved;
             if (IsResolved)
             {
                 Points = bet.PlayerPoints.Value + bet.TeamPoints.Value;
             }
+            CloseTime = Constants.GeneralBetsCloseTime;
         }
 
         public int GeneralBetId { get; set; }
-
-        public String WinningTeam { get; set; }
 
         public int  WinningTeamId { get; set; }
 
@@ -32,23 +30,32 @@ namespace Mundialito.Models
 
         public Boolean IsResolved { get; set; }
 
+        public Boolean IsClosed
+        {
+            get
+            {
+                return DateTime.UtcNow > Constants.GeneralBetsCloseTime;
+            }
+        }
         public int Points { get; set; }
+
+        public DateTime CloseTime { get; set; }
     }
 
     public class NewGeneralBetModel
     {
-        public int TeamId { get; set; }
+        public int WinningTeamId { get; set; }
 
-        public string Player { get; set; }
+        public string GoldenBootPlayer { get; set; }
 
         public int GenrealBetId { get; set; }
     }
 
     public class UpdateGenralBetModel
     {
-        public int TeamId { get; set; }
+        public int WinningTeamId { get; set; }
 
-        public string Player { get; set; }
+        public string GoldenBootPlayer { get; set; }
     }
 
     public class ResolveGeneralBetModel

@@ -3,6 +3,7 @@ using Mundialito.DAL.Teams;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -28,8 +29,10 @@ namespace Mundialito.DAL.GeneralBets
         [Required]
         public MundialitoUser User { get; set; }
 
+        //public virtual Team WinningTeam { get; set; }
+
         [Required]
-        public Team WinningTeam { get; set; }
+        public int WinningTeamId { get; set; }
 
         [Required]
         public String GoldBootPlayer { get; set; }

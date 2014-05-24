@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mundialitoApp')    .controller('StadiumCtrl', ['$scope', '$log', 'StadiumsManager', 'stadium', 'Alert', function ($scope, $log, StadiumsManager, stadium, Alert) {
+angular.module('mundialitoApp').controller('StadiumCtrl', ['$scope', '$log', 'StadiumsManager', 'stadium', 'Alert', function ($scope, $log, StadiumsManager, stadium, Alert) {
     $scope.stadium = stadium;
     $scope.showEditForm = false;
 

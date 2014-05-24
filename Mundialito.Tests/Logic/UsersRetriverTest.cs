@@ -51,8 +51,7 @@ namespace Mundialito.Tests.Logic
 
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
             var user = usersRetriver.GetUser("1", false);
-            Assert.AreEqual(1, user.Bets.Count);
-            Assert.IsFalse(user.Bets[0].IsOpenForBetting);
+            Assert.AreEqual(5, user.Points);
         }
 
         [TestMethod]
@@ -73,7 +72,7 @@ namespace Mundialito.Tests.Logic
 
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
             var user = usersRetriver.GetUser("1", true);
-            Assert.AreEqual(2, user.Bets.Count);
+            Assert.AreEqual(5, user.Points);
         }
 
         [TestMethod]
@@ -118,16 +117,14 @@ namespace Mundialito.Tests.Logic
 
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
             List<GeneralBet> generalBets = new List<GeneralBet>();
-            generalBets.Add(new GeneralBet() { User = user1, IsResolved = true, PlayerPoints = 12, TeamPoints = 0 , WinningTeam = new Team() { TeamId = 1, Name =  "A"}});
-            generalBets.Add(new GeneralBet() { User = user2, IsResolved = false, WinningTeam = new Team() { TeamId = 1, Name = "A" } });
-            generalBets.Add(new GeneralBet() { User = user3, IsResolved = true, PlayerPoints = 12, TeamPoints = 12, WinningTeam = new Team() { TeamId = 2, Name = "B" } });
+            generalBets.Add(new GeneralBet() { User = user1, IsResolved = true, PlayerPoints = 12, TeamPoints = 0, WinningTeamId = 1 });
+            generalBets.Add(new GeneralBet() { User = user2, IsResolved = false, WinningTeamId = 1 });
+            generalBets.Add(new GeneralBet() { User = user3, IsResolved = true, PlayerPoints = 12, TeamPoints = 12, WinningTeamId = 2 });
             generalBetsRepository.Setup(rep => rep.GetGeneralBets()).Returns(generalBets);
 
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
             var res = usersRetriver.GetAllUsers();
             Assert.AreEqual(3, res.Count);
-            Assert.AreEqual(1, res[0].Bets.Count);
-            Assert.AreEqual(1, res[1].Bets.Count);
             Assert.AreEqual(17, res[0].Points);
             Assert.AreEqual(0, res[1].Points);
             Assert.AreEqual(24, res[2].Points);

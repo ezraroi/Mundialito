@@ -56,7 +56,16 @@ namespace Mundialito.Controllers
 
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Bet with id '{0}' not found", id));
+
             return new BetViewModel(item);
+        }
+
+        [HttpGet]
+        [Route("user/{username}")]
+        public IEnumerable<BetViewModel> GetUserBets(string username)
+        {
+            var bets = betsRepository.GetUserBets(username);
+            return bets.Where(bet => !bet.IsOpenForBetting || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
         }
 
         [HttpPost]

@@ -11,12 +11,35 @@
                 templateUrl: 'App/Dashboard/Dashboard.html',
                 controller: 'DashboardCtrl'
             }).
+            when('/users/:username', {
+                templateUrl: 'App/Users/UserProfile.html',
+                controller: 'UserProfileCtrl',
+                resolve : {
+                    profileUser: ['$route', 'UsersManager', function ($route, UsersManager) {
+                        var username = $route.current.params.username;
+                        return UsersManager.getUser(username, true);
+                    }],
+                    userGameBets : ['$route', 'BetsManager', function ($route, BetsManager) {
+                        var username = $route.current.params.username;
+                        return BetsManager.getUserBets(username);
+                    }],
+                    teams : ['TeamsManager', function ( TeamsManager) {
+                        return TeamsManager.loadAllTeams();
+                    }],
+                    generalBetsAreOpen : ['GeneralBetsManager', function (GeneralBetsManager) {
+                        return GeneralBetsManager.canSubmtiGeneralBet();
+                    }]
+                }
+            }).
             when('/manage_users', {
-                templateUrl: 'App/Users/ManageUsers.html',
-                controller: 'ManageUsersCtrl',
+                templateUrl: 'App/Users/ManageApp.html',
+                controller: 'ManageAppCtrl',
                 resolve: {
                     users : ['UsersManager', function (UsersManager) {
                         return UsersManager.loadAllUsers();
+                    }],
+                    generalBets: ['GeneralBetsManager' , function (GeneralBetsManager) {
+                        return GeneralBetsManager.loadAllGeneralBets();
                     }]
                 }
             }).

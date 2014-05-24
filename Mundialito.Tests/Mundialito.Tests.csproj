@@ -78,6 +78,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GamesControllerUnitTest.cs" />
     <Compile Include="Controllers\GeneralBetsControllerUnitTest.cs" />
     <Compile Include="Controllers\TeamsControllerUnitTest.cs" />
     <Compile Include="Controllers\BetsControllerUnitTest.cs" />
