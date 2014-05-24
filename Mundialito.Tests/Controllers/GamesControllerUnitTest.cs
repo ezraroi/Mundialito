@@ -7,6 +7,7 @@ using Mundialito.DAL.Teams;
 using Mundialito.Logic;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,32 @@ namespace Mundialito.Tests.Controllers
             var betsResolver = new Mock<IBetsResolver>();
             var openGame = CreateOpenGame(1);
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
+
+            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object);
+            var res = controller.GetGameBets(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
+        public void GetNonExistingGameBetsTest()
+        {
+            var gamesRepository = new Mock<IGamesRepository>();
+            var betsRepository = new Mock<IBetsRepository>();
+            var betsResolver = new Mock<IBetsResolver>();
+            gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
+
+            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object);
+            var res = controller.GetGameBets(1);
+        }
+
+        [TestMethod]
+        public void GetClosedGameBetsTest()
+        {
+            var gamesRepository = new Mock<IGamesRepository>();
+            var betsRepository = new Mock<IBetsRepository>();
+            var betsResolver = new Mock<IBetsResolver>();
+            var closedGame = CreateClosedGame(1);
+            gamesRepository.Setup(rep => rep.GetGame(1)).Returns(closedGame);
 
             var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object);
             var res = controller.GetGameBets(1);
