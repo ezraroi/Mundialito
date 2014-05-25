@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Mundialito.Controllers;
+using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
@@ -55,9 +56,13 @@ namespace Mundialito.Tests.Controllers
             var betsResolver = new Mock<IBetsResolver>();
             var closedGame = CreateClosedGame(1);
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(closedGame);
+            List<Bet> bets = new List<Bet>();
+            bets.Add(new Bet() { BetId = 1, Game = closedGame, User = new MundialitoUser() { FirstName = "A", LastName = "B", UserName = "User" } });
+            betsRepository.Setup(rep => rep.GetGameBets(1)).Returns(bets);
 
             var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object);
             var res = controller.GetGameBets(1);
+            Assert.AreEqual(1, res.Count());
         }
 
         private Game CreateOpenGame(int id)

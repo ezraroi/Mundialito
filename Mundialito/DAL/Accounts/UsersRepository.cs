@@ -8,7 +8,8 @@ namespace Mundialito.DAL.Accounts
 {
     public class UsersRepository : GenericRepository<MundialitoUser>, IUsersRepository
     {
-        public UsersRepository(MundialitoContext context)  : base(context)
+        public UsersRepository()
+            : base(new MundialitoContext())
         {
             
         }

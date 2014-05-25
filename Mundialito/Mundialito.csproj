@@ -244,6 +244,7 @@
     <Compile Include="DAL\Accounts\UsersRepository.cs" />
     <Compile Include="DAL\Bets\BetsRepository.cs" />
     <Compile Include="DAL\Bets\IBetsRepository.cs" />
+    <Compile Include="DAL\DataBaseConnectionProvider.cs" />
     <Compile Include="DAL\Games\GamesRepository.cs" />
     <Compile Include="DAL\Games\IGamesRepository.cs" />
     <Compile Include="DAL\GeneralBets\GeneralBet.cs" />
@@ -341,7 +342,7 @@
     <Content Include="App\Teams\TeamsCtrl.js" />
     <Content Include="App\General\accessLevel.js" />
     <Content Include="App\General\confirmPassword.js" />
-    <Content Include="App\General\mundialitoDirectives.js" />
+    <Content Include="App\General\mundialitoToggleTextDirective.js" />
     <Content Include="App\General\Alert.js" />
     <Content Include="App\General\ErrorHandler.js" />
     <Content Include="App\Teams\TeamsManager.js" />

@@ -78,6 +78,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptenceTests\AcceptenceTests.cs" />
     <Compile Include="Controllers\GamesControllerUnitTest.cs" />
     <Compile Include="Controllers\GeneralBetsControllerUnitTest.cs" />
     <Compile Include="Controllers\TeamsControllerUnitTest.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Logic\BetValidatorUnitTest.cs" />
     <Compile Include="Logic\UsersRetriverTest.cs" />
     <Compile Include="Models\GameUnitTest.cs" />
+    <Compile Include="MundialitoTestContextInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

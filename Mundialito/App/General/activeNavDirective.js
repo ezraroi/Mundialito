@@ -15,6 +15,5 @@ angular.module('mundialitoApp').directive('activeNav', ['$location', function ($
                 }
             });
         }
-
     };
 }]);

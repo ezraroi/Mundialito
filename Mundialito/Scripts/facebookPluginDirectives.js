@@ -4,7 +4,7 @@
     module = angular.module('FacebookPluginDirectives', []);
 
     createDirective = function (name) {
-        return module.directive(name, function ($location) {
+        return module.directive(name, ['$location',function ($location) {
             return {
                 restrict: 'C',
                 link: function (scope, element, attributes) {
@@ -12,7 +12,7 @@
                     return typeof FB !== "undefined" && FB !== null ? FB.XFBML.parse(element.parent()[0]) : void 0;
                 }
             };
-        });
+        }]);
     };
 
     _ref = ['fbActivity', 'fbComments', 'fbFacepile', 'fbLike', 'fbLikeBox', 'fbLiveStream', 'fbLoginButton', 'fbName', 'fbProfilePic', 'fbRecommendations'];
