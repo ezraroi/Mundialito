@@ -16,7 +16,7 @@ namespace Mundialito.DAL
 
         public static string GetConnection()
         {
-            return String.IsNullOrEmpty(manualConnetionString) ?  "DbConnection" : manualConnetionString;
+            return String.IsNullOrEmpty(manualConnetionString) ? "name=DefaultConnection" : manualConnetionString;
         }
     }
 }
