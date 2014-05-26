@@ -10,8 +10,8 @@ namespace Mundialito
     public class TournamentTimesUtils
     {
 
-        private static DateTime generalBetsCloseTime = DateTime.Parse(ConfigurationManager.AppSettings["TournamentStartDate"]).Subtract(TimeSpan.FromDays(1)).ToUniversalTime();
-        private static DateTime generalBetsResolveTime = DateTime.Parse(ConfigurationManager.AppSettings["TournamentEndDate"]).ToUniversalTime();
+        private static DateTime generalBetsCloseTime = DateTime.Parse(WebConfigurationManager.AppSettings["TournamentStartDate"]).Subtract(TimeSpan.FromDays(1)).ToUniversalTime();
+        private static DateTime generalBetsResolveTime = DateTime.Parse(WebConfigurationManager.AppSettings["TournamentEndDate"]).ToUniversalTime();
 
 
         public static DateTime GeneralBetsCloseTime 

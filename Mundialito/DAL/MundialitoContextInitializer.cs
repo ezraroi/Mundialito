@@ -80,10 +80,10 @@ namespace Mundialito.DAL
 
             //Create User=Admin with password=123456
             var user = new MundialitoUser();
-            user.UserName = ConfigurationManager.AppSettings["AdminUserName"];
-            user.FirstName = ConfigurationManager.AppSettings["AdminFirstName"];
-            user.LastName = ConfigurationManager.AppSettings["AdminLastName"];
-            user.Email = ConfigurationManager.AppSettings["AdminEmail"];
+            user.UserName = WebConfigurationManager.AppSettings["AdminUserName"];
+            user.FirstName = WebConfigurationManager.AppSettings["AdminFirstName"];
+            user.LastName = WebConfigurationManager.AppSettings["AdminLastName"];
+            user.Email = WebConfigurationManager.AppSettings["AdminEmail"];
             var adminresult = UserManager.Create(user, "123456");
 
             //Add User Admin to Role Admin
