@@ -49,7 +49,7 @@ namespace Mundialito.Controllers
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            MundialitoUser user = UserManager.FindByName(User.Identity.Name);// FindById(User.Identity.GetUserId());
+            MundialitoUser user = UserManager.FindById(User.Identity.GetUserId());
 
             if (user == null)
                 throw new Exception("Session expired. Please login again");

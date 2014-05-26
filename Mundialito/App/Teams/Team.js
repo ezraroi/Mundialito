@@ -11,8 +11,10 @@ angular.module('mundialitoApp').factory('Team', ['$http','$log', function($http,
             angular.extend(this, teamData);
         },
         delete: function() {
-            $log.debug('Team: Will delete team ' + this.TeamId)
-            return $http.delete("api/teams/" + this.TeamId, { tracker: 'deleteTeam'});
+            if (confirm('Are you sure you would like to delete team ' + this.Name)) {
+                $log.debug('Team: Will delete team ' + this.TeamId)
+                return $http.delete("api/teams/" + this.TeamId, { tracker: 'deleteTeam'});
+            }
         },
         update: function() {
             $log.debug('Team: Will update game ' + this.TeamId)

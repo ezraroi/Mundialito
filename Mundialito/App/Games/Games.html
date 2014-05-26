@@ -72,25 +72,45 @@
             <div class="panel-body">
                 <div class="row" ng-repeat="updatedGame in games | filter:isPendingUpdate()">
                     <div class="col-md-12">
-                        <form class="form-horizontal" novalidate name="updateGame_{{updatedGame.GameId}}">
+                        <ng-form class="form-horizontal" novalidate name="updateGame_{{updatedGame.GameId}}">
                             <div class="form-group">
-                                <label class="col-md-3 control-label" for="{{updatedGame.HomeTeam.TeamId}}">
-                                    <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}</div>
+                                <label class="col-md-2 control-label" for="HomeScore_{{updatedGame.HomeTeam.TeamId}}">
+                                    <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
                                 </label>
-                                <div class="col-md-2">
-                                    <input id="{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
+                                <div class="col-md-1">
+                                    <input id="HomeScore_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeScore" class="form-control" required min="0">
                                 </div>
-                                <label class="col-md-3 control-label" for="{{updatedGame.AwayTeam.TeamId}}">
-                                    <div class="text-center"><i ng-class="['flagsp','flagsp_{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}</div>
+                                <label class="col-md-2 control-label" for="AwayScore_{{updatedGame.AwayTeam.TeamId}}">
+                                    <i ng-class="['flagsp','flagsp_{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}
                                 </label>
-                                <div class="col-md-2">
-                                    <input id="{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" placeholder="Away Team Score" required min="0">
+                                <div class="col-md-1">
+                                    <input id="AwayScore_{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" required min="0">
+                                </div>
+                                <label class="col-md-1 control-label" for="Cards_{{updatedGame.AwayTeam.TeamId}}">
+                                    <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i>
+                                </label>
+                                <div class="col-md-1">
+                                    <select id="Cards_{{updatedGame.AwayTeam.TeamId}}" name="Cards_{{updatedGame.AwayTeam.TeamId}}" ui-select2="{allowClear: false}" class="form-control" ng-model="updatedGame.CardsMark" required placeholder="Game Corners Mark">
+                                        <option value="1">1</option>
+                                        <option value="X">X</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <label class="col-md-1 control-label" for="Corners_{{updatedGame.AwayTeam.TeamId}}">
+                                    <i class="fa fa-arrows-alt" tooltip="Corners Mark"></i>
+                                </label>
+                                <div class="col-md-1">
+                                    <select id="Corners_{{updatedGame.AwayTeam.TeamId}}" name="Corners_{{updatedGame.AwayTeam.TeamId}}" ui-select2="{allowClear: false}" class="form-control" ng-model="updatedGame.CornersMark" required placeholder="Game Corners Mark">
+                                        <option value="1">1</option>
+                                        <option value="X">X</option>
+                                        <option value="2">2</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" ng-click="updateGame(updatedGame)" game="updatedGame" class="btn btn-success btn-block" ng-disabled="updateGame_{{updatedGame.GameId}}.$invalid"><i class="fa fa-save"></i></button>
                                 </div>
                             </div>
-                        </form>
+                        </ng-form>
                     </div>
                 </div>
             </div>

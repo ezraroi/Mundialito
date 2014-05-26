@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 
 namespace Mundialito.Models
 {
@@ -16,27 +17,24 @@ namespace Mundialito.Models
             GoldenBootPlayer = bet.GoldBootPlayer;
             IsResolved = bet.IsResolved;
             if (IsResolved)
-            {
                 Points = bet.PlayerPoints.Value + bet.TeamPoints.Value;
-            }
-            CloseTime = Constants.GeneralBetsCloseTime;
+            CloseTime = TournamentTimesUtils.GeneralBetsCloseTime;
+            OwnerName = string.Format("{0} {1}", bet.User.FirstName, bet.User.LastName);
+            IsClosed = DateTime.UtcNow > CloseTime;
         }
 
         public int GeneralBetId { get; set; }
 
-        public int  WinningTeamId { get; set; }
+        public int WinningTeamId { get; set; }
+
+        public String OwnerName { get; private set; }
 
         public String GoldenBootPlayer { get; set; }
 
         public Boolean IsResolved { get; set; }
 
-        public Boolean IsClosed
-        {
-            get
-            {
-                return DateTime.UtcNow > Constants.GeneralBetsCloseTime;
-            }
-        }
+        public Boolean IsClosed { get; private set; }
+       
         public int Points { get; set; }
 
         public DateTime CloseTime { get; set; }

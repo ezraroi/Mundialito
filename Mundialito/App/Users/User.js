@@ -15,8 +15,10 @@ angular.module('mundialitoApp').factory('User', ['$http','$log', function($http,
             return '/users/' + this.Username;
         },
         delete: function() {
-            $log.debug('User: Will delete user ' + this.Username)
-            return $http.delete("api/users/" + this.Id, { tracker: 'deleteUser' });
+            if (confirm('Are you sure you would like to delete user ' + this.Username)) {
+                $log.debug('User: Will delete user ' + this.Username)
+                return $http.delete("api/users/" + this.Id, { tracker: 'deleteUser' });
+            }
         },
         makeAdmin :function() {
             $log.debug('User: Will make user ' + this.Username + ' admin')

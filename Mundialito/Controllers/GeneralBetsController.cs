@@ -58,7 +58,7 @@ namespace Mundialito.Controllers
         [HttpGet]
         public Boolean CanSubmitBets()
         {
-            return DateTime.UtcNow < Constants.GeneralBetsCloseTime;
+            return DateTime.UtcNow < TournamentTimesUtils.GeneralBetsCloseTime;
         }
 
         [Route("user/{username}")]
@@ -99,12 +99,10 @@ namespace Mundialito.Controllers
             return newBet;
         }
 
-        
-
         [HttpPut]
         public UpdateGenralBetModel UpdateBet(int id, UpdateGenralBetModel bet)
         {
-            if (dateTimeProvider.UTCNow > Constants.GeneralBetsCloseTime)
+            if (dateTimeProvider.UTCNow > TournamentTimesUtils.GeneralBetsCloseTime)
                 throw new ArgumentException("General bets are already closed for betting");
             var betToUpdate = new GeneralBet();
             betToUpdate.GeneralBetId = id;
@@ -124,7 +122,7 @@ namespace Mundialito.Controllers
         public void ResolveGeneralBet(int id, ResolveGeneralBetModel resolvedBet)
         {
             Trace.TraceInformation("Resolved General Bet '{0}' with data: {1}", id, resolvedBet);
-            if (dateTimeProvider.UTCNow < Constants.GeneralBetsCloseTime)
+            if (dateTimeProvider.UTCNow < TournamentTimesUtils.GeneralBetsResolveTime)
                 throw new ArgumentException("General bets are not closed for betting yet");
 
             var item = generalBetsRepository.GetGeneralBet(id);
@@ -139,7 +137,7 @@ namespace Mundialito.Controllers
         {
             if (generalBetsRepository.IsGeneralBetExists(userProivider.UserName))
                 throw new ArgumentException("You have already sibmitted yoyr genral bet, only update is permitted");
-            if (dateTimeProvider.UTCNow > Constants.GeneralBetsCloseTime)
+            if (dateTimeProvider.UTCNow > TournamentTimesUtils.GeneralBetsCloseTime)
                 throw new ArgumentException("General bets are already closed for betting");
         }
     }

@@ -47,7 +47,7 @@ namespace Mundialito.DAL.GeneralBets
         {
             get
             {
-                return DateTime.Now.ToUniversalTime() < Constants.GeneralBetsCloseTime;
+                return DateTime.Now.ToUniversalTime() < TournamentTimesUtils.GeneralBetsCloseTime;
             }
         }
     }

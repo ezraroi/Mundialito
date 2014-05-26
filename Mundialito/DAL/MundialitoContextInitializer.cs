@@ -7,6 +7,8 @@ using Mundialito.DAL.Teams;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Accounts;
+using System.Web.Configuration;
+using System.Configuration;
 
 namespace Mundialito.DAL
 {
@@ -78,10 +80,10 @@ namespace Mundialito.DAL
 
             //Create User=Admin with password=123456
             var user = new MundialitoUser();
-            user.UserName = Constants.AdminUsername;
-            user.FirstName = Constants.AdminFirstName;
-            user.LastName = Constants.AdminLastName;
-            user.Email = Constants.AdminEmail;
+            user.UserName = ConfigurationManager.AppSettings["AdminUserName"];
+            user.FirstName = ConfigurationManager.AppSettings["AdminFirstName"];
+            user.LastName = ConfigurationManager.AppSettings["AdminLastName"];
+            user.Email = ConfigurationManager.AppSettings["AdminEmail"];
             var adminresult = UserManager.Create(user, "123456");
 
             //Add User Admin to Role Admin

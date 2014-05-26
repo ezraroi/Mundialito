@@ -1,8 +1,13 @@
 'use strict';
-angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', 'Alert', 'users','generalBets','UsersManager', function ($scope, $log, Alert, users, generalBets, UsersManager) {
+angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', 'Alert', 'users','teams', 'generalBets','UsersManager', function ($scope, $log, Alert, users, teams, generalBets, UsersManager) {
     $scope.users = users;
     $scope.generalBets = generalBets;
     $scope.privateKey = {};
+    $scope.teamsDic = {};
+
+    for(var i=0; i<teams.length; i++) {
+        $scope.teamsDic[teams[i].TeamId] = teams[i];
+    }
 
     $scope.deleteUser = function(user) {
         var scope = user;
@@ -12,6 +17,12 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
                 $scope.users.splice($scope.users.indexOf(scope), 1);
             })
         }
+    };
+
+    $scope.resolveBet = function(bet) {
+        bet.resolve().success(function() {
+            Alert.new('success', 'General bet was resolved successfully', 2000);
+        });
     };
 
     $scope.generateKey = function() {
@@ -24,8 +35,8 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
 
     $scope.makeAdmin = function(user) {
         if (confirm('Are you sure you would like to make ' + user.Name + ' Admin?')) {
-            user.makeAdmin.success(function () {
-                Alert.new('success', 'User was isnow admin', 2000);
+            user.makeAdmin().success(function () {
+                Alert.new('success', 'User was is now admin', 2000);
                 user.IsAdmin = true;
             })
         }

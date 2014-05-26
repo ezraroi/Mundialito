@@ -38,6 +38,9 @@
                     users : ['UsersManager', function (UsersManager) {
                         return UsersManager.loadAllUsers();
                     }],
+                    teams : ['TeamsManager', function (TeamsManager) {
+                        return TeamsManager.loadAllTeams();
+                    }],
                     generalBets: ['GeneralBetsManager' , function (GeneralBetsManager) {
                         return GeneralBetsManager.loadAllGeneralBets();
                     }]

@@ -1,27 +1,82 @@
-﻿<h4><i class="fa fa-users"></i> All Users</h4>
+﻿<!-- Users list -->
 <div class="row">
     <div class="col-md-12">
-        <div class="table-responsive">
-            <table class="table table-striped" cg-busy="{tracker:'getUsers'}">
-                <thead>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-                </thead>
-                <tbody>
-                <tr ng-repeat="user in users">
-                    <td><a href="{{user.getUrl()}}">{{user.Name}}</a></td>
-                    <td>{{user.Email}}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" ng-click="deleteUser(user)" tooltip="Delete User"><i class="fa fa-times-circle"></i></button>
-                        <button ng-show="!user.IsAdmin" type="button" class="btn btn-primary btn-sm" ng-click="user.makeAdmin()" tooltip="Make Admin"><i class="fa fa-gear"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-users"></i> Users Management</div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" cg-busy="{tracker:'getUsers'}">
+                        <thead>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in users">
+                            <td><a href="{{user.getUrl()}}">{{user.Name}}</a></td>
+                            <td>{{user.Email}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" ng-click="deleteUser(user)" tooltip="Delete User"><i class="fa fa-times-circle"></i></button>
+                                <button ng-show="!user.IsAdmin" type="button" class="btn btn-primary btn-sm" ng-click="user.makeAdmin()" tooltip="Make Admin"><i class="fa fa-gear"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End of Users list -->
+<!-- General Bets -->
+<div class="row" ng-if="generalBets.length > 0">
+    <div class="col-md-12">
+        <div class="panel panel-info" cg-busy="{tracker:'resolveGeneralBet'}">
+            <div class="panel-heading"><i class="fa fa-money"></i> Users General Bets</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Winning Team</th>
+                                    <th>Golden Boot Player</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="bet in generalBets">
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>{{bet.OwnerName}}</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" tooltip="Check if it is winning bet" ng-model="bet.TeamIsRight"> {{teamsDic[bet.WinningTeamId].Name}}</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" tooltip="Check if it is winning bet" ng-model="bet.PlayerIsRight"> {{bet.GoldenBootPlayer}}</label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-success btn-block" ng-click="resolveBet(bet)" tooltip="Update bet result"><i class="fa fa-save"></i> </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- End of General Bets -->
+<!-- Private Key Generator -->
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-success" cg-busy="{tracker:'generatePrivateKey'}">
@@ -48,3 +103,4 @@
         </div>
     </div>
 </div>
+<!-- End of Private Key Generator -->

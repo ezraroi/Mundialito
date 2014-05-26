@@ -12,8 +12,10 @@ angular.module('mundialitoApp').factory('Game', ['$http','$log', function($http,
             angular.extend(this, gameData);
         },
         delete: function() {
-            $log.debug('Game: Will delete game ' + this.GameId)
-            return $http.delete("api/games/" + this.GameId, { tracker: 'deleteGame' });
+            if (confirm('Are you sure you would like to delete game ' + this.GameId)) {
+                $log.debug('Game: Will delete game ' + this.GameId)
+                return $http.delete("api/games/" + this.GameId, { tracker: 'deleteGame' });
+            }
         },
         update: function() {
             $log.debug('Game: Will update game ' + this.GameId)
