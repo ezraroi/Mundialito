@@ -7,7 +7,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
     });
 
     var userHasGeneralBet = function() {
-        if (!angular.isDefined($scope.security.user))
+        if (!angular.isDefined($scope.security.user) && ($scope.security.user != null))
         {
             $log.debug('DashboardCtrl: user info not loaded yet, will retry in 1 second');
             $timeout(userHasGeneralBet,1000);
