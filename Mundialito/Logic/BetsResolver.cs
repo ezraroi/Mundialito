@@ -19,14 +19,14 @@ namespace Mundialito.Logic
 
         public void ResolveBets(Game game)
         {
-            if (!game.IsBetResolved)
+            if (!game.IsBetResolved())
                 throw new ArgumentException(string.Format("Game {0} is not resolved yet", game.GameId));
 
             var bets = betsRepository.GetGameBets(game.GameId);
             foreach (Bet bet in bets)
             {
                 var points = 0;
-                if (bet.Mark == game.Mark)
+                if (bet.Mark() == game.Mark())
                 {
                     points += 3;
                     bet.GameMarkWin = true;

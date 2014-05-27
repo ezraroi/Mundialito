@@ -16,37 +16,37 @@ namespace Mundialito.Tests.Models
         public void IsOpenSimpleTest()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow } };
-            Assert.IsFalse(bet.IsOpenForBetting, "Bet should not be open");
+            Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
         }
 
         [TestMethod]
         public void IsOpenSimpleTest2()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow.AddMinutes(20) } };
-            Assert.IsFalse(bet.IsOpenForBetting, "Bet should not be open");
+            Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
         }
 
         [TestMethod]
         public void IsOpenSimpleTest3()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow.AddMinutes(31) } };
-            Assert.IsTrue(bet.IsOpenForBetting, "Bet should be open");
+            Assert.IsTrue(bet.IsOpenForBetting(), "Bet should be open");
         }
 
         [TestMethod]
         public void IsResolvedTest()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow } };
-            Assert.IsFalse(bet.IsOpenForBetting, "Bet should not be open");
-            Assert.IsFalse(bet.IsResolved, " Bet should not be resolved");
+            Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
+            Assert.IsFalse(bet.IsResolved(), " Bet should not be resolved");
         }
 
         [TestMethod]
         public void IsResolvedTest2()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow , HomeScore = 1, AwayScore = 1} };
-            Assert.IsFalse(bet.IsOpenForBetting, "Bet should not be open");
-            Assert.IsTrue(bet.IsResolved, " Bet should be resolved");
+            Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
+            Assert.IsTrue(bet.IsResolved(), " Bet should be resolved");
         }
     }
 }

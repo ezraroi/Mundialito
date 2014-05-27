@@ -44,7 +44,7 @@ namespace Mundialito.Logic
                 throw new ArgumentException(string.Format("Updated bet {0} must have user", bet.BetId));
             if (betToUpdate.User.Id != bet.User.Id)
                 throw new UnauthorizedAccessException("You can't update a bet that is not yours");
-            var game = gamesRepository.GetGame(bet.Game.GameId);
+            var game = gamesRepository.GetGame(betToUpdate.Game.GameId);
             if (dateTimeProvider.UTCNow > game.CloseTime)
                 throw new ArgumentException(string.Format("Game {0} is closed for betting", game.GameId));
 

@@ -124,7 +124,7 @@ namespace Mundialito.Tests.Controllers
             var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
             var res = controller.GetUserBets("ezraroi");
             Assert.AreEqual(2, res.Count());
-            bets.ForEach(bet => Assert.IsFalse(bet.IsOpenForBetting));
+            bets.ForEach(bet => Assert.IsFalse(bet.IsOpenForBetting()));
         }
 
         [TestMethod]

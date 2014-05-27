@@ -29,8 +29,6 @@ namespace Mundialito.DAL.GeneralBets
         [Required]
         public MundialitoUser User { get; set; }
 
-        //public virtual Team WinningTeam { get; set; }
-
         [Required]
         public int WinningTeamId { get; set; }
 

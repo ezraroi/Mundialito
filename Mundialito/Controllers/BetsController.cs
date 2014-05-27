@@ -64,8 +64,8 @@ namespace Mundialito.Controllers
         [Route("user/{username}")]
         public IEnumerable<BetViewModel> GetUserBets(string username)
         {
-            var bets = betsRepository.GetUserBets(username);
-            return bets.Where(bet => !bet.IsOpenForBetting || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
+            var bets = betsRepository.GetUserBets(username).ToList();
+            return bets.Where(bet => !bet.IsOpenForBetting() || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
         }
 
         [HttpPost]

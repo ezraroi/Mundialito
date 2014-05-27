@@ -67,7 +67,7 @@ namespace Mundialito.Controllers
             if (game == null)
                 throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
 
-            if (game.IsOpen)
+            if (game.IsOpen())
                 throw new ArgumentException(String.Format("Game '{0}' is stil open for betting", id));
 
             return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item)).OrderByDescending( bet => bet.Points);
@@ -90,7 +90,7 @@ namespace Mundialito.Controllers
         [Route("Open")]
         public IEnumerable<Game> GetOpenGames()
         {
-            return gamesRepository.GetGames().Where(game => game.IsOpen);
+            return gamesRepository.GetGames().Where(game => game.IsOpen());
         }
 
         [HttpPost]
@@ -111,7 +111,7 @@ namespace Mundialito.Controllers
         {
             gamesRepository.UpdateGame(game);
             gamesRepository.Save();
-            if (game.IsBetResolved)
+            if (game.IsBetResolved())
             {
                 Trace.TraceInformation("Will reoslve Game {0} bets", game.GameId);
                 betsResolver.ResolveBets(game);

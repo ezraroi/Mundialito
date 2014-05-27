@@ -184,12 +184,16 @@
                             <thead>
                                 <th><i class="fa fa-user"></i> User</th>
                                 <th>Result</th>
+                                <th><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
+                                <th><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i></th>
                                 <th>Points</th>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="bet in gameBets">
-                                    <td>{{bet.User.FirstName}} {{bet.User.LastName}}</td>
+                                    <td><a href="users/{{bet.User.UserName}}">{{bet.User.FirstName}} {{bet.User.LastName}}</a></td>
                                     <td>{{bet.HomeScore}} - {{bet.AwayScore}}</td>
+                                    <td>{{bet.CardsMark}}</td>
+                                    <td>{{bet.CornersMark}}</td>
                                     <td><span class="label label-{{bet.getClass()}}" ng-show="bet.IsResolved">{{bet.Points}}</span></td>
                                 </tr>
                             </tbody>

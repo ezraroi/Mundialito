@@ -29,8 +29,8 @@ namespace Mundialito.Models
             CardsMark = bet.CardsMark;
             GameMarkWin = bet.GameMarkWin;
             ResultWin = bet.ResultWin;
-            IsOpenForBetting = bet.IsOpenForBetting;
-            IsResolved = bet.IsResolved;
+            IsOpenForBetting = bet.IsOpenForBetting();
+            IsResolved = bet.IsResolved();
             Points = bet.Points.HasValue ? bet.Points.Value : 0;
             Game = new BetGame(bet.Game);
             User = new BetUser(bet.User);
@@ -156,7 +156,7 @@ namespace Mundialito.Models
             GameId = game.GameId;
             HomeTeam = new BetGameTeam(game.HomeTeam);
             AwayTeam = new BetGameTeam(game.AwayTeam);
-            IsOpen = game.IsOpen;
+            IsOpen = game.IsOpen();
         }
         public int GameId { get; set; }
 
