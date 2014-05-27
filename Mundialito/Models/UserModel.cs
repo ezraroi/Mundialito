@@ -8,8 +8,6 @@ namespace Mundialito.Models
 {
     public class UserModel
     {
-        //private List<BetViewModel> bets = new List<BetViewModel>();
-        
         public UserModel(MundialitoUser user)
         {
             Username = user.UserName;
@@ -17,6 +15,12 @@ namespace Mundialito.Models
             Points = 0;
             Id = user.Id;
             Email = user.Email;
+        }
+
+        public UserModel(String id, String username)
+        {
+            Username = username;
+            Id = id;
         }
 
         public String Id { get; private set; }

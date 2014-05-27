@@ -20,7 +20,7 @@ namespace Mundialito.Tests
         {
             CreateAdminRoleAndUsers(context);
 
-            SetupDefaultData(context);
+            SetupTestData(context);
 
             base.Seed(context);
         }
@@ -56,49 +56,87 @@ namespace Mundialito.Tests
             user.LastName = "User1";
             user.Email = "User1@admin.com";
             UserManager.Create(user, "123456");
+
+            var user2 = new MundialitoUser();
+            user2.UserName = "User2";
+            user2.FirstName = "User2";
+            user2.LastName = "User2";
+            user2.Email = "User2@admin.com";
+            UserManager.Create(user2, "123456");
+
+            var user3 = new MundialitoUser();
+            user3.UserName = "User3";
+            user3.FirstName = "User3";
+            user3.LastName = "User3";
+            user3.Email = "User3@admin.com";
+            UserManager.Create(user3, "123456");
         }
 
-        private static void SetupDefaultData(MundialitoContext context)
+        private static void SetupTestData(MundialitoContext context)
         {
-            var eng = new Team { Name = "England", ShortName = "ENG", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/logos/xs/ENG.gif" };
-            var ita = new Team { Name = "Italy", ShortName = "ITA", Logo = "http://www.fifa.com/imgml/logos/xs/ITA.gif", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ITA.png" };
-            var uru = new Team { Name = "Uruguay", ShortName = "URU", Logo = "http://www.fifa.com/imgml/logos/xs/URU.gif", Flag = "http://www.fifa.com/imgml/flags/reflected/m/URU.png" };
+            var teamA = new Team { Name = "TeamA", ShortName = "AAA", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png" };
+            var teamB = new Team { Name = "TeamB", ShortName = "BBB", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png" };
+            var teamC = new Team { Name = "TeamC", ShortName = "CCC", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png" };
+            var teamD = new Team { Name = "TeamD", ShortName = "DDD", Flag = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png", Logo = "http://www.fifa.com/imgml/flags/reflected/m/ENG.png" };
 
-            context.Teams.Add(eng);
-            context.Teams.Add(ita);
-            context.Teams.Add(uru);
+            context.Teams.Add(teamA);
+            context.Teams.Add(teamB);
+            context.Teams.Add(teamC);
+            context.Teams.Add(teamD);
 
-            var stadium = new Stadium
-            {
-                Capacity = 15000,
-                Name = "Blomfiled"
-            };
-            context.Stadiums.Add(stadium);
+            var stadiumA = new Stadium {Capacity = 15000, Name = "StadiumA" };
+            var stadiumB = new Stadium {Capacity = 15000, Name = "StadiumB" };
+
+            context.Stadiums.Add(stadiumA);
+            context.Stadiums.Add(stadiumB);
 
             context.Games.Add(new Game
             {
-                HomeTeam = eng,
-                AwayTeam = ita,
-                HomeScore = 3,
-                AwayScore = 0,
-                Date = DateTime.Now,
-                Stadium = new Stadium
-                {
-                    Capacity = 15000,
-                    Name = "Kiryat Eliezer"
-                }
+                HomeTeam = teamA,
+                AwayTeam = teamB,
+                Date = DateTime.UtcNow.AddDays(1),
+                Stadium = stadiumA
             });
 
             context.Games.Add(new Game
             {
-                HomeTeam = eng,
-                AwayTeam = ita,
-                HomeScore = 0,
-                AwayScore = 0,
-                Date = DateTime.Now.AddDays(2),
-                Stadium = stadium
+                HomeTeam = teamC,
+                AwayTeam = teamD,
+                Date = DateTime.UtcNow.AddDays(1),
+                Stadium = stadiumB
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeam = teamA,
+                AwayTeam = teamC,
+                Date = DateTime.UtcNow.AddDays(2),
+                Stadium = stadiumA
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeam = teamB,
+                AwayTeam = teamD,
+                Date = DateTime.UtcNow.AddDays(2),
+                Stadium = stadiumB
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeam = teamA,
+                AwayTeam = teamD,
+                Date = DateTime.UtcNow.AddDays(3),
+                Stadium = stadiumA
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeam = teamB,
+                AwayTeam = teamC,
+                Date = DateTime.UtcNow.AddDays(3),
+                Stadium = stadiumB
             });
         }
-
     }
 }

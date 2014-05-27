@@ -48,7 +48,7 @@ namespace Mundialito.DAL.Games
         {
             get
             {
-                return DateTime.Now.ToUniversalTime() < CloseTime;
+                return DateTime.UtcNow < CloseTime;
             }
         }
 

@@ -8,6 +8,7 @@ using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
+using Mundialito.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,7 +20,6 @@ namespace Mundialito.Tests.AcceptenceTests
 {
     public class AcceptenceTestsUtils
     {
-
         public static void InitDatabase()
         {
             DataBaseConnectionProvider.SetManualString(@"Data Source=(local)\SQLEXPRESS;Initial Catalog=MundialitoTests;Integrated Security=True");
@@ -28,14 +28,9 @@ namespace Mundialito.Tests.AcceptenceTests
             c.Database.Initialize(true);
         }
 
-        public static BetsController GetBetsControllerAsAdmin()
+        public static BetsController GetBetsController(UserModel user, DateTime now)
         {
-            return GetBetsController("Admin");
-        }
-
-        public static BetsController GetBetsController(String username)
-        {
-            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository()), GetLoggedUserProvider(username));
+            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GeDateTimeProvider(now)), GetLoggedUserProvider(user));
         }
 
         public static GamesController GetGamesController()
@@ -53,30 +48,21 @@ namespace Mundialito.Tests.AcceptenceTests
             return new TeamsController(new TeamsRepository());
         }
 
-        public static UsersController GetUsersControllerAsAdmin()
+        public static UsersController GetUsersController(UserModel user)
         {
-            return GetUsersController("Admin");
+            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository()), GetLoggedUserProvider(user), new UsersRepository());
         }
 
-        public static UsersController GetUsersController(String username)
+        public static GeneralBetsController GetGeneralBetsController(UserModel user, DateTime now)
         {
-            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository()), GetLoggedUserProvider(username), new UsersRepository());
+            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(user), GeDateTimeProvider(now));
         }
 
-        public static GeneralBetsController GetGeneralBetsControllerAsAdmin(DateTime now)
-        {
-            return GetGeneralBetsController("Admin", now);
-        }
-
-        public static GeneralBetsController GetGeneralBetsController(String username, DateTime now)
-        {
-            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(username), GeDateTimeProvider(now));
-        }
-
-        private static ILoggedUserProvider GetLoggedUserProvider(String username)
+        private static ILoggedUserProvider GetLoggedUserProvider(UserModel user)
         {
             var userProvider = new Mock<ILoggedUserProvider>();
-            userProvider.SetupGet(user => user.UserId).Returns(username);
+            userProvider.SetupGet(item => item.UserId).Returns(user.Id);
+            userProvider.SetupGet(item => item.UserName).Returns(user.Username);
             return userProvider.Object;
         }
 

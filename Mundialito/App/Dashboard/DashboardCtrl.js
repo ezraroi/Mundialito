@@ -1,13 +1,14 @@
 'use strict';
 angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','$timeout','GamesManager','UsersManager','GeneralBetsManager', function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager) {
     $scope.generalBetsAreOpen = false;
+    $scope.submittedGeneralBet = true;
 
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
     });
 
     var userHasGeneralBet = function() {
-        if (!angular.isDefined($scope.security.user) && ($scope.security.user != null))
+        if (!angular.isDefined($scope.security.user) || ($scope.security.user == null))
         {
             $log.debug('DashboardCtrl: user info not loaded yet, will retry in 1 second');
             $timeout(userHasGeneralBet,1000);

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
+using System.Data.Entity.Core;
 
 namespace Mundialito.Tests.Controllers
 {
@@ -33,6 +34,46 @@ namespace Mundialito.Tests.Controllers
             controller.PostBet(new NewBetModel());
 
             betValidator.Verify(foo => foo.ValidateNewBet(It.IsAny<Bet>()), Times.Exactly(1), "ValidateNewBet must be called");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectNotFoundException))]
+        public void GetNonExistingBetByIdTest()
+        {
+            var betsRepository = new Mock<IBetsRepository>();
+            var betValidator = new Mock<IBetValidator>();
+            var userProvider = new Mock<ILoggedUserProvider>();
+            betsRepository.Setup(rep => rep.GetBet(1)).Returns((Bet)null);
+
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            controller.GetBetById(1);
+        }
+
+        [TestMethod]
+        public void GetBetByIdTest()
+        {
+            var betsRepository = new Mock<IBetsRepository>();
+            var betValidator = new Mock<IBetValidator>();
+            var userProvider = new Mock<ILoggedUserProvider>();
+            var bet = new Bet()
+            {
+                BetId = 1,
+                User = new MundialitoUser() { Id = "1", UserName = "ezraroi" },
+                Game = new Game() { GameId = 1, HomeTeam = homeTeam, AwayTeam = awayTeam, Date = DateTime.Now.ToUniversalTime() },
+                HomeScore = 1,
+                AwayScore = 1,
+                CardsMark = "X",
+                CornersMark = "1",
+            };
+            betsRepository.Setup(rep => rep.GetBet(1)).Returns(bet);
+
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var res = controller.GetBetById(1);
+            Assert.AreEqual(1, res.BetId);
+            Assert.AreEqual("X", res.CardsMark);
+            Assert.AreEqual("1", res.CornersMark);
+            Assert.AreEqual(1, res.HomeScore);
+            Assert.AreEqual(1, res.AwayScore);
         }
 
         [TestMethod]

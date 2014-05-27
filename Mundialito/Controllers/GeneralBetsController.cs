@@ -136,7 +136,7 @@ namespace Mundialito.Controllers
         private void Validate()
         {
             if (generalBetsRepository.IsGeneralBetExists(userProivider.UserName))
-                throw new ArgumentException("You have already sibmitted yoyr genral bet, only update is permitted");
+                throw new ArgumentException("You have already submitted your general bet, only update is permitted");
             if (dateTimeProvider.UTCNow > TournamentTimesUtils.GeneralBetsCloseTime)
                 throw new ArgumentException("General bets are already closed for betting");
         }
