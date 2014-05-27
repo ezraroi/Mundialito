@@ -30,9 +30,9 @@ namespace Mundialito.Tests.AcceptenceTests
         public void CreateControllers()
         {
             AcceptenceTestsUtils.InitDatabase();
-            users = AcceptenceTestsUtils.GetUsersController(new UserModel(String.Empty, "Admin")).GetAllUsers().ToDictionary(item => item.Username, item => item);
+            users = AcceptenceTestsUtils.GetUsersController(new UserModel(String.Empty, "Admin"), DateTime.UtcNow).GetAllUsers().ToDictionary(item => item.Username, item => item);
             teams = AcceptenceTestsUtils.GetTeamsController().GetAllTeams().ToList();
-            games = AcceptenceTestsUtils.GetGamesController().Get().ToList();
+            games = AcceptenceTestsUtils.GetGamesController(DateTime.UtcNow).Get().ToList();
         }
 
         private UserModel GetUser(String username)
@@ -65,6 +65,19 @@ namespace Mundialito.Tests.AcceptenceTests
             TryUpdateBetOnClosedGame();
 
             TestOtherUsersCanNotSeeOpenGameBets();
+
+            TryUpdateOtherUserBet();
+        }
+
+        private void TryUpdateOtherUserBet()
+        {
+            try
+            {
+                var bet = AcceptenceTestsUtils.GetBetsController(GetUser("User3"), DateTime.UtcNow.AddDays(2)).GetUserBets("Admin").First();
+                AcceptenceTestsUtils.GetBetsController(GetUser("User3"), DateTime.UtcNow.AddDays(2)).UpdateBet(bet.BetId, new UpdateBetModel() { AwayScore = 1, HomeScore = 2, CardsMark = "1", CornersMark = "2" });
+                throw new Exception("Operation should have failed");
+            }
+            catch (UnauthorizedAccessException) { }
         }
 
         private void TestOtherUsersCanNotSeeOpenGameBets()

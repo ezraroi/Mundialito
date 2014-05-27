@@ -23,8 +23,9 @@ namespace Mundialito.Controllers
         private readonly IBetsRepository betsRepository;
         private readonly IBetValidator betValidator;
         private readonly ILoggedUserProvider userProivider;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProivider)
+        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProivider, IDateTimeProvider dateTimeProvider)
         {
             if (betsRepository == null)
             {
@@ -43,6 +44,12 @@ namespace Mundialito.Controllers
                 throw new ArgumentNullException("userProivider");
             }
             this.userProivider = userProivider;
+
+            if (dateTimeProvider == null)
+            {
+                throw new ArgumentNullException("dateTimeProvider");
+            }
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         public IEnumerable<BetViewModel> GetAllBets()
@@ -65,7 +72,7 @@ namespace Mundialito.Controllers
         public IEnumerable<BetViewModel> GetUserBets(string username)
         {
             var bets = betsRepository.GetUserBets(username).ToList();
-            return bets.Where(bet => !bet.IsOpenForBetting() || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
+            return bets.Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow) || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
         }
 
         [HttpPost]

@@ -30,7 +30,7 @@ namespace Mundialito.Tests.Controllers
             userProvider.SetupGet(user => user.UserId).Returns("1");
             betsRepository.Setup(rep => rep.InsertBet(It.IsAny<Bet>())).Returns(new Bet() { BetId = 1 });
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             controller.PostBet(new NewBetModel());
 
             betValidator.Verify(foo => foo.ValidateNewBet(It.IsAny<Bet>()), Times.Exactly(1), "ValidateNewBet must be called");
@@ -45,7 +45,7 @@ namespace Mundialito.Tests.Controllers
             var userProvider = new Mock<ILoggedUserProvider>();
             betsRepository.Setup(rep => rep.GetBet(1)).Returns((Bet)null);
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             controller.GetBetById(1);
         }
 
@@ -67,7 +67,7 @@ namespace Mundialito.Tests.Controllers
             };
             betsRepository.Setup(rep => rep.GetBet(1)).Returns(bet);
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetBetById(1);
             Assert.AreEqual(1, res.BetId);
             Assert.AreEqual("X", res.CardsMark);
@@ -96,7 +96,7 @@ namespace Mundialito.Tests.Controllers
             });
 
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetUserBets("ezraroi");
             Assert.AreEqual(3, res.Count());
         }
@@ -121,7 +121,7 @@ namespace Mundialito.Tests.Controllers
             });
 
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetUserBets("ezraroi");
             Assert.AreEqual(2, res.Count());
             bets.ForEach(bet => Assert.IsFalse(bet.IsOpenForBetting()));
@@ -135,7 +135,7 @@ namespace Mundialito.Tests.Controllers
             var userProvider = new Mock<ILoggedUserProvider>();
             userProvider.SetupGet(user => user.UserId).Returns("1");
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             controller.UpdateBet(1, new UpdateBetModel() { HomeScore = 1, AwayScore = 2 });
 
             betValidator.Verify(foo => foo.ValidateUpdateBet(It.IsAny<Bet>()), Times.Exactly(1), "ValidateUpdateBet must be called");
@@ -150,7 +150,7 @@ namespace Mundialito.Tests.Controllers
             var userProvider = new Mock<ILoggedUserProvider>();
             userProvider.SetupGet(user => user.UserId).Returns("1");
 
-            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object);
+            var controller = new BetsController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
             controller.DeleteBet(1);
 
             betValidator.Verify(foo => foo.ValidateDeleteBet(It.IsAny<int>(), It.IsAny<string>()), Times.Exactly(1), "ValidateDeleteBet must be called");

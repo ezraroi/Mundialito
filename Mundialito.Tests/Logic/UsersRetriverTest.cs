@@ -29,7 +29,7 @@ namespace Mundialito.Tests.Logic
             var betsRepository = new Mock<IBetsRepository>();
             var usersRepository = new Mock<IUsersRepository>();
             usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns((MundialitoUser)null);
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             usersRetriver.GetUser("roi", false);
         }
 
@@ -49,7 +49,7 @@ namespace Mundialito.Tests.Logic
             allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5, ResultWin = true });
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var user = usersRetriver.GetUser("1", false);
             Assert.AreEqual(5, user.Points);
             Assert.AreEqual(1, user.Results);
@@ -72,7 +72,7 @@ namespace Mundialito.Tests.Logic
             allBets.Add(new Bet(user1, openGame2) { AwayScore = 1, HomeScore = 1 });
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var user = usersRetriver.GetUser("1", false);
             Assert.AreEqual(0, user.Points);
             Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks + user.Results);
@@ -94,7 +94,7 @@ namespace Mundialito.Tests.Logic
             allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 , ResultWin = true });
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var user = usersRetriver.GetUser("1", true);
             Assert.AreEqual(5, user.Points);
             Assert.AreEqual(1, user.Results);
@@ -111,7 +111,7 @@ namespace Mundialito.Tests.Logic
             allUsers.Add(new MundialitoUser() { Id = "1" });
             allUsers.Add(new MundialitoUser() { Id = "2" });
             usersRepository.Setup(item => item.AllUsers()).Returns(allUsers);
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var res = usersRetriver.GetAllUsers();
             Assert.AreEqual(2, res.Count);
         }
@@ -148,7 +148,7 @@ namespace Mundialito.Tests.Logic
             generalBets.Add(new GeneralBet() { User = user3, IsResolved = true, PlayerPoints = 12, TeamPoints = 12, WinningTeamId = 2 });
             generalBetsRepository.Setup(rep => rep.GetGeneralBets()).Returns(generalBets);
 
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var res = usersRetriver.GetAllUsers();
             Assert.AreEqual(3, res.Count);
             Assert.AreEqual(17, res[0].Points);
@@ -175,7 +175,7 @@ namespace Mundialito.Tests.Logic
             allBets.Add(new Bet(user1, closedGame3) { AwayScore = 1, HomeScore = 1, Points = 6, ResultWin = true , GameMarkWin = true, CardsWin = true});
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
-            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
             var user = usersRetriver.GetUser("1", false);
             Assert.AreEqual(13, user.Points);
             Assert.AreEqual(1, user.Results);

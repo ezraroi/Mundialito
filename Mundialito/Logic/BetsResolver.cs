@@ -11,15 +11,17 @@ namespace Mundialito.Logic
     public class BetsResolver : IBetsResolver
     {
         private readonly IBetsRepository betsRepository;
+        private readonly IDateTimeProvider dateTimeProvider;
 
-        public BetsResolver(IBetsRepository betsRepository)
+        public BetsResolver(IBetsRepository betsRepository, IDateTimeProvider dateTimeProvider)
         {
             this.betsRepository = betsRepository;
+            this.dateTimeProvider = dateTimeProvider;
         }
 
         public void ResolveBets(Game game)
         {
-            if (!game.IsBetResolved())
+            if (!game.IsBetResolved(dateTimeProvider.UTCNow))
                 throw new ArgumentException(string.Format("Game {0} is not resolved yet", game.GameId));
 
             var bets = betsRepository.GetGameBets(game.GameId);

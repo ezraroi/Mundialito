@@ -21,7 +21,7 @@ namespace Mundialito.Tests.Logic
         {
 
             var betsRepository = new Mock<IBetsRepository>();
-            var resolver = new BetsResolver(betsRepository.Object);
+            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 1,
@@ -47,7 +47,7 @@ namespace Mundialito.Tests.Logic
                     BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
                 }
             });
-            var resolver = new BetsResolver(betsRepository.Object);
+            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 1,
@@ -81,7 +81,7 @@ namespace Mundialito.Tests.Logic
                     BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
                 }
             });
-            var resolver = new BetsResolver(betsRepository.Object);
+            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 3,

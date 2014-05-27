@@ -30,12 +30,12 @@ namespace Mundialito.Tests.AcceptenceTests
 
         public static BetsController GetBetsController(UserModel user, DateTime now)
         {
-            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GeDateTimeProvider(now)), GetLoggedUserProvider(user));
+            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), GetDateTimeProvider(now));
         }
 
-        public static GamesController GetGamesController()
+        public static GamesController GetGamesController(DateTime now)
         {
-            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository()));
+            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository(), GetDateTimeProvider(now)));
         }
 
         public static StadiumsController GetStadiumsController()
@@ -48,14 +48,14 @@ namespace Mundialito.Tests.AcceptenceTests
             return new TeamsController(new TeamsRepository());
         }
 
-        public static UsersController GetUsersController(UserModel user)
+        public static UsersController GetUsersController(UserModel user, DateTime now)
         {
-            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository()), GetLoggedUserProvider(user), new UsersRepository());
+            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), new UsersRepository());
         }
 
         public static GeneralBetsController GetGeneralBetsController(UserModel user, DateTime now)
         {
-            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(user), GeDateTimeProvider(now));
+            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(user), GetDateTimeProvider(now));
         }
 
         private static ILoggedUserProvider GetLoggedUserProvider(UserModel user)
@@ -66,7 +66,7 @@ namespace Mundialito.Tests.AcceptenceTests
             return userProvider.Object;
         }
 
-        private static IDateTimeProvider GeDateTimeProvider(DateTime utcNow)
+        private static IDateTimeProvider GetDateTimeProvider(DateTime utcNow)
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
             dateTimeProvider.SetupGet(item => item.UTCNow).Returns(utcNow);
