@@ -46,12 +46,36 @@ namespace Mundialito.Tests.Logic
             var clsoedGame = CreateClosedGame(2);
             List<Bet> allBets = new List<Bet>();
             allBets.Add(new Bet(user1, openGame) { AwayScore = 1, HomeScore = 1 });
-            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5, ResultWin = true });
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
             var user = usersRetriver.GetUser("1", false);
             Assert.AreEqual(5, user.Points);
+            Assert.AreEqual(1, user.Results);
+            Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks);
+        }
+
+        [TestMethod]
+        public void TestGetNotLoggedUser2()
+        {
+            var generalBetsRepository = new Mock<IGeneralBetsRepository>();
+            var usersRepository = new Mock<IUsersRepository>();
+            var user1 = CreateMundialtoUser("1");
+            usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns(user1);
+
+            var betsRepository = new Mock<IBetsRepository>();
+            var openGame1 = CreateOpenGame(1);
+            var openGame2 = CreateOpenGame(2);
+            List<Bet> allBets = new List<Bet>();
+            allBets.Add(new Bet(user1, openGame1) { AwayScore = 1, HomeScore = 1 });
+            allBets.Add(new Bet(user1, openGame2) { AwayScore = 1, HomeScore = 1 });
+            betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
+
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var user = usersRetriver.GetUser("1", false);
+            Assert.AreEqual(0, user.Points);
+            Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks + user.Results);
         }
 
         [TestMethod]
@@ -67,12 +91,14 @@ namespace Mundialito.Tests.Logic
             var clsoedGame = CreateClosedGame(2);
             List<Bet> allBets = new List<Bet>();
             allBets.Add(new Bet(user1, openGame) { AwayScore = 1, HomeScore = 1 });
-            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 , ResultWin = true });
             betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
 
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
             var user = usersRetriver.GetUser("1", true);
             Assert.AreEqual(5, user.Points);
+            Assert.AreEqual(1, user.Results);
+            Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks);
         }
 
         [TestMethod]
@@ -108,7 +134,7 @@ namespace Mundialito.Tests.Logic
             var clsoedGame = CreateClosedGame(2);
             List<Bet> allBets = new List<Bet>();
             allBets.Add(new Bet(user1, openGame) { AwayScore = 1, HomeScore = 1 });
-            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            allBets.Add(new Bet(user1, clsoedGame) { AwayScore = 1, HomeScore = 1, Points = 5, ResultWin = true });
             allBets.Add(new Bet(user2, openGame) { AwayScore = 2, HomeScore = 0 });
             allBets.Add(new Bet(user2, clsoedGame) { AwayScore = 0, HomeScore = 1 });
             allBets.Add(new Bet(user3, openGame) { AwayScore = 2, HomeScore = 0 });
@@ -126,8 +152,43 @@ namespace Mundialito.Tests.Logic
             var res = usersRetriver.GetAllUsers();
             Assert.AreEqual(3, res.Count);
             Assert.AreEqual(17, res[0].Points);
+            Assert.AreEqual(1, res[0].Results);
             Assert.AreEqual(0, res[1].Points);
             Assert.AreEqual(24, res[2].Points);
+        }
+
+        [TestMethod]
+        public void TestUserTotalMarks()
+        {
+            var generalBetsRepository = new Mock<IGeneralBetsRepository>();
+            var usersRepository = new Mock<IUsersRepository>();
+            var user1 = CreateMundialtoUser("1");
+            usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns(user1);
+
+            var betsRepository = new Mock<IBetsRepository>();
+            var closedGame1 = CreateClosedGame(1);
+            var closedGame2 = CreateClosedGame(2);
+            var closedGame3 = CreateClosedGame(3);
+            List<Bet> allBets = new List<Bet>();
+            allBets.Add(new Bet(user1, closedGame1) { AwayScore = 1, HomeScore = 1, Points = 2, CardsWin = true, CornersWin = true });
+            allBets.Add(new Bet(user1, closedGame2) { AwayScore = 1, HomeScore = 1, Points = 5, GameMarkWin = true, CornersWin = true, CardsWin = true });
+            allBets.Add(new Bet(user1, closedGame3) { AwayScore = 1, HomeScore = 1, Points = 6, ResultWin = true , GameMarkWin = true, CardsWin = true});
+            betsRepository.Setup(item => item.GetUserBets(user1.UserName)).Returns(allBets);
+
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object);
+            var user = usersRetriver.GetUser("1", false);
+            Assert.AreEqual(13, user.Points);
+            Assert.AreEqual(1, user.Results);
+            Assert.AreEqual(3, user.YellowCards);
+            Assert.AreEqual(1, user.Marks);
+            Assert.AreEqual(2, user.Corners);
+
+            user = usersRetriver.GetUser("1", true);
+            Assert.AreEqual(13, user.Points);
+            Assert.AreEqual(1, user.Results);
+            Assert.AreEqual(3, user.YellowCards);
+            Assert.AreEqual(1, user.Marks);
+            Assert.AreEqual(2, user.Corners);
         }
 
         private Game CreateOpenGame(int id)

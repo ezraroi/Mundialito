@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcceptenceTests\AcceptenceTests.cs" />
+    <Compile Include="AcceptenceTests\AcceptenceTestsUtils.cs" />
     <Compile Include="Controllers\GamesControllerUnitTest.cs" />
     <Compile Include="Controllers\GeneralBetsControllerUnitTest.cs" />
     <Compile Include="Controllers\TeamsControllerUnitTest.cs" />

@@ -15,13 +15,13 @@ namespace Mundialito.Logic
         public BetsResolver(IBetsRepository betsRepository)
         {
             this.betsRepository = betsRepository;
-
         }
 
         public void ResolveBets(Game game)
         {
             if (!game.IsBetResolved)
                 throw new ArgumentException(string.Format("Game {0} is not resolved yet", game.GameId));
+
             var bets = betsRepository.GetGameBets(game.GameId);
             foreach (Bet bet in bets)
             {
@@ -36,7 +36,6 @@ namespace Mundialito.Logic
                     points += 2;
                     bet.ResultWin = true;
                 }
-                    
                 if (game.CardsMark == bet.CardsMark)
                 {
                     points += 1;
@@ -51,7 +50,8 @@ namespace Mundialito.Logic
                 betsRepository.UpdateBet(bet);
                 Trace.TraceInformation("{0} of {1} got {2} points", bet, game, points);
             }
-            betsRepository.Save();
+            if (bets.Count() > 0)
+                betsRepository.Save();
         }
     }
 }

@@ -1,14 +1,25 @@
 'use strict';
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','GamesManager','UsersManager','GeneralBetsManager','security', function ($scope, $log, $location, GamesManager, UsersManager, GeneralBetsManager, security) {
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','$timeout','GamesManager','UsersManager','GeneralBetsManager', function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager) {
     $scope.generalBetsAreOpen = false;
 
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
     });
 
-    GeneralBetsManager.hasGeneralBet(security.user.userName).then(function(data) {
-        $scope.submittedGeneralBet = data === 'true';
-    });
+    var userHasGeneralBet = function() {
+        if (!angular.isDefined($scope.security.user))
+        {
+            $log.debug('DashboardCtrl: user info not loaded yet, will retry in 1 second');
+            $timeout(userHasGeneralBet,1000);
+        }
+        else {
+            GeneralBetsManager.hasGeneralBet($scope.security.user.userName).then(function (data) {
+                $scope.submittedGeneralBet = data === 'true';
+            });
+        }
+    };
+
+    userHasGeneralBet();
 
     GeneralBetsManager.canSubmtiGeneralBet().then(function(data) {
         $scope.generalBetsAreOpen = data === 'true';

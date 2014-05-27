@@ -27,8 +27,6 @@ namespace Mundialito.Tests.Logic
                 GameId = 1,
                 Date = new DateTime().AddDays(2)
             });
-
-
         }
 
         [TestMethod]
@@ -46,7 +44,7 @@ namespace Mundialito.Tests.Logic
                     BetId = 3, User = new MundialitoUser() { Id = "3" } , Game = new Game() { GameId = 1, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "1", CornersMark = "X"
                 },
                 new Bet() { 
-                    BetId = 4, User = new MundialitoUser() { Id = "1" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
+                    BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
                 }
             });
             var resolver = new BetsResolver(betsRepository.Object);
@@ -59,9 +57,45 @@ namespace Mundialito.Tests.Logic
                 CardsMark = "X",
                 CornersMark = "1"
             });
-            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 1 && bet.Points == 7)));
-            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 2 && bet.Points == 1)));
-            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 3 && bet.Points == 3)));
+            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 1 && bet.Points == 7 && bet.GameMarkWin && bet.ResultWin && bet.CornersWin && bet.CardsWin)));
+            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 2 && bet.Points == 1 && !bet.GameMarkWin && !bet.ResultWin && bet.CornersWin && !bet.CardsWin)));
+            betsRepository.Verify(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 3 && bet.Points == 3 && bet.GameMarkWin && !bet.ResultWin && !bet.CornersWin && !bet.CardsWin)));
+            betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 4))).Throws(new Exception("Should not be called"));
+        }
+
+        [TestMethod]
+        public void TestBetResolvingGameWithNoBets()
+        {
+            var betsRepository = new Mock<IBetsRepository>();
+            betsRepository.Setup(res => res.GetGameBets(It.IsAny<int>())).Returns(new List<Bet> { 
+                new Bet() { 
+                    BetId = 1, User = new MundialitoUser() { Id = "1" } , Game = new Game() { GameId = 1, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 1, AwayScore = 1 , CardsMark = "X", CornersMark = "1"
+                },
+                new Bet() { 
+                    BetId = 2, User = new MundialitoUser() { Id = "2" } , Game = new Game() { GameId = 1, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 1 , CardsMark = "2", CornersMark = "1"
+                },
+                new Bet() { 
+                    BetId = 3, User = new MundialitoUser() { Id = "3" } , Game = new Game() { GameId = 1, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "1", CornersMark = "X"
+                },
+                new Bet() { 
+                    BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
+                }
+            });
+            var resolver = new BetsResolver(betsRepository.Object);
+            resolver.ResolveBets(new Game()
+            {
+                GameId = 3,
+                Date = DateTime.Now.ToUniversalTime(),
+                HomeScore = 1,
+                AwayScore = 1,
+                CardsMark = "X",
+                CornersMark = "1"
+            });
+            betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 1))).Throws(new Exception("Should not be called"));
+            betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 2))).Throws(new Exception("Should not be called"));
+            betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 3))).Throws(new Exception("Should not be called"));
+            betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 4))).Throws(new Exception("Should not be called"));
+            betsRepository.Setup(res => res.Save()).Throws(new Exception("Should not be called"));
         }
     }
 }

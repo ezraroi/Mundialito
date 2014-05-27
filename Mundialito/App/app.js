@@ -1,10 +1,11 @@
 ﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'ui.select2', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid'])
     .value('cgBusyTemplateName','App/Partials/angular-busy.html')
-    .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider','Constants', function ($routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider, Constants) {
+    .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider','Constants', function ( $routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider, Constants) {
         $locationProvider.html5Mode(true);
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         $httpProvider.interceptors.push('myHttpInterceptor');
         securityProvider.urls.login = Constants.LOGIN_PATH;
+        securityProvider.usePopups = false;
 
         $routeProvider.
             when('/', {
@@ -145,29 +146,26 @@
             });
     }])
     .run(['$rootScope', '$log', 'security', '$route', '$location', function ($rootScope, $log, security, $route, $location) {
-        $rootScope.location = $location;
+        security.events.login = function (security, user) {
+            $log.log('Current user details: ' + angular.toJson(user));
+            $rootScope.mundialitoApp.authenticating = false;
+        };
+        security.events.reloadUser = function (security, user) {
+            $log.log('User reloaded' + angular.toJson(user));
+            $rootScope.mundialitoApp.authenticating = false;
+        };
+        security.events.logout = function (security) {
+            $log.log('User logged out');
+            security.authenticate();
+        };
         $rootScope.mundialitoApp = {
             params: null,
             loading: true,
             authenticating: true,
             message: null
         };
+        security.authenticate();
         $rootScope.security = security;
-
-        security.events.login = function (security, user) {
-            $log.log('Current user details: ' + angular.toJson(user));
-            $rootScope.mundialitoApp.authenticating = false;
-        };
-
-        security.events.reloadUser = function (security, user) {
-            $log.log('User reloaded' + angular.toJson(user));
-            $rootScope.mundialitoApp.authenticating = false;
-        };
-
-        security.events.logout = function (security) {
-            $log.log('User logged out');
-            security.authenticate();
-        };
 
         $rootScope.$on('$locationChangeStart', function () {
             $log.debug('$locationChangeStart');
@@ -188,5 +186,5 @@
             $rootScope.mundialitoApp.message = null;
         });
 
-        security.authenticate();
+
     }]);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Mundialito.Controllers;
+using Mundialito.DAL.Accounts;
 using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -11,12 +12,14 @@ using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace Mundialito.Tests.Controllers
 {
     [TestClass]
     public class GeneralBetsControllerUnitTest
     {
+    
         [TestMethod]
         public void GetAllGeneralBetsTest()
         {
@@ -24,8 +27,8 @@ namespace Mundialito.Tests.Controllers
             var repository = new Mock<IGeneralBetsRepository>();
             var userProvider = new Mock<ILoggedUserProvider>();
             var bets = new List<GeneralBet>();
-            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 });
-            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId= 1 });
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetGeneralBets()).Returns(bets);
 
             var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
@@ -40,8 +43,8 @@ namespace Mundialito.Tests.Controllers
             var repository = new Mock<IGeneralBetsRepository>();
             var userProvider = new Mock<ILoggedUserProvider>();
             var bets = new List<GeneralBet>();
-            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 });
-            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1 });
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetGeneralBet(1)).Returns(bets[0]);
             repository.Setup(rep => rep.GetGeneralBet(2)).Returns(bets[1]);
 
@@ -71,9 +74,9 @@ namespace Mundialito.Tests.Controllers
             var repository = new Mock<IGeneralBetsRepository>();
             var userProvider = new Mock<ILoggedUserProvider>();
             var bets = new List<GeneralBet>();
-            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 });
-            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1 });
-            repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 });
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
 
             var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetUserGeneralBet("ezraroi");
@@ -88,12 +91,12 @@ namespace Mundialito.Tests.Controllers
             var repository = new Mock<IGeneralBetsRepository>();
             var userProvider = new Mock<ILoggedUserProvider>();
             var bets = new List<GeneralBet>();
-            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 });
-            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1 });
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns( (GeneralBet)null);
 
             var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            var res = controller.GetUserGeneralBet("ezraroi");
+            controller.GetUserGeneralBet("ezraroi");
         }
 
         [TestMethod]
@@ -173,7 +176,7 @@ namespace Mundialito.Tests.Controllers
             var dateTimeProvider = new Mock<IDateTimeProvider>();
             var repository = new Mock<IGeneralBetsRepository>();
             var userProvider = new Mock<ILoggedUserProvider>();
-            var generalBet = new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1 };
+            var generalBet = new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } };
             repository.Setup(rep => rep.GetGeneralBet(1)).Returns(generalBet);
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 6, 1));
 

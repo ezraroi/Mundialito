@@ -83,7 +83,6 @@ namespace Mundialito.Controllers
             // TODO - Should i delete all bets?
         }
 
-
         private void IsAdmin(UserModel user)
         {
             user.IsAdmin = usersManager.GetRoles<MundialitoUser>(user.Id).Contains("Admin");
