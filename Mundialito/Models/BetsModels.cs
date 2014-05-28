@@ -18,7 +18,7 @@ namespace Mundialito.Models
 
         }
 
-        public BetViewModel(Bet bet)
+        public BetViewModel(Bet bet, DateTime now)
         {
             BetId = bet.BetId;
             HomeScore = bet.HomeScore;
@@ -29,8 +29,8 @@ namespace Mundialito.Models
             CardsMark = bet.CardsMark;
             GameMarkWin = bet.GameMarkWin;
             ResultWin = bet.ResultWin;
-            IsOpenForBetting = bet.IsOpenForBetting();
-            IsResolved = bet.IsResolved();
+            IsOpenForBetting = bet.IsOpenForBetting(now);
+            IsResolved = bet.IsResolved(now);
             Points = bet.Points.HasValue ? bet.Points.Value : 0;
             Game = new BetGame(bet.Game);
             User = new BetUser(bet.User);

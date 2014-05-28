@@ -13,6 +13,9 @@ namespace Mundialito.DAL.Stadiums
         public string Name { get; set; }
 
         [Required]
+        public string City { get; set; }
+
+        [Required]
         [Range(0,int.MaxValue)]
         public int Capacity { get; set; }
 

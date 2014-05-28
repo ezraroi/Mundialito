@@ -198,7 +198,7 @@ namespace Mundialito.Tests.Logic
 
         private Game CreateClosedGame(int id)
         {
-            return new Game() { GameId = id, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, HomeTeam = homeTeam, AwayTeam = awayTeam };
+            return new Game() { GameId = id, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, CornersMark = "X", CardsMark = "2",  HomeTeam = homeTeam, AwayTeam = awayTeam };
         }
 
         private MundialitoUser CreateMundialtoUser(String id)

@@ -25,8 +25,10 @@ namespace Mundialito.Controllers
         private readonly IGamesRepository gamesRepository;
         private readonly IBetsRepository betsRepository;
         private readonly IBetsResolver betsResolver;
+        private readonly IDateTimeProvider dateTimeProvider;
+        private readonly ILoggedUserProvider loggedUserProvider;
         
-        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver)
+        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider loggedUserProvider,  IDateTimeProvider dateTimeProvider)
         {
             if (gamesRepository == null)
             {
@@ -45,19 +47,32 @@ namespace Mundialito.Controllers
                 throw new ArgumentNullException("betsResolver");
             }
             this.betsResolver = betsResolver;
+
+
+            if (loggedUserProvider == null)
+            {
+                throw new ArgumentNullException("loggedUserProvider");
+            }
+            this.loggedUserProvider = loggedUserProvider;
+
+            if (dateTimeProvider == null)
+            {
+                throw new ArgumentNullException("dateTimeProvider");
+            }
+            this.dateTimeProvider = dateTimeProvider;
         }
 
-        public IEnumerable<Game> Get()
+        public IEnumerable<GameViewModel> GetAllGames()
         {
-            return gamesRepository.GetGames();
+            return gamesRepository.GetGames().Select(game => new GameViewModel(game));
         }
 
-        public Game GetGameByID(int id)
+        public GameViewModel GetGameByID(int id)
         {
             var item = gamesRepository.GetGame(id);
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
-            return item; 
+            return new GameViewModel(item); 
         }
 
         [Route("{id}/Bets")]
@@ -67,30 +82,30 @@ namespace Mundialito.Controllers
             if (game == null)
                 throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
 
-            if (game.IsOpen())
+            if (game.IsOpen(dateTimeProvider.UTCNow))
                 throw new ArgumentException(String.Format("Game '{0}' is stil open for betting", id));
 
-            return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item)).OrderByDescending( bet => bet.Points);
+            return betsRepository.GetGameBets(id).Select(item => new BetViewModel(item, dateTimeProvider.UTCNow)).OrderByDescending(bet => bet.Points);
         }
 
         [Route("{id}/MyBet/")]
         public BetViewModel GetGameUserBet(int id)
         {
             var game = GetGameByID(id);
-            var uid = User.Identity.GetUserId();
+            var uid = loggedUserProvider.UserId;
             var item =  betsRepository.GetGameBets(id).SingleOrDefault(bet => bet.User.Id == uid);
             if (item == null)
             {
                 Trace.TraceInformation("No bet found for game {0} and user {1}, creating empty Bet", game.GameId, uid);
                 return new BetViewModel() { BetId = -1, HomeScore = null, AwayScore = null,  IsOpenForBetting = true, IsResolved = false, Game = new BetGame() { GameId = id } };
             }
-            return new BetViewModel(item); 
+            return new BetViewModel(item, dateTimeProvider.UTCNow); 
         }
 
         [Route("Open")]
         public IEnumerable<Game> GetOpenGames()
         {
-            return gamesRepository.GetGames().Where(game => game.IsOpen());
+            return gamesRepository.GetGames().Where(game => game.IsOpen(dateTimeProvider.UTCNow));
         }
 
         [HttpPost]
@@ -99,6 +114,7 @@ namespace Mundialito.Controllers
         {
             if (game.AwayTeam.TeamId == game.HomeTeam.TeamId)
                 throw new ArgumentException("Home team and Away team can not be the same team");
+
             var res = gamesRepository.InsertGame(game);
             Trace.TraceInformation("Posting new Game: {0}", game);
             gamesRepository.Save();
@@ -109,12 +125,29 @@ namespace Mundialito.Controllers
         [Authorize(Roles = "Admin")]
         public Game PutGame(int id, Game game)
         {
-            gamesRepository.UpdateGame(game);
+            var item = gamesRepository.GetGame(id);
+
+            if (item == null)
+                throw new ObjectNotFoundException(string.Format("No such game with id '{0}'", id));
+
+            if (item.IsOpen(dateTimeProvider.UTCNow) && (game.HomeScore != null || game.AwayScore != null || game.CornersMark != null || game.CardsMark != null))
+                throw new ArgumentException("Open game can not be updated with results");
+
+            item.AwayScore = game.AwayScore;
+            item.HomeScore = game.HomeScore;
+            item.CardsMark = game.CardsMark;
+            item.CornersMark = game.CornersMark;
+            item.Date = game.Date;
+            item.HomeTeam = game.HomeTeam;
+            item.Stadium = game.Stadium;
+            item.AwayTeam = game.AwayTeam;
+
+            gamesRepository.UpdateGame(item);
             gamesRepository.Save();
-            if (game.IsBetResolved())
+            if (item.IsBetResolved(dateTimeProvider.UTCNow))
             {
                 Trace.TraceInformation("Will reoslve Game {0} bets", game.GameId);
-                betsResolver.ResolveBets(game);
+                betsResolver.ResolveBets(item);
             }
             return game;
         }

@@ -12,8 +12,10 @@ angular.module('mundialitoApp').factory('Stadium', ['$http','$log', function($ht
             angular.extend(this, stadiumData);
         },
         delete: function() {
-            $log.debug('Stadium: Will delete stadium ' + this.StadiumId)
-            return $http.delete("api/stadiums/" + this.StadiumId, { tracker: 'deleteStadium' });
+            if (confirm('Are you sure you would like to delete stadium ' + this.Name)) {
+                $log.debug('Stadium: Will delete stadium ' + this.StadiumId)
+                return $http.delete("api/stadiums/" + this.StadiumId, { tracker: 'deleteStadium' });
+            }
         },
         update: function() {
             $log.debug('Stadium: Will update stadium ' + this.StadiumId)

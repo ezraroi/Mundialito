@@ -43,6 +43,7 @@ angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stad
         getStaidumSchema: function() {
             return [
                 { property: 'Name', label: 'Name', type: 'text', attr: { required: true } },
+                { property: 'City', label: 'City', type: 'text', attr: { required: true } },
                 { property: 'Capacity', label: 'Capacity', type: 'number', attr: { required: true } }
             ];
         },

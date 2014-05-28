@@ -3,7 +3,7 @@
         <div class="list-group" cg-busy="{tracker:'getStadiums'}">
             <a href="/stadiums/{{stadium.StadiumId}}" class="list-group-item" ng-repeat="stadium in stadiums">
                 <span class="pull-left"><img ng-src="{{team.Flag}}" style="width: 55%;" /></span>
-                {{stadium.Name}} (Capacity: {{stadium.Capacity | number }})
+                {{stadium.Name}}, {{stadium.City}} (Capacity: {{stadium.Capacity | number }})
                 <span class="pull-right"><i class="glyphicon glyphicon-chevron-right"></i></span>
             </a>
             <a href="" class="list-group-item" data-access-level="Admin" ng-click="addNewStadium()">

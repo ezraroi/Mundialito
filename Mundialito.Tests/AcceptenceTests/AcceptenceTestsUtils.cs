@@ -33,9 +33,9 @@ namespace Mundialito.Tests.AcceptenceTests
             return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), GetDateTimeProvider(now));
         }
 
-        public static GamesController GetGamesController(DateTime now)
+        public static GamesController GetGamesController(UserModel user, DateTime now)
         {
-            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository(), GetDateTimeProvider(now)));
+            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), GetDateTimeProvider(now));
         }
 
         public static StadiumsController GetStadiumsController()

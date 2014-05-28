@@ -54,7 +54,7 @@ namespace Mundialito.Controllers
 
         public IEnumerable<BetViewModel> GetAllBets()
         {
-            return betsRepository.GetBets().Select(item => new BetViewModel(item));
+            return betsRepository.GetBets().Select(item => new BetViewModel(item, dateTimeProvider.UTCNow));
         }
 
         public BetViewModel GetBetById(int id)
@@ -64,7 +64,7 @@ namespace Mundialito.Controllers
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Bet with id '{0}' not found", id));
 
-            return new BetViewModel(item);
+            return new BetViewModel(item, dateTimeProvider.UTCNow);
         }
 
         [HttpGet]
@@ -72,7 +72,7 @@ namespace Mundialito.Controllers
         public IEnumerable<BetViewModel> GetUserBets(string username)
         {
             var bets = betsRepository.GetUserBets(username).ToList();
-            return bets.Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow) || userProivider.UserName == username).Select(bet => new BetViewModel(bet));
+            return bets.Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow) || userProivider.UserName == username).Select(bet => new BetViewModel(bet, dateTimeProvider.UTCNow));
         }
 
         [HttpPost]

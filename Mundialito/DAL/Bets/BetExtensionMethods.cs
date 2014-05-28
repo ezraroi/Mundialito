@@ -16,7 +16,6 @@ namespace Mundialito.DAL.Bets
 
         public static Boolean IsOpenForBetting(this Bet bet, DateTime now)
         {
-
             return bet.Game.IsOpen(now);
         }
 

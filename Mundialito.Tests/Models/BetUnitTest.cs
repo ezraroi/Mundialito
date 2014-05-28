@@ -44,7 +44,7 @@ namespace Mundialito.Tests.Models
         [TestMethod]
         public void IsResolvedTest2()
         {
-            var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow , HomeScore = 1, AwayScore = 1} };
+            var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow , HomeScore = 1, AwayScore = 1, CornersMark = "X", CardsMark = "1"} };
             Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
             Assert.IsTrue(bet.IsResolved(), " Bet should be resolved");
         }

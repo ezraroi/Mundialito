@@ -58,8 +58,11 @@ namespace Mundialito.Tests.Models
         {
             var game = new Game();
             game.Date = DateTime.Now.ToUniversalTime().Subtract(TimeSpan.FromMinutes(5));
+
             game.HomeScore = 1;
             game.AwayScore = 1;
+            game.CardsMark = "X";
+            game.CornersMark = "1";
 
             Assert.AreEqual("X", game.Mark());
         }
@@ -72,6 +75,8 @@ namespace Mundialito.Tests.Models
 
             game.HomeScore = 2;
             game.AwayScore = 1;
+            game.CardsMark = "X";
+            game.CornersMark = "1";
 
             Assert.AreEqual("1", game.Mark());
         }
@@ -84,6 +89,8 @@ namespace Mundialito.Tests.Models
 
             game.HomeScore = 1;
             game.AwayScore = 2;
+            game.CardsMark = "X";
+            game.CornersMark = "1";
 
             Assert.AreEqual("2", game.Mark());
         }
@@ -96,6 +103,5 @@ namespace Mundialito.Tests.Models
 
             Assert.AreEqual("Pending Update", game.Mark());
         }
-
     }
 }

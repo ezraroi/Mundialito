@@ -84,8 +84,8 @@ namespace Mundialito.Tests
             context.Teams.Add(teamC);
             context.Teams.Add(teamD);
 
-            var stadiumA = new Stadium {Capacity = 15000, Name = "StadiumA" };
-            var stadiumB = new Stadium {Capacity = 15000, Name = "StadiumB" };
+            var stadiumA = new Stadium {Capacity = 15000, Name = "StadiumA", City = "CityA" };
+            var stadiumB = new Stadium {Capacity = 15000, Name = "StadiumB", City = "CityB"  };
 
             context.Stadiums.Add(stadiumA);
             context.Stadiums.Add(stadiumB);

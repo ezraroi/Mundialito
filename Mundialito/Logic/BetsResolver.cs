@@ -28,7 +28,7 @@ namespace Mundialito.Logic
             foreach (Bet bet in bets)
             {
                 var points = 0;
-                if (bet.Mark() == game.Mark())
+                if (bet.Mark() == game.Mark(dateTimeProvider.UTCNow))
                 {
                     points += 3;
                     bet.GameMarkWin = true;

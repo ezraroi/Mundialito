@@ -36,7 +36,7 @@ namespace Mundialito.Logic
                 throw new ObjectNotFoundException(string.Format("No such user '{0}'", username));
             }
             var userModel = new UserModel(user);
-            betsRepository.GetUserBets(user.UserName).Where(bet => isLogged || !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => userModel.AddBet(new BetViewModel(bet)));
+            betsRepository.GetUserBets(user.UserName).Where(bet => isLogged || !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => userModel.AddBet(new BetViewModel(bet, dateTimeProvider.UTCNow)));
             var generalBet = generalBetsRepository.GetUserGeneralBet(username);
             if (generalBet != null)
             {
@@ -48,7 +48,7 @@ namespace Mundialito.Logic
         public List<UserModel> GetAllUsers()
         {
             var users = usersRepository.AllUsers().ToDictionary(user => user.Id, user => new UserModel(user));
-            betsRepository.GetBets().Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => users[bet.User.Id].AddBet(new BetViewModel(bet)));
+            betsRepository.GetBets().Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => users[bet.User.Id].AddBet(new BetViewModel(bet, dateTimeProvider.UTCNow)));
             generalBetsRepository.GetGeneralBets().ToList().ForEach(generalBet => 
             {
                 users[generalBet.User.Id].SetGeneralBet(new GeneralBetViewModel(generalBet));

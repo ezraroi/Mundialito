@@ -24,7 +24,7 @@ namespace Mundialito.Tests.AcceptenceTests
     {
         private Dictionary<String, UserModel> users;
         private List<Team> teams;
-        private List<Game> games;
+        private List<GameViewModel> games;
 
         [TestInitialize]
         public void CreateControllers()
@@ -32,7 +32,7 @@ namespace Mundialito.Tests.AcceptenceTests
             AcceptenceTestsUtils.InitDatabase();
             users = AcceptenceTestsUtils.GetUsersController(new UserModel(String.Empty, "Admin"), DateTime.UtcNow).GetAllUsers().ToDictionary(item => item.Username, item => item);
             teams = AcceptenceTestsUtils.GetTeamsController().GetAllTeams().ToList();
-            games = AcceptenceTestsUtils.GetGamesController(DateTime.UtcNow).Get().ToList();
+            games = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).GetAllGames().ToList();
         }
 
         private UserModel GetUser(String username)
@@ -67,6 +67,75 @@ namespace Mundialito.Tests.AcceptenceTests
             TestOtherUsersCanNotSeeOpenGameBets();
 
             TryUpdateOtherUserBet();
+
+            GetAllLoggedUserBets();
+
+            GetOpenGames();
+
+            ValidateUserBetOnGame();
+
+            ValidateTableAfter2Games();
+
+            ValidateTableAfterGameResultUpdate();
+
+            // TODO - Test adding a new game and updating his date
+        }
+
+        private void ValidateTableAfterGameResultUpdate()
+        {
+            AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow.AddDays(1)).PutGame(games[1].GameId, CreateGameWithBetData(games[1], 0, 1, "2", "1"));
+            var allUsers = AcceptenceTestsUtils.GetUsersController(GetUser("User1"), DateTime.UtcNow.AddDays(1)).GetAllUsers().ToDictionary(item => item.Username, item => item);
+            Assert.AreEqual(7, allUsers["Admin"].Points);
+            Assert.AreEqual(6, allUsers["User1"].Points);
+            Assert.AreEqual(10, allUsers["User2"].Points);
+            Assert.AreEqual(5, allUsers["User3"].Points);
+        }
+
+        private void ValidateTableAfter2Games()
+        {
+            AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow.AddDays(1)).PutGame(games[0].GameId, CreateGameWithBetData(games[0], 1, 2, "X", "1"));
+            AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow.AddDays(1)).PutGame(games[1].GameId, CreateGameWithBetData(games[1], 1, 1, "2", "X"));
+            var allUsers = AcceptenceTestsUtils.GetUsersController(GetUser("User1"), DateTime.UtcNow.AddDays(1)).GetAllUsers().ToDictionary(item => item.Username, item => item);
+            Assert.AreEqual(3, allUsers["Admin"].Points);
+            Assert.AreEqual(5, allUsers["User1"].Points);
+            Assert.AreEqual(8, allUsers["User2"].Points);
+            Assert.AreEqual(3, allUsers["User3"].Points);
+        }
+
+        private Game CreateGameWithBetData(GameViewModel game, int homeScore, int awayScore, String cards, String corners)
+        {
+            var newGame = new Game();
+            newGame.GameId = game.GameId;
+            newGame.AwayScore = awayScore;
+            newGame.AwayTeam = game.AwayTeam;
+            newGame.CardsMark = cards;
+            newGame.CornersMark = corners;
+            newGame.Date = game.Date;
+            newGame.HomeScore = homeScore;
+            newGame.HomeTeam = game.HomeTeam;
+            newGame.Stadium = game.Stadium;
+            return newGame;
+        }
+
+        private void ValidateUserBetOnGame()
+        {
+            var userBet = AcceptenceTestsUtils.GetGamesController(GetUser("User1"), DateTime.Now).GetGameUserBet(games[0].GameId);
+            Assert.AreEqual(2, userBet.AwayScore);
+            Assert.AreEqual(1, userBet.HomeScore);
+            Assert.AreEqual("1", userBet.CardsMark);
+            Assert.AreEqual("2", userBet.CornersMark);
+        }
+
+        private void GetOpenGames()
+        {
+            Assert.AreEqual(6, AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).GetOpenGames().Count());
+            Assert.AreEqual(4, AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow.AddDays(1)).GetOpenGames().Count());
+        }
+
+        private void GetAllLoggedUserBets()
+        {
+            var bets = AcceptenceTestsUtils.GetBetsController(GetUser("User1"), DateTime.UtcNow).GetUserBets("User1");
+            Assert.AreEqual(6, bets.Count());
         }
 
         private void TryUpdateOtherUserBet()
@@ -82,8 +151,9 @@ namespace Mundialito.Tests.AcceptenceTests
 
         private void TestOtherUsersCanNotSeeOpenGameBets()
         {
-            var bets = AcceptenceTestsUtils.GetBetsController(GetUser("User3"), DateTime.UtcNow).GetUserBets("Admin");
-            Assert.IsTrue(bets.Count() == 0);
+            var bets = AcceptenceTestsUtils.GetBetsController(GetUser("User3"), DateTime.UtcNow.AddDays(2)).GetUserBets("Admin");
+            Assert.IsTrue(bets.Count() == 4);
+            bets.ToList().ForEach(bet => Assert.IsFalse(bet.IsOpenForBetting));
         }
 
         private void TryUpdateBetOnClosedGame()
