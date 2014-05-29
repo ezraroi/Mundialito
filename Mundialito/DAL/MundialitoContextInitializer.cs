@@ -45,7 +45,7 @@ namespace Mundialito.DAL
             {
                 HomeTeamId = GetTeam("BRAZIL").TeamId,
                 AwayTeamId = GetTeam("CROATIA").TeamId,
-                Date = new DateTime(2014,5,30,20,0,0),
+                Date = new DateTime(2014,5,29,20,0,0),
                 //Date = new DateTime(2014,6,12,23,0,0),
                 StadiumId = GetStadium("Arena de Sao Paulo").StadiumId
             });
@@ -54,7 +54,7 @@ namespace Mundialito.DAL
             {
                 HomeTeamId = GetTeam("MEXICO").TeamId,
                 AwayTeamId = GetTeam("CAMEROON").TeamId,
-                Date = new DateTime(2014, 5, 31, 16, 0, 0),
+                Date = new DateTime(2014, 5, 30, 16, 0, 0),
                 //Date = new DateTime(2014, 6, 13, 19, 0, 0),
                 StadiumId = GetStadium("Estadio das Dunas").StadiumId
             });
@@ -63,7 +63,7 @@ namespace Mundialito.DAL
             {
                 HomeTeamId = GetTeam("SPAIN").TeamId,
                 AwayTeamId = GetTeam("NETHERLANDS").TeamId,
-                Date = new DateTime(2014, 5, 31, 19, 0, 0),
+                Date = new DateTime(2014, 5, 30, 19, 0, 0),
                 //Date = new DateTime(2014, 6, 13, 22, 0, 0),
                 StadiumId = GetStadium("Arena Fonte Nova").StadiumId
             });
@@ -72,7 +72,7 @@ namespace Mundialito.DAL
             {
                 HomeTeamId = GetTeam("CHILE").TeamId,
                 AwayTeamId = GetTeam("AUSTRALIA").TeamId,
-                Date = new DateTime(2014, 5, 31, 22, 0, 0),
+                Date = new DateTime(2014, 5, 30, 22, 0, 0),
                 //Date = new DateTime(2014, 6, 14, 1, 0, 0),
                 StadiumId = GetStadium("Arena Pantanal").StadiumId
             });
