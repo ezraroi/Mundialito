@@ -95,7 +95,7 @@ namespace Mundialito.Controllers
             var res = generalBetsRepository.InsertGeneralBet(generalBet);
             Trace.TraceInformation("Posting new General Bet: {0}", generalBet);
             generalBetsRepository.Save();
-            newBet.GenrealBetId = res.GeneralBetId;
+            newBet.GeneralBetId = res.GeneralBetId;
             return newBet;
         }
 

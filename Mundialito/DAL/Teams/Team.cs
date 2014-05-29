@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mundialito.DAL.Games;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -23,5 +24,9 @@ namespace Mundialito.DAL.Teams
         [MinLength(3)]
         [MaxLength(3)]
         public string ShortName { get; set; }
+
+        public ICollection<Game> HomeMatches { get; set; }
+
+        public ICollection<Game> AwayMatches { get; set; }
     }
 }

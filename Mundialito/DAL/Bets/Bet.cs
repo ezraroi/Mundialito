@@ -25,10 +25,14 @@ namespace Mundialito.DAL.Bets
         public int BetId { get; set; }
 
         [Required]
-        public virtual MundialitoUser User { get; set; }
+        public String UserId { get; set; }
+                
+        public MundialitoUser User { get; set; }
 
         [Required]
-        public virtual Game Game { get; set; }
+        public int GameId { get; set; }
+        
+        public Game Game { get; set; }
 
         [Required]
         [Range(0, 10)]

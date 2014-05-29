@@ -133,7 +133,7 @@ angular.module('mundialitoApp').factory('GeneralBetsManager', ['$http', '$q', 'G
         },
 
         /*  This function is useful when we got somehow the bet data and we wish to store it or update the pool and get a general bet instance in return */
-        setBet: function(betData) {
+        setGeneralBet: function(betData) {
             $log.debug('GeneralBetsManager: will set bet ' + betData.GeneralBetId + ' to -' + angular.toJson(betData));
             var scope = this;
             var bet = this._search(betData.GeneralBetId);

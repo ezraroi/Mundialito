@@ -24,14 +24,14 @@ namespace Mundialito.Logic
 
         public void ValidateNewBet(Bet bet)
         {
-            var game = gamesRepository.GetGame(bet.Game.GameId);
+            var game = gamesRepository.GetGame(bet.GameId);
             if (game == null)
                 throw new ArgumentException(string.Format("Game {0} dosen't exist", bet.Game.GameId));
             if (!game.IsOpen(dateTimeProvider.UTCNow))
                 throw new ArgumentException(string.Format("Game {0} is closed for betting", game.GameId));
-            if (bet.User == null)
+            if (String.IsNullOrEmpty(bet.UserId))
                 throw new ArgumentException("New bet must have an owner");
-            if (betsRepository.GetGameBets(game.GameId).Any(b => b.User.Id == bet.User.Id))
+            if (betsRepository.GetGameBets(game.GameId).Any(b => b.UserId == bet.UserId))
                 throw new ArgumentException(string.Format("You already have an existing bet on game {0}", game.GameId));
         }
 
@@ -40,11 +40,11 @@ namespace Mundialito.Logic
             var betToUpdate = betsRepository.GetBet(bet.BetId);
             if (betToUpdate == null)
                 throw new ArgumentException(string.Format("Bet {0} dosen't exist", bet.BetId));
-            if (bet.User == null)
+            if (String.IsNullOrEmpty(bet.UserId))
                 throw new ArgumentException(string.Format("Updated bet {0} must have user", bet.BetId));
-            if (betToUpdate.User.Id != bet.User.Id)
+            if (betToUpdate.UserId != bet.UserId)
                 throw new UnauthorizedAccessException("You can't update a bet that is not yours");
-            var game = gamesRepository.GetGame(betToUpdate.Game.GameId);
+            var game = gamesRepository.GetGame(betToUpdate.GameId);
             if (!game.IsOpen(dateTimeProvider.UTCNow))
                 throw new ArgumentException(string.Format("Game {0} is closed for betting", game.GameId));
 
@@ -57,7 +57,7 @@ namespace Mundialito.Logic
                 throw new ArgumentException(string.Format("Bet {0} dosen't exist", betId));
             if (betToDelete.User.Id != userId)
                 throw new UnauthorizedAccessException("You can't delete a bet that is not yours");
-            var game = gamesRepository.GetGame(betToDelete.Game.GameId);
+            var game = gamesRepository.GetGame(betToDelete.GameId);
             if (dateTimeProvider.UTCNow > game.CloseTime)
                 throw new ArgumentException(string.Format("Game {0} is closed for betting", game.GameId));
 

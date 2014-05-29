@@ -2,6 +2,7 @@
 using Mundialito.DAL.Teams;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mundialito.DAL.Games
 {
@@ -10,10 +11,14 @@ namespace Mundialito.DAL.Games
         public int GameId { get; set; }
 
         [Required]
-        public Team HomeTeam { get; set; }
+        public int HomeTeamId { get; set; }
+        
+        public virtual Team HomeTeam { get; set; }
 
         [Required]
-        public Team AwayTeam { get; set; }
+        public int AwayTeamId { get; set; }
+
+        public virtual Team AwayTeam { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -34,7 +39,9 @@ namespace Mundialito.DAL.Games
         public String CardsMark { get; set; }
 
         [Required]
-        public Stadium Stadium { get; set; }
+        public int StadiumId { get; set; }
+        
+        public virtual Stadium Stadium { get; set; }
 
         public DateTime CloseTime
         {

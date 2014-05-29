@@ -79,10 +79,8 @@ namespace Mundialito.Controllers
         public NewBetModel PostBet(NewBetModel bet)
         {
             var newBet = new Bet();
-            newBet.User = new MundialitoUser();
-            newBet.User.Id = userProivider.UserId;
-            newBet.Game = new Game();
-            newBet.Game.GameId = bet.GameId;
+            newBet.UserId = userProivider.UserId;
+            newBet.GameId = bet.GameId;
             newBet.HomeScore = bet.HomeScore;
             newBet.AwayScore = bet.AwayScore;
             newBet.CardsMark = bet.CardsMark;
@@ -104,10 +102,8 @@ namespace Mundialito.Controllers
             betToUpdate.AwayScore = bet.AwayScore;
             betToUpdate.CornersMark = bet.CornersMark;
             betToUpdate.CardsMark = bet.CardsMark;
-            betToUpdate.Game = new Game();
-            betToUpdate.Game.GameId = bet.GameId;
-            betToUpdate.User = new MundialitoUser();
-            betToUpdate.User.Id = userProivider.UserId;
+            betToUpdate.GameId = bet.GameId;
+            betToUpdate.UserId = userProivider.UserId;
             betValidator.ValidateUpdateBet(betToUpdate);
             betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();

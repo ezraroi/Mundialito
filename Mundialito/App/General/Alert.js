@@ -10,6 +10,9 @@ angular.module('mundialitoApp').factory('Alert', ['$rootScope', '$timeout', func
 
     Alert.new = function (type, message, time) {
         var alert = { type: type, message: message, close: Alert.close };
+        if (time == null) {
+            time = 3000;
+        }
         if (time != null) {
             alert.timer = $timeout(function () {
                 alerts.splice(alerts.indexOf(alert), 1);

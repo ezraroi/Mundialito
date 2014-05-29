@@ -136,16 +136,15 @@ namespace Mundialito.Tests.Logic
         public void TestUpdateBetNotMineBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
-            betsRepository.Setup(res => res.GetBet(It.IsAny<int>())).Returns(new Bet() { BetId = 1, User = new MundialitoUser() { Id = "2"  }});
+            betsRepository.Setup(res => res.GetBet(It.IsAny<int>())).Returns(new Bet() { BetId = 1, UserId = "2"});
 
             var gamesRepository = new Mock<IGamesRepository>();
 
             var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
-            betToUpdate.Game = new Game();
-            betToUpdate.Game.GameId = 1;
-            betToUpdate.User = new MundialitoUser() { Id = "1" };
+            betToUpdate.GameId = 1;
+            betToUpdate.UserId = "1";
             betValidator.ValidateUpdateBet(betToUpdate);
         }
 

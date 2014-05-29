@@ -21,8 +21,10 @@ angular.module('mundialitoApp').factory('User', ['$http','$log', function($http,
             }
         },
         makeAdmin :function() {
-            $log.debug('User: Will make user ' + this.Username + ' admin')
-            return $http.post("api/users/makeadmin/" + this.Id, { tracker: 'makeAdmin' });
+            if (confirm('Are you sure you would like to make ' + this.Name + ' Admin?')) {
+                $log.debug('User: Will make user ' + this.Username + ' admin')
+                return $http.post("api/users/makeadmin/" + this.Id, { tracker: 'makeAdmin' });
+            }
         }
     };
     return User;

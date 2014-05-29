@@ -51,6 +51,7 @@ namespace Mundialito.Controllers
 
             MundialitoUser user = UserManager.FindById(User.Identity.GetUserId());
 
+
             if (user == null)
                 throw new Exception("Session expired. Please login again");
 

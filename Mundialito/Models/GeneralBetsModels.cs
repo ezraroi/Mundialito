@@ -46,7 +46,7 @@ namespace Mundialito.Models
 
         public string GoldenBootPlayer { get; set; }
 
-        public int GenrealBetId { get; set; }
+        public int GeneralBetId { get; set; }
     }
 
     public class UpdateGenralBetModel

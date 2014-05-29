@@ -14,49 +14,73 @@ using System.Collections.Generic;
 
 namespace Mundialito.DAL
 {
-    public class MundialitoContextInitializer : DropCreateDatabaseIfModelChanges<MundialitoContext>
+    public class MundialitoContextInitializer : DropCreateDatabaseAlways<MundialitoContext>
     {
-        private List<Stadium> stadiums = new List<Stadium>();
-        private List<Team> teams = new List<Team>();
+        private Dictionary<String, Stadium> stadiumsDic = new Dictionary<string, Stadium>();
+        private Dictionary<String, Team> teamsDic = new Dictionary<string, Team>();
 
         protected override void Seed(MundialitoContext context)
         {
             CreateAdminRoleAndUser(context);
 
-            SetupRio2014Data(context);
+            SetupBrazil2014Data(context);
 
             base.Seed(context);
         }
 
-        private void SetupRio2014Data(MundialitoContext context)
+        private void SetupBrazil2014Data(MundialitoContext context)
         {
             SetupTeams(context);
 
             SetupStadiums(context);
 
+            SetupGames(context);
+
+            
+        }
+
+        private void SetupGames(MundialitoContext context)
+        {
             context.Games.Add(new Game
             {
-                HomeTeam = teams[0],
-                AwayTeam = teams[1],
-                HomeScore = 3,
-                AwayScore = 0,
-                Date = DateTime.Now,
-                Stadium = stadiums[0]
+                HomeTeamId = GetTeam("BRAZIL").TeamId,
+                AwayTeamId = GetTeam("CROATIA").TeamId,
+                Date = new DateTime(2014,5,30,20,0,0),
+                //Date = new DateTime(2014,6,12,23,0,0),
+                StadiumId = GetStadium("Arena de Sao Paulo").StadiumId
             });
 
             context.Games.Add(new Game
             {
-                HomeTeam = teams[2],
-                AwayTeam = teams[3],
-                HomeScore = 0,
-                AwayScore = 0,
-                Date = DateTime.Now.AddDays(2),
-                Stadium = stadiums[1]
+                HomeTeamId = GetTeam("MEXICO").TeamId,
+                AwayTeamId = GetTeam("CAMEROON").TeamId,
+                Date = new DateTime(2014, 5, 31, 16, 0, 0),
+                //Date = new DateTime(2014, 6, 13, 19, 0, 0),
+                StadiumId = GetStadium("Estadio das Dunas").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("SPAIN").TeamId,
+                AwayTeamId = GetTeam("NETHERLANDS").TeamId,
+                Date = new DateTime(2014, 5, 31, 19, 0, 0),
+                //Date = new DateTime(2014, 6, 13, 22, 0, 0),
+                StadiumId = GetStadium("Arena Fonte Nova").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("CHILE").TeamId,
+                AwayTeamId = GetTeam("AUSTRALIA").TeamId,
+                Date = new DateTime(2014, 5, 31, 22, 0, 0),
+                //Date = new DateTime(2014, 6, 14, 1, 0, 0),
+                StadiumId = GetStadium("Arena Pantanal").StadiumId
             });
         }
 
         private void SetupTeams(MundialitoContext context)
         {
+            var teams = new List<Team>();
             teams.Add(CreateTeam("USA", "USA"));
             teams.Add(CreateTeam("MEXICO", "MEX"));
             teams.Add(CreateTeam("HONDURAS", "HON"));
@@ -91,6 +115,19 @@ namespace Mundialito.DAL
             teams.Add(CreateTeam("GREECE", "GRE"));
 
             teams.ForEach(team => context.Teams.Add(team));
+
+            context.SaveChanges();
+            teamsDic = context.Teams.ToDictionary(team => team.Name, team => team);
+        }
+
+        private Team GetTeam(String teamName)
+        {
+            return teamsDic[teamName];
+        }
+
+        private Stadium GetStadium(String name)
+        {
+            return stadiumsDic[name];
         }
 
         private Team CreateTeam(String name, String shortName)
@@ -100,6 +137,7 @@ namespace Mundialito.DAL
 
         private void SetupStadiums(MundialitoContext context)
         {
+            var stadiums = new List<Stadium>();
             stadiums.Add(new Stadium() { Name = "Arena Amazonia", Capacity = 39118, City = "Manaus" });
             stadiums.Add(new Stadium() { Name = "Arena da Baixada", Capacity = 38533, City = "Curitiba" });
             stadiums.Add(new Stadium() { Name = "Arena de Sao Paulo", Capacity = 61606, City = "Sao Paulo" });
@@ -114,6 +152,9 @@ namespace Mundialito.DAL
             stadiums.Add(new Stadium() { Name = "Estadio Do Maracana", Capacity = 74689, City = "Rio de Janeiro" });
 
             stadiums.ForEach(stadium => context.Stadiums.Add(stadium));
+
+            context.SaveChanges();
+            stadiumsDic = context.Stadiums.ToDictionary(stadium => stadium.Name, stadium => stadium);
         }
 
         private void CreateAdminRoleAndUser(MundialitoContext context)
@@ -128,7 +169,7 @@ namespace Mundialito.DAL
                 var roleresult = RoleManager.Create(new IdentityRole(name));
             }
 
-            //Create User=Admin with password=123456
+            //Create Admin user with password=123456
             var user = new MundialitoUser();
             user.UserName = WebConfigurationManager.AppSettings["AdminUserName"];
             user.FirstName = WebConfigurationManager.AppSettings["AdminFirstName"];

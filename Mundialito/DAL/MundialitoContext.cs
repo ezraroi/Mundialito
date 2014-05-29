@@ -22,22 +22,36 @@ namespace Mundialito.DAL
         public MundialitoContext()
             : base(DataBaseConnectionProvider.GetConnection())
         {
+            //Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Game>()
+                    .HasRequired(m => m.HomeTeam)
+                    .WithMany(t => t.HomeMatches)
+                    .HasForeignKey(m => m.HomeTeamId)
+                    .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Game>()
+                        .HasRequired(m => m.AwayTeam)
+                        .WithMany(t => t.AwayMatches)
+                        .HasForeignKey(m => m.AwayTeamId)
+                        .WillCascadeOnDelete(false);
+
+            /*
             modelBuilder.Entity<Game>().HasRequired(x => x.HomeTeam) //or HasOptional
                                        .WithMany() //Unidirectional
-                                       .Map(x => x.MapKey("HomeTeam")) //FK column Name
+                                       .Map(x => x.MapKey("HomeTeamId")) //FK column Name
                                        .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Game>().HasRequired(x => x.AwayTeam) //or HasOptional
                                        .WithMany() //Unidirectional
-                                       .Map(x => x.MapKey("AwayTeam")) //FK column Name
+                                       .Map(x => x.MapKey("AwayTeamId")) //FK column Name
                                        .WillCascadeOnDelete(false);
-
+            */
             /*
             modelBuilder.Entity<IdentityUser>()
                 .ToTable("Users");

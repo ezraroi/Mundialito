@@ -11,12 +11,10 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
 
     $scope.deleteUser = function(user) {
         var scope = user;
-        if (confirm('Are you sure you would like to delete ' + user.Name + '?')) {
-            user.delete().success(function () {
-                Alert.new('success', 'User was deleted successfully', 2000);
-                $scope.users.splice($scope.users.indexOf(scope), 1);
-            })
-        }
+        user.delete().success(function () {
+            Alert.new('success', 'User was deleted successfully', 2000);
+            $scope.users.splice($scope.users.indexOf(scope), 1);
+        })
     };
 
     $scope.resolveBet = function(bet) {
@@ -34,12 +32,10 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
     };
 
     $scope.makeAdmin = function(user) {
-        if (confirm('Are you sure you would like to make ' + user.Name + ' Admin?')) {
-            user.makeAdmin().success(function () {
-                Alert.new('success', 'User was is now admin', 2000);
-                user.IsAdmin = true;
-            })
-        }
+        user.makeAdmin().success(function () {
+            Alert.new('success', 'User was is now admin', 2000);
+            user.IsAdmin = true;
+        })
     };
 
 }]);

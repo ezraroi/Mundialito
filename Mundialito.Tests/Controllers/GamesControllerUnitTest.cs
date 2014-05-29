@@ -4,8 +4,10 @@ using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
+using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
+using Mundialito.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
@@ -20,6 +22,7 @@ namespace Mundialito.Tests.Controllers
     {
         private Team homeTeam = new Team() { TeamId = 1, Name = "Team1", ShortName = "TA1" };
         private Team awayTeam = new Team() { TeamId = 1, Name = "Team2", ShortName = "TA2" };
+        private Stadium stadium = new Stadium() { StadiumId = 1 };
         private Mock<ILoggedUserProvider> userProvider = new Mock<ILoggedUserProvider>();
 
         [TestInitialize]
@@ -83,7 +86,7 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
 
             var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new Game() { HomeScore = 1 });
+            controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
         }
 
         [TestMethod]
@@ -96,7 +99,7 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
 
             var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new Game() { HomeScore = 1 });
+            controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
         }
 
         [TestMethod]
@@ -109,18 +112,18 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(closedGame);
 
             var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new Game() { HomeScore = 1, AwayScore = 1, CardsMark = "X", CornersMark = "1", Date = closedGame.Date });
+            controller.PutGame(1, new PutGameModel() {Stadium = stadium,  HomeTeam = homeTeam, AwayTeam = awayTeam, HomeScore = 1, AwayScore = 1, CardsMark = "X", CornersMark = "1", Date = closedGame.Date });
             betsResolver.Verify(item => item.ResolveBets(closedGame));
         }
 
         private Game CreateOpenGame(int id)
         {
-            return new Game() { GameId = id, Date = (DateTime.UtcNow).Add(TimeSpan.FromDays(1)), HomeTeam = homeTeam, AwayTeam = awayTeam };
+            return new Game() { GameId = id, Date = (DateTime.UtcNow).Add(TimeSpan.FromDays(1)), HomeTeam = homeTeam, AwayTeam = awayTeam ,Stadium = stadium };
         }
 
         private Game CreateClosedGame(int id)
         {
-            return new Game() { GameId = id, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, HomeTeam = homeTeam, AwayTeam = awayTeam };
+            return new Game() { GameId = id, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, HomeTeam = homeTeam, AwayTeam = awayTeam , Stadium = stadium};
         }
 
     }

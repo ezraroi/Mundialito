@@ -110,20 +110,27 @@ namespace Mundialito.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public Game PostGame(Game game)
+        public NewGameModel PostGame(NewGameModel game)
         {
             if (game.AwayTeam.TeamId == game.HomeTeam.TeamId)
                 throw new ArgumentException("Home team and Away team can not be the same team");
-
-            var res = gamesRepository.InsertGame(game);
+            var newGame= new Game();
+            newGame.HomeTeamId = game.HomeTeam.TeamId;
+            newGame.AwayTeamId = game.AwayTeam.TeamId;
+            newGame.StadiumId = game.Stadium.StadiumId;
+            newGame.Date = game.Date;
+            var res = gamesRepository.InsertGame(newGame);
             Trace.TraceInformation("Posting new Game: {0}", game);
             gamesRepository.Save();
-            return res;
+            game.GameId = res.GameId;
+            game.IsOpen = true;
+            game.IsPendingUpdate = false;
+            return game;
         }
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public Game PutGame(int id, Game game)
+        public PutGameModel PutGame(int id, PutGameModel game)
         {
             var item = gamesRepository.GetGame(id);
 
@@ -138,15 +145,15 @@ namespace Mundialito.Controllers
             item.CardsMark = game.CardsMark;
             item.CornersMark = game.CornersMark;
             item.Date = game.Date;
-            item.HomeTeam = game.HomeTeam;
-            item.Stadium = game.Stadium;
-            item.AwayTeam = game.AwayTeam;
+            item.HomeTeamId = game.HomeTeam.TeamId;
+            item.StadiumId = game.Stadium.StadiumId;
+            item.AwayTeamId = game.AwayTeam.TeamId;
 
             gamesRepository.UpdateGame(item);
             gamesRepository.Save();
             if (item.IsBetResolved(dateTimeProvider.UTCNow))
             {
-                Trace.TraceInformation("Will reoslve Game {0} bets", game.GameId);
+                Trace.TraceInformation("Will reoslve Game {0} bets", id);
                 betsResolver.ResolveBets(item);
             }
             return game;

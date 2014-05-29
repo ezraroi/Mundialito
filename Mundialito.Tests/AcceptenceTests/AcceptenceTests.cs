@@ -102,10 +102,9 @@ namespace Mundialito.Tests.AcceptenceTests
             Assert.AreEqual(3, allUsers["User3"].Points);
         }
 
-        private Game CreateGameWithBetData(GameViewModel game, int homeScore, int awayScore, String cards, String corners)
+        private PutGameModel CreateGameWithBetData(GameViewModel game, int homeScore, int awayScore, String cards, String corners)
         {
-            var newGame = new Game();
-            newGame.GameId = game.GameId;
+            var newGame = new PutGameModel();
             newGame.AwayScore = awayScore;
             newGame.AwayTeam = game.AwayTeam;
             newGame.CardsMark = cards;
