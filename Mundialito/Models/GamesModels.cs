@@ -64,6 +64,27 @@ namespace Mundialito.Models
 
     }
 
+    /*
+    public class GameStadiumViewModel
+    {
+        public GameStadiumViewModel(Stadium stadium)
+        {
+            StadiumId = stadium.StadiumId;
+            Name = stadium.Name;
+            City = stadium.City;
+            Capacity = stadium.Capacity;
+        }
+
+        public int StadiumId { get; set; }
+
+        public string Name { get; set; }
+
+        public string City { get; set; }
+
+        public int Capacity { get; set; }
+    }
+    */
+
     public class NewGameModel
     {
         public int GameId { get; set; }
@@ -88,6 +109,23 @@ namespace Mundialito.Models
 
     public class PutGameModel
     {
+        public PutGameModel()
+        {
+
+        }
+
+        public PutGameModel(Game game)
+        {
+            Date = game.Date;
+            HomeScore = game.HomeScore;
+            AwayScore = game.AwayScore;
+            CornersMark = game.CornersMark;
+            CardsMark = game.CardsMark;
+            Stadium = game.Stadium;
+            HomeTeam = game.HomeTeam;
+            AwayTeam = game.AwayTeam;
+        }
+
         public DateTime Date { get; set; }
 
         public int? HomeScore { get; set; }
@@ -103,6 +141,29 @@ namespace Mundialito.Models
         public Team HomeTeam { get; set; }
 
         public Team AwayTeam { get; set; }
+
+    }
+
+    public class PutGameModelResult : PutGameModel
+    {
+        public PutGameModelResult(Game game, DateTime now) : base(game)
+        {
+            GameId = game.GameId;
+            IsOpen = game.IsOpen(now);
+            IsPendingUpdate = game.IsPendingUpdate(now);
+            IsBetResolved = game.IsBetResolved(now);
+            Mark = game.Mark(now);
+        }
+
+        public int GameId { get; private set; }
+
+        public Boolean IsOpen { get; private set; }
+
+        public Boolean IsPendingUpdate { get; private set; }
+
+        public Boolean IsBetResolved { get; private set; }
+
+        public String Mark { get; private set; }
 
     }
 }

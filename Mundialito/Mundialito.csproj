@@ -305,6 +305,7 @@
     <Content Include="App\GeneralBets\GeneralBet.js" />
     <Content Include="App\GeneralBets\GeneralBetsManager.js" />
     <Content Include="App\Lib\angular-select2.js" />
+    <Content Include="App\Lib\ng-google-chart.js" />
     <Content Include="App\Lib\select2.js" />
     <Content Include="App\Users\ManageApp.html" />
     <Content Include="App\Users\ManageAppCtrl.js" />

@@ -64,7 +64,8 @@ namespace Mundialito
                       "~/App/Lib/line-chart.min.js",
                       "~/Scripts/ng-grid.min.js",
                       "~/App/Lib/ng-grid-flexible-height.js",
-                      "~/App/Lib/angular-select2.js ",
+                      "~/App/Lib/angular-select2.js",
+                      "~/App/Lib/ng-google-chart.js",
                       "~/Scripts/angular-busy.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

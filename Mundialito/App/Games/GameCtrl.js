@@ -5,11 +5,32 @@ angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'Games
     $scope.userBet.GameId = game.GameId;
     $scope.showEditForm = false;
 
+
+
     if (!$scope.game.IsOpen)
     {
         BetsManager.getGameBets($scope.game.GameId).then(function (data) {
             $log.debug("GameCtrl: get game bets" + angular.toJson(data));
             $scope.gameBets = data;
+
+            var chart1 = {};
+            chart1.type = "PieChart";
+            chart1.options = {
+                displayExactValues: true,
+                is3D: true,
+                chartArea: {left:10,top:20,bottom:0,height:"100%"},
+                title: 'Bets Distribution'
+            };
+            var mark1 = _.filter(data, function(bet) { return bet.HomeScore > bet.AwayScore}).length;
+            var markX = _.filter(data, function(bet) { return bet.HomeScore === bet.AwayScore}).length;
+            var mark2 = _.filter(data, function(bet) { return bet.HomeScore < bet.AwayScore}).length;
+            chart1.data = [
+                ['Game Mark', 'Number Of Users'],
+                ['1', mark1],
+                ['X', markX],
+                ['2', mark2]
+            ];
+            $scope.chart = chart1;
         });
     }
 

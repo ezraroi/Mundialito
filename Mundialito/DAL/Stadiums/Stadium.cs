@@ -19,6 +19,6 @@ namespace Mundialito.DAL.Stadiums
         [Range(0,int.MaxValue)]
         public int Capacity { get; set; }
 
-        public ICollection<Game> Games { get; set; }
+        //public virtual ICollection<Game> Games { get; set; }
     }
 }

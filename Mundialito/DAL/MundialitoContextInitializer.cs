@@ -35,8 +35,6 @@ namespace Mundialito.DAL
             SetupStadiums(context);
 
             SetupGames(context);
-
-            
         }
 
         private void SetupGames(MundialitoContext context)
@@ -134,11 +132,193 @@ namespace Mundialito.DAL
                 Date = GetFixedDate(new DateTime(2014, 6, 15, 22, 0, 0)),
                 StadiumId = GetStadium("Estadio Do Maracana").StadiumId
             });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("GERMANY").TeamId,
+                AwayTeamId = GetTeam("PORTUGAL").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 16, 16, 0, 0)),
+                StadiumId = GetStadium("Arena Fonte Nova").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("IRAN").TeamId,
+                AwayTeamId = GetTeam("NIGERIA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 16, 19, 0, 0)),
+                StadiumId = GetStadium("Arena da Baixada").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("GHANA").TeamId,
+                AwayTeamId = GetTeam("USA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 16, 22, 0, 0)),
+                StadiumId = GetStadium("Estadio das Dunas").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("BELGIUM").TeamId,
+                AwayTeamId = GetTeam("ALGERIA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 17, 16, 0, 0)),
+                StadiumId = GetStadium("Estadio Mineirao").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("BRAZIL").TeamId,
+                AwayTeamId = GetTeam("MEXICO").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 17, 19, 0, 0)),
+                StadiumId = GetStadium("Estadio Castelao").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("RUSSIA").TeamId,
+                AwayTeamId = GetTeam("KOREA REPUBLIC").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 17, 22, 0, 0)),
+                StadiumId = GetStadium("Estadio das Dunas").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("AUSTRALIA").TeamId,
+                AwayTeamId = GetTeam("NETHERLANDS").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 18, 16, 0, 0)),
+                StadiumId = GetStadium("Estadio Beira-Rio").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("SPAIN").TeamId,
+                AwayTeamId = GetTeam("CHILE").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 18, 19, 0, 0)),
+                StadiumId = GetStadium("Estadio Do Maracana").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("CAMEROON").TeamId,
+                AwayTeamId = GetTeam("CROATIA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 18, 22, 0, 0)),
+                StadiumId = GetStadium("Arena Amazonia").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("COLOMBIA").TeamId,
+                AwayTeamId = GetTeam("CÔTE D'IVOIRE").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 19, 16, 0, 0)),
+                StadiumId = GetStadium("Estadio Nacional de Brasilia").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("URUGUAY").TeamId,
+                AwayTeamId = GetTeam("ENGLAND").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 19, 19, 0, 0)),
+                StadiumId = GetStadium("Arena de Sao Paulo").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("JAPAN").TeamId,
+                AwayTeamId = GetTeam("GREECE").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 19, 22, 0, 0)),
+                StadiumId = GetStadium("Estadio das Dunas").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("ITALY").TeamId,
+                AwayTeamId = GetTeam("COSTA RICA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 20, 16, 0, 0)),
+                StadiumId = GetStadium("Arena Pernambuco").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("SWITZERLAND").TeamId,
+                AwayTeamId = GetTeam("FRANCE").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 20, 19, 0, 0)),
+                StadiumId = GetStadium("Arena Fonte Nova").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("HONDURAS").TeamId,
+                AwayTeamId = GetTeam("ECUADOR").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 20, 22, 0, 0)),
+                StadiumId = GetStadium("Arena da Baixada").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("ARGENTINA").TeamId,
+                AwayTeamId = GetTeam("IRAN").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 21, 16, 0, 0)),
+                StadiumId = GetStadium("Estadio Mineirao").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("GERMANY").TeamId,
+                AwayTeamId = GetTeam("GHANA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 21, 19, 0, 0)),
+                StadiumId = GetStadium("Estadio Castelao").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("NIGERIA").TeamId,
+                AwayTeamId = GetTeam("BOSNIA AND HERZEGOVINA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 21, 22, 0, 0)),
+                StadiumId = GetStadium("Arena Pantanal").StadiumId
+            });
+
+            /* */
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("BELGIUM").TeamId,
+                AwayTeamId = GetTeam("RUSSIA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 22, 16, 0, 0)),
+                StadiumId = GetStadium("Estadio Mineirao").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("KOREA REPUBLIC").TeamId,
+                AwayTeamId = GetTeam("ALGERIA").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 22, 19, 0, 0)),
+                StadiumId = GetStadium("Estadio Beira-Rio").StadiumId
+            });
+
+            context.Games.Add(new Game
+            {
+                HomeTeamId = GetTeam("USA").TeamId,
+                AwayTeamId = GetTeam("PORTUGAL").TeamId,
+                Date = GetFixedDate(new DateTime(2014, 6, 22, 22, 0, 0)),
+                StadiumId = GetStadium("Estadio Do Maracana").StadiumId
+            });
         }
 
         private DateTime GetFixedDate(DateTime date)
         {
-            return date.Subtract(TimeSpan.FromDays(13));
+            return date.Subtract(TimeSpan.FromDays(10));
         }
 
         private void SetupTeams(MundialitoContext context)

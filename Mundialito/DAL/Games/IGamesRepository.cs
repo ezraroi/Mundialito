@@ -11,8 +11,10 @@ namespace Mundialito.DAL.Games
         Game InsertGame(Game game);
         void DeleteGame(int gameId);
         void UpdateGame(Game game);
-        void Save(); 
+        IEnumerable<Game> GetStadiumGames(int id);
+        void Save();
 
+        
     }
     
 }

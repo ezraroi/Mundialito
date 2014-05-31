@@ -130,7 +130,7 @@ namespace Mundialito.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public PutGameModel PutGame(int id, PutGameModel game)
+        public PutGameModelResult PutGame(int id, PutGameModel game)
         {
             var item = gamesRepository.GetGame(id);
 
@@ -156,7 +156,7 @@ namespace Mundialito.Controllers
                 Trace.TraceInformation("Will reoslve Game {0} bets", id);
                 betsResolver.ResolveBets(item);
             }
-            return game;
+            return new PutGameModelResult(item, dateTimeProvider.UTCNow);
         }
 
         [HttpDelete]

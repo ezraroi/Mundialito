@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Web.Http;
@@ -13,16 +14,22 @@ namespace Mundialito.Controllers
     [Authorize]
     public class StadiumsController : ApiController
     {
-
         private readonly IStadiumsRepository stadiumsRepository;
+        private readonly IGamesRepository gamesRepository;
 
-        public StadiumsController(IStadiumsRepository stadiumsRepository)
+        public StadiumsController(IStadiumsRepository stadiumsRepository, IGamesRepository gamesRepository)
         {
             if (stadiumsRepository == null)
             {
                 throw new ArgumentNullException("stadiumsRepository");
             }
             this.stadiumsRepository = stadiumsRepository;
+
+            if (gamesRepository == null)
+            {
+                throw new ArgumentNullException("gamesRepository");
+            }
+            this.gamesRepository = gamesRepository;
         }
 
         public IEnumerable<Stadium>  GetAllStadiums()
@@ -40,9 +47,9 @@ namespace Mundialito.Controllers
         }
 
         [Route("{id}/Games")]
-        public IEnumerable<Game> GetStadiumGames(int id)
+        public IEnumerable<GameViewModel> GetStadiumGames(int id)
         {
-            return GetStadium(id).Games;
+            return gamesRepository.GetStadiumGames(id).Select(game => new GameViewModel(game));
         }
 
         [Authorize(Roles = "Admin")]

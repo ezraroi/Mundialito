@@ -1,4 +1,4 @@
-﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'ui.select2', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid'])
+﻿angular.module('mundialitoApp', ['security', 'ngSanitize', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'autoFields', 'cgBusy', 'ajoslin.promise-tracker', 'ui.select2', 'ui.bootstrap.datetimepicker', 'FacebookPluginDirectives','ngGrid','googlechart'])
     .value('cgBusyTemplateName','App/Partials/angular-busy.html')
     .config(['$routeProvider', '$httpProvider', '$locationProvider', '$parseProvider', 'securityProvider','Constants', function ( $routeProvider, $httpProvider, $locationProvider, $parseProvider, securityProvider, Constants) {
         $locationProvider.html5Mode(true);
@@ -103,23 +103,9 @@
                 templateUrl: 'App/Stadiums/Stadium.html',
                 controller: 'StadiumCtrl',
                 resolve: {
-                    stadium: ['$q','$route','StadiumsManager','GamesManager',  function ($q, $route, StadiumsManager, GamesManager) {
-                        var lastDeferred = $q.defer();
+                    stadium: ['$q','$route','StadiumsManager',  function ($q, $route, StadiumsManager) {
                         var stadiumId = $route.current.params.stadiumId;
-                        StadiumsManager.getStadium(stadiumId,true).then(function(stadium){
-                            var promises = [];
-                            for (var i=0; i < stadium.Games.length ; i++) {
-                                promises.push(GamesManager.getGame(stadium.Games[i].GameId));
-                            }
-                            $q.all(promises).then(function(data)
-                            {
-                                for (var j=0; j < data.length; j++) {
-                                    stadium.Games[j] = data[j];
-                                }
-                                lastDeferred.resolve(stadium)
-                            });
-                        });
-                        return lastDeferred.promise;
+                        return StadiumsManager.getStadium(stadiumId, true);
                     }]
                 }
             }).

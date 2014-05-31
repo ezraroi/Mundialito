@@ -25,10 +25,10 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-success">
+        <div class="panel panel-success"  cg-busy="{tracker:'getStadiumGames'}">
             <div class="panel-heading">Games in {{stadium.Name}}</div>
             <div class="panel-body">
-                <mundialito-games info="stadium.Games" show-only="true"></mundialito-games>
+                <mundialito-games info="games" show-only="true"></mundialito-games>
             </div>
         </div>
     </div>

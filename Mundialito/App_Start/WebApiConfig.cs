@@ -40,11 +40,17 @@ namespace Mundialito
             config.Formatters.JsonFormatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
             config.Formatters.JsonFormatter.SerializerSettings.DateParseHandling = DateParseHandling.DateTime;
             config.Formatters.JsonFormatter.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
+            //config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling =PreserveReferencesHandling.;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            
             //config.Formatters.JsonFormatter.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
             //config.Formatters.JsonFormatter.SerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-
-            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
-            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+            
+            if (config.Formatters.XmlFormatter != null)
+            {
+                var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+                config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+            }
         }
     }
 }
