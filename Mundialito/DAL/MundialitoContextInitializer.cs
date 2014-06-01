@@ -343,8 +343,8 @@ namespace Mundialito.DAL
 
             context.Games.Add(new Game
             {
-                HomeTeamId = GetTeam("CAMEROON").TeamId,
-                AwayTeamId = GetTeam("BRAZIL").TeamId,
+                HomeTeamId = GetTeam("CROATIA").TeamId,
+                AwayTeamId = GetTeam("MEXICO").TeamId,
                 Date = GetFixedDate(new DateTime(2014, 6, 23, 20, 0, 0)),
                 StadiumId = GetStadium("Arena Pernambuco").StadiumId
             });
