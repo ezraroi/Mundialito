@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.Logic;
 using Mundialito.Models;
 using System;
@@ -19,16 +20,19 @@ namespace Mundialito.Controllers
     [Authorize]
     public class UsersController : ApiController
     {
-        private IUsersRetriver usersRetriver;
-        private ILoggedUserProvider loggedUserProvider;
-        private IUsersRepository usersRepository;
+        private const String ObjectType = "User";
+        private readonly IUsersRetriver usersRetriver;
+        private readonly ILoggedUserProvider loggedUserProvider;
+        private readonly IUsersRepository usersRepository;
+        private readonly IActionLogsRepository actionLogsRepository;
         private readonly UserManager<MundialitoUser> usersManager = new UserManager<MundialitoUser>(new UserStore<MundialitoUser>(new MundialitoContext()));
 
-        public UsersController(IUsersRetriver usersRetriver, ILoggedUserProvider loggedUserProvider, IUsersRepository usersRepository)
+        public UsersController(IUsersRetriver usersRetriver, ILoggedUserProvider loggedUserProvider, IUsersRepository usersRepository, IActionLogsRepository actionLogsRepository)
         {
             this.usersRetriver = usersRetriver;
             this.loggedUserProvider = loggedUserProvider;
             this.usersRepository = usersRepository;
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public IEnumerable<UserModel> GetAllUsers()
@@ -70,6 +74,7 @@ namespace Mundialito.Controllers
         public void MakeAdmin(String id)
         {
             usersManager.AddToRole<MundialitoUser>(id, "Admin");
+            AddLog(ActionType.UPDATE, string.Format("Made  user {0} admin", id));
         }
 
         [HttpDelete]
@@ -80,7 +85,7 @@ namespace Mundialito.Controllers
             Trace.TraceInformation("Deleting user {0} by {1}", id, loggedUserProvider.UserName);
             usersRepository.DeleteUser(id);
             usersRepository.Save();
-            // TODO - Should i delete all bets?
+            AddLog(ActionType.DELETE, string.Format("Deleted user: {0}", id));
         }
 
         private void IsAdmin(UserModel user)
@@ -88,5 +93,17 @@ namespace Mundialito.Controllers
             user.IsAdmin = usersManager.GetRoles<MundialitoUser>(user.Id).Contains("Admin");
         }
 
+        private void AddLog(ActionType actionType, String message)
+        {
+            try
+            {
+                actionLogsRepository.InsertLogAction(ActionLog.Create(actionType, ObjectType, message));
+                actionLogsRepository.Save();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Mundialito.DAL.Bets;
+﻿using Mundialito.DAL.ActionLogs;
+using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,16 @@ namespace Mundialito.Logic
 {
     public class BetsResolver : IBetsResolver
     {
+        private const String ObjectType = "Bet";
         private readonly IBetsRepository betsRepository;
         private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IActionLogsRepository actionLogsRepository;
 
-        public BetsResolver(IBetsRepository betsRepository, IDateTimeProvider dateTimeProvider)
+        public BetsResolver(IBetsRepository betsRepository, IDateTimeProvider dateTimeProvider, IActionLogsRepository actionLogsRepository)
         {
             this.betsRepository = betsRepository;
             this.dateTimeProvider = dateTimeProvider;
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public void ResolveBets(Game game)
@@ -51,9 +55,23 @@ namespace Mundialito.Logic
                 bet.Points = points;
                 betsRepository.UpdateBet(bet);
                 Trace.TraceInformation("{0} of {1} got {2} points", bet, game, points);
+                AddLog(ActionType.UPDATE, String.Format("Resolved bet {0} with points {1}", bet, points));
             }
             if (bets.Count() > 0)
                 betsRepository.Save();
+        }
+
+        private void AddLog(ActionType actionType, String message)
+        {
+            try
+            {
+                actionLogsRepository.InsertLogAction(ActionLog.Create(actionType, ObjectType, message));
+                actionLogsRepository.Save();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
         }
     }
 }

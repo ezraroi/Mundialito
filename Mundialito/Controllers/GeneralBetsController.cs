@@ -1,4 +1,5 @@
 ﻿using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -18,28 +19,28 @@ namespace Mundialito.Controllers
     [Authorize]
     public class GeneralBetsController : ApiController
     {
-        private IGeneralBetsRepository generalBetsRepository;
-        private ILoggedUserProvider userProivider;
-        private IDateTimeProvider dateTimeProvider;
+        private const String ObjectType = "GeneralBet";
+        private readonly IGeneralBetsRepository generalBetsRepository;
+        private readonly ILoggedUserProvider userProivider;
+        private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IActionLogsRepository actionLogsRepository;
 
-        public GeneralBetsController(IGeneralBetsRepository generalBetsRepository, ILoggedUserProvider userProivider, IDateTimeProvider dateTimeProvider)
+        public GeneralBetsController(IGeneralBetsRepository generalBetsRepository, ILoggedUserProvider userProivider, IDateTimeProvider dateTimeProvider, IActionLogsRepository actionLogsRepository)
         {
             if (generalBetsRepository == null)
-            {
                 throw new ArgumentNullException("generalBetsRepository");
-            }
             if (userProivider == null)
-            {
                 throw new ArgumentNullException("userProivider");
-            }
             if (dateTimeProvider == null)
-            {
                 throw new ArgumentNullException("dateTimeProvider");
-            }
+            if (actionLogsRepository == null)
+                throw new ArgumentNullException("actionLogsRepository");
 
             this.dateTimeProvider = dateTimeProvider;
             this.generalBetsRepository = generalBetsRepository;
             this.userProivider = userProivider;
+            this.actionLogsRepository = actionLogsRepository;
+            
         }
 
         public IEnumerable<GeneralBetViewModel> GetAllGeneralBets()
@@ -96,6 +97,7 @@ namespace Mundialito.Controllers
             Trace.TraceInformation("Posting new General Bet: {0}", generalBet);
             generalBetsRepository.Save();
             newBet.GeneralBetId = res.GeneralBetId;
+            AddLog(ActionType.CREATE, String.Format("Posting new Generel Bet: {0}", res));
             return newBet;
         }
 
@@ -113,6 +115,7 @@ namespace Mundialito.Controllers
             generalBetsRepository.UpdateGeneralBet(betToUpdate);
             generalBetsRepository.Save();
             Trace.TraceInformation("Updating General Bet: {0}", betToUpdate);
+            AddLog(ActionType.UPDATE, String.Format("Updating new Generel Bet: {0}", betToUpdate));
             return bet;
         }
 
@@ -121,24 +124,51 @@ namespace Mundialito.Controllers
         [Route("{id}/resolve")]
         public void ResolveGeneralBet(int id, ResolveGeneralBetModel resolvedBet)
         {
-            Trace.TraceInformation("Resolved General Bet '{0}' with data: {1}", id, resolvedBet);
             if (dateTimeProvider.UTCNow < TournamentTimesUtils.GeneralBetsResolveTime)
+            {
+                AddLog(ActionType.ERROR, "General bets are not closed for betting yet");
                 throw new ArgumentException("General bets are not closed for betting yet");
+            }
 
             var item = generalBetsRepository.GetGeneralBet(id);
             if (item == null)
+            {
+                AddLog(ActionType.ERROR, string.Format("General Bet '{0}' dosen't exits", id));
                 throw new ObjectNotFoundException(string.Format("General Bet '{0}' dosen't exits", id));
+            }
+
+            Trace.TraceInformation("Resolved General Bet '{0}' with data: {1}", id, resolvedBet);
             item.Resolve(resolvedBet.PlayerIsRight, resolvedBet.TeamIsRight);
             generalBetsRepository.UpdateGeneralBet(item);
             generalBetsRepository.Save();
+            AddLog(ActionType.UPDATE, String.Format("Resolved Generel Bet: {0}", item));
         }
 
         private void Validate()
         {
             if (generalBetsRepository.IsGeneralBetExists(userProivider.UserName))
+            {
+                AddLog(ActionType.ERROR, "You have already submitted your general bet, only update is permitted");
                 throw new ArgumentException("You have already submitted your general bet, only update is permitted");
+            }
             if (dateTimeProvider.UTCNow > TournamentTimesUtils.GeneralBetsCloseTime)
+            {
+                AddLog(ActionType.ERROR, "General bets are already closed for betting");
                 throw new ArgumentException("General bets are already closed for betting");
+            }
+        }
+
+        private void AddLog(ActionType actionType, String message)
+        {
+            try
+            {
+                actionLogsRepository.InsertLogAction(ActionLog.Create(actionType, ObjectType, message));
+                actionLogsRepository.Save();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
         }
     }
 }

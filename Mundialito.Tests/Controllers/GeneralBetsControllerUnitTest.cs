@@ -2,6 +2,7 @@
 using Moq;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -31,7 +32,7 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetGeneralBets()).Returns(bets);
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetAllGeneralBets();
             Assert.AreEqual(2, res.Count());
         }
@@ -48,7 +49,7 @@ namespace Mundialito.Tests.Controllers
             repository.Setup(rep => rep.GetGeneralBet(1)).Returns(bets[0]);
             repository.Setup(rep => rep.GetGeneralBet(2)).Returns(bets[1]);
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetGeneralBetById(1);
             Assert.AreEqual(1, res.GeneralBetId);
         }
@@ -63,7 +64,7 @@ namespace Mundialito.Tests.Controllers
             var bets = new List<GeneralBet>();
             repository.Setup(rep => rep.GetGeneralBet(1)).Returns((GeneralBet) null);
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetGeneralBetById(1);
         }
 
@@ -78,7 +79,7 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetUserGeneralBet("ezraroi");
             Assert.AreEqual(1, res.GeneralBetId);
         }
@@ -95,7 +96,7 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns( (GeneralBet)null);
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.GetUserGeneralBet("ezraroi");
         }
 
@@ -108,7 +109,7 @@ namespace Mundialito.Tests.Controllers
             var bets = new List<GeneralBet>();
             repository.Setup(rep => rep.IsGeneralBetExists("ezraroi")).Returns(false);
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             Assert.IsFalse(controller.HasBet("ezraroi"));
         }
 
@@ -123,7 +124,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 8, 1));
 
             Assert.IsFalse(generalBet.IsResolved);
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = true, PlayerIsRight = true });
             Assert.AreEqual(12, generalBet.PlayerPoints);
             Assert.AreEqual(12, generalBet.TeamPoints);
@@ -142,7 +143,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 8, 1));
 
             Assert.IsFalse(generalBet.IsResolved);
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = false, PlayerIsRight = true });
             Assert.AreEqual(12, generalBet.PlayerPoints);
             Assert.AreEqual(0, generalBet.TeamPoints);
@@ -161,7 +162,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 8, 1));
 
             Assert.IsFalse(generalBet.IsResolved);
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = false, PlayerIsRight = false });
             Assert.AreEqual(0, generalBet.PlayerPoints);
             Assert.AreEqual(0, generalBet.TeamPoints);
@@ -181,7 +182,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 6, 1));
 
             Assert.IsFalse(generalBet.IsResolved);
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = false, PlayerIsRight = false });
         }
 
@@ -197,9 +198,14 @@ namespace Mundialito.Tests.Controllers
             userProvider.SetupGet(provider => provider.UserName).Returns("ezraroi");
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 6, 1));
 
-            var controller = new GeneralBetsController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.PostBet(new NewGeneralBetModel() { GoldenBootPlayer = "A", WinningTeamId = 1 });
         }
 
+        private GeneralBetsController CreateController(IGeneralBetsRepository repository, ILoggedUserProvider userProvider, IDateTimeProvider dateTimeProvider)
+        {
+            var actionLogsRepository = new Mock<IActionLogsRepository>();
+            return new GeneralBetsController(repository, userProvider, dateTimeProvider, actionLogsRepository.Object);
+        }
     }
 }

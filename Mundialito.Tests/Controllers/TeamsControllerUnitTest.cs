@@ -6,6 +6,7 @@ using Moq;
 using Mundialito.Controllers;
 using Mundialito.Models;
 using System.Collections.Generic;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Tests.Controllers
 {
@@ -20,7 +21,7 @@ namespace Mundialito.Tests.Controllers
             var teams = new List<Team> { new Team(), new Team(), new Team() };
 
             teamsRepository.Setup(rep => rep.GetTeams()).Returns(teams);
-            var controller = new TeamsController(teamsRepository.Object);
+            var controller = CreateController(teamsRepository.Object);
             Assert.AreEqual(3, controller.GetAllTeams().ToList().Count);
         }
 
@@ -33,9 +34,15 @@ namespace Mundialito.Tests.Controllers
             teams.Add(new Team() { Name = "B", TeamId = 2 });
 
             teamsRepository.Setup(rep => rep.GetTeam(1)).Returns(teams.Where(team => team.TeamId == 1).Single());
-            var controller = new TeamsController(teamsRepository.Object);
+            var controller = CreateController(teamsRepository.Object);
             Assert.AreEqual(1, controller.GetTeamById(1).TeamId);
             Assert.AreEqual("A", controller.GetTeamById(1).Name);
+        }
+
+        private TeamsController CreateController(ITeamsRepository repository)
+        {
+            var actionLogsRepository = new Mock<IActionLogsRepository>();
+            return new TeamsController(repository, actionLogsRepository.Object);
         }
     }
 }

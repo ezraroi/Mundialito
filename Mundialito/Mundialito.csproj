@@ -230,6 +230,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="DAL\ActionLogs\ActionLog.cs" />
+    <Compile Include="DAL\ActionLogs\ActionLogsRepository.cs" />
+    <Compile Include="DAL\ActionLogs\IActionLogsRepository.cs" />
+    <Compile Include="DAL\ActionLogs\ActionType.cs" />
     <Compile Include="DAL\Bets\BetExtensionMethods.cs" />
     <Compile Include="DAL\Games\GameExtensionMethods.cs" />
     <Compile Include="Models\GamesModels.cs" />

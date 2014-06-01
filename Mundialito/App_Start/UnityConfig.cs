@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.DataHandler;
 using Microsoft.Practices.Unity;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.GeneralBets;
@@ -37,6 +38,7 @@ namespace Mundialito
             container.RegisterType<ILoggedUserProvider, LoggedUserProvider>();
             container.RegisterType<IUsersRetriver, UsersRetriver>();
             container.RegisterType<IDateTimeProvider, DateTimeProvider>();
+            container.RegisterType<IActionLogsRepository, ActionLogsRepository>();
          
             container.RegisterType<AccountController>(new InjectionConstructor());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

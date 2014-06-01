@@ -2,6 +2,7 @@
 using Mundialito.Controllers;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.GeneralBets;
@@ -30,32 +31,32 @@ namespace Mundialito.Tests.AcceptenceTests
 
         public static BetsController GetBetsController(UserModel user, DateTime now)
         {
-            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), GetDateTimeProvider(now));
+            return new BetsController(new BetsRepository(), new BetValidator(new GamesRepository(), new BetsRepository(), GetDateTimeProvider(now), new ActionLogsRepository()), GetLoggedUserProvider(user), GetDateTimeProvider(now), new ActionLogsRepository());
         }
 
         public static GamesController GetGamesController(UserModel user, DateTime now)
         {
-            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), GetDateTimeProvider(now));
+            return new GamesController(new GamesRepository(), new BetsRepository(), new BetsResolver(new BetsRepository(), GetDateTimeProvider(now), new ActionLogsRepository()), GetLoggedUserProvider(user), GetDateTimeProvider(now), new ActionLogsRepository());
         }
 
         public static StadiumsController GetStadiumsController()
         {
-            return new StadiumsController(new StadiumsRepository(), new GamesRepository());
+            return new StadiumsController(new StadiumsRepository(), new GamesRepository(), new ActionLogsRepository());
         }
 
         public static TeamsController GetTeamsController()
         {
-            return new TeamsController(new TeamsRepository());
+            return new TeamsController(new TeamsRepository(), new ActionLogsRepository());
         }
 
         public static UsersController GetUsersController(UserModel user, DateTime now)
         {
-            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), new UsersRepository());
+            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), new UsersRepository(), new ActionLogsRepository());
         }
 
         public static GeneralBetsController GetGeneralBetsController(UserModel user, DateTime now)
         {
-            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(user), GetDateTimeProvider(now));
+            return new GeneralBetsController(new GeneralBetsRepository(), GetLoggedUserProvider(user), GetDateTimeProvider(now), new ActionLogsRepository());
         }
 
         private static ILoggedUserProvider GetLoggedUserProvider(UserModel user)

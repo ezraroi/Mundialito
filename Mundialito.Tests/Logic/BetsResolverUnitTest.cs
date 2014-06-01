@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.Logic;
@@ -21,7 +22,7 @@ namespace Mundialito.Tests.Logic
         {
 
             var betsRepository = new Mock<IBetsRepository>();
-            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
+            var resolver = CreateTarget(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 1,
@@ -47,7 +48,7 @@ namespace Mundialito.Tests.Logic
                     BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
                 }
             });
-            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
+            var resolver = CreateTarget(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 1,
@@ -81,7 +82,7 @@ namespace Mundialito.Tests.Logic
                     BetId = 4, User = new MundialitoUser() { Id = "4" } , Game = new Game() { GameId = 2, Date = DateTime.Now.ToUniversalTime()}, HomeScore = 2, AwayScore = 2 , CardsMark = "X", CornersMark = "2"
                 }
             });
-            var resolver = new BetsResolver(betsRepository.Object, new DateTimeProvider());
+            var resolver = CreateTarget(betsRepository.Object, new DateTimeProvider());
             resolver.ResolveBets(new Game()
             {
                 GameId = 3,
@@ -96,6 +97,12 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 3))).Throws(new Exception("Should not be called"));
             betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 4))).Throws(new Exception("Should not be called"));
             betsRepository.Setup(res => res.Save()).Throws(new Exception("Should not be called"));
+        }
+
+        private BetsResolver CreateTarget(IBetsRepository betsRepository, IDateTimeProvider dateTimeProvider)
+        {
+            var actionLogsRepository = new Mock<IActionLogsRepository>();
+            return new BetsResolver(betsRepository, dateTimeProvider, actionLogsRepository.Object);
         }
     }
 }

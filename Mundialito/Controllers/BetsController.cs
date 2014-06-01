@@ -13,6 +13,7 @@ using Mundialito.Logic;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Accounts;
 using System.Diagnostics;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Controllers
 {
@@ -20,36 +21,34 @@ namespace Mundialito.Controllers
     [Authorize]
     public class BetsController : ApiController
     {
+        private const String ObjectType = "Bet";
         private readonly IBetsRepository betsRepository;
         private readonly IBetValidator betValidator;
         private readonly ILoggedUserProvider userProivider;
         private readonly IDateTimeProvider dateTimeProvider;
+        private readonly IActionLogsRepository actionLogsRepository;
 
-        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProivider, IDateTimeProvider dateTimeProvider)
+        public BetsController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProivider, IDateTimeProvider dateTimeProvider, IActionLogsRepository actionLogsRepository)
         {
             if (betsRepository == null)
-            {
                 throw new ArgumentNullException("betsRepository"); 
-            }
             this.betsRepository = betsRepository;
 
             if (betValidator == null)
-            {
                 throw new ArgumentNullException("betValidator"); 
-            }
             this.betValidator = betValidator;
 
             if (userProivider == null)
-            {
                 throw new ArgumentNullException("userProivider");
-            }
             this.userProivider = userProivider;
 
             if (dateTimeProvider == null)
-            {
                 throw new ArgumentNullException("dateTimeProvider");
-            }
             this.dateTimeProvider = dateTimeProvider;
+
+            if (actionLogsRepository == null)
+                throw new ArgumentNullException("actionLogsRepository");
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public IEnumerable<BetViewModel> GetAllBets()
@@ -90,6 +89,7 @@ namespace Mundialito.Controllers
             Trace.TraceInformation("Posting new Bet: {0}", newBet);
             betsRepository.Save();
             bet.BetId = res.BetId;
+            AddLog(ActionType.CREATE, string.Format("Posting new Bet: {0}", res));
             return bet;
         }
 
@@ -108,17 +108,31 @@ namespace Mundialito.Controllers
             betsRepository.UpdateBet(betToUpdate);
             betsRepository.Save();
             Trace.TraceInformation("Updating Bet: {0}", betToUpdate);
+            AddLog(ActionType.UPDATE, string.Format("Updating Bet: {0}", betToUpdate));
             return bet;
         }
 
         [HttpDelete]
         public void DeleteBet(int id)
         {
-            Trace.TraceInformation("Deleting Bet {0}", id);
             betValidator.ValidateDeleteBet(id, userProivider.UserId);
             betsRepository.DeleteBet(id);
             betsRepository.Save();
+            Trace.TraceInformation("Deleting Bet {0}", id);
+            AddLog(ActionType.DELETE, string.Format("Deleting Bet: {0}", id));
         }
-        
+
+        private void AddLog(ActionType actionType, String message)
+        {
+            try
+            {
+                actionLogsRepository.InsertLogAction(ActionLog.Create(actionType, ObjectType, message));
+                actionLogsRepository.Save();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
+        }
     }
 }

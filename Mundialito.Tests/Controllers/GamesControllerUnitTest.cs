@@ -2,6 +2,7 @@
 using Moq;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Stadiums;
@@ -41,7 +42,7 @@ namespace Mundialito.Tests.Controllers
             var openGame = CreateOpenGame(1);
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetGameBets(1);
         }
 
@@ -54,7 +55,7 @@ namespace Mundialito.Tests.Controllers
             var betsResolver = new Mock<IBetsResolver>();
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetGameBets(1);
         }
 
@@ -70,7 +71,7 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new Bet() { BetId = 1, Game = closedGame, User = new MundialitoUser() { FirstName = "A", LastName = "B", UserName = "User" } });
             betsRepository.Setup(rep => rep.GetGameBets(1)).Returns(bets);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             var res = controller.GetGameBets(1);
             Assert.AreEqual(1, res.Count());
         }
@@ -85,7 +86,7 @@ namespace Mundialito.Tests.Controllers
             var openGame = CreateOpenGame(1);
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
         }
 
@@ -98,7 +99,7 @@ namespace Mundialito.Tests.Controllers
             var betsResolver = new Mock<IBetsResolver>();
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
         }
 
@@ -111,7 +112,7 @@ namespace Mundialito.Tests.Controllers
             var closedGame = CreateClosedGame(1);
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(closedGame);
 
-            var controller = new GamesController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
+            var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
             controller.PutGame(1, new PutGameModel() {Stadium = stadium,  HomeTeam = homeTeam, AwayTeam = awayTeam, HomeScore = 1, AwayScore = 1, CardsMark = "X", CornersMark = "1", Date = closedGame.Date });
             betsResolver.Verify(item => item.ResolveBets(closedGame));
         }
@@ -124,6 +125,12 @@ namespace Mundialito.Tests.Controllers
         private Game CreateClosedGame(int id)
         {
             return new Game() { GameId = id, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, HomeTeam = homeTeam, AwayTeam = awayTeam , Stadium = stadium};
+        }
+
+        private GamesController CreateController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider userProvider, IDateTimeProvider dateTimeProvider)
+        {
+            var actionLogsRepository = new Mock<IActionLogsRepository>();
+            return new GamesController(gamesRepository, betsRepository, betsResolver, userProvider, dateTimeProvider, actionLogsRepository.Object);
         }
 
     }

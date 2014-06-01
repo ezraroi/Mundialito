@@ -7,6 +7,7 @@ using Mundialito.DAL.Stadiums;
 using Mundialito.Models;
 using Mundialito.DAL.Games;
 using System.Diagnostics;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Controllers
 {
@@ -16,20 +17,21 @@ namespace Mundialito.Controllers
     {
         private readonly IStadiumsRepository stadiumsRepository;
         private readonly IGamesRepository gamesRepository;
+        private readonly IActionLogsRepository actionLogsRepository;
 
-        public StadiumsController(IStadiumsRepository stadiumsRepository, IGamesRepository gamesRepository)
+        public StadiumsController(IStadiumsRepository stadiumsRepository, IGamesRepository gamesRepository, IActionLogsRepository actionLogsRepository)
         {
             if (stadiumsRepository == null)
-            {
                 throw new ArgumentNullException("stadiumsRepository");
-            }
             this.stadiumsRepository = stadiumsRepository;
 
             if (gamesRepository == null)
-            {
                 throw new ArgumentNullException("gamesRepository");
-            }
             this.gamesRepository = gamesRepository;
+
+            if (actionLogsRepository == null)
+                throw new ArgumentNullException("actionLogsRepository");
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public IEnumerable<Stadium>  GetAllStadiums()

@@ -64,7 +64,7 @@ namespace Mundialito.DAL.Bets
 
         public override string ToString()
         {
-            return string.Format("Bet ID = {0}, Owner = {1} {2}", BetId, User == null ? "Unkown" : User.FirstName, User == null ? "Unkown":  User.LastName);
+            return string.Format("Bet ID = {0}, UserID = {1}, Game ID = {2}", BetId, UserId, GameId);
         }
     }
 }

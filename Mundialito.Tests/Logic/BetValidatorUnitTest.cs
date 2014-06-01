@@ -7,6 +7,7 @@ using Mundialito.DAL.Bets;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
 using Mundialito.DAL.Accounts;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Tests.Logic
 {
@@ -21,7 +22,7 @@ namespace Mundialito.Tests.Logic
             var gamesRepository = new Mock<IGamesRepository>();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns((Game)null);
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
@@ -36,13 +37,12 @@ namespace Mundialito.Tests.Logic
             var gamesRepository = new Mock<IGamesRepository>();
             CreateClosedGame();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
             betValidator.ValidateNewBet(newBet);
         }
-             
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -53,7 +53,7 @@ namespace Mundialito.Tests.Logic
             var game = CreatePendingUpdateGame();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game);
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
@@ -71,7 +71,7 @@ namespace Mundialito.Tests.Logic
             var game = CreateOpenGame();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game);;
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
@@ -90,7 +90,7 @@ namespace Mundialito.Tests.Logic
             var game = CreateOpenGame();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
@@ -106,7 +106,7 @@ namespace Mundialito.Tests.Logic
 
             var gamesRepository = new Mock<IGamesRepository>();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
             betValidator.ValidateUpdateBet(betToUpdate);
@@ -123,7 +123,7 @@ namespace Mundialito.Tests.Logic
             var game = CreateClosedGame();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
             betToUpdate.Game = new Game();
@@ -140,7 +140,7 @@ namespace Mundialito.Tests.Logic
 
             var gamesRepository = new Mock<IGamesRepository>();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
             betToUpdate.GameId = 1;
@@ -157,7 +157,7 @@ namespace Mundialito.Tests.Logic
 
             var gamesRepository = new Mock<IGamesRepository>();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
             betValidator.ValidateUpdateBet(betToUpdate);
@@ -172,7 +172,7 @@ namespace Mundialito.Tests.Logic
 
             var gamesRepository = new Mock<IGamesRepository>();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             betValidator.ValidateDeleteBet(1, "");
         }
 
@@ -185,7 +185,7 @@ namespace Mundialito.Tests.Logic
 
             var gamesRepository = new Mock<IGamesRepository>();
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             betValidator.ValidateDeleteBet(1, "1");
         }
 
@@ -200,7 +200,7 @@ namespace Mundialito.Tests.Logic
             var game = CreateClosedGame();
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
-            var betValidator = new BetValidator(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
+            var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             betValidator.ValidateDeleteBet(1, "1");
         }
 
@@ -226,5 +226,10 @@ namespace Mundialito.Tests.Logic
             return pendingUpdateGame;
         }
 
+        private BetValidator CreateTarget(IGamesRepository gamesRepository, IBetsRepository betsRepository, IDateTimeProvider dateTimeProvider)
+        {
+            var actionLogsRepository = new Mock<IActionLogsRepository>();
+            return new BetValidator(gamesRepository, betsRepository, dateTimeProvider, actionLogsRepository.Object);
+        }
     }
 }

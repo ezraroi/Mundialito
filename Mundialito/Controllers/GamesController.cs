@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Diagnostics;
 using Mundialito.DAL.Accounts;
 using Mundialito.Logic;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Controllers
 {
@@ -22,44 +23,43 @@ namespace Mundialito.Controllers
     [Authorize]
     public class GamesController : ApiController
     {
+        private const String ObjectType = "Game";
         private readonly IGamesRepository gamesRepository;
         private readonly IBetsRepository betsRepository;
         private readonly IBetsResolver betsResolver;
         private readonly IDateTimeProvider dateTimeProvider;
         private readonly ILoggedUserProvider loggedUserProvider;
-        
-        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider loggedUserProvider,  IDateTimeProvider dateTimeProvider)
+        private readonly IActionLogsRepository actionLogsRepository;
+
+        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider loggedUserProvider, IDateTimeProvider dateTimeProvider, IActionLogsRepository actionLogsRepository)
         {
             if (gamesRepository == null)
-            {
                 throw new ArgumentNullException("gamesRepository");
-            }
             this.gamesRepository = gamesRepository;
 
             if (betsRepository == null)
-            {
                 throw new ArgumentNullException("betsRepository");
-            }
             this.betsRepository = betsRepository;
 
             if (betsResolver == null)
-            {
                 throw new ArgumentNullException("betsResolver");
-            }
             this.betsResolver = betsResolver;
 
-
             if (loggedUserProvider == null)
-            {
                 throw new ArgumentNullException("loggedUserProvider");
-            }
             this.loggedUserProvider = loggedUserProvider;
 
             if (dateTimeProvider == null)
-            {
                 throw new ArgumentNullException("dateTimeProvider");
-            }
             this.dateTimeProvider = dateTimeProvider;
+
+            if (dateTimeProvider == null)
+                throw new ArgumentNullException("dateTimeProvider");
+            this.dateTimeProvider = dateTimeProvider;
+
+            if (actionLogsRepository == null)
+                throw new ArgumentNullException("actionLogsRepository");
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public IEnumerable<GameViewModel> GetAllGames()
@@ -114,6 +114,7 @@ namespace Mundialito.Controllers
         {
             if (game.AwayTeam.TeamId == game.HomeTeam.TeamId)
                 throw new ArgumentException("Home team and Away team can not be the same team");
+
             var newGame= new Game();
             newGame.HomeTeamId = game.HomeTeam.TeamId;
             newGame.AwayTeamId = game.AwayTeam.TeamId;
@@ -125,6 +126,7 @@ namespace Mundialito.Controllers
             game.GameId = res.GameId;
             game.IsOpen = true;
             game.IsPendingUpdate = false;
+            AddLog(ActionType.CREATE, String.Format("Posting new game: {0}", newGame));
             return game;
         }
 
@@ -153,9 +155,11 @@ namespace Mundialito.Controllers
             gamesRepository.Save();
             if (item.IsBetResolved(dateTimeProvider.UTCNow))
             {
+                AddLog(ActionType.UPDATE, String.Format("Will resolve bets of game {0}", item.GameId));
                 Trace.TraceInformation("Will reoslve Game {0} bets", id);
                 betsResolver.ResolveBets(item);
             }
+            AddLog(ActionType.UPDATE, String.Format("Updating Game {0}", item));
             return new PutGameModelResult(item, dateTimeProvider.UTCNow);
         }
 
@@ -166,6 +170,20 @@ namespace Mundialito.Controllers
             Trace.TraceInformation("Deleting Game {0}", id);
             gamesRepository.DeleteGame(id);
             gamesRepository.Save();
+            AddLog(ActionType.DELETE, String.Format("Deleting Game {0}", id));
+        }
+
+        private void AddLog(ActionType actionType, String message)
+        {
+            try
+            {
+                actionLogsRepository.InsertLogAction(ActionLog.Create(actionType, ObjectType, message));
+                actionLogsRepository.Save();
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
         }
     }
 }

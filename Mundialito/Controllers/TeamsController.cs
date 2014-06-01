@@ -7,6 +7,7 @@ using Mundialito.Models;
 using System.Diagnostics;
 using System.Threading;
 using Mundialito.DAL.Games;
+using Mundialito.DAL.ActionLogs;
 
 namespace Mundialito.Controllers
 {
@@ -15,14 +16,17 @@ namespace Mundialito.Controllers
     public class TeamsController : ApiController
     {
         private readonly ITeamsRepository teamsRepository;
+        private readonly IActionLogsRepository actionLogsRepository;
 
-        public TeamsController(ITeamsRepository teamsRepository )
+        public TeamsController(ITeamsRepository teamsRepository, IActionLogsRepository actionLogsRepository)
         {
             if (teamsRepository == null)
-            {
                 throw new ArgumentNullException("teamsRepository"); 
-            }
             this.teamsRepository = teamsRepository;
+
+            if (actionLogsRepository == null)
+                throw new ArgumentNullException("actionLogsRepository");
+            this.actionLogsRepository = actionLogsRepository;
         }
 
         public IEnumerable<Team> GetAllTeams()
