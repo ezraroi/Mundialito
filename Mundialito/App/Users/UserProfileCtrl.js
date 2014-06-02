@@ -18,6 +18,7 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
         }
         else
         {
+            $scope.generalBet =  {};
             if ($scope.isGeneralBetClosed())
             {
                 $scope.noGeneralBetWasSubmitted = true;
@@ -25,7 +26,6 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
             }
             if ($scope.isLoggedUserProfile() && !$scope.isGeneralBetClosed())
             {
-                $scope.generalBet =  {};
                 return;
             }
             $scope.noGeneralBetWasSubmitted = true;
