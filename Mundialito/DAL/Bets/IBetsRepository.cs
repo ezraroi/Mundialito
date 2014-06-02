@@ -15,6 +15,8 @@ namespace Mundialito.DAL.Bets
 
         IEnumerable<Bet> GetUserBets(string username);
 
+        Bet GetUserBetOnGame(string username, int gameId);
+
         IEnumerable<Bet> GetGameBets(int gameId);
         
         Bet GetBet(int betId);

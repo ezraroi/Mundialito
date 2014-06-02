@@ -46,6 +46,8 @@ namespace Mundialito.Models
 
         public Stadium Stadium { get; private set; }
 
+        public Boolean UserHasBet { get; set; }
+
         public DateTime CloseTime
         {
             get

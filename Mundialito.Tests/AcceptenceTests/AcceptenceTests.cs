@@ -85,9 +85,20 @@ namespace Mundialito.Tests.AcceptenceTests
 
             ValidateTableAfterAllGames();
 
+            ValidateUerHasBet();
+
             TryResolveGeneralBetBeforeTime();
 
             ResolveUsersGeneralBets();
+        }
+
+        private void ValidateUerHasBet()
+        {
+            var games = AcceptenceTestsUtils.GetGamesController(GetUser("User1"), DateTime.UtcNow).GetAllGames();
+            Assert.AreEqual(6, games.Count(game => game.UserHasBet));
+
+            games = AcceptenceTestsUtils.GetGamesController(GetUser("User3"), DateTime.UtcNow).GetAllGames();
+            Assert.AreEqual(5, games.Count(game => game.UserHasBet));
         }
 
         [TestMethod]

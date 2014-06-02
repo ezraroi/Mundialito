@@ -16,18 +16,13 @@ namespace Mundialito.Controllers
     public class StadiumsController : ApiController
     {
         private readonly IStadiumsRepository stadiumsRepository;
-        private readonly IGamesRepository gamesRepository;
         private readonly IActionLogsRepository actionLogsRepository;
 
-        public StadiumsController(IStadiumsRepository stadiumsRepository, IGamesRepository gamesRepository, IActionLogsRepository actionLogsRepository)
+        public StadiumsController(IStadiumsRepository stadiumsRepository, IActionLogsRepository actionLogsRepository)
         {
             if (stadiumsRepository == null)
                 throw new ArgumentNullException("stadiumsRepository");
             this.stadiumsRepository = stadiumsRepository;
-
-            if (gamesRepository == null)
-                throw new ArgumentNullException("gamesRepository");
-            this.gamesRepository = gamesRepository;
 
             if (actionLogsRepository == null)
                 throw new ArgumentNullException("actionLogsRepository");
@@ -48,11 +43,7 @@ namespace Mundialito.Controllers
             return item;
         }
 
-        [Route("{id}/Games")]
-        public IEnumerable<GameViewModel> GetStadiumGames(int id)
-        {
-            return gamesRepository.GetStadiumGames(id).Select(game => new GameViewModel(game));
-        }
+        
 
         [Authorize(Roles = "Admin")]
         [HttpPost]

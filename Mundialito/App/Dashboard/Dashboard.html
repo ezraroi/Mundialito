@@ -12,7 +12,7 @@
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
                     <a class="list-group-item"  ng-repeat="game in games | filter:isOpenForBetting() | limitTo:10" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
-                        <div class="row">
+                        <div class="row" ng-class="{'text-danger': !game.UserHasBet}">
                             <div class="col-md-5 col-xs-3">
                                 <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{game.HomeTeam.Name}}</span>
                             </div>
@@ -34,7 +34,7 @@
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
                     <a class="list-group-item"  ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">
-                        <div class="row">
+                        <div class="row" ng-class="{'text-danger': !game.UserHasBet}">
                             <div class="col-md-5 col-xs-3">
                                 <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{game.HomeTeam.Name}}</span>
                             </div>

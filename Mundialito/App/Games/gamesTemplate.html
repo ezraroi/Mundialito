@@ -3,7 +3,7 @@
     <div class="col-md-11 col-xs-10">
         <div class="list-group">
             <a href="{{game.getUrl()}}" class="list-group-item" ng-repeat="game in games | filter:matchGameType(gamesType)" title="At {{game.Stadium.Name}} Stadium">
-                <div class="row">
+                <div class="row" ng-class="{'text-danger': !game.UserHasBet}">
                     <div class="col-md-3 col-xs-3">
                         <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{game.HomeTeam.Name}}</span>
                     </div>

@@ -114,7 +114,28 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all games of team ' + teamId + '  from server');
-            $http.get("api/teams/" + teamId + "/games", { tracker: 'getTeamGames' })
+            $http.get('api/teams/' + teamId + '/games', { tracker: 'getTeamGames' })
+                .success(function(gamesArray) {
+                    var games = [];
+                    gamesArray.forEach(function(gameData) {
+                        var game = scope._retrieveInstance(gameData.GameId, gameData);
+                        games.push(game);
+                    });
+
+                    deferred.resolve(games);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+            return deferred.promise;
+        } ,
+
+        /* Use this function in order to get instances of all the games in specific stadium */
+        getStadiumGames: function(stadiumId) {
+            var deferred = $q.defer();
+            var scope = this;
+            $log.debug('GamesManager: will fetch all games in stadium ' + stadiumId + '  from server');
+            $http.get('api/games/Stadium/' + stadiumId, { tracker: 'getStadiumGames' })
                 .success(function(gamesArray) {
                     var games = [];
                     gamesArray.forEach(function(gameData) {

@@ -27,6 +27,11 @@ namespace Mundialito.DAL.Bets
             return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam).Where(bet => bet.User.UserName == username);
         }
 
+        public Bet GetUserBetOnGame(string username, int gameId)
+        {
+            return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam).SingleOrDefault(bet => bet.User.UserName == username && bet.GameId == gameId);
+        }
+
         public IEnumerable<Bet> GetGameBets(int gameId)
         {
             return Context.Bets.Include(bet => bet.User).Include(bet => bet.Game).Include(bet => bet.Game.AwayTeam).Include(bet => bet.Game.HomeTeam).Where(bet => bet.Game.GameId == gameId);
@@ -39,9 +44,6 @@ namespace Mundialito.DAL.Bets
 
         public Bet InsertBet(Bet bet)
         {
-            // TODO - Check the status of the attched items, force that the items are not new
-            //Context.Games.Attach(bet.Game);
-            //Context.Users.Attach(bet.User);
             return Insert(bet);
         }
 
@@ -52,9 +54,8 @@ namespace Mundialito.DAL.Bets
 
         public void UpdateBet(Bet bet)
         {
-            //Context.Games.Attach(bet.Game);
-            //Context.Users.Attach(bet.User);
             Update(bet);
         }
+        
     }
 }

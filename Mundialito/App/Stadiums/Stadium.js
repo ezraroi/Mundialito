@@ -24,9 +24,6 @@ angular.module('mundialitoApp').factory('Stadium', ['$http','$log', function($ht
             delete stadiumToUpdate.Games;
             return $http.put("api/stadiums/" + this.StadiumId, stadiumToUpdate, { tracker: 'editStadium' });
         },
-        getGames: function() {
-            return $http.get("api/stadiums/" + this.StadiumId + "/games", { tracker: 'getStadiumGames' });
-        },
         getUrl: function() {
             return '/stadiums/' + this.StadiumId;
         }

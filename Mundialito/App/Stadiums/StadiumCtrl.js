@@ -1,11 +1,11 @@
 'use strict';
-angular.module('mundialitoApp').controller('StadiumCtrl', ['$scope', '$log', 'StadiumsManager', 'stadium', 'Alert', function ($scope, $log, StadiumsManager, stadium, Alert) {
+angular.module('mundialitoApp').controller('StadiumCtrl', ['$scope', '$log', 'StadiumsManager', 'GamesManager', 'stadium', 'Alert', function ($scope, $log, StadiumsManager, GamesManager, stadium, Alert) {
     $scope.stadium = stadium;
     $scope.showEditForm = false;
 
-    $scope.stadium.getGames().then(function(data) {
+    GamesManager.getStadiumGames($scope.stadium.StadiumId).then(function(data) {
         $log.debug('StadiumCtrl: Got games of stadium');
-        $scope.games = data.data;
+        $scope.games = data;
     });
 
     $scope.updateStadium = function() {

@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Mundialito.DAL.Accounts;
 using Mundialito.Logic;
 using Mundialito.DAL.ActionLogs;
+using System.Web;
 
 namespace Mundialito.Controllers
 {
@@ -64,7 +65,18 @@ namespace Mundialito.Controllers
 
         public IEnumerable<GameViewModel> GetAllGames()
         {
-            return gamesRepository.GetGames().Select(game => new GameViewModel(game));
+            var res = gamesRepository.GetGames().Select(game => new GameViewModel(game)).ToList();
+            AddUserBetsData(res);
+            return res;
+        }
+
+        [HttpGet]
+        [Route("Stadium/{stadiumId}")]
+        public IEnumerable<GameViewModel> GetStadiumGames(int stadiumId)
+        {
+            var res = gamesRepository.GetStadiumGames(stadiumId).Select(game => new GameViewModel(game)).ToList();
+            AddUserBetsData(res);
+            return res;
         }
 
         public GameViewModel GetGameByID(int id)
@@ -72,7 +84,10 @@ namespace Mundialito.Controllers
             var item = gamesRepository.GetGame(id);
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("Game with id '{0}' not found", id));
-            return new GameViewModel(item); 
+
+            var res = new GameViewModel(item);
+            res.UserHasBet = betsRepository.GetUserBetOnGame(loggedUserProvider.UserName, id) != null; 
+            return res;
         }
 
         [Route("{id}/Bets")]
@@ -103,9 +118,11 @@ namespace Mundialito.Controllers
         }
 
         [Route("Open")]
-        public IEnumerable<Game> GetOpenGames()
+        public IEnumerable<GameViewModel> GetOpenGames()
         {
-            return gamesRepository.GetGames().Where(game => game.IsOpen(dateTimeProvider.UTCNow));
+            var res = gamesRepository.GetGames().Where(game => game.IsOpen(dateTimeProvider.UTCNow)).Select(game => new GameViewModel(game));
+            AddUserBetsData(res);
+            return res;
         }
 
         [HttpPost]
@@ -171,6 +188,15 @@ namespace Mundialito.Controllers
             gamesRepository.DeleteGame(id);
             gamesRepository.Save();
             AddLog(ActionType.DELETE, String.Format("Deleting Game {0}", id));
+        }
+
+        private void AddUserBetsData(IEnumerable<GameViewModel> res)
+        {
+            var allBets = betsRepository.GetUserBets(loggedUserProvider.UserName).ToDictionary(bet => bet.GameId, bet => bet);
+            foreach (var game in res)
+            {
+                game.UserHasBet = allBets.ContainsKey(game.GameId);
+            }
         }
 
         private void AddLog(ActionType actionType, String message)

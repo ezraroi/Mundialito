@@ -41,7 +41,7 @@ namespace Mundialito.Tests.AcceptenceTests
 
         public static StadiumsController GetStadiumsController()
         {
-            return new StadiumsController(new StadiumsRepository(), new GamesRepository(), new ActionLogsRepository());
+            return new StadiumsController(new StadiumsRepository(), new ActionLogsRepository());
         }
 
         public static TeamsController GetTeamsController()
