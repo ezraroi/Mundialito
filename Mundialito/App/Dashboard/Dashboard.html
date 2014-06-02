@@ -11,8 +11,8 @@
             <div class="panel-heading"><i class="fa fa-folder-open"></i> Open Games for Betting <span class="pull-right badge">{{(games | filter:isOpenForBetting()).length }}</span></div>
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
-                    <a class="list-group-item"  ng-repeat="game in games | filter:isOpenForBetting() | limitTo:10" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
-                        <div class="row" ng-class="{'text-danger': !game.UserHasBet}">
+                    <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}"  ng-repeat="game in games | filter:isOpenForBetting() | limitTo:10" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
+                        <div class="row">
                             <div class="col-md-5 col-xs-3">
                                 <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{game.HomeTeam.Name}}</span>
                             </div>
@@ -33,8 +33,8 @@
             <div class="panel-heading"><i class="fa fa-pencil"></i> Last scores</div>
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
-                    <a class="list-group-item"  ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">
-                        <div class="row" ng-class="{'text-danger': !game.UserHasBet}">
+                    <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}" ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">
+                        <div class="row">
                             <div class="col-md-5 col-xs-3">
                                 <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{game.HomeTeam.Name}}</span>
                             </div>
