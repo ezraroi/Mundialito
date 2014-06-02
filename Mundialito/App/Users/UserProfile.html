@@ -59,7 +59,10 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-info">
-            <div class="panel-heading">General Bet</div>
+            <div class="panel-heading">
+                General Bet
+                <span class="label label-success pull-right"  ng-show="!noGeneralBetWasSubmitted && generalBet.IsResolved">{{generalBet.Points}} Points</span>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form" name="generalBetForm" novalidate ng-hide="noGeneralBetWasSubmitted">
                     <div class="form-group">
