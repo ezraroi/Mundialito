@@ -19,7 +19,7 @@ angular.module('mundialitoApp').controller('ManageCtrl', ['$scope','Alert', func
         if (!$scope.manageForm.$valid) return;
         var newPassword = angular.copy($scope.changingPassword);
         $scope.changingPassword = null;
-        Security.changePassword(newPassword).then(function () {
+        $scope.security.changePassword(newPassword).then(function () {
             Alert.new('success', "Password was changed sucessfully" ,3000);
         }, function () {
             Alert.new('danger', "Failed to change password");
