@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Mundialito.DAL
 {
-    public class MundialitoContextInitializer : DropCreateDatabaseIfModelChanges<MundialitoContext>
+    public class MundialitoContextInitializer : DropCreateDatabaseAlways<MundialitoContext>
     {
         private Dictionary<String, Stadium> stadiumsDic = new Dictionary<string, Stadium>();
         private Dictionary<String, Team> teamsDic = new Dictionary<string, Team>();
