@@ -454,7 +454,8 @@ namespace Mundialito.DAL
 
         private DateTime GetFixedDate(DateTime date)
         {
-            return date.Subtract(TimeSpan.FromDays(10));
+            return date;
+            //return date.Subtract(TimeSpan.FromDays(10));
         }
 
         private void SetupTeams(MundialitoContext context)
