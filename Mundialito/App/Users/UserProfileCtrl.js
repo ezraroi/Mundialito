@@ -1,6 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log', '$routeParams', 'security', 'Alert','GeneralBetsManager', 'profileUser','userGameBets', 'teams', 'generalBetsAreOpen', function ($scope, $log, $routeParams, security, Alert, GeneralBetsManager, profileUser, userGameBets, teams, generalBetsAreOpen) {
-    $scope.loggedUser = security.user.userName;
+angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log', '$routeParams', 'Alert','GeneralBetsManager', 'profileUser','userGameBets', 'teams', 'generalBetsAreOpen', function ($scope, $log, $routeParams, Alert, GeneralBetsManager, profileUser, userGameBets, teams, generalBetsAreOpen) {
     $scope.profileUser = profileUser;
     $scope.userGameBets = userGameBets;
     $scope.teams = teams;
@@ -50,7 +49,7 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
     };
 
     $scope.isLoggedUserProfile = function() {
-        return $scope.loggedUser === $scope.profileUser.Username;
+        return ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
     };
 
     $scope.isGeneralBetClosed = function() {
