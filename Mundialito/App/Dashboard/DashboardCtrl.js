@@ -45,7 +45,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
     $scope.gridOptions = {
         data: 'users',
         columnDefs: [
-            {field:'Place', displayName:'', resizable: false, width: 25},
+            {field:'Place', displayName:'', resizable: false, width: 30},
             {field:'Name', displayName:'Name'},
             {field:'Results', displayName:'Results'},
             {field:'Marks', displayName:'Marks'},
