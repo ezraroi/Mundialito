@@ -13,6 +13,7 @@ namespace Mundialito.Models
             Username = user.UserName;
             Name = String.Format("{0} {1}", user.FirstName, user.LastName);
             Points = 0;
+            Place = String.Empty;
             Id = user.Id;
             Email = user.Email;
         }
@@ -24,6 +25,8 @@ namespace Mundialito.Models
         }
 
         public String Id { get; private set; }
+
+        public String Place { get; set; }
 
         public String Email { get; set; }
         

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mundialito", "Mundialito\Mu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mundialito.Tests", "Mundialito.Tests\Mundialito.Tests.csproj", "{14F62FEE-D307-4F4B-A82B-903420C67265}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MundialitoDbBackupApp", "MundialitoDbBackupApp\MundialitoDbBackupApp.csproj", "{1C099A4F-81FF-4A29-B859-520D66801E17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C099A4F-81FF-4A29-B859-520D66801E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C099A4F-81FF-4A29-B859-520D66801E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C099A4F-81FF-4A29-B859-520D66801E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C099A4F-81FF-4A29-B859-520D66801E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

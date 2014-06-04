@@ -55,6 +55,8 @@ namespace Mundialito.Tests.AcceptenceTests
 
             PostGeneralBets();
 
+            TrySeeOtherUserGeneralBetBeforeTime();
+            
             UpdateGeneralBet();
 
             TryPostGeneralBetAfterTime();
@@ -92,6 +94,16 @@ namespace Mundialito.Tests.AcceptenceTests
             ResolveUsersGeneralBets();
         }
 
+        private void TrySeeOtherUserGeneralBetBeforeTime()
+        {
+            try
+            {
+                AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User1"), TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1))).GetUserGeneralBet("User2");
+                throw new Exception("Operation should have failed");
+            }
+            catch (ArgumentException) { }
+        }
+
         private void ValidateUerHasBet()
         {
             var games = AcceptenceTestsUtils.GetGamesController(GetUser("User1"), DateTime.UtcNow).GetAllGames();
@@ -120,18 +132,19 @@ namespace Mundialito.Tests.AcceptenceTests
 
         private void ResolveUsersGeneralBets()
         {
-            var generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), DateTime.UtcNow.AddDays(4)).GetUserGeneralBet("Admin");
+            var generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).GetUserGeneralBet("Admin");
             AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).ResolveGeneralBet(generalBet.GeneralBetId, new ResolveGeneralBetModel() { PlayerIsRight = true, TeamIsRight = false });
 
-            generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), DateTime.UtcNow.AddDays(4)).GetUserGeneralBet("User1");
+            generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).GetUserGeneralBet("User1");
             AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).ResolveGeneralBet(generalBet.GeneralBetId, new ResolveGeneralBetModel() { PlayerIsRight = false, TeamIsRight = false });
 
-            generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), DateTime.UtcNow.AddDays(4)).GetUserGeneralBet("User2");
+            generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).GetUserGeneralBet("User2");
             AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).ResolveGeneralBet(generalBet.GeneralBetId, new ResolveGeneralBetModel() { PlayerIsRight = false, TeamIsRight = true });
 
             try
             {
-                AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), DateTime.UtcNow.AddDays(4)).GetUserGeneralBet("User3");
+                AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsResolveTime.AddDays(4)).GetUserGeneralBet("User3");
+                throw new Exception("Operation should have failed");
             }
             catch (ObjectNotFoundException) { }
             
@@ -162,6 +175,11 @@ namespace Mundialito.Tests.AcceptenceTests
             Assert.AreEqual(16, allUsers["User1"].Points);
             Assert.AreEqual(23, allUsers["User2"].Points);
             Assert.AreEqual(7, allUsers["User3"].Points);
+
+            Assert.AreEqual("1", allUsers["Admin"].Place);
+            Assert.AreEqual("3", allUsers["User1"].Place);
+            Assert.AreEqual("2", allUsers["User2"].Place);
+            Assert.AreEqual("4", allUsers["User3"].Place);
         }
 
         private void ValidateTableAfter2MoreGames()

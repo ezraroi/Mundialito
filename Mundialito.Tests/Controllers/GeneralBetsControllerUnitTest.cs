@@ -78,10 +78,47 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetUserGeneralBet("ezraroi");
             Assert.AreEqual(1, res.GeneralBetId);
+        }
+
+        [TestMethod]
+        public void GetUserGeneralBetsBevoreCloseTimeSameUserTest()
+        {
+            var dateTimeProvider = new Mock<IDateTimeProvider>();
+            var repository = new Mock<IGeneralBetsRepository>();
+            var userProvider = new Mock<ILoggedUserProvider>();
+            var bets = new List<GeneralBet>();
+            userProvider.SetupGet(item => item.UserName).Returns("ezraroi");
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1)));
+
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            var res = controller.GetUserGeneralBet("ezraroi");
+            Assert.AreEqual(1, res.GeneralBetId);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetUserGeneralBetsBevoreCloseTimeTest()
+        {
+            var dateTimeProvider = new Mock<IDateTimeProvider>();
+            var repository = new Mock<IGeneralBetsRepository>();
+            var userProvider = new Mock<ILoggedUserProvider>();
+            var bets = new List<GeneralBet>();
+            userProvider.SetupGet(item => item.UserName).Returns("aaaa");
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1)));
+
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            controller.GetUserGeneralBet("ezraroi");
         }
 
         [TestMethod]
@@ -95,6 +132,7 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetUserGeneralBet("ezraroi")).Returns( (GeneralBet)null);
+            dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             controller.GetUserGeneralBet("ezraroi");

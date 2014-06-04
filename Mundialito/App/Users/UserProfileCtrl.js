@@ -6,30 +6,40 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
     $scope.noGeneralBetWasSubmitted = false;
     $scope.generalBetsAreOpen = generalBetsAreOpen;
 
-    GeneralBetsManager.hasGeneralBet($scope.profileUser.Username).then(function(answer) {
-        $log.debug('UserProfileCtrl: hasGeneralBet = ' + answer);
-        if (answer === 'true')
-        {
-            GeneralBetsManager.getUserGeneralBet($scope.profileUser.Username).then(function(generalBet) {
-                $log.debug('UserProfileCtrl: got user genral bet - ' + angular.toJson(generalBet));
-                $scope.generalBet = generalBet
-            });
-        }
-        else
-        {
-            $scope.generalBet =  {};
-            if ($scope.isGeneralBetClosed())
-            {
+    $scope.isLoggedUserProfile = function() {
+        return ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
+    };
+
+    $scope.isGeneralBetClosed = function() {
+        return !$scope.generalBetsAreOpen;
+    };
+
+    $scope.isGeneralBetReadOnly = function() {
+        return (!$scope.isLoggedUserProfile() || ($scope.isGeneralBetClosed()));
+    }
+
+    if (!$scope.isGeneralBetReadOnly()) {
+        GeneralBetsManager.hasGeneralBet($scope.profileUser.Username).then(function (answer) {
+            $log.debug('UserProfileCtrl: hasGeneralBet = ' + answer);
+            if (answer === 'true') {
+                GeneralBetsManager.getUserGeneralBet($scope.profileUser.Username).then(function (generalBet) {
+                    $log.debug('UserProfileCtrl: got user general bet - ' + angular.toJson(generalBet));
+                    $scope.generalBet = generalBet
+                });
+            }
+            else {
+                $scope.generalBet = {};
+                if ($scope.isGeneralBetClosed()) {
+                    $scope.noGeneralBetWasSubmitted = true;
+                    return;
+                }
+                if ($scope.isLoggedUserProfile() && !$scope.isGeneralBetClosed()) {
+                    return;
+                }
                 $scope.noGeneralBetWasSubmitted = true;
-                return;
             }
-            if ($scope.isLoggedUserProfile() && !$scope.isGeneralBetClosed())
-            {
-                return;
-            }
-            $scope.noGeneralBetWasSubmitted = true;
-        }
-    });
+        });
+    }
 
     $scope.saveGeneralBet = function() {
         if (angular.isDefined($scope.generalBet.GeneralBetId))
@@ -48,15 +58,5 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
         }
     };
 
-    $scope.isLoggedUserProfile = function() {
-        return ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
-    };
 
-    $scope.isGeneralBetClosed = function() {
-        return !$scope.generalBetsAreOpen;
-    };
-
-    $scope.isGeneralBetReadOnly = function() {
-        return (!$scope.isLoggedUserProfile() || ($scope.isGeneralBetClosed()));
-    }
 }]);

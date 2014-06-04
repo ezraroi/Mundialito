@@ -72,7 +72,7 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
             var deferred = $q.defer();
             var scope = this;
             $log.debug('UsersManager: will fetch all users from server');
-            $http.get('api/users', { tracker: 'getUsers' })
+            $http.get('api/users', { tracker: 'getUsers', cache: true })
                 .success(function(usersArray) {
                     var users = [];
                     usersArray.forEach(function(userData) {

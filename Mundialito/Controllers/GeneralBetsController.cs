@@ -66,6 +66,9 @@ namespace Mundialito.Controllers
         [HttpGet]
         public GeneralBetViewModel GetUserGeneralBet(string username)
         {
+            if (userProivider.UserName != username && dateTimeProvider.UTCNow < TournamentTimesUtils.GeneralBetsCloseTime)
+                throw new ArgumentException("General bets are still open for betting, you can't see other users bets yet");
+
             var item = generalBetsRepository.GetUserGeneralBet(username);
 
             if (item == null)

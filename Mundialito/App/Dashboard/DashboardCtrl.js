@@ -38,13 +38,14 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
 
     $scope.isDecided = function() {
         return function( item ) {
-            return !item.IsOpen && !item.IsPendingUpdate;;
+            return !item.IsOpen && !item.IsPendingUpdate;
         };
     };
 
     $scope.gridOptions = {
         data: 'users',
         columnDefs: [
+            {field:'Place', displayName:'', resizable: false, width: 25},
             {field:'Name', displayName:'Name'},
             {field:'Results', displayName:'Results'},
             {field:'Marks', displayName:'Marks'},

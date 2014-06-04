@@ -39,7 +39,12 @@ namespace Mundialito.Controllers
         {
             var res = usersRetriver.GetAllUsers();
             res.ForEach(user => IsAdmin(user));
-            return res.OrderByDescending(user => user.Points);
+            res = res.OrderByDescending(user => user.Points).ToList();
+            for (int i = 0; i < res.Count; i++)
+            {
+                res[i].Place = (i + 1).ToString();
+            }
+            return res;
         }
 
         [Route("{username}")]
