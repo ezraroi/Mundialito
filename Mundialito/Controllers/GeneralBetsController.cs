@@ -43,6 +43,7 @@ namespace Mundialito.Controllers
             
         }
 
+        [Authorize(Roles = "Admin")]
         public IEnumerable<GeneralBetViewModel> GetAllGeneralBets()
         {
             return generalBetsRepository.GetGeneralBets().Select( bet => new GeneralBetViewModel(bet));
