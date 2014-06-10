@@ -302,6 +302,8 @@
     <Content Include="App\Accounts\Register.html" />
     <Content Include="App\app.js" />
     <Content Include="App\Bets\Bet.js" />
+    <Content Include="App\Bets\BetsCenter.html" />
+    <Content Include="App\Bets\BetsCenterCtrl.js" />
     <Content Include="App\Bets\BetsManager.js" />
     <Content Include="App\Constants.js" />
     <Content Include="App\Dashboard\Dashboard.html" />

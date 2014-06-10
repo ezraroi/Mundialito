@@ -109,6 +109,27 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
             return deferred.promise;
         },
 
+        /* Use this function in order to get instances of all the open games */
+        loadOpenGames: function() {
+            var deferred = $q.defer();
+            var scope = this;
+            $log.debug('GamesManager: will fetch all open games from server');
+            $http.get('api/games/open', { tracker: 'getOpenGames', cache: true })
+                .success(function(gamesArray) {
+                    var games = [];
+                    gamesArray.forEach(function(gameData) {
+                        var game = scope._retrieveInstance(gameData.GameId, gameData);
+                        games.push(game);
+                    });
+
+                    deferred.resolve(games);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+            return deferred.promise;
+        },
+
         /* Use this function in order to get instances of all the games of a specific team */
         getTeamGames: function(teamId) {
             var deferred = $q.defer();

@@ -12,6 +12,15 @@
                 templateUrl: 'App/Dashboard/Dashboard.html',
                 controller: 'DashboardCtrl'
             }).
+            when('/bets_center', {
+                templateUrl: 'App/Bets/BetsCenter.html',
+                controller: 'BetsCenterCtrl',
+                resolve : {
+                    games : ['GamesManager', function (GamesManager) {
+                        return GamesManager.loadOpenGames();
+                    }]
+                }
+            }).
             when('/users/:username', {
                 templateUrl: 'App/Users/UserProfile.html',
                 controller: 'UserProfileCtrl',

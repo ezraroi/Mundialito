@@ -5,8 +5,6 @@ angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'Games
     $scope.userBet.GameId = game.GameId;
     $scope.showEditForm = false;
 
-
-
     if (!$scope.game.IsOpen)
     {
         BetsManager.getGameBets($scope.game.GameId).then(function (data) {

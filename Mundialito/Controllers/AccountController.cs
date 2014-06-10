@@ -332,6 +332,10 @@ namespace Mundialito.Controllers
             {
                 return BadRequest(ModelState);
             }
+            if (TournamentTimesUtils.GeneralBetsCloseTime < DateTime.UtcNow)
+            {
+                return BadRequest("Tournament is not closed for registration");
+            }
             if (!PrivateKeyValidator.ValidatePrivateKey(model.PrivateKey, model.Email))
             {
                 return BadRequest("Invalid private key");
