@@ -14,8 +14,9 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
     };
 
     $scope.isGeneralBetClosed = function() {
-        var res =  !$scope.generalBetsAreOpen;
+        var res = !$scope.generalBetsAreOpen;
         $log.debug('UserProfileCtrl: isGeneralBetClosed = ' + res);
+        return res;
     };
 
     $scope.isGeneralBetReadOnly = function() {
