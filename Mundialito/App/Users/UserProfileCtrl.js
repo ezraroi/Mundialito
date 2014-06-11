@@ -25,7 +25,13 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
         return res;
     }
 
-    if (!$scope.isGeneralBetReadOnly()) {
+    $scope.shoudLoadGeneralBet = function() {
+        var res = ($scope.isLoggedUserProfile() || ($scope.isGeneralBetClosed()));
+        $log.debug('UserProfileCtrl: shoudLoadGeneralBet = ' + res);
+        return res;
+    }
+
+    if ($scope.shoudLoadGeneralBet()) {
         GeneralBetsManager.hasGeneralBet($scope.profileUser.Username).then(function (answer) {
             $log.debug('UserProfileCtrl: hasGeneralBet = ' + answer);
             if (answer === 'true') {
