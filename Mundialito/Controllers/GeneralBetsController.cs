@@ -60,7 +60,7 @@ namespace Mundialito.Controllers
         [HttpGet]
         public Boolean CanSubmitBets()
         {
-            return DateTime.UtcNow < TournamentTimesUtils.GeneralBetsCloseTime;
+            return dateTimeProvider.UTCNow  < TournamentTimesUtils.GeneralBetsCloseTime;
         }
 
         [Route("user/{username}")]
