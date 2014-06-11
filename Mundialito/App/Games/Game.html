@@ -110,7 +110,7 @@
                 <span ng-show="game.IsOpen" class="label label-success pull-right"><i class="fa fa-unlock"></i> Open for betting</span>
                 <span class="label label-success pull-right"  ng-show="!game.IsOpen && !game.IsPendingUpdate">{{userBet.Points}} Points</span>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" cg-busy="{tracker:'addBetOnGame'}">
                 <div ng-if="!game.IsOpen && userBet.BetId == -1" class="text-danger">
                     <i class="fa fa-warning"></i> You haven't placed a bet on this game and it is already closed for betting
                 </div>
