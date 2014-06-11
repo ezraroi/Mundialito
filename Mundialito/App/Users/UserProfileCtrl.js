@@ -7,15 +7,20 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
     $scope.generalBetsAreOpen = generalBetsAreOpen;
 
     $scope.isLoggedUserProfile = function() {
+        var res = ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
+        $log.debug('UserProfileCtrl: isLoggedUserProfile = ' + res);
         return ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
     };
 
     $scope.isGeneralBetClosed = function() {
-        return !$scope.generalBetsAreOpen;
+        var res =  !$scope.generalBetsAreOpen;
+        $log.debug('UserProfileCtrl: isGeneralBetClosed = ' + res);
     };
 
     $scope.isGeneralBetReadOnly = function() {
-        return (!$scope.isLoggedUserProfile() || ($scope.isGeneralBetClosed()));
+        var res = (!$scope.isLoggedUserProfile() || ($scope.isGeneralBetClosed()));
+        $log.debug('UserProfileCtrl: isGeneralBetReadOnly = ' + res);
+        return res;
     }
 
     if (!$scope.isGeneralBetReadOnly()) {
