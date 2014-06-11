@@ -5,6 +5,7 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
     $scope.teams = teams;
     $scope.noGeneralBetWasSubmitted = false;
     $scope.generalBetsAreOpen = generalBetsAreOpen;
+    $log.debug('UserProfileCtrl: generalBetsAreOpen = ' + generalBetsAreOpen);
 
     $scope.isLoggedUserProfile = function() {
         var res = ($scope.security.user != null) && ($scope.security.user.userName === $scope.profileUser.Username);
