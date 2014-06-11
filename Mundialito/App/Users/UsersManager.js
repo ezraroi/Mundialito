@@ -96,7 +96,7 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
             if (user) {
                 user.setData(userData);
             } else {
-                user = scope._retrieveInstance(userData);
+                user = scope._retrieveInstance(userData.Username,userData);
             }
             return user;
         }

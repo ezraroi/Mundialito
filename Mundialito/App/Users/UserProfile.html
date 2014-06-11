@@ -63,7 +63,7 @@
                 General Bet
                 <span class="label label-success pull-right"  ng-show="!noGeneralBetWasSubmitted && generalBet.IsResolved">{{generalBet.Points}} Points</span>
             </div>
-            <div class="panel-body" cg-busy="{tracker:'getUserGeneralBet'}">
+            <div class="panel-body" cg-busy="{tracker:['getUserGeneralBet','addGeneralBet','updateGeneralBet']}">
                 <form class="form-horizontal" role="form" name="generalBetForm" novalidate ng-hide="noGeneralBetWasSubmitted || (!isGeneralBetClosed() && !isLoggedUserProfile())">
                     <div class="form-group">
                         <label class="col-md-3 col-xs-6 control-label">Winning Team</label>

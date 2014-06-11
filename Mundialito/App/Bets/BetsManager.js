@@ -137,7 +137,7 @@ angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet','$l
             if (bet) {
                 bet.setData(betData);
             } else {
-                bet = scope._retrieveInstance(betData);
+                bet = scope._retrieveInstance(betData.BetId, betData);
             }
             return bet;
         }

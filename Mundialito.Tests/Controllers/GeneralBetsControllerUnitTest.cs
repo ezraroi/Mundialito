@@ -31,10 +31,28 @@ namespace Mundialito.Tests.Controllers
             bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
             repository.Setup(rep => rep.GetGeneralBets()).Returns(bets);
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
             var res = controller.GetAllGeneralBets();
             Assert.AreEqual(2, res.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetAllGeneralBetsBeofreCloseTest()
+        {
+            var dateTimeProvider = new Mock<IDateTimeProvider>();
+            var repository = new Mock<IGeneralBetsRepository>();
+            var userProvider = new Mock<ILoggedUserProvider>();
+            var bets = new List<GeneralBet>();
+            bets.Add(new GeneralBet() { GeneralBetId = 1, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            bets.Add(new GeneralBet() { GeneralBetId = 2, WinningTeamId = 1, User = new MundialitoUser() { FirstName = "A", LastName = "B" } });
+            repository.Setup(rep => rep.GetGeneralBets()).Returns(bets);
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1)));
+
+            var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
+            controller.GetAllGeneralBets();
         }
 
         [TestMethod]

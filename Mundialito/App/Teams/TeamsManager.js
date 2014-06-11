@@ -118,7 +118,7 @@ angular.module('mundialitoApp').factory('TeamsManager', ['$http', '$q', 'Team','
             if (team) {
                 team.setData(teamData);
             } else {
-                team = scope._retrieveInstance(teamData);
+                team = scope._retrieveInstance(teamData.TeamId,teamData);
             }
             return team;
         }

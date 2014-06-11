@@ -16,7 +16,7 @@ namespace Mundialito.Logic
     {
         public LoggedUserProvider()
         {
-            
+
         }
 
         public String UserId

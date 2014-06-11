@@ -35,14 +35,14 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
     $scope.updateBet = function(gameId) {
         if ($scope.bets[gameId].BetId !== -1) {
             $log.debug('BetsCenterCtrl: Will update bet');
-            $scope.bets[gameId].update().then(function(data) {
+            $scope.bets[gameId].update().success(function(data) {
                 Alert.new('success', 'Bet was updated successfully', 2000);
                 BetsManager.setBet(data);
             });
         }
         else {
             $log.debug('BetsCenterCtrl: Will create new bet');
-            BetsManager.addBet($scope.bets[gameId]).then(function (data) {
+            BetsManager.addBet($scope.bets[gameId]).then(function(data) {
                 $log.log('BetsCenterCtrl: Bet ' + data.BetId + ' was added');
                 $scope.bets[gameId] = data;
                 Alert.new('success', 'Bet was added successfully', 2000);

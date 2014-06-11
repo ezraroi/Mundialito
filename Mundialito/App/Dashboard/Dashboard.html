@@ -54,11 +54,41 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-table"></i> Table</div>
+            <div class="panel-heading"><i class="fa fa-table"></i> Ranking Table</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div style="border: 1px solid rgb(212,212,212);" ng-grid="gridOptions" cg-busy="{tracker:'getUsers'}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="!generalBetsAreOpen">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-money"></i> General Bets</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <th>Name</th>
+                                <th>Winning Team</th>
+                                <th>Golden Boot Player</th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="bet in generalBets">
+                                    <td>{{bet.OwnerName}}</td>
+                                    </td>
+                                    <td>{{teamsDic[bet.WinningTeamId].Name}}</td>
+                                    <td>{{bet.GoldenBootPlayer}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

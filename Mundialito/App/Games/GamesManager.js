@@ -180,7 +180,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
             if (game) {
                 game.setData(gameData);
             } else {
-                game = scope._retrieveInstance(gameData);
+                game = scope._retrieveInstance(gameData.GameId,gameData);
             }
             return game;
         }

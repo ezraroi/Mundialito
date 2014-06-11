@@ -10,7 +10,12 @@
         $routeProvider.
             when('/', {
                 templateUrl: 'App/Dashboard/Dashboard.html',
-                controller: 'DashboardCtrl'
+                controller: 'DashboardCtrl',
+                resolve : {
+                    teams : ['TeamsManager', function ( TeamsManager) {
+                        return TeamsManager.loadAllTeams();
+                    }]
+                }
             }).
             when('/bets_center', {
                 templateUrl: 'App/Bets/BetsCenter.html',

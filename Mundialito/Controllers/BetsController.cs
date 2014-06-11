@@ -94,7 +94,7 @@ namespace Mundialito.Controllers
         }
 
         [HttpPut]
-        public UpdateBetModel UpdateBet(int id, UpdateBetModel bet)
+        public NewBetModel UpdateBet(int id, UpdateBetModel bet)
         {
             var betToUpdate = new Bet();
             betToUpdate.BetId = id;
@@ -109,7 +109,7 @@ namespace Mundialito.Controllers
             betsRepository.Save();
             Trace.TraceInformation("Updating Bet: {0}", betToUpdate);
             AddLog(ActionType.UPDATE, string.Format("Updating Bet: {0}", betToUpdate));
-            return bet;
+            return new NewBetModel(id, bet);
         }
 
         [HttpDelete]

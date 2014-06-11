@@ -91,6 +91,16 @@ namespace Mundialito.Models
 
         }
 
+        public NewBetModel(int id, UpdateBetModel bet)
+        {
+            BetId = id;
+            GameId = bet.GameId;
+            HomeScore = bet.HomeScore;
+            AwayScore = bet.AwayScore;
+            CornersMark = bet.CornersMark;
+            CardsMark = bet.CardsMark;
+        }
+
         public int BetId { get; set; }
 
         [Required]

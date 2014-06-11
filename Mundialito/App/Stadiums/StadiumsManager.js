@@ -114,7 +114,7 @@ angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stad
             if (stadium) {
                 stadium.setData(stadiumData);
             } else {
-                stadium = scope._retrieveInstance(stadiumData);
+                stadium = scope._retrieveInstance(stadiumData.StadiumId,stadiumData);
             }
             return stadium;
         }

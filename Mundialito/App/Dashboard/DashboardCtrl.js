@@ -1,7 +1,13 @@
 'use strict';
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','$timeout','GamesManager','UsersManager','GeneralBetsManager', function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager) {
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','$timeout','GamesManager','UsersManager','GeneralBetsManager','teams', function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager, teams) {
     $scope.generalBetsAreOpen = false;
     $scope.submittedGeneralBet = true;
+
+    $scope.teamsDic = {};
+
+    for(var i=0; i<teams.length; i++) {
+        $scope.teamsDic[teams[i].TeamId] = teams[i];
+    }
 
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
@@ -23,7 +29,12 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
     userHasGeneralBet();
 
     GeneralBetsManager.canSubmtiGeneralBet().then(function(data) {
-        $scope.generalBetsAreOpen = data === 'true';
+        $scope.generalBetsAreOpen = (data === 'true');
+        if (!$scope.generalBetsAreOpen) {
+            GeneralBetsManager.loadAllGeneralBets().then(function(data) {
+                $scope.generalBets = data;
+            });
+        }
     });
 
     UsersManager.loadAllUsers().then(function(users) {

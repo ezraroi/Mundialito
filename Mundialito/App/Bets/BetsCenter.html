@@ -2,13 +2,13 @@
     <div class="col-md-12">
         <form name="betsForm" novalidate>
                     <div class="table-responsive">
-                        <table class="table table-striped" cg-busy="{tracker:'getUserBets'}">
+                        <table class="table table-striped" cg-busy="{tracker:['getUserBets','addBetOnGame','updateBet']}">
                             <thead>
                             <th class="col-md-3">Game</th>
-                            <th class="col-md-3">Home Score</th>
-                            <th class="col-md-3">Away Score</th>
-                            <th class="col-md-1"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> Cards</th>
-                            <th class="col-md-1"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> Corners</th>
+                            <th class="col-md-2">Home Score</th>
+                            <th class="col-md-2">Away Score</th>
+                            <th class="col-md-2"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> Cards</th>
+                            <th class="col-md-2"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> Corners</th>
                             <th class="col-md-1">Save</th>
                             </thead>
                             <tbody>
@@ -19,10 +19,10 @@
                                         <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{game.AwayTeam.Name}}"></i>{{game.AwayTeam.ShortName}}
                                     </td>
                                     <td>
-                                        <input class="col-md-3" name="homeScore" id="homeScore" type="number" ng-model="bets[game.GameId].HomeScore" class="form-control" required min="0">
+                                        <input class="form-control" name="homeScore" id="homeScore" type="number" ng-model="bets[game.GameId].HomeScore" required min="0">
                                     </td>
                                     <td>
-                                        <input class="col-md-3" name="awayScore" id="awayScore" type="number" ng-model="bets[game.GameId].AwayScore" class="form-control" required min="0">
+                                        <input class="col-md-1 form-control" name="awayScore" id="awayScore" type="number" ng-model="bets[game.GameId].AwayScore" required min="0">
                                     </td>
                                     <td>
                                         <select id="cards" name="cards" ui-select2="{allowClear: false}" class="form-control" ng-model="bets[game.GameId].CardsMark" required>
