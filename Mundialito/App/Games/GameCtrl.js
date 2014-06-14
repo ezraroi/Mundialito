@@ -16,6 +16,7 @@ angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'Games
             chart1.options = {
                 displayExactValues: true,
                 is3D: true,
+                backgroundColor: { fill:'transparent' },
                 chartArea: {left:10,top:20,bottom:0,height:"100%"},
                 title: 'Bets Distribution'
             };

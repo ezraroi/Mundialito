@@ -33,6 +33,30 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
         if (!$scope.generalBetsAreOpen) {
             GeneralBetsManager.loadAllGeneralBets().then(function(data) {
                 $scope.generalBets = data;
+                $scope.winningTeams = {};
+                for (var i=0; i < $scope.generalBets.length ; i++ ){
+                    if (!angular.isDefined($scope.winningTeams[$scope.generalBets[i].WinningTeamId])) {
+                        $scope.winningTeams[$scope.generalBets[i].WinningTeamId] = 0;
+                    }
+                    $scope.winningTeams[$scope.generalBets[i].WinningTeamId] += 1;
+                }
+
+                var chart1 = {};
+                chart1.type = "PieChart";
+                chart1.options = {
+                    displayExactValues: true,
+                    is3D: true,
+                    backgroundColor: { fill:'transparent' },
+                    chartArea: {left:10,top:20,bottom:0,height:"100%"},
+                    title: 'Winning Team Bets Distribution'
+                };
+                chart1.data = [
+                    ['Team', 'Number Of Users']
+                ];
+                for (var teamId in $scope.winningTeams) {
+                    chart1.data.push([$scope.teamsDic[teamId].Name, $scope.winningTeams[teamId]]);
+                }
+                $scope.chart = chart1;
             });
         }
     });
