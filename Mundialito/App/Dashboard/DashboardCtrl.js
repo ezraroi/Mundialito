@@ -2,6 +2,7 @@
 angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$location','$timeout','GamesManager','UsersManager','GeneralBetsManager','teams', function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager, teams) {
     $scope.generalBetsAreOpen = false;
     $scope.submittedGeneralBet = true;
+    $scope.pendingUpdateGames = false;
 
     $scope.teamsDic = {};
 
@@ -11,6 +12,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
 
     GamesManager.loadAllGames().then(function(games) {
         $scope.games = games;
+        $scope.pendingUpdateGames = _.findWhere($scope.games,{IsPendingUpdate: true}) !== undefined;
     });
 
     var userHasGeneralBet = function() {
@@ -71,6 +73,12 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
         };
     };
 
+    $scope.isPendingUpdate = function() {
+        return function( item ) {
+            return item.IsPendingUpdate;
+        };
+    };
+
     $scope.isDecided = function() {
         return function( item ) {
             return !item.IsOpen && !item.IsPendingUpdate;
@@ -79,6 +87,10 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
 
     $scope.gridOptions = {
         data: 'users',
+        rowTemplate:'<div style="height: 100%" ng-class="{\'text-primary\': row.getProperty(\'Username\') === security.user.userName}"><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
+            '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
+            '<div ng-cell></div>' +
+            '</div></div>',
         columnDefs: [
             {field:'Place', displayName:'', resizable: false, width: 30},
             {field:'Name', displayName:'Name'},

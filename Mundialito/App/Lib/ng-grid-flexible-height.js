@@ -1,4 +1,4 @@
-﻿function ngGridFlexibleHeightPlugin(opts) {
+﻿function ngGridFlexibleHeightPlugin (opts) {
     var self = this;
     self.grid = null;
     self.scope = null;
