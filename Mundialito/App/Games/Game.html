@@ -183,11 +183,11 @@
                     <div class="table-responsive" ng-if="gameBets.length > 0">
                         <table class="table table-striped">
                             <thead>
-                                <th><i class="fa fa-user"></i> User</th>
-                                <th>Result</th>
-                                <th><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
-                                <th><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i></th>
-                                <th>Points</th>
+                                <th style="cursor: pointer" ng-click="sort('user')"><i class="fa fa-user"></i> User</th>
+                                <th style="cursor: pointer" ng-click="sort('result')">Result</th>
+                                <th style="cursor: pointer" ng-click="sort('cards')"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
+                                <th style="cursor: pointer" ng-click="sort('corners')"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i></th>
+                                <th style="cursor: pointer" ng-click="sort('points')">Points</th>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="bet in gameBets">

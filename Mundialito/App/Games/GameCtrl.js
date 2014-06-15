@@ -58,4 +58,18 @@ angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'Games
             });
         }
     };
+
+    $scope.sort = function(column) {
+        $log.debug('GameCtrl: sorting by ' + column);
+        $scope.gameBets = _.sortBy($scope.gameBets, function (item) {
+            switch (column)
+            {
+                case 'points': return item.Points;
+                case 'cards': return item.CardsMark;
+                case 'corners': return item.CornersMark;
+                case 'user': return item.User.FirstName + item.User.LastName;
+                case 'result': return item.HomeScore + '-' + item.AwayScore;
+            }
+        });
+    };
 }]);
