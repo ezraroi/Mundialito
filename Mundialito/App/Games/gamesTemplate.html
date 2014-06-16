@@ -12,7 +12,7 @@
                             <span class="label label-info"><i class="fa fa-clock-o"></i> Pending Update</span>
                         </div>
                         <div ng-if="!game.IsOpen && !game.IsPendingUpdate" class="text-center">
-                            {{game.HomeScore}} - {{game.AwayScore}} ({{game.Mark}})
+                            {{game.HomeScore}} - {{game.AwayScore}} (<span tooltip="Cards Mark">{{game.CardsMark}}</span>,<span tooltip="Corners Mark">{{game.CornersMark}}</span>)
                         </div>
                         <div ng-if="game.IsOpen" class="text-center">-</div>
                     </div>
