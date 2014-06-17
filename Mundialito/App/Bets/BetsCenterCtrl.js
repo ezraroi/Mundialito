@@ -49,4 +49,11 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
             });
         }
     };
+	$scope.shuffleBet = function(gameId) {
+		var toto = ['1', 'X', '2'];
+		$scope.bets[gameId].HomeScore = Math.floor((Math.random() * 6));
+		$scope.bets[gameId].AwayScore = Math.floor((Math.random() * 6));
+        $scope.bets[gameId].CardsMark = toto[Math.floor((Math.random() * 3))];
+		$scope.bets[gameId].CornersMark = toto[Math.floor((Math.random() * 3))];
+    };
 }]);
