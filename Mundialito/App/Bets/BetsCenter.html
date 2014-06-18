@@ -4,14 +4,15 @@
                     <div class="table-responsive">
                         <table class="table table-striped" cg-busy="{tracker:['getUserBets','addBetOnGame','updateBet']}">
                             <thead>
-                                <th class="col-md-3 text-center">Game</th>
+                                <th class="col-md-2 text-center">Game</th>
                                 <th class="col-md-2 text-center">Home Score</th>
                                 <th class="col-md-2 text-center">Away Score</th>
                                 <th class="col-md-1 text-center"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> Cards</th>
                                 <th class="col-md-1 text-center"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> Corners</th>
                                 <th class="col-md-2 text-center"><i class="fa fa-clock-o" tooltip="Close Time"></i></th>
-                                <th class="col-md-1 text-center">Save</th>
-                            </thead>
+                                <th class="col-md-1 text-center">Shuffle</th>
+								<th class="col-md-1 text-center">Save</th>
+							</thead>
                             <tbody>
                             <tr ng-repeat="game in games">
                                 <ng-form name="betFromIn">
@@ -22,10 +23,10 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <input class="form-control" name="homeScore" id="homeScore" type="number" ng-model="bets[game.GameId].HomeScore" required min="0">
+                                        <input class="form-control" name="homeScore" id="homeScore" type="number" ng-model="bets[game.GameId].HomeScore" placeholder="{{game.HomeTeam.Name}}" required min="0">
                                     </td>
                                     <td>
-                                        <input class="col-md-1 form-control" name="awayScore" id="awayScore" type="number" ng-model="bets[game.GameId].AwayScore" required min="0">
+                                        <input class="form-control" name="awayScore" id="awayScore" type="number" ng-model="bets[game.GameId].AwayScore" placeholder="{{game.AwayTeam.Name}}" required min="0">
                                     </td>
                                     <td>
                                         <select id="cards" name="cards" ui-select2="{allowClear: false}" class="form-control" ng-model="bets[game.GameId].CardsMark" required>
@@ -42,6 +43,9 @@
                                         </select>
                                     </td>
                                     <td class="text-center">{{game.CloseTime | date:'dd/MM/yy @ H:mm' }}</td>
+									<td class="text-center">
+                                        <button type="button" class="btn btn-info btn-sm" ng-click="shuffleBet(game.GameId)"><i class="fa fa-random"></i></button>
+                                    </td>
                                     <td class="text-center">
                                         <button type="button" ng-disabled="betFromIn.$invalid" class="btn btn-success btn-sm" ng-click="updateBet(game.GameId)"><i class="fa fa-save"></i></button>
                                     </td>
