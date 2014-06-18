@@ -8,7 +8,7 @@
                 </h3>
                 <h5 ng-if="game.IsBetResolved">
                     <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> {{game.CardsMark}}
-                    <i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> {{game.CornersMark}}
+                    <i class="fa fa-flag-o" tooltip="Corners Mark"></i> {{game.CornersMark}}
                 </h5>
                 <h4>{{game.Stadium.Name}} Stadium</h4>
                 <h4>{{game.Date | date:'dd/MM/yy @ H:mm'}} <small ng-show="game.IsOpen">(<i class="fa fa-clock-o"></i> Open until {{game.CloseTime | date:'dd/MM/yy @ H:mm'}})</small></h4><br />
@@ -186,7 +186,7 @@
                                 <th style="cursor: pointer" ng-click="sort('user')"><i class="fa fa-user"></i> User</th>
                                 <th style="cursor: pointer" ng-click="sort('result')">Result</th>
                                 <th style="cursor: pointer" ng-click="sort('cards')"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
-                                <th style="cursor: pointer" ng-click="sort('corners')"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i></th>
+                                <th style="cursor: pointer" ng-click="sort('corners')"><i class="fa fa-flag-o" tooltip="Corners Mark"></i></th>
                                 <th style="cursor: pointer" ng-click="sort('points')">Points</th>
                             </thead>
                             <tbody>

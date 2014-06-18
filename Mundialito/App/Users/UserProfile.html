@@ -108,17 +108,23 @@
                                     </div>
                                     <div class="col-md-2 col-xs-3">
                                         <div class="text-center">
-                                            <b>{{userBet.HomeScore}} - {{userBet.AwayScore}}</b>
+                                            <span class="label" ng-class="{'label-success' : userBet.ResultWin, 'label-info': userBet.GameMarkWin && !userBet.ResultWin, 'label-danger' : !userBet.ResultWin && !userBet.GameMarkWin}" >
+                                                <b>{{userBet.HomeScore}} - {{userBet.AwayScore}}</b>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-xs-1">
                                         <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-2 col-xs-2">
-                                        <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> <b>{{userBet.CardsMark}}</b>
+                                        <span class="label" ng-class="{'label-success' : userBet.CardsWin, 'label-danger': !userBet.CardsWin}">
+                                            <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> <b>{{userBet.CardsMark}}</b>
+                                        </span>
                                     </div>
                                     <div class="col-md-2 col-xs-2">
-                                        <i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> <b>{{userBet.CornersMark}}</b>
+                                        <span class="label" ng-class="{'label-success' : userBet.CornersWin, 'label-danger': !userBet.CornersWin}">
+                                            <i class="fa fa-flag-o" tooltip="Corners Mark"></i> <b>{{userBet.CornersMark}}</b>
+                                        </span>
                                     </div>
                                     <div class="col-md-2 col-xs-2" ng-if="userBet.IsResolved">
                                         <i class="fa fa-legal" tooltip="Points"></i> <b>{{userBet.Points}}</b>
