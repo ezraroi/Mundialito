@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="col-md-2 col-xs-3">
                                         <div class="text-center">
-                                            <span class="label" ng-class="{'label-success' : userBet.ResultWin, 'label-info': userBet.GameMarkWin && !userBet.ResultWin, 'label-danger' : !userBet.ResultWin && !userBet.GameMarkWin}" >
+                                            <span class="label" ng-class="{'label-default' : !userBet.IsResolved,'label-success' : userBet.ResultWin && userBet.IsResolved, 'label-info': userBet.GameMarkWin && !userBet.ResultWin, 'label-danger' : !userBet.ResultWin && !userBet.GameMarkWin && userBet.IsResolved}" >
                                                 <b>{{userBet.HomeScore}} - {{userBet.AwayScore}}</b>
                                             </span>
                                         </div>
@@ -117,12 +117,12 @@
                                         <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-2 col-xs-2">
-                                        <span class="label" ng-class="{'label-success' : userBet.CardsWin, 'label-danger': !userBet.CardsWin}">
+                                        <span class="label" ng-class="{'label-default' : !userBet.IsResolved, 'label-success' : userBet.CardsWin && userBet.IsResolved, 'label-danger': !userBet.CardsWin && userBet.IsResolved}">
                                             <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> <b>{{userBet.CardsMark}}</b>
                                         </span>
                                     </div>
                                     <div class="col-md-2 col-xs-2">
-                                        <span class="label" ng-class="{'label-success' : userBet.CornersWin, 'label-danger': !userBet.CornersWin}">
+                                        <span class="label" ng-class="{'label-default' : !userBet.IsResolved,'label-success' : userBet.CornersWin && userBet.IsResolved, 'label-danger': !userBet.CornersWin && userBet.IsResolved}">
                                             <i class="fa fa-flag-o" tooltip="Corners Mark"></i> <b>{{userBet.CornersMark}}</b>
                                         </span>
                                     </div>
