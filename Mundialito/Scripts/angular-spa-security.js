@@ -283,6 +283,7 @@
 				$location.path(securityProvider.urls.postLogout);
 				deferred.resolve();
 			}).error(function (errorData) {
+			    accessToken('clear');
 				deferred.reject(errorData);
 			});
 
