@@ -85,6 +85,7 @@
     <Compile Include="Controllers\GeneralBetsControllerUnitTest.cs" />
     <Compile Include="Controllers\TeamsControllerUnitTest.cs" />
     <Compile Include="Controllers\BetsControllerUnitTest.cs" />
+    <Compile Include="Controllers\UsersControllerUnitTest.cs" />
     <Compile Include="Logic\BetsResolverUnitTest.cs" />
     <Compile Include="Logic\BetValidatorUnitTest.cs" />
     <Compile Include="Logic\UsersRetriverTest.cs" />

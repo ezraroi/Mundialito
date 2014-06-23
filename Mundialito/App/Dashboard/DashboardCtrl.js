@@ -93,12 +93,13 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
             '</div></div>',
         columnDefs: [
             {field:'Place', displayName:'', resizable: false, width: 30},
-            {field:'Name', displayName:'Name'},
-            {field:'Results', displayName:'Results'},
-            {field:'Marks', displayName:'Marks'},
-            {field:'YellowCards', displayName:'Yellow Cards Marks'},
-            {field:'Corners', displayName:'Corners Marks'},
-            {field:'Points', displayName:'Points'}
+            {field:'Name', displayName:'Name', resizable: true},
+            {field:'Results', displayName:'Results', resizable: true},
+            {field:'Marks', displayName:'Marks', resizable: true},
+            {field:'YellowCards', displayName:'Yellow Cards Marks', resizable: true},
+            {field:'Corners', displayName:'Corners Marks', resizable: true},
+            {field:'Points', displayName:'Points', resizable: true},
+            {field:'PlaceDiff', displayName:'', resizable: false, width: 50, cellTemplate: '<div ng-class="{\'text-success\': row.getProperty(col.field).indexOf(\'+\') !== -1, \'text-danger\': (row.getProperty(col.field).indexOf(\'+\') === -1) && (row.getProperty(col.field) !== \'0\')}"><div class="ngCellText">{{row.getProperty(col.field)}}</div></div>'}
         ],
         plugins: [new ngGridFlexibleHeightPlugin()],
         multiSelect: false,

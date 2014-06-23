@@ -39,6 +39,8 @@ namespace Mundialito
             container.RegisterType<IUsersRetriver, UsersRetriver>();
             container.RegisterType<IDateTimeProvider, DateTimeProvider>();
             container.RegisterType<IActionLogsRepository, ActionLogsRepository>();
+            container.RegisterType<IAdminManagment, AdminManagment>();
+            
          
             container.RegisterType<AccountController>(new InjectionConstructor());
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

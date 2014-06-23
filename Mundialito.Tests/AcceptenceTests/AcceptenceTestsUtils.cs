@@ -51,7 +51,7 @@ namespace Mundialito.Tests.AcceptenceTests
 
         public static UsersController GetUsersController(UserModel user, DateTime now)
         {
-            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), new UsersRepository(), new ActionLogsRepository());
+            return new UsersController(new UsersRetriver(new BetsRepository(), new GeneralBetsRepository(), new UsersRepository(), GetDateTimeProvider(now)), GetLoggedUserProvider(user), new UsersRepository(), new AdminManagment(), new ActionLogsRepository());
         }
 
         public static GeneralBetsController GetGeneralBetsController(UserModel user, DateTime now)

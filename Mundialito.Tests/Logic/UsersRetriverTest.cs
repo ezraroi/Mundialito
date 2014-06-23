@@ -158,6 +158,51 @@ namespace Mundialito.Tests.Logic
         }
 
         [TestMethod]
+        public void TestGetAllUsersYesterdayPoints()
+        {
+            var dateTimeProvider = new Mock<IDateTimeProvider>();
+            var usersRepository = new Mock<IUsersRepository>();
+            var generalBetsRepository = new Mock<IGeneralBetsRepository>();
+            List<MundialitoUser> allUsers = new List<MundialitoUser>();
+            var user1 = CreateMundialtoUser("1");
+            var user2 = CreateMundialtoUser("2");
+            var user3 = CreateMundialtoUser("3");
+            allUsers.Add(user1);
+            allUsers.Add(user2);
+            allUsers.Add(user3);
+            usersRepository.Setup(item => item.AllUsers()).Returns(allUsers);
+
+            var betsRepository = new Mock<IBetsRepository>();
+            var clsoedGame1 = new Game() { GameId = 1, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(1)), HomeTeam = homeTeam, AwayTeam = awayTeam };
+            var clsoedGame2 = new Game() { GameId = 2, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(2)), HomeTeam = homeTeam, AwayTeam = awayTeam };
+
+            List<Bet> allBets = new List<Bet>();
+            allBets.Add(new Bet(user1, clsoedGame1) { AwayScore = 1, HomeScore = 1, Points = 5 });
+            allBets.Add(new Bet(user1, clsoedGame2) { AwayScore = 1, HomeScore = 1, Points = 1 });
+            allBets.Add(new Bet(user2, clsoedGame1) { AwayScore = 2, HomeScore = 0, Points = 1 });
+            allBets.Add(new Bet(user2, clsoedGame2) { AwayScore = 0, HomeScore = 1, Points = 7 });
+            allBets.Add(new Bet(user3, clsoedGame1) { AwayScore = 2, HomeScore = 0, Points = 2 });
+            allBets.Add(new Bet(user3, clsoedGame2) { AwayScore = 0, HomeScore = 1, Points = 10 });
+            betsRepository.Setup(item => item.GetBets()).Returns(allBets);
+            
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(clsoedGame2.Date);
+            var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, dateTimeProvider.Object);
+            var res = usersRetriver.GetAllUsers();
+            Assert.AreEqual(0, res.Sum(user => user.YesterdayPoints));
+
+            dateTimeProvider = new Mock<IDateTimeProvider>();
+            usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
+            res = usersRetriver.GetAllUsers();
+            Assert.AreEqual(18, res.Sum(user => user.YesterdayPoints));
+
+            dateTimeProvider = new Mock<IDateTimeProvider>();
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(DateTime.Now.AddDays(1));
+            usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, dateTimeProvider.Object);
+            res = usersRetriver.GetAllUsers();
+            Assert.AreEqual(26, res.Sum(user => user.YesterdayPoints));
+        }
+
+        [TestMethod]
         public void TestUserTotalMarks()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();

@@ -25,24 +25,33 @@ namespace Mundialito.Controllers
         private readonly ILoggedUserProvider loggedUserProvider;
         private readonly IUsersRepository usersRepository;
         private readonly IActionLogsRepository actionLogsRepository;
-        private readonly UserManager<MundialitoUser> usersManager = new UserManager<MundialitoUser>(new UserStore<MundialitoUser>(new MundialitoContext()));
+        private readonly IAdminManagment adminManagment;
 
-        public UsersController(IUsersRetriver usersRetriver, ILoggedUserProvider loggedUserProvider, IUsersRepository usersRepository, IActionLogsRepository actionLogsRepository)
+        public UsersController(IUsersRetriver usersRetriver, ILoggedUserProvider loggedUserProvider, IUsersRepository usersRepository, IAdminManagment adminManagment, IActionLogsRepository actionLogsRepository)
         {
             this.usersRetriver = usersRetriver;
             this.loggedUserProvider = loggedUserProvider;
             this.usersRepository = usersRepository;
             this.actionLogsRepository = actionLogsRepository;
+            this.adminManagment = adminManagment;
         }
 
         public IEnumerable<UserModel> GetAllUsers()
         {
             var res = usersRetriver.GetAllUsers();
+            var yesterdayPlaces = new Dictionary<string, int>(res.Count);
             res.ForEach(user => IsAdmin(user));
+            res = res.OrderByDescending(user => user.YesterdayPoints).ToList();
+            for (int i = 0; i < res.Count; i++)
+            {
+                yesterdayPlaces.Add(res[i].Id, i + 1);
+            }
             res = res.OrderByDescending(user => user.Points).ToList();
             for (int i = 0; i < res.Count; i++)
             {
                 res[i].Place = (i + 1).ToString();
+                var diff = yesterdayPlaces[res[i].Id] - (i + 1);
+                res[i].PlaceDiff = string.Format("{0}{1}", diff > 0 ? "+" : string.Empty, diff);
             }
             return res;
         }
@@ -78,7 +87,7 @@ namespace Mundialito.Controllers
         [Route("MakeAdmin/{id}")]
         public void MakeAdmin(String id)
         {
-            usersManager.AddToRole<MundialitoUser>(id, "Admin");
+            adminManagment.MakeAdmin(id);
             AddLog(ActionType.UPDATE, string.Format("Made  user {0} admin", id));
         }
 
@@ -95,7 +104,7 @@ namespace Mundialito.Controllers
 
         private void IsAdmin(UserModel user)
         {
-            user.IsAdmin = usersManager.GetRoles<MundialitoUser>(user.Id).Contains("Admin");
+            user.IsAdmin = adminManagment.IsAdmin(user.Id);
         }
 
         private void AddLog(ActionType actionType, String message)

@@ -236,6 +236,8 @@
     <Compile Include="DAL\ActionLogs\ActionType.cs" />
     <Compile Include="DAL\Bets\BetExtensionMethods.cs" />
     <Compile Include="DAL\Games\GameExtensionMethods.cs" />
+    <Compile Include="Logic\AdminManagment.cs" />
+    <Compile Include="Logic\IAdminManagment.cs" />
     <Compile Include="Models\GamesModels.cs" />
     <Compile Include="TournamentTimesUtils.cs" />
     <Compile Include="Controllers\AccountController.cs" />

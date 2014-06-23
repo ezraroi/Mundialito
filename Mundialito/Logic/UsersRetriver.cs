@@ -48,7 +48,9 @@ namespace Mundialito.Logic
         public List<UserModel> GetAllUsers()
         {
             var users = usersRepository.AllUsers().ToDictionary(user => user.Id, user => new UserModel(user));
-            betsRepository.GetBets().Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => users[bet.User.Id].AddBet(new BetViewModel(bet, dateTimeProvider.UTCNow)));
+            var allBets = betsRepository.GetBets();
+            allBets.Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).ToList().ForEach(bet => users[bet.User.Id].AddBet(new BetViewModel(bet, dateTimeProvider.UTCNow)));
+            allBets.Where(bet => users.ContainsKey(bet.User.Id)).Where(bet => !bet.IsOpenForBetting(dateTimeProvider.UTCNow)).Where(bet => bet.Game.Date < dateTimeProvider.UTCNow.Subtract(TimeSpan.FromDays(1))).ToList().ForEach(bet => users[bet.User.Id].YesterdayPoints += bet.Points.HasValue ? bet.Points.Value : 0);
             generalBetsRepository.GetGeneralBets().ToList().ForEach(generalBet => 
             {
                 users[generalBet.User.Id].SetGeneralBet(new GeneralBetViewModel(generalBet));

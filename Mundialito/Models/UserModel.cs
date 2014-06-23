@@ -28,6 +28,8 @@ namespace Mundialito.Models
 
         public String Place { get; set; }
 
+        public String PlaceDiff { get; set; }
+
         public String Email { get; set; }
         
         public bool IsAdmin { get; set; }
@@ -37,6 +39,8 @@ namespace Mundialito.Models
         public String Name { get; set; }
 
         public int Points { get; set; }
+
+        public int YesterdayPoints { get; set; }
 
         public int Results { get; private set; }
 
