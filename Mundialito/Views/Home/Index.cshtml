@@ -6,7 +6,7 @@
 <html lang="en" ng-app="mundialitoApp">
 <head>
     <meta charset="utf-8" />
-    <title>Mundialito</title>
+    <title>@System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta http-equiv="cache-control" content="max-age=0" />
@@ -38,7 +38,7 @@
     <!-- App Loading message -->
     <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="text-center">
-            <h3><i class="fa fa-spin fa-spinner fa-lg"></i> Loading Mundialito...</h3>
+            <h3><i class="fa fa-spin fa-spinner fa-lg"></i> Loading @System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]</h3>
         </div>
     </div>
     <!-- End of App Loading message -->
@@ -54,7 +54,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="/" class="navbar-brand"><i class="fa fa-trophy" style="color: gold;"></i> Mundialito</a>
+                    <a href="/" class="navbar-brand"><i class="fa fa-trophy" style="color: gold;"></i> @System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]</a>
                 </div>
                 <div ng-if="security.user" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
