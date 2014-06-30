@@ -147,8 +147,8 @@ namespace Mundialito.Models
             CornersMark = game.CornersMark;
             CardsMark = game.CardsMark;
             Stadium = game.Stadium;
-            HomeTeam = new GameTeamModel(game.HomeTeam);
-            AwayTeam = new GameTeamModel(game.AwayTeam);
+            HomeTeam = game.HomeTeam;
+            AwayTeam = game.AwayTeam;
         }
 
         public DateTime Date { get; set; }
@@ -163,9 +163,9 @@ namespace Mundialito.Models
 
         public Stadium Stadium { get; set; }
 
-        public GameTeamModel HomeTeam { get; set; }
+        public Team HomeTeam { get; set; }
 
-        public GameTeamModel AwayTeam { get; set; }
+        public Team AwayTeam { get; set; }
 
     }
 
