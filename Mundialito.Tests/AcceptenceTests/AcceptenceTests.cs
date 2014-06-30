@@ -118,7 +118,7 @@ namespace Mundialito.Tests.AcceptenceTests
         {
             var newGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PostGame(new NewGameModel() { AwayTeam = teams[0], HomeTeam = teams[1], Date = DateTime.UtcNow.AddHours(2), Stadium = stadiums[0] });
             var updatedTime = DateTime.UtcNow.AddHours(3);
-            var updatedGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PutGame(newGame.GameId, new PutGameModel() { Date = updatedTime, HomeTeam = teams[1], AwayTeam = teams[0], Stadium = stadiums[1] });
+            var updatedGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PutGame(newGame.GameId, new PutGameModel() { Date = updatedTime, HomeTeam = new GameTeamModel(teams[1]), AwayTeam = new GameTeamModel(teams[0]), Stadium = stadiums[1] });
             Assert.AreEqual(updatedTime, updatedGame.Date);
             Assert.AreEqual(stadiums[1].StadiumId, updatedGame.Stadium.StadiumId);
 

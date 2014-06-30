@@ -14,8 +14,8 @@ namespace Mundialito.Models
         public GameViewModel(Game game)
         {
             GameId = game.GameId;
-            HomeTeam = game.HomeTeam;
-            AwayTeam = game.AwayTeam;
+            HomeTeam = new GameTeamModel(game.HomeTeam);
+            AwayTeam = new GameTeamModel(game.AwayTeam);
             Date = game.Date;
             HomeScore = game.HomeScore;
             AwayScore = game.AwayScore;
@@ -30,9 +30,9 @@ namespace Mundialito.Models
 
         public int GameId { get; private set; }
 
-        public Team HomeTeam { get; private set; }
+        public GameTeamModel HomeTeam { get; private set; }
 
-        public Team AwayTeam { get; private set; }
+        public GameTeamModel AwayTeam { get; private set; }
 
         public DateTime Date { get; private set; }
 
@@ -63,6 +63,29 @@ namespace Mundialito.Models
         public Boolean IsBetResolved { get; private set; }
 
         public String Mark { get; private set; }
+
+    }
+
+    public class GameTeamModel
+    {
+        public GameTeamModel(Team team)  
+        {
+            TeamId = team.TeamId;
+            Name = team.Name;
+            Flag = team.Flag;
+            Logo = team.Logo;
+            ShortName = team.ShortName;
+        }
+
+        public int TeamId { get; set; }
+
+        public string Name { get; set; }
+
+        public string Flag { get; set; }
+
+        public string Logo { get; set; }
+
+        public string ShortName { get; set; }
 
     }
 
@@ -124,8 +147,8 @@ namespace Mundialito.Models
             CornersMark = game.CornersMark;
             CardsMark = game.CardsMark;
             Stadium = game.Stadium;
-            HomeTeam = game.HomeTeam;
-            AwayTeam = game.AwayTeam;
+            HomeTeam = new GameTeamModel(game.HomeTeam);
+            AwayTeam = new GameTeamModel(game.AwayTeam);
         }
 
         public DateTime Date { get; set; }
@@ -140,9 +163,9 @@ namespace Mundialito.Models
 
         public Stadium Stadium { get; set; }
 
-        public Team HomeTeam { get; set; }
+        public GameTeamModel HomeTeam { get; set; }
 
-        public Team AwayTeam { get; set; }
+        public GameTeamModel AwayTeam { get; set; }
 
     }
 
