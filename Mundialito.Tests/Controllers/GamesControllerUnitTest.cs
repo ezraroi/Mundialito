@@ -113,7 +113,7 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(closedGame);
 
             var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new PutGameModel() {Stadium = stadium,  HomeTeam = homeTeam, AwayTeam = awayTeam, HomeScore = 1, AwayScore = 1, CardsMark = "X", CornersMark = "1", Date = closedGame.Date });
+            controller.PutGame(1, new PutGameModel() {HomeScore = 1, AwayScore = 1, CardsMark = "X", CornersMark = "1", Date = closedGame.Date });
             betsResolver.Verify(item => item.ResolveBets(closedGame));
         }
 

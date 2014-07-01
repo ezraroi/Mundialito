@@ -164,9 +164,6 @@ namespace Mundialito.Controllers
             item.CardsMark = game.CardsMark;
             item.CornersMark = game.CornersMark;
             item.Date = game.Date;
-            item.HomeTeamId = game.HomeTeam.TeamId;
-            item.StadiumId = game.Stadium.StadiumId;
-            item.AwayTeamId = game.AwayTeam.TeamId;
 
             gamesRepository.UpdateGame(item);
             gamesRepository.Save();

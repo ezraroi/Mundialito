@@ -121,11 +121,10 @@ namespace Mundialito.Tests.AcceptenceTests
         [TestMethod]
         public void AddAndEditGame()
         {
-            var newGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PostGame(new NewGameModel() { AwayTeam = teams[0], HomeTeam = teams[1], Date = DateTime.UtcNow.AddHours(2), Stadium = stadiums[0] });
+            var newGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PostGame(new NewGameModel() { AwayTeam = new GameTeamModel(teams[0]), HomeTeam = new GameTeamModel(teams[1]), Date = DateTime.UtcNow.AddHours(2), Stadium = stadiums[0] });
             var updatedTime = DateTime.UtcNow.AddHours(3);
-            var updatedGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PutGame(newGame.GameId, new PutGameModel() { Date = updatedTime, HomeTeam = teams[1], AwayTeam = teams[0], Stadium = stadiums[1] });
+            var updatedGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PutGame(newGame.GameId, new PutGameModel() { Date = updatedTime});
             Assert.AreEqual(updatedTime, updatedGame.Date);
-            Assert.AreEqual(stadiums[1].StadiumId, updatedGame.Stadium.StadiumId);
 
             try
             {
@@ -223,13 +222,10 @@ namespace Mundialito.Tests.AcceptenceTests
         {
             var newGame = new PutGameModel();
             newGame.AwayScore = awayScore;
-            newGame.AwayTeam = GetTeam(game.AwayTeam.TeamId);
             newGame.CardsMark = cards;
             newGame.CornersMark = corners;
             newGame.Date = game.Date;
             newGame.HomeScore = homeScore;
-            newGame.HomeTeam = GetTeam(game.HomeTeam.TeamId);
-            newGame.Stadium = game.Stadium;
             return newGame;
         }
 
