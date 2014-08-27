@@ -17,6 +17,7 @@ using Mundialito.DAL.Accounts;
 using Mundialito.Logic;
 using Mundialito.DAL.ActionLogs;
 using System.Web;
+using System.Web.Configuration;
 
 namespace Mundialito.Controllers
 {
@@ -30,9 +31,10 @@ namespace Mundialito.Controllers
         private readonly IBetsResolver betsResolver;
         private readonly IDateTimeProvider dateTimeProvider;
         private readonly ILoggedUserProvider loggedUserProvider;
+        private readonly IUsersRepository usersRepository;
         private readonly IActionLogsRepository actionLogsRepository;
 
-        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider loggedUserProvider, IDateTimeProvider dateTimeProvider, IActionLogsRepository actionLogsRepository)
+        public GamesController(IGamesRepository gamesRepository, IBetsRepository betsRepository, IBetsResolver betsResolver, ILoggedUserProvider loggedUserProvider, IDateTimeProvider dateTimeProvider, IUsersRepository usersRepository, IActionLogsRepository actionLogsRepository)
         {
             if (gamesRepository == null)
                 throw new ArgumentNullException("gamesRepository");
@@ -57,6 +59,10 @@ namespace Mundialito.Controllers
             if (dateTimeProvider == null)
                 throw new ArgumentNullException("dateTimeProvider");
             this.dateTimeProvider = dateTimeProvider;
+
+            if (usersRepository == null)
+                throw new ArgumentNullException("usersRepository");
+            this.usersRepository = usersRepository;
 
             if (actionLogsRepository == null)
                 throw new ArgumentNullException("actionLogsRepository");
@@ -144,6 +150,8 @@ namespace Mundialito.Controllers
             game.IsOpen = true;
             game.IsPendingUpdate = false;
             AddLog(ActionType.CREATE, String.Format("Posting new game: {0}", newGame));
+            AddMonkeyBet(res);
+
             return game;
         }
 
@@ -206,6 +214,30 @@ namespace Mundialito.Controllers
             catch (Exception e)
             {
                 Trace.TraceError("Exception during log. Exception: {0}", e.Message);
+            }
+        }
+
+        private void AddMonkeyBet(Game res)
+        {
+            var monkeyUserName = WebConfigurationManager.AppSettings["MonkeyUserName"];
+            if (!String.IsNullOrEmpty(monkeyUserName))
+            {
+                var monkeyUser = usersRepository.GetUser(monkeyUserName);
+                if (monkeyUser == null)
+                {
+                    Trace.TraceError("Monkey user {0} was not found, will not add monkey bet", monkeyUserName);
+                }
+                var randomResults = new RandomResults();
+                betsRepository.InsertBet(new Bet()
+                {
+                    GameId = res.GameId,
+                    UserId = monkeyUser.Id,
+                    HomeScore = 1,
+                    AwayScore = 1,
+                    CardsMark = randomResults.GetRandomMark(),
+                    CornersMark = randomResults.GetRandomMark()
+                });
+                betsRepository.Save();
             }
         }
     }
