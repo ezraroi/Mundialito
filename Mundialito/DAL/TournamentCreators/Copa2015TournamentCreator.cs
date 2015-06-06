@@ -35,7 +35,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["CHILE"].TeamId,
                 AwayTeamId = teams["ECUADOR"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 11, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 11, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Nacional Julio Martínez Prádanos"].StadiumId
             });
 
@@ -45,7 +45,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["MEXICO"].TeamId,
                 AwayTeamId = teams["BOLIVIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 12, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 12, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Sausalito"].StadiumId
             });
 
@@ -55,7 +55,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["URUGUAY"].TeamId,
                 AwayTeamId = teams["JAMAICA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 13, 19, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 13, 19, 0, 0)),
                 StadiumId = stadiums["Estadio Regional Calvo y Bascuñán"].StadiumId
             });            
 
@@ -63,7 +63,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["ARGENTINA"].TeamId,
                 AwayTeamId = teams["PARAGUAY"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 13, 21, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 13, 21, 30, 0)),
                 StadiumId = stadiums["Estadio La Portada de La Serena"].StadiumId
             });
 
@@ -73,7 +73,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["COLOMBIA"].TeamId,
                 AwayTeamId = teams["VENEZUELA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 14, 19, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 14, 19, 0, 0)),
                 StadiumId = stadiums["Estadio El Teniente"].StadiumId
             });           
 
@@ -81,7 +81,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["BRAZIL"].TeamId,
                 AwayTeamId = teams["PERU"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 14, 21, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 14, 21, 30, 0)),
                 StadiumId = stadiums["Estadio Municipal Bicentenario Germán Becker"].StadiumId
             });
 
@@ -91,7 +91,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["ECUADOR"].TeamId,
                 AwayTeamId = teams["BOLIVIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 21, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 15, 21, 0, 0)),
                 StadiumId = stadiums["Estadio Elías Figueroa Brander"].StadiumId
             });
 
@@ -99,7 +99,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["CHILE"].TeamId,
                 AwayTeamId = teams["MEXICO"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 15, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Nacional Julio Martínez Prádanos"].StadiumId
             });          
 
@@ -109,7 +109,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Paraguay".ToUpper()].TeamId,
                 AwayTeamId = teams["Jamaica".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 16, 21, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 16, 21, 0, 0)),
                 StadiumId = stadiums["Estadio Regional Calvo y Bascuñán"].StadiumId
             });
 
@@ -117,7 +117,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Argentina".ToUpper()].TeamId,
                 AwayTeamId = teams["Uruguay".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 16, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 16, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Regional Calvo y Bascuñán"].StadiumId
             });
             
@@ -127,7 +127,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Brazil".ToUpper()].TeamId,
                 AwayTeamId = teams["Colombia".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 17, 00, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 17, 00, 0, 0)),
                 StadiumId = stadiums["Estadio Monumental David Arellano"].StadiumId
             });            
 
@@ -137,7 +137,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Peru".ToUpper()].TeamId,
                 AwayTeamId = teams["Venezuela".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 18, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 18, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Elías Figueroa Brander"].StadiumId
             });
            
@@ -147,7 +147,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Mexico".ToUpper()].TeamId,
                 AwayTeamId = teams["Ecuador".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 19, 21, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 19, 21, 0, 0)),
                 StadiumId = stadiums["Estadio El Teniente"].StadiumId
             });
 
@@ -155,7 +155,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Chile".ToUpper()].TeamId,
                 AwayTeamId = teams["Bolivia".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 19, 23, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 19, 23, 30, 0)),
                 StadiumId = stadiums["Estadio Nacional Julio Martínez Prádanos"].StadiumId
             });
             
@@ -165,7 +165,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Uruguay".ToUpper()].TeamId,
                 AwayTeamId = teams["Paraguay".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 20, 19, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 20, 19, 0, 0)),
                 StadiumId = stadiums["Estadio La Portada de La Serena"].StadiumId
             });
 
@@ -173,7 +173,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Argentina".ToUpper()].TeamId,
                 AwayTeamId = teams["Jamaica".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 20, 21, 30, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 20, 21, 30, 0)),
                 StadiumId = stadiums["Estadio Sausalito"].StadiumId
             });
             
@@ -183,7 +183,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Colombia".ToUpper()].TeamId,
                 AwayTeamId = teams["Peru".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 21, 19, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 21, 19, 0, 0)),
                 StadiumId = stadiums["Estadio Municipal Bicentenario Germán Becker"].StadiumId
             });
 
@@ -191,7 +191,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Brazil".ToUpper()].TeamId,
                 AwayTeamId = teams["Venezuela".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 21, 21, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 21, 21, 0, 0)),
                 StadiumId = stadiums["Estadio Monumental David Arellano"].StadiumId
             });            
 
