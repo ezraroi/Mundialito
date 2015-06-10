@@ -334,7 +334,7 @@ namespace Mundialito.Controllers
             }
             if (TournamentTimesUtils.GeneralBetsCloseTime < DateTime.UtcNow)
             {
-                return BadRequest("Tournament is not closed for registration");
+                return BadRequest("Tournament is not open for registration anymore");
             }
             if (!PrivateKeyValidator.ValidatePrivateKey(model.PrivateKey, model.Email))
             {
