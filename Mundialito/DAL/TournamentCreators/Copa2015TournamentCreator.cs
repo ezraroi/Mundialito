@@ -127,7 +127,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["Brazil".ToUpper()].TeamId,
                 AwayTeamId = teams["Colombia".ToUpper()].TeamId,
-                Date = GetFixedDate(new DateTime(2015, 6, 17, 00, 0, 0)),
+                Date = GetFixedDate(new DateTime(2015, 6, 18, 00, 0, 0)),
                 StadiumId = stadiums["Estadio Monumental David Arellano"].StadiumId
             });            
 
