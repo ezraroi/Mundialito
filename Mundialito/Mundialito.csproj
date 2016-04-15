@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -237,6 +238,7 @@
     <Compile Include="DAL\Bets\BetExtensionMethods.cs" />
     <Compile Include="DAL\TournamentCreators\ITournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Copa2015TournamentCreator.cs" />
+    <Compile Include="DAL\TournamentCreators\Euro2016TournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Mondial2014TournamentCreator.cs" />
     <Compile Include="DAL\Games\GameExtensionMethods.cs" />
     <Compile Include="Logic\AdminManagment.cs" />
@@ -905,7 +907,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1694</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
