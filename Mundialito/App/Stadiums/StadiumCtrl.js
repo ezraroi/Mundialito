@@ -10,7 +10,7 @@ angular.module('mundialitoApp').controller('StadiumCtrl', ['$scope', '$log', 'St
 
     $scope.updateStadium = function() {
         $scope.stadium.update().success(function() {
-            Alert.new('success', 'Stadium was updated successfully', 2000);
+            Alert.success('Stadium was updated successfully');
         })
     };
 

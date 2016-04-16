@@ -1,25 +1,23 @@
 ﻿'use strict';
-angular.module('mundialitoApp').factory('Alert', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
-    var Alert = this;
-    var alerts = $rootScope.alerts = [];
+angular.module('mundialitoApp').factory('Alert', ['toaster', '$log', '$rootScope', function (toaster, $log, $rootScope) {
+    var service = {
+        success: success,
+        error: error,
+        note: note
+    };
 
-    Alert.close = function (alert, index) {
-        if (alert.timer != null) $timeout.cancel(alert.timer);
-        alerts.splice(index, 1);
+    return service;
+
+
+     function success(message) {
+        toaster.pop('success', 'Success', message);
+    };
+
+     function error(message) {
+        toaster.pop('error', 'Error', message);
     }
 
-    Alert.new = function (type, message, time) {
-        var alert = { type: type, message: message, close: Alert.close };
-        if (time == null) {
-            time = 3000;
-        }
-        if (time != null) {
-            alert.timer = $timeout(function () {
-                alerts.splice(alerts.indexOf(alert), 1);
-            }, time);
-        }
-        alerts.push(alert);
+    function note(message) {
+        toaster.pop('note', 'Info', message);
     }
-
-    return Alert;
 }]);

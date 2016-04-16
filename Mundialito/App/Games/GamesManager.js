@@ -40,6 +40,10 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
         },
 
         /* Public Methods */
+
+        clearGamesCache: function () {
+            this._cacheManager.remove('api/games');
+        },
         /* Use this function in order to get a new empty game data object */
         getEmptyGameObject: function() {
             return {

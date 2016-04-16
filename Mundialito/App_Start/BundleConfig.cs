@@ -68,17 +68,20 @@ namespace Mundialito
                       "~/App/Lib/angular-select2.js",
                       "~/App/Lib/ng-google-chart.js",
                       "~/App/Lib/angular-cache.min.js",
+                      "~/Scripts/toaster.min.js",
                       "~/Scripts/angular-busy.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-spacelab.min.css",
                       "~/Content/datetimepicker.css",
-                      "~/Content/font-awesome.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/flags.css",
                       "~/Content/angular-busy.min.css",
                       "~/Content/select2.min.css",
                       "~/Content/select2-bootstrap.min.css",
                       "~/Content/ng-grid.min.css",
+                      "~/Content/toaster.min.css",
                       "~/Content/site.css"));
         }
 

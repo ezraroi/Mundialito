@@ -1,5 +1,5 @@
 'use strict';
-angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet','$log','MundialitoUtils', function($http,$q,Bet,$log,MundialitoUtils) {
+angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet', '$log', 'MundialitoUtils', 'GamesManager', function ($http, $q, Bet, $log, MundialitoUtils, GamesManager) {
     var betsManager = {
         _pool: {},
         _retrieveInstance: function(betId, betData) {
@@ -46,11 +46,12 @@ angular.module('mundialitoApp').factory('BetsManager', ['$http', '$q', 'Bet','$l
             $log.debug('BetsManager: will add new bet - ' + angular.toJson(betData));
             $http.post('api/bets/', betData, { tracker: 'addBetOnGame' }).success(function(data) {
                 var bet = scope._retrieveInstance(data.BetId, data);
+                GamesManager.clearGamesCache();
                 deferred.resolve(bet);
-            })
-                .error(function() {
-                    deferred.reject();
-                });
+            }).error(function (err) {
+                $log.error('Failed to add bet');
+                deferred.reject(err);
+            });
             return deferred.promise;
         },
 

@@ -10,7 +10,7 @@ angular.module('mundialitoApp').controller('TeamsCtrl', ['$scope', '$log', 'Team
 
     $scope.saveNewTeam = function() {
         TeamsManager.addTeam($scope.newTeam).then(function(data) {
-            Alert.new('success', 'Team was added successfully', 2000);
+            Alert.success('Team was added successfully');
             $scope.newTeam = null;
             $scope.teams.push(data);
         });
@@ -19,7 +19,7 @@ angular.module('mundialitoApp').controller('TeamsCtrl', ['$scope', '$log', 'Team
     $scope.deleteTeam = function(team) {
         var scope = team;
         team.delete().success(function() {
-            Alert.new('success', 'Team was deleted successfully', 2000);
+            Alert.success('Team was deleted successfully');
             $scope.teams.splice($scope.teams.indexOf(scope),1);
         })
     };

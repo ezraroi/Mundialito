@@ -10,7 +10,7 @@ angular.module('mundialitoApp').controller('StadiumsCtrl', ['$scope', '$log', 'S
 
     $scope.saveNewStadium = function() {
         StadiumsManager.addStadium($scope.newStadium).then(function(data) {
-            Alert.new('success', 'Stadium was added successfully', 2000);
+            Alert.success('Stadium was added successfully');
             $scope.newStadium = null;
             $scope.stadiums.push(data);
         });
@@ -19,7 +19,7 @@ angular.module('mundialitoApp').controller('StadiumsCtrl', ['$scope', '$log', 'S
     $scope.deleteStadium = function(stadium) {
         var scope = stadium;
         stadium.delete().success(function() {
-            Alert.new('success', 'Stadium was deleted successfully', 2000);
+            Alert.success('Stadium was deleted successfully');
             $scope.stadiums.splice($scope.stadiums.indexOf(scope),1);
         })
     };

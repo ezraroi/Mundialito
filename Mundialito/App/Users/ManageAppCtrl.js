@@ -12,14 +12,14 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
     $scope.deleteUser = function(user) {
         var scope = user;
         user.delete().success(function () {
-            Alert.new('success', 'User was deleted successfully', 2000);
+            Alert.success('User was deleted successfully');
             $scope.users.splice($scope.users.indexOf(scope), 1);
         })
     };
 
     $scope.resolveBet = function(bet) {
         bet.resolve().success(function() {
-            Alert.new('success', 'General bet was resolved successfully', 2000);
+            Alert.success('General bet was resolved successfully');
         });
     };
 
@@ -33,7 +33,7 @@ angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', '
 
     $scope.makeAdmin = function(user) {
         user.makeAdmin().success(function () {
-            Alert.new('success', 'User was is now admin', 2000);
+            Alert.success('User was is now admin');
             user.IsAdmin = true;
         })
     };

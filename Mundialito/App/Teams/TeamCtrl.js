@@ -6,7 +6,7 @@ angular.module('mundialitoApp').controller('TeamCtrl', ['$scope', '$log', 'Teams
 
     $scope.updateTeam = function() {
         $scope.team.update().success(function(data) {
-            Alert.new('success', 'Team was updated successfully', 2000);
+            Alert.success('Team was updated successfully');
             TeamsManager.setTeam(data);
         })
     };

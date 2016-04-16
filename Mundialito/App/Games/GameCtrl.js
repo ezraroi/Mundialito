@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'GamesManager', 'BetsManager', 'game', 'userBet','Alert', function ($scope, $log, GamesManager, BetsManager, game, userBet, Alert) {
+angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'GamesManager', 'BetsManager', 'game', 'userBet', 'Alert', function ($scope, $log, GamesManager, BetsManager, game, userBet, Alert) {
     $scope.game = game;
     $scope.userBet = userBet;
     $scope.userBet.GameId = game.GameId;
@@ -37,24 +37,33 @@ angular.module('mundialitoApp').controller('GameCtrl', ['$scope', '$log', 'Games
         if  ((angular.isDefined(game.Stadium.Games)) && (game.Stadium.Games != null)) {
             delete game.Stadium.Games;
         }
-        $scope.game.update().success(function(data) {
-            Alert.new('success', 'Game was updated successfully', 2000);
+        $scope.game.update().success(function (data) {
+            Alert.success('Game was updated successfully');
             GamesManager.setGame(data);
-        })
+        }).catch(function (err) {
+            Alert.error('Failed to update game, please try again');
+            $log.error('Error updating game', err);
+        });
     };
 
     $scope.updateBet = function() {
         if ($scope.userBet.BetId !== -1) {
-            $scope.userBet.update().success(function(data) {
-                Alert.new('success', 'Bet was updated successfully', 2000);
+            $scope.userBet.update().success(function (data) {
+                Alert.success('Bet was updated successfully');
                 BetsManager.setBet(data);
+            }).error(function (err) {
+                Alert.error('Failed to update bet, please try again');
+                $log.error('Error updating bet', err);
             });
         }
         else {
             BetsManager.addBet($scope.userBet).then(function (data) {
                 $log.log('GameCtrl: Bet ' + data.BetId + ' was added');
                 $scope.userBet = data;
-                Alert.new('success', 'Bet was added successfully', 2000);
+                Alert.success('Bet was added successfully');
+            }, function (err) {
+                Alert.error('Failed to add bet, please try again');
+                $log.error('Error adding bet', err);
             });
         }
     };

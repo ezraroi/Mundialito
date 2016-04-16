@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', '$timeout','Alert', 'BetsManager', 'games', function ($scope, $log, $timeout, Alert, BetsManager, games) {
+angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', '$timeout', 'Alert', 'BetsManager', 'games', function ($scope, $log, $timeout, Alert, BetsManager, games) {
     $scope.games = games;
     $scope.bets = {};
 
@@ -36,8 +36,10 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
         if ($scope.bets[gameId].BetId !== -1) {
             $log.debug('BetsCenterCtrl: Will update bet');
             $scope.bets[gameId].update().success(function(data) {
-                Alert.new('success', 'Bet was updated successfully', 2000);
+                Alert.success('Bet was updated successfully');
                 BetsManager.setBet(data);
+            }).catch(function () {
+                Alert.error('Failed to update Bet, please try again');
             });
         }
         else {
@@ -45,7 +47,9 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
             BetsManager.addBet($scope.bets[gameId]).then(function(data) {
                 $log.log('BetsCenterCtrl: Bet ' + data.BetId + ' was added');
                 $scope.bets[gameId] = data;
-                Alert.new('success', 'Bet was added successfully', 2000);
+                Alert.success('Bet was added successfully');
+            }).catch(function () {
+                Alert.error('Failed to add Bet, please try again');
             });
         }
     };

@@ -36,6 +36,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <!-- App Loading message -->
+    <toaster-container toaster-options="{'time-out': 2500, 'close-button': true}"></toaster-container>
     <div class="loading" ng-show="mundialitoApp.loading || mundialitoApp.authenticating">
         <div class="text-center">
             <h3><i class="fa fa-spin fa-spinner fa-lg"></i> Loading @System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]</h3>
@@ -116,12 +117,6 @@
         <!-- End of Content Loading message -->
     </div>
     <!-- End of Main Content -->
-    <div class="appAlerts ng-cloak">
-        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alert.close(alert, $index)">
-            <span class="message" ng-bind-html="alert.message"></span>
-        </alert>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/external")

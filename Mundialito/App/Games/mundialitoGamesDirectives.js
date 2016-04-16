@@ -13,7 +13,7 @@ angular.module('mundialitoApp').directive('mundialitoGames',['Alert', function (
             $scope.deleteGame = function(game) {
                 var scope = game;
                 game.delete().success(function() {
-                    Alert.new('success', 'Game was deleted successfully', 2000);
+                    Alert.success('Game was deleted successfully');
                     $scope.games.splice($scope.games.indexOf(scope),1);
                 });
             }

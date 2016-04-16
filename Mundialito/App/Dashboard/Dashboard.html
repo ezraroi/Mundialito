@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-6 col-xs-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-pencil"></i> Last scores</div>
+            <div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i> Last scores</div>
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
                     <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}" ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">
@@ -78,7 +78,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-table"></i> Ranking Table</div>
+            <div class="panel-heading"><i class="fa fa-calculator" aria-hidden="true"></i> Ranking Table</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">

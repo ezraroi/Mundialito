@@ -58,7 +58,9 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
         if (angular.isDefined($scope.generalBet.GeneralBetId))
         {
             $scope.generalBet.update().then(function() {
-                Alert.new('success', 'General Bet was updated successfully', 2000);
+                Alert.success('General Bet was updated successfully');
+            }, function () {
+                Alert.error('Failed to update General Bet, please try again');
             });
         }
         else
@@ -66,7 +68,9 @@ angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log',
             GeneralBetsManager.addGeneralBet($scope.generalBet).then(function(data) {
                 $log.log('UserProfileCtrl: General Bet ' + data.GeneralBetId + ' was added');
                 $scope.generalBet = data;
-                Alert.new('success', 'General Bet was added successfully', 2000);
+                Alert.success('General Bet was added successfully');
+            }, function () {
+                Alert.error('Failed to add General Bet, please try again');
             });
         }
     };
