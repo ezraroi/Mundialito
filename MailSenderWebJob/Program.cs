@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Azure.WebJobs;
 using Mundialito.DAL.Games;
 using System.Threading;
 using Mundialito.DAL.Accounts;
 using System.Net.Mail;
 using System.Net;
 using Mundialito.DAL.Bets;
-using System.Linq.Expressions;
+using System.Configuration;
 
 namespace MailSenderWebJob
 {
@@ -28,9 +26,15 @@ namespace MailSenderWebJob
             for (; Program.openGames.Count > 0; Program.openGames = Program.GetOpenGames())
             {
                 long dueTime = Program.GetMilliscecondsToSleep(Program.openGames[0]);
-                if (dueTime == -1 || dueTime > 4294967294)
+                if (dueTime == -1)
                 {
-                    Program.WriteLine("Due time is " + dueTime + ", skipping");
+                    Program.WriteLine("Due time is " + dueTime + ", skipping as it already passed");
+                    continue;
+                }
+                if (dueTime > 4294967294)
+                {
+                    Program.WriteLine("Due time is " + dueTime + ", going to sleep 1 day");
+                    Thread.Sleep((int)TimeSpan.FromDays(1).TotalMilliseconds);
                     continue;
                 }
                 autoResetEvent.Reset();
@@ -66,17 +70,21 @@ namespace MailSenderWebJob
         {
             try
             {
+                string sendGridUsername = ConfigurationManager.AppSettings["SendGridUserName"];
+                string sendGridPassword = ConfigurationManager.AppSettings["SendGridPassword"];
+                string linkAddress = ConfigurationManager.AppSettings["LinkAddress"];
+                string fromAddress = ConfigurationManager.AppSettings["fromAddress"];
                 MailMessage message = new MailMessage();
                 message.To.Add(new MailAddress(user.Email, user.FirstName + " " + user.LastName));
-                message.From = new MailAddress("copalito@copalito.com", "Mundialito");
+                message.From = new MailAddress(fromAddress, "EuroChamp");
                 TimeSpan timeSpan = game.CloseTime - DateTime.UtcNow;
                 message.Subject = string.Format("WARNING: The game between {0} and {1}, will be closed in {2} minutes and you havn't placed a bet yet", (object)game.HomeTeam.Name, (object)game.AwayTeam.Name, (object)(int)timeSpan.TotalMinutes);
                 string content1 = string.Format("Please submit your bet as soon as possible");
-                string content2 = "<p>Please submit your bet as soon as possible. <a href='http://copalito.azurewebsites.net/bets_center'>Click here for the Bets Center</a></p>";
+                string content2 = "<p>Please submit your bet as soon as possible. <a href='" + linkAddress  + "'>Click here for the Bets Center</a></p>";
                 message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(content1, (Encoding)null, "text/plain"));
                 message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(content2, (Encoding)null, "text/html"));
                 SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
-                NetworkCredential networkCredential = new NetworkCredential("azure_fb8cfc80de0ce3719adfcccce4911a60@azure.com", "q7eN701sFvI49R8");
+                NetworkCredential networkCredential = new NetworkCredential(sendGridUsername, sendGridPassword);
                 smtpClient.Credentials = (ICredentialsByHost)networkCredential;
                 smtpClient.Send(message);
             }
