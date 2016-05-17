@@ -18,9 +18,11 @@ angular.module('mundialitoApp').controller('RegisterCtrl', ['$scope', 'security'
     $scope.user = new User();
     $scope.join = function () {
         if (!$scope.joinForm.$valid) return;
+        $scope.isJoinActive = true;
         $scope.mundialitoApp.message = "Processing Registration...";
         Security.register(angular.copy($scope.user)).finally(function () {
             $scope.mundialitoApp.message = null;
+            $scope.isJoinActive = false;
         });
     };
 
