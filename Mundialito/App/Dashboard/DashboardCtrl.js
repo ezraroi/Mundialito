@@ -10,7 +10,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
         $scope.teamsDic[teams[i].TeamId] = teams[i];
     }
 
-    GamesManager.loadAllGames().then(function(games) {
+    GamesManager.loadAllGames().then(function (games) {
         $scope.games = games;
         $scope.pendingUpdateGames = _.findWhere($scope.games,{IsPendingUpdate: true}) !== undefined;
     });
