@@ -31,7 +31,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
     userHasGeneralBet();
 
     GeneralBetsManager.canSubmtiGeneralBet().then(function(data) {
-        $scope.generalBetsAreOpen = (data === 'true');
+        $scope.generalBetsAreOpen = (data === true);
         if (!$scope.generalBetsAreOpen) {
             GeneralBetsManager.loadAllGeneralBets().then(function(data) {
                 $scope.generalBets = data;

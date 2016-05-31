@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-12">
-        <alert type="warning" ng-show="!submittedGeneralBet && generalBetsAreOpen">
+        <uib-alert type="warning" ng-show="!submittedGeneralBet && generalBetsAreOpen">
             <i class="fa fa-exclamation-triangle"></i> You haven't placed a bet on the <b>Winning Team</b> and the <b>Golden Boot Player</b>, <a ng-href="users/{{security.user.userName}}">click here</a> now
-        </alert>
+        </uib-alert>
     </div>
 </div>
 <div class="row" ng-show="pendingUpdateGames">
