@@ -12,16 +12,16 @@
                             <span class="label label-info"><i class="fa fa-clock-o"></i> Pending Update</span>
                         </div>
                         <div ng-if="!game.IsOpen && !game.IsPendingUpdate" class="text-center">
-                            {{game.HomeScore}} - {{game.AwayScore}} (<span tooltip="Cards Mark">{{game.CardsMark}}</span>,<span tooltip="Corners Mark">{{game.CornersMark}}</span>)
+                            {{::game.HomeScore}} - {{::game.AwayScore}} (<span tooltip="Cards Mark">{{::game.CardsMark}}</span>,<span tooltip="Corners Mark">{{::game.CornersMark}}</span>)
                         </div>
                         <div ng-if="game.IsOpen" class="text-center">-</div>
                     </div>
                     <div class="col-md-3 col-xs-3">
-                        <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{game.AwayTeam.Name}}</span>
+                        <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{::game.AwayTeam.Name}}</span>
                     </div>
                     <div class="col-md-3 hidden-xs">
                         <span class="pull-right">
-                            {{game.Date | date:'dd/MM/yy @ H:mm' }}
+                            {{::game.Date | date:'dd/MM/yy @ H:mm' }}
                         </span>
                     </div>
                 </div>

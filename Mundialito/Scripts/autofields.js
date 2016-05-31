@@ -1,6 +1,6 @@
 /**
- * @license Autofields v2.1.4
- * (c) 2014 Justin Maier http://justmaier.github.io/angular-autoFields-bootstrap
+ * @license Autofields v2.2.2
+ * (c) 2016 Justin Maier http://justmaier.github.io/angular-autoFields-bootstrap
  * License: MIT
  */
 'use strict';
@@ -75,7 +75,7 @@ angular.module('autofields.core', [])
 			var fieldContainer = angular.element('<div/>');
 			attrs = angular.extend({}, autofields.settings.attributes.container, attrs);
 			setAttributes(directive, field, fieldContainer, attrs);
-			fieldContainer.addClass(autofields.settings.classes.container.join(' '));
+			fieldContainer.addClass((directive.options||autofields.settings).classes.container.join(' '));
 
 			return fieldContainer;
 		};
@@ -84,7 +84,7 @@ angular.module('autofields.core', [])
 			var label = angular.element('<label/>');
 			attrs = angular.extend({}, autofields.settings.attributes.label, attrs);
 			setAttributes(directive, field, label, attrs);
-			label.addClass(autofields.settings.classes.label.join(' '));
+			label.addClass((directive.options||autofields.settings).classes.label.join(' '));
 			label.html(helper.LabelText(field));
 
 			return label;
@@ -94,7 +94,7 @@ angular.module('autofields.core', [])
 			var input = angular.element(html);
 			attrs = angular.extend({}, autofields.settings.attributes.input, attrs, field.attr);
 			setAttributes(directive, field, input, attrs);
-			input.addClass(autofields.settings.classes.input.join(' '));
+			input.addClass((directive.options||autofields.settings).classes.input.join(' '));
 
 			return input;
 		}
@@ -164,7 +164,7 @@ angular.module('autofields.core', [])
 			if(handler == null){
 				console.warn(field.type+' not supported - field ignored');
 				return;
-			} 
+			}
 			return handler(directive, field, index);
 		};
 
@@ -195,7 +195,7 @@ angular.module('autofields.core', [])
 						container: null,
 						formScope: null
 					};
-					
+
 					//Helper Functions
 					var helper = {
 						extendDeep: function(dst) {
@@ -206,8 +206,8 @@ angular.module('autofields.core', [])
 											helper.extendDeep(dst[key], value);
 										} else {
 											dst[key] = value;
-										}     
-									});   
+										}
+									});
 								}
 							});
 							return dst;
@@ -319,11 +319,11 @@ angular.module('autofields.standard',['autofields.core'])
 		$autofieldsProvider.settings.displayAttributes = ($autofieldsProvider.settings.displayAttributes || []).concat(['ng-if', 'ng-show', 'ng-hide']);
 		$autofieldsProvider.registerMutator('displayAttributes',function(directive, field, fieldElements){
 			if(!field.attr) return fieldElements;
-			
+
 			// Check for presence of each display attribute
 			angular.forEach($autofieldsProvider.settings.displayAttributes, function(attr){
 				var value = fieldElements.input.attr(attr);
-				
+
 				// Stop if field doesn't have attribute
 				if(!value) return;
 
@@ -346,9 +346,9 @@ angular.module('autofields.standard',['autofields.core'])
 				var render = function () {
 					var viewValue = ngModel.$modelValue;
 					if (viewValue == null) return;
-					for (var i in ngModel.$formatters) {
-						viewValue = ngModel.$formatters[i](viewValue);
-					}
+					angular.forEach(ngModel.$formatters, function (formatter) {
+						viewValue = formatter(viewValue);
+					})
 					ngModel.$viewValue = viewValue;
 					ngModel.$render();
 				};
@@ -397,7 +397,7 @@ angular.module('autofields.validation', ['autofields.core'])
 				min: 'This is under the minumum value',
 				max: 'This exceeds the maximum value',
 				email: 'This is not a valid email address',
-				valid: 'This field is valid'
+				valid: ''
 			},
 			invalid: '$form.$property_clean.$invalid && $form.$property_clean.$dirty',
 			valid: '$form.$property_clean.$valid'
@@ -409,7 +409,7 @@ angular.module('autofields.validation', ['autofields.core'])
 		// Add Validation Mutator
 		$autofieldsProvider.registerMutator('validation', function(directive, field, fieldElements){
 			//Check to see if validation should be added
-			fieldElements.validation = directive.options.validation.enabled && directive.options.validation.showMessages;
+			fieldElements.validation = directive.options.validation.enabled && field.validate !== false;
 			if(!fieldElements.validation){
 				//If not enabled, remove validation hooks
 				fieldElements.fieldContainer.removeAttr('ng-class');
@@ -418,6 +418,7 @@ angular.module('autofields.validation', ['autofields.core'])
 
 			// Get Error Messages
 			fieldElements.msgs = [];
+			if(!directive.options.validation.showMessages) return fieldElements;
 			angular.forEach(angular.extend({}, directive.options.validation.defaultMsgs, field.msgs), function(message, error){
 				if(
 					(field.msgs && field.msgs[error] != null) ||
@@ -427,12 +428,13 @@ angular.module('autofields.validation', ['autofields.core'])
 						field.attr['ng'+helper.CamelToTitle(error)] != null)
 					)
 				){
-					fieldElements.msgs.push('('+directive.formStr+'.'+field.property+'.$error.'+error+'? \''+message+'\' : \'\')');
+					var $property_clean  = field.property.replace(/\[|\]|\./g, '');
+          				fieldElements.msgs.push('('+directive.formStr+'.'+$property_clean+'.$error.'+error+'? \''+message+'\' : \'\')');
 				}
 			});
 			// Get Valid Message
 			fieldElements.validMsg = (field.msgs && field.msgs.valid)? field.msgs.valid : directive.options.validation.defaultMsgs.valid;
-			
+
 			// Add validation attributes
 			if(fieldElements.msgs.length){
 				// Add message display with ng-show/ng-hide

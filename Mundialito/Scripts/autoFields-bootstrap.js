@@ -1,6 +1,6 @@
 /**
- * @license Autofields v2.1.4
- * (c) 2014 Justin Maier http://justmaier.github.io/angular-autoFields-bootstrap
+ * @license Autofields v2.2.2
+ * (c) 2016 Justin Maier http://justmaier.github.io/angular-autoFields-bootstrap
  * License: MIT
  */
 'use strict';
@@ -29,7 +29,6 @@ angular.module('autofields.bootstrap', ['autofields.standard','ui.bootstrap'])
 
 		// Date Handler with Bootstrap Popover
 		$autofieldsProvider.settings.dateSettings = {
-			showWeeks:false,
 			datepickerPopup: 'MMMM dd, yyyy'
 		};
 		$autofieldsProvider.settings.scope.datepickerOptions = {
@@ -42,19 +41,17 @@ angular.module('autofields.bootstrap', ['autofields.standard','ui.bootstrap'])
 			$scope[property] = !$scope[property];
 		};
 		$autofieldsProvider.registerHandler('date', function(directive, field, index){
-			var showWeeks = field.showWeeks ? field.showWeeks : directive.options.dateSettings.showWeeks;
 			var datepickerPopup = field.datepickerPopup ? field.datepickerPopup : directive.options.dateSettings.datepickerPopup;
 
 			var inputAttrs = {
 				type:'text',
-				showWeeks: showWeeks,
-				datepickerPopup: datepickerPopup,
+				uibDatepickerPopup: datepickerPopup,
 				datepickerOptions: 'datepickerOptions',
 				isOpen: '$property_cleanOpen'
 			};
 
 			if (!(field.attr && field.attr.disabled == true)) {
-				field.addons = [{
+				field.$addons = [{
 					button: true,
 					icon: 'glyphicon glyphicon-calendar',
 					attr: { ngClick: 'openCalendar("$property_cleanOpen",$event)' }
@@ -126,13 +123,13 @@ angular.module('autofields.bootstrap', ['autofields.standard','ui.bootstrap'])
 		$autofieldsProvider.settings.classes.inputGroupAddonButton = ['input-group-btn'];
 		$autofieldsProvider.settings.classes.button = ['btn','btn-default'];
 		$autofieldsProvider.registerMutator('addons', function(directive, field, fieldElements){
-			if(!field.addons) return fieldElements;
+			if(!(field.$addons || field.addons)) return fieldElements;
 
 			fieldElements.inputGroup = angular.element('<div/>');
 			fieldElements.inputGroup.addClass($autofieldsProvider.settings.classes.inputGroup.join(' '));
 
 			var toAppend = [];
-			angular.forEach(field.addons, function(addon){
+			angular.forEach(field.$addons || field.addons, function(addon){
 				var inputGroupAddon = angular.element('<span/>'),
 					button = null;
 				inputGroupAddon.addClass($autofieldsProvider.settings.classes.inputGroupAddon.join(' '));
@@ -225,10 +222,17 @@ angular.module('autofields.bootstrap', ['autofields.standard','ui.bootstrap'])
  * validation popovers and highlight valid/invalid fields
  */
 angular.module('autofields.bootstrap.validation',['autofields.validation'])
+	.config(['$uibTooltipProvider', function($uibTooltipProvider){
+		$uibTooltipProvider.setTriggers({'keyup focus':'blur'});
+		$uibTooltipProvider.options({
+			placement:'top',
+			animation:false
+		});
+	}])
 	.config(['$autofieldsProvider', function($autofieldsProvider){
 		// Add Validation Attributes
 		$autofieldsProvider.settings.attributes.container.ngClass = "{'has-error':"+$autofieldsProvider.settings.validation.invalid+", 'has-success':"+$autofieldsProvider.settings.validation.valid+"}";
-		$autofieldsProvider.settings.attributes.input.popover = "{{("+$autofieldsProvider.settings.validation.valid+") ? '$validMsg' : ($errorMsgs)}}";
+		$autofieldsProvider.settings.attributes.input.uibPopover = "{{("+$autofieldsProvider.settings.validation.valid+") ? '$validMsg' : ($errorMsgs)}}";
 
 		// Dont show popovers on these types
 		// this is to avoid multiple scope errors with UI Bootstrap
@@ -239,22 +243,21 @@ angular.module('autofields.bootstrap.validation',['autofields.validation'])
 			//Check to see if validation should be added
 			if(!fieldElements.validation || $autofieldsProvider.settings.noPopover.indexOf(field.type) != -1){
 				//If not enabled, remove validation hooks
-				fieldElements.input.removeAttr('popover');
+				fieldElements.input.removeAttr('uib-popover');
 				return fieldElements;
 			}
 
 			// Add validation attributes
 			if(fieldElements.msgs.length){
-				var popoverAttr = fieldElements.input.attr('popover')
-								  .replace(/\$validMsg/gi, fieldElements.validMsg)
-								  .replace(/\$errorMsgs/gi, fieldElements.msgs.join('+'));
+				var popoverAttr = fieldElements.input.attr('uib-popover')
+									.replace(/\$validMsg/gi, fieldElements.validMsg)
+									.replace(/\$errorMsgs/gi, fieldElements.msgs.join('+'));
 				fieldElements.input.attr({
-					'popover-trigger':'focus',
-					'popover-placement':'top',
-					'popover':popoverAttr
+					'uib-popover-trigger':'keyup focus',
+					'uib-popover':popoverAttr
 				});
 			}else{
-				fieldElements.input.removeAttr('popover');
+				fieldElements.input.removeAttr('uib-popover');
 			}
 
 			return fieldElements;
