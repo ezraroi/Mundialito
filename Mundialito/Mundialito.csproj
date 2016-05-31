@@ -553,9 +553,6 @@
     <Content Include="Content\toaster.scss" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-spa-security.min.js.map">
-      <DependentUpon>angular-spa-security.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\facebookPluginDirectives.min.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
