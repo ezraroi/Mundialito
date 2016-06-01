@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('RegisterCtrl', ['$scope', 'security', '$modal', function ($scope, Security, $modal) {
+angular.module('mundialitoApp').controller('RegisterCtrl', ['$scope', 'security', function ($scope, Security) {
     Security.redirectAuthenticated('/');
     $scope.mundialitoApp.authenticating = false;
 
