@@ -77,7 +77,8 @@ namespace Mundialito.Controllers
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StringContent(PrivateKeyValidator.GeneratePrivateKey(email), Encoding.UTF8, "application/json")
+                
+                Content = new StringContent(PrivateKeyValidator.GeneratePrivateKey(email), Encoding.UTF8, "text/plain")
             };
             return response;
         }
