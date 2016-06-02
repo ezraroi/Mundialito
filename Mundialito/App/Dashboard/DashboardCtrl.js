@@ -23,7 +23,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
         }
         else {
             GeneralBetsManager.hasGeneralBet($scope.security.user.userName).then(function (data) {
-                $scope.submittedGeneralBet = data === 'true';
+                $scope.submittedGeneralBet = data === true;
             });
         }
     };
