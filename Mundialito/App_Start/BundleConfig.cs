@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Optimization;
 
 namespace Mundialito
@@ -71,18 +72,40 @@ namespace Mundialito
                       "~/Scripts/toaster.min.js",
                       "~/Scripts/angular-busy.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-spacelab.min.css",
-                      "~/Content/datetimepicker.css",
-                      "~/Content/font-awesome.min.css",
-                      "~/Content/flags.css",
-                      "~/Content/angular-busy.min.css",
-                      "~/Content/select2.min.css",
-                      "~/Content/select2-bootstrap.min.css",
-                      "~/Content/ng-grid.min.css",
-                      "~/Content/toaster.min.css",
-                      "~/Content/site.css"));
+            var spaceLabStyle = new StyleBundle("~/Content/css").Include(
+                          "~/Content/bootstrap.css",
+                          "~/Content/bootstrap-spacelab.min.css",
+                          "~/Content/datetimepicker.css",
+                          "~/Content/font-awesome.min.css",
+                          "~/Content/flags.css",
+                          "~/Content/angular-busy.min.css",
+                          "~/Content/select2.min.css",
+                          "~/Content/select2-bootstrap.min.css",
+                          "~/Content/ng-grid.min.css",
+                          "~/Content/toaster.min.css",
+                          "~/Content/site.css");
+            var ceruleanStyle = new StyleBundle("~/Content/css").Include(
+                          "~/Content/bootstrap.css",
+                          "~/Content/bootstrap-cerulean.min.css",
+                          "~/Content/datetimepicker.css",
+                          "~/Content/font-awesome.min.css",
+                          "~/Content/flags.css",
+                          "~/Content/angular-busy.min.css",
+                          "~/Content/select2.min.css",
+                          "~/Content/select2-bootstrap.min.css",
+                          "~/Content/ng-grid.min.css",
+                          "~/Content/toaster.min.css",
+                          "~/Content/site.css");
+
+            var themeName = WebConfigurationManager.AppSettings["Theme"];
+            if (String.IsNullOrEmpty(themeName) || !themeName.ToLower().Equals("cerulean"))
+            {
+                bundles.Add(spaceLabStyle);
+            }
+            else
+            {
+                bundles.Add(ceruleanStyle);
+            }
         }
 
         public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)

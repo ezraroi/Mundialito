@@ -368,6 +368,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Content\angular-busy.min.css" />
+    <Content Include="Content\bootstrap-cerulean.min.css" />
     <Content Include="Content\bootstrap-spacelab.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
