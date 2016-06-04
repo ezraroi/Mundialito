@@ -13,8 +13,8 @@ angular.module('mundialitoApp').factory('Alert', ['toaster', '$log', '$rootScope
         toaster.pop('success', 'Success', message);
     };
 
-     function error(message) {
-        toaster.pop('error', 'Error', message);
+     function error(message, title) {
+        toaster.pop('error', title || 'Error', message);
     }
 
     function note(message) {
