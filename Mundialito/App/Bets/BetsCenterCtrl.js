@@ -53,10 +53,23 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
             });
         }
     };
-	$scope.shuffleBet = function(gameId) {
-		var toto = ['1', 'X', '2'];
-		$scope.bets[gameId].HomeScore = Math.floor((Math.random() * 6));
-		$scope.bets[gameId].AwayScore = Math.floor((Math.random() * 6));
+    $scope.shuffleBet = function(gameId) {
+        var homeGoals, awayGoals;
+	    var toto = ['1', 'X', '2'];
+	    var goals = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 5];
+	    var gameMark = toto[Math.floor((Math.random() * 3))];
+	    do {
+	        homeGoals = goals[Math.floor((Math.random() * 12))];
+	        awayGoals = goals[Math.floor((Math.random() * 12))];
+	    } while (gameMark !== 'X' && homeGoals === awayGoals);
+	    $log.debug('Random game mark is ' + gameMark);
+	    if (gameMark === 'X') {
+	        awayGoals = homeGoals;
+	    }
+	    $log.debug('Home goals: ' + homeGoals);
+	    $log.debug('Away goals: ' + awayGoals);
+	    $scope.bets[gameId].HomeScore = homeGoals;
+	    $scope.bets[gameId].AwayScore = awayGoals
         $scope.bets[gameId].CardsMark = toto[Math.floor((Math.random() * 3))];
 		$scope.bets[gameId].CornersMark = toto[Math.floor((Math.random() * 3))];
     };
