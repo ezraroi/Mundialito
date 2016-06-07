@@ -56,11 +56,11 @@ angular.module('mundialitoApp').controller('BetsCenterCtrl', ['$scope', '$log', 
     $scope.shuffleBet = function(gameId) {
         var homeGoals, awayGoals;
 	    var toto = ['1', 'X', '2'];
-	    var goals = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 5];
+	    var goals = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5];
 	    var gameMark = toto[Math.floor((Math.random() * 3))];
 	    do {
-	        homeGoals = goals[Math.floor((Math.random() * 12))];
-	        awayGoals = goals[Math.floor((Math.random() * 12))];
+	        homeGoals = goals[Math.floor((Math.random() * goals.length))];
+	        awayGoals = goals[Math.floor((Math.random() * goals.length))];
 	    } while (gameMark !== 'X' && homeGoals === awayGoals);
 	    $log.debug('Random game mark is ' + gameMark);
 	    if (gameMark === 'X') {
