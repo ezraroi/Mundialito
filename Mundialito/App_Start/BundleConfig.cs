@@ -56,7 +56,7 @@ namespace Mundialito
                       "~/Scripts/autofields-bootstrap.min.js",
                       "~/Scripts/autofields.min.js",
                       "~/Scripts/moment.min.js",
-                      "~/Scripts/angular-spa-security.js",
+                      "~/Scripts/angular-spa-security.min.js",
                       "~/Scripts/promise-tracker.min.js",
                       "~/Scripts/datetimepicker.min.js",
                       "~/Scripts/angular-bootstrap-select.js",
