@@ -107,7 +107,7 @@ namespace MailSenderWebJob
         private static long GetMilliscecondsToSleep(Game openGame)
         {
             DateTime notificationTime = Program.GetNotificationTime(openGame);
-                        DateTime now = DateTime.Now;
+            DateTime now = DateTime.Now.ToLocalTime();
             TimeSpan timeSpan = notificationTime - now;
             Program.WriteLine(string.Format("Will scheduale notification for {0}, going to sleep {1} minutes", (object)notificationTime, (object)timeSpan.TotalMinutes));
             if (timeSpan.TotalMilliseconds >= 0.0)
@@ -134,7 +134,7 @@ namespace MailSenderWebJob
 
         public static void WriteLine(string message)
         {
-            Console.WriteLine("{0} - {1}", (object)DateTime.Now, (object)message);
+            Console.WriteLine("{0} - {1}", (object)DateTime.Now.ToLocalTime(), (object)message);
         }
     }
 }
