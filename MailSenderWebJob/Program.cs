@@ -25,6 +25,8 @@ namespace MailSenderWebJob
             AutoResetEvent autoResetEvent = new AutoResetEvent(false);
             for (; Program.openGames.Count > 0; Program.openGames = Program.GetOpenGames())
             {
+                Program.WriteLine("Current Time: " + DateTime.Now.ToLocalTime());
+                Program.WriteLine("Next game will start @ " + Program.openGames[0].Date.ToLocalTime());
                 long dueTime = Program.GetMilliscecondsToSleep(Program.openGames[0]);
                 if (dueTime == -1)
                 {
@@ -49,6 +51,7 @@ namespace MailSenderWebJob
         private static void SendNotifications(object stateInfo)
         {
             Program.WriteLine("***** Sending notifications started *****");
+            Program.WriteLine("Current Time: " + DateTime.Now.ToLocalTime());
             AutoResetEvent autoResetEvent = (AutoResetEvent)stateInfo;
             List<Game> list = Enumerable.ToList<Game>(Enumerable.Where<Game>((IEnumerable<Game>)Program.openGames, (Func<Game, bool>)(game => game.Date == Program.openGames[0].Date)));
             Program.WriteLine(string.Format("Sending notifications on {0} games", (object)list.Count));
@@ -104,7 +107,7 @@ namespace MailSenderWebJob
         private static long GetMilliscecondsToSleep(Game openGame)
         {
             DateTime notificationTime = Program.GetNotificationTime(openGame);
-            DateTime now = DateTime.Now;
+                        DateTime now = DateTime.Now;
             TimeSpan timeSpan = notificationTime - now;
             Program.WriteLine(string.Format("Will scheduale notification for {0}, going to sleep {1} minutes", (object)notificationTime, (object)timeSpan.TotalMinutes));
             if (timeSpan.TotalMilliseconds >= 0.0)
