@@ -36,6 +36,7 @@ namespace MailSenderWebJob
             for (int i = 0; i < Program.openGames.Count; i++)
             {
                 var minutes = Program.openGames[i].Date.ToLocalTime().Subtract(DateTime.Now.ToLocalTime()).TotalMinutes;
+                log.WriteLine("Game " + Program.openGames[i].GameId + " Minutes is " + minutes);
                 if (minutes < 120 && minutes > 35)
                 {
                     log.WriteLine("Found game that will start @ " + Program.openGames[i].Date.ToLocalTime());

@@ -69,12 +69,11 @@
                         <li active-nav access-level="Admin" class="hidden-xs"><a href="/manage_users"><i class="fa fa-tasks"></i> Admin Panel</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-                            <a href="#" uib-dropdown-toggle><i class="fa fa-user"></i> {{security.user.userName}} <b class="caret"></b></a>
-                            <ul class="dropdown-menu" uib-dropdown-menu>
+                        <li uib-dropdown on-toggle="toggled(open)">
+                            <a href="#" uib-dropdown-toggle id="userDropdown"><i class="fa fa-user"></i> {{security.user.userName}} <b class="caret"></b></a>
+                            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="userDropdown">
                                 <li><a href="/users/{{security.user.userName}}"><span class="fa fa-book"></span> Profile</a></li>
                                 <li><a href="/manage"><span class="fa fa-cog"></span> Account</a></li>
-                                <li class="divider"></li>
                                 <li><a href="#" ng-click="security.logout()"><span class="fa fa-power-off"></span> Logout</a></li>
                             </ul>
                         </li>

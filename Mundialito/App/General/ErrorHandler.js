@@ -5,6 +5,8 @@ angular.module('mundialitoApp').factory('ErrorHandler', ['$rootScope', '$log' , 
     ErrorHandler.handle = function (data, status) {
         $log.log(data);
         if (status === 401) {
+            localStorage.removeItem('accessToken');
+            sessionStorage.removeItem('accessToken');
             $location.path(Constants.LOGIN_PATH);
             return;
         }
