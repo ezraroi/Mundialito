@@ -25,13 +25,11 @@ namespace MailSenderWebJob
         {
             var config = new JobHostConfiguration();
             config.UseTimers();
-            var host = new JobHost(config);
+            JobHost host = new JobHost(config);
             host.RunAndBlock();
-            host.Start();
-            //host.Call(typeof(Program).GetMethod("RunJob"));
         }
 
-        public static void RunJob([TimerTrigger("0 0/30 * * * *")] TimerInfo timerInfo, TextWriter log)
+        public static void RunJob([TimerTrigger("00:30:00")] TimerInfo timerInfo, TextWriter log)
         {
             log.WriteLine("*********************************** Mundialito Mail Sender app started running***********************************");
             Program.openGames = Program.GetOpenGames(log);
