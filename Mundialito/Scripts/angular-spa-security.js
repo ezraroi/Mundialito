@@ -277,7 +277,6 @@
 				if (securityProvider.events.login) securityProvider.events.login(Security, user); // Your Login events
 				deferred.resolve(Security.user);
 			}).error(function (errorData) {
-				accessToken('clear');
 				deferred.reject(errorData);
 			});
 
