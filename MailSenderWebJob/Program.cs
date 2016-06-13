@@ -9,67 +9,61 @@ using System.Net.Mail;
 using System.Net;
 using Mundialito.DAL.Bets;
 using System.Configuration;
+using Microsoft.Azure.WebJobs;
+using System.IO;
+using Microsoft.Azure.WebJobs.Extensions.Timers;
 
 namespace MailSenderWebJob
 {
     // To learn more about Microsoft Azure WebJobs SDK, please see http://go.microsoft.com/fwlink/?LinkID=320976
-    class Program
+    public class Program
     {
         private static List<Game> openGames;
 
-        
+
         static void Main()
         {
-            Program.WriteLine("Mundialito Mail Sender app started running");
-            Program.openGames = Program.GetOpenGames();
-            AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-            for (; Program.openGames.Count > 0; Program.openGames = Program.GetOpenGames())
-            {
-                Program.WriteLine("Current Time: " + DateTime.Now.ToLocalTime());
-                Program.WriteLine("Next game will start @ " + Program.openGames[0].Date.ToLocalTime());
-                long dueTime = Program.GetMilliscecondsToSleep(Program.openGames[0]);
-                if (dueTime == -1)
-                {
-                    Program.WriteLine("Due time is " + dueTime + ", skipping as it already passed");
-                    continue;
-                }
-                if (dueTime > 4294967294)
-                {
-                    Program.WriteLine("Due time is " + dueTime + ", going to sleep 1 day");
-                    Thread.Sleep((int)TimeSpan.FromDays(1).TotalMilliseconds);
-                    continue;
-                }
-                autoResetEvent.Reset();
-                Timer timer = new Timer(new TimerCallback(Program.SendNotifications), (object)autoResetEvent, dueTime, Timeout.Infinite);
-                autoResetEvent.WaitOne();
-            }
-            Program.WriteLine("Mundialito Mail Sender app finished - Press Enter");
-            Console.ReadLine();
-            
+            var config = new JobHostConfiguration();
+            config.UseTimers();
+            var host = new JobHost(config);
+            host.RunAndBlock();
+            host.Start();
+            //host.Call(typeof(Program).GetMethod("RunJob"));
         }
 
-        private static void SendNotifications(object stateInfo)
+        public static void RunJob([TimerTrigger("0 0/30 * * * *")] TimerInfo timerInfo, TextWriter log)
         {
-            Program.WriteLine("***** Sending notifications started *****");
-            Program.WriteLine("Current Time: " + DateTime.Now.ToLocalTime());
-            AutoResetEvent autoResetEvent = (AutoResetEvent)stateInfo;
-            List<Game> list = Enumerable.ToList<Game>(Enumerable.Where<Game>((IEnumerable<Game>)Program.openGames, (Func<Game, bool>)(game => game.Date == Program.openGames[0].Date)));
-            Program.WriteLine(string.Format("Sending notifications on {0} games", (object)list.Count));
-            foreach (Game game in list)
+            log.WriteLine("*********************************** Mundialito Mail Sender app started running***********************************");
+            Program.openGames = Program.GetOpenGames(log);
+            for (int i = 0; i < Program.openGames.Count; i++)
             {
-                List<MundialitoUser> usersToNotify = Program.GetUsersToNotify(game);
-                Program.WriteLine(string.Format("Sending notifications to {0} users on game {1}", (object)usersToNotify.Count, (object)game.GameId));
-                foreach (MundialitoUser user in usersToNotify)
+                var minutes = Program.openGames[i].Date.ToLocalTime().Subtract(DateTime.Now.ToLocalTime()).TotalMinutes;
+                if (minutes < 120 && minutes > 35)
                 {
-                    Program.WriteLine(string.Format("Will send notification to {0}", (object)user.Email));
-                    Program.SendNotification(user, game);
+                    log.WriteLine("Found game that will start @ " + Program.openGames[i].Date.ToLocalTime());
+                    log.WriteLine(minutes + " Minutes until start time");
+                    SendNotifications(Program.openGames[i], log);
                 }
             }
-            autoResetEvent.Set();
-            Program.WriteLine("***** End of Notification senidng *****");
+            log.WriteLine("***********************************  Bye bye ***********************************");
         }
 
-        private static void SendNotification(MundialitoUser user, Game game)
+        private static void SendNotifications(Game game, TextWriter log)
+        {
+            log.WriteLine("***** Sending notifications started *****");
+            log.WriteLine("Current Time: " + DateTime.Now.ToLocalTime());
+            log.WriteLine(string.Format("Sending notifications on game {0} ", game.GameId));
+            List<MundialitoUser> usersToNotify = Program.GetUsersToNotify(game);
+            log.WriteLine(string.Format("Sending notifications to {0} users on game {1}", usersToNotify.Count, game.GameId));
+            foreach (MundialitoUser user in usersToNotify)
+            {
+                log.WriteLine(string.Format("Will send notification to {0}", user.Email));
+                Program.SendNotification(user, game, log);
+            }
+            log.WriteLine("***** End of Notification sending *****");
+        }
+
+        private static void SendNotification(MundialitoUser user, Game game, TextWriter log)
         {
             try
             {
@@ -93,7 +87,12 @@ namespace MailSenderWebJob
             }
             catch (Exception ex)
             {
-                Program.WriteLine("Failed to send notification. Exception is " + ex.Message);
+                log.WriteLine("Failed to send notification. Exception is " + ex.Message);
+                if (ex.InnerException != null)
+                {
+                    log.WriteLine("Innber excpetion: " + ex.InnerException.Message);
+                }
+                
             }
         }
 
@@ -103,38 +102,15 @@ namespace MailSenderWebJob
             Dictionary<string, Bet> gameBets = Enumerable.ToDictionary<Bet, string, Bet>(new BetsRepository().GetGameBets(game.GameId), (Func<Bet, string>)(bet => bet.UserId), (Func<Bet, Bet>)(bet => bet));
             return Enumerable.ToList<MundialitoUser>(Enumerable.Where<MundialitoUser>(source, (Func<MundialitoUser, bool>)(user => !gameBets.ContainsKey(user.Id))));
         }
-
-        private static long GetMilliscecondsToSleep(Game openGame)
-        {
-            DateTime notificationTime = Program.GetNotificationTime(openGame);
-            DateTime now = DateTime.Now.ToLocalTime();
-            TimeSpan timeSpan = notificationTime - now;
-            Program.WriteLine(string.Format("Will scheduale notification for {0}, going to sleep {1} minutes", (object)notificationTime, (object)timeSpan.TotalMinutes));
-            if (timeSpan.TotalMilliseconds >= 0.0)
-                return (long)timeSpan.TotalMilliseconds;
-            Program.WriteLine(string.Format("WARNING: Game {0} notification time passed, will not send notification", (object)notificationTime, (object)timeSpan.TotalMinutes));
-            return -1;
-        }
-
-        private static DateTime GetNotificationTime(Game game)
-        {
-            DateTime dateTime = game.Date;
-            dateTime = dateTime.Subtract(TimeSpan.FromMinutes(270.0));
-            return dateTime.ToLocalTime();
-        }
-
-        private static List<Game> GetOpenGames()
+        
+        private static List<Game> GetOpenGames(TextWriter log)
         {
             List<Game> list1 = Enumerable.ToList<Game>((IEnumerable<Game>)new GamesRepository().Get(null, (Func<IQueryable<Game>, IOrderedQueryable<Game>>)null, ""));
-            Program.WriteLine(string.Format("Got {0} games from database", (object)list1.Count));
+            log.WriteLine(string.Format("Got {0} games from database", list1.Count));
             List<Game> list2 = Enumerable.ToList<Game>(Enumerable.Where<Game>((IEnumerable<Game>)Enumerable.OrderBy<Game, DateTime>((IEnumerable<Game>)list1, (Func<Game, DateTime>)(game => game.Date)), (Func<Game, bool>)(game => game.Date.Subtract(TimeSpan.FromMinutes(270.0)) > DateTime.UtcNow)));
-            Program.WriteLine(string.Format("{0} games still can be notified", (object)list2.Count));
+            log.WriteLine(string.Format("{0} games still can be notified", list2.Count));
             return list2;
         }
-
-        public static void WriteLine(string message)
-        {
-            Console.WriteLine("{0} - {1}", (object)DateTime.Now.ToLocalTime(), (object)message);
-        }
+      
     }
 }
