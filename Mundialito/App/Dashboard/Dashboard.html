@@ -54,7 +54,7 @@
     </div>
     <div class="col-md-6 col-xs-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i> Last scores</div>
+            <div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i> Last scores <span class="pull-right badge" uib-tooltip="Total Finished Games">{{(games | filter:isDecided()).length }}</span></div>
             <div class="panel-body">
                 <div class="list-group" cg-busy="{tracker:'getGames'}">
                     <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}" ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">

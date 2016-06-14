@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','$log','MundialitoUtils','DSCacheFactory', function($http,$q,User,$log,MundialitoUtils,DSCacheFactory) {
+angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User', '$log', 'MundialitoUtils', 'DSCacheFactory', function ($http, $q, User, $log, MundialitoUtils, DSCacheFactory) {
+    var usersPromise = undefined;
     var usersManager = {
         _cacheManager: DSCacheFactory('UsersManager', { cacheFlushInterval : 1800000 }),
         _pool: {},
@@ -69,7 +70,10 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
         },
 
         /* Use this function in order to get instances of all the users */
-        loadAllUsers: function() {
+        loadAllUsers: function () {
+            if (usersPromise) {
+                return usersPromise;
+            }
             var deferred = $q.defer();
             var scope = this;
             $log.debug('UsersManager: will fetch all users from server');
@@ -86,6 +90,7 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User','
                 .error(function() {
                     deferred.reject();
                 });
+            usersPromise = deferred.promise;
             return deferred.promise;
         },
 

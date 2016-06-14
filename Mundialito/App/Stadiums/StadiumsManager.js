@@ -1,5 +1,6 @@
 'use strict';
-angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stadium','$log','MundialitoUtils', function($http,$q,Stadium,$log,MundialitoUtils) {
+angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stadium', '$log', 'MundialitoUtils', function ($http, $q, Stadium, $log, MundialitoUtils) {
+    var stadiumsPromise = undefined;
     var stadiumsManager = {
         _pool: {},
         _retrieveInstance: function(stadiumId, stadiumData) {
@@ -87,7 +88,10 @@ angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stad
         },
 
         /* Use this function in order to get instances of all the stadiums */
-        loadAllStadiums: function() {
+        loadAllStadiums: function () {
+            if (stadiumsPromise) {
+                return stadiumsPromise;
+            }
             var deferred = $q.defer();
             var scope = this;
             $log.debug('StadiumsManager: will fetch all games from server');
@@ -103,6 +107,7 @@ angular.module('mundialitoApp').factory('StadiumsManager', ['$http', '$q', 'Stad
                 .error(function() {
                     deferred.reject();
                 });
+            stadiumsPromise = deferred.promise;
             return deferred.promise;
         },
 

@@ -1,5 +1,7 @@
 'use strict';
-angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','$log','MundialitoUtils','DSCacheFactory', function($http,$q,Game,$log,MundialitoUtils,DSCacheFactory) {
+angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', '$log', 'MundialitoUtils', 'DSCacheFactory', function ($http, $q, Game, $log, MundialitoUtils, DSCacheFactory) {
+    var gamesPromise = undefined;
+    var openGamesPromise = undefined;
     var gamesManager = {
         _cacheManager: DSCacheFactory('GamesManager', { cacheFlushInterval : 1800000 }),
         _pool: {},
@@ -94,7 +96,10 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
         },
 
         /* Use this function in order to get instances of all the games */
-        loadAllGames: function() {
+        loadAllGames: function () {
+            if (gamesPromise) {
+                return gamesPromise;
+            }
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all games from server');
@@ -111,11 +116,15 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
                 .error(function() {
                     deferred.reject();
                 });
+            gamesPromise = deferred.promise;
             return deferred.promise;
         },
 
         /* Use this function in order to get instances of all the open games */
-        loadOpenGames: function() {
+        loadOpenGames: function () {
+            if (openGamesPromise) {
+                return openGamesPromise;
+            }
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all open games from server');
@@ -132,6 +141,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game','
                 .error(function() {
                     deferred.reject();
                 });
+            openGamesPromise = deferred.promise;
             return deferred.promise;
         },
 

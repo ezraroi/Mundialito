@@ -129,6 +129,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\ECCHamp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ECCHamp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\eurochamp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\eurochamp - Web Deploy.pubxml" />
     <None Include="Properties\webjob-publish-settings.json" />
