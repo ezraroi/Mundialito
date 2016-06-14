@@ -106,7 +106,7 @@ namespace MailSenderWebJob
         {
             List<Game> list1 = Enumerable.ToList<Game>((IEnumerable<Game>)new GamesRepository().Get(null, (Func<IQueryable<Game>, IOrderedQueryable<Game>>)null, ""));
             log.WriteLine(string.Format("Got {0} games from database", list1.Count));
-            List<Game> list2 = Enumerable.ToList<Game>(Enumerable.Where<Game>((IEnumerable<Game>)Enumerable.OrderBy<Game, DateTime>((IEnumerable<Game>)list1, (Func<Game, DateTime>)(game => game.Date)), (Func<Game, bool>)(game => game.Date.Subtract(TimeSpan.FromMinutes(270.0)) > DateTime.UtcNow)));
+            List<Game> list2 = Enumerable.ToList<Game>(Enumerable.Where<Game>((IEnumerable<Game>)Enumerable.OrderBy<Game, DateTime>((IEnumerable<Game>)list1, (Func<Game, DateTime>)(game => game.Date)), (Func<Game, bool>)(game => game.IsOpen())));
             log.WriteLine(string.Format("{0} games still can be notified", list2.Count));
             return list2;
         }
