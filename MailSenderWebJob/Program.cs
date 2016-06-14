@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mundialito.DAL.Games;
-using System.Threading;
 using Mundialito.DAL.Accounts;
 using System.Net.Mail;
 using System.Net;
@@ -11,7 +10,6 @@ using Mundialito.DAL.Bets;
 using System.Configuration;
 using Microsoft.Azure.WebJobs;
 using System.IO;
-using Microsoft.Azure.WebJobs.Extensions.Timers;
 
 namespace MailSenderWebJob
 {
@@ -72,7 +70,7 @@ namespace MailSenderWebJob
                 string fromAddress = ConfigurationManager.AppSettings["fromAddress"];
                 MailMessage message = new MailMessage();
                 message.To.Add(new MailAddress(user.Email, user.FirstName + " " + user.LastName));
-                message.From = new MailAddress(fromAddress, "EuroChamp");
+                message.From = new MailAddress(fromAddress, ConfigurationManager.AppSettings["ApplicationName"]);
                 TimeSpan timeSpan = game.CloseTime - DateTime.UtcNow;
                 message.Subject = string.Format("WARNING: The game between {0} and {1}, will be closed in {2} minutes and you havn't placed a bet yet", (object)game.HomeTeam.Name, (object)game.AwayTeam.Name, (object)(int)timeSpan.TotalMinutes);
                 string content1 = string.Format("Please submit your bet as soon as possible");
