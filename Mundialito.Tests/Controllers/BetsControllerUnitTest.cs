@@ -160,7 +160,8 @@ namespace Mundialito.Tests.Controllers
         private BetsController CreateController(IBetsRepository betsRepository, IBetValidator betValidator, ILoggedUserProvider userProvider, IDateTimeProvider dateTimeProvider)
         {
             var actionLogsRepository = new Mock<IActionLogsRepository>();
-            return new BetsController(betsRepository, betValidator, userProvider, dateTimeProvider, actionLogsRepository.Object);
+            var gamesRepository = new Mock<IGamesRepository>();
+            return new BetsController(betsRepository, betValidator, userProvider, dateTimeProvider, actionLogsRepository.Object, gamesRepository.Object);
         }
     }
 }
