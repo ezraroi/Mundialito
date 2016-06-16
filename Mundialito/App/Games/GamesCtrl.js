@@ -1,10 +1,14 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesManager','games','teams','stadiums','Alert',function ($scope,$log, GamesManager, games, teams, stadiums, Alert) {
+angular.module('mundialitoApp').controller('GamesCtrl', ['$scope','$log','GamesManager','games','teams', 'StadiumsManager' ,'Alert',function ($scope,$log, GamesManager, games, teams, StadiumsManager, Alert) {
     $scope.newGame = null;
     $scope.gamesFilter = "All";
     $scope.games = games;
     $scope.teams = teams;
-    $scope.stadiums = stadiums;
+    
+
+    StadiumsManager.loadAllStadiums().then(function (res) {
+        $scope.stadiums = res;
+    });
 
     $scope.addNewGame = function () {
         $('.selectpicker').selectpicker('refresh');

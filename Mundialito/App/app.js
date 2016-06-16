@@ -107,9 +107,6 @@
                     }],
                     teams : ['TeamsManager', function (TeamsManager) {
                         return TeamsManager.loadAllTeams();
-                    }],
-                    stadiums : ['StadiumsManager', function (StadiumsManager) {
-                        return StadiumsManager.loadAllStadiums();
                     }]
                 }
             }).

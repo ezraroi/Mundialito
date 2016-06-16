@@ -69,6 +69,20 @@ angular.module('mundialitoApp').factory('UsersManager', ['$http', '$q', 'User', 
             return deferred.promise;
         },
 
+        getTable: function() {
+            var scope = this;
+            $log.debug('UsersManager: will fetch table from server');
+            return $http.get('api/users/table', { tracker: 'getUsers', cache: this._cacheManager })
+                .then(function (usersArray) {
+                    var users = [];
+                    usersArray.data.forEach(function (userData) {
+                        var user = scope._retrieveInstance(userData.Username, userData);
+                        users.push(user);
+                    });
+                    return users;
+                });
+        },
+
         /* Use this function in order to get instances of all the users */
         loadAllUsers: function () {
             if (usersPromise) {

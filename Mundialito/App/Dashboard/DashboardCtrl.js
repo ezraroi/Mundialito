@@ -63,7 +63,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope','$log','$l
         }
     });
 
-    UsersManager.loadAllUsers().then(function(users) {
+    UsersManager.getTable().then(function (users) {
         $scope.users = users;
     });
 
