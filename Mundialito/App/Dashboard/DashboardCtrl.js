@@ -111,8 +111,8 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
     $scope.getTableHeight = function () {
         var rowHeight = 30; // your row height
         var headerHeight = 30; // your header height
-        var total = ($scope.gridOptions.data.length * rowHeight + headerHeight);
-        $log.debug('Total Height: ' + total + ', Num of users:' + $scope.gridOptions.data.length);
+        var total = ( ($scope.users ? $scope.users.length : 0) * rowHeight + headerHeight);
+        $log.debug('Total Height: ' + total);
         return {
             height: total + "px"
         };
