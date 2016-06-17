@@ -382,8 +382,6 @@
     <Content Include="Content\Img\select2-spinner.gif" />
     <Content Include="Content\Img\select2.png" />
     <Content Include="Content\Img\select2x2.png" />
-    <Content Include="Content\ng-grid.css" />
-    <Content Include="Content\ng-grid.min.css" />
     <Content Include="Content\select2-bootstrap.css" />
     <Content Include="Content\select2-bootstrap.min.css">
       <DependentUpon>select2-bootstrap.css</DependentUpon>
@@ -457,6 +455,9 @@
     <Content Include="Content\toaster.css" />
     <Content Include="Content\toaster.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\ui-grid.css" />
+    <Content Include="Content\ui-grid.min.css" />
+    <Content Include="Content\ui-grid.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -552,6 +553,9 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\toaster.scss" />
+    <Content Include="Content\ui-grid.woff" />
+    <Content Include="Content\ui-grid.ttf" />
+    <Content Include="Content\ui-grid.eot" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\facebookPluginDirectives.min.js" />
@@ -1326,8 +1330,6 @@
     <Content Include="Scripts\moment.min.js">
       <DependentUpon>moment.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\ng-grid.js" />
-    <Content Include="Scripts\ng-grid.min.js" />
     <Content Include="Scripts\promise-tracker.js" />
     <Content Include="Scripts\promise-tracker.min.js">
       <DependentUpon>promise-tracker.js</DependentUpon>
@@ -1336,6 +1338,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toaster.js" />
     <Content Include="Scripts\toaster.min.js" />
+    <Content Include="Scripts\ui-grid.js" />
+    <Content Include="Scripts\ui-grid.min.js" />
     <Content Include="Scripts\WebApiTestClient.js" />
     <Content Include="Web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

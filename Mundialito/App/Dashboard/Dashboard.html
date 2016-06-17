@@ -82,7 +82,8 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div style="border: 1px solid rgb(212,212,212);" ng-grid="gridOptions" cg-busy="{tracker:'getUsers'}"></div>
+                        <div ui-grid="gridOptions" class="myGrid" ui-grid-auto-resize ng-style="getTableHeight()"
+                              cg-busy="{tracker:'getUsers'}" ui-if="gridOptions.data.length > 0"></div>
                     </div>
                 </div>
             </div>

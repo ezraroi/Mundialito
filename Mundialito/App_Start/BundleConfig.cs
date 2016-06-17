@@ -64,8 +64,8 @@ namespace Mundialito
                       "~/App/Lib/underscore.min.js",
                       "~/App/Lib/d3.min.js",
                       "~/App/Lib/line-chart.min.js",
-                      "~/Scripts/ng-grid.min.js",
-                      "~/App/Lib/ng-grid-flexible-height.js",
+                      "~/Scripts/ui-grid.min.js",
+                      //"~/App/Lib/ng-grid-flexible-height.js",
                       "~/App/Lib/angular-select2.js",
                       "~/App/Lib/ng-google-chart.js",
                       "~/App/Lib/angular-cache.min.js",
@@ -81,7 +81,7 @@ namespace Mundialito
                           "~/Content/angular-busy.min.css",
                           "~/Content/select2.min.css",
                           "~/Content/select2-bootstrap.min.css",
-                          "~/Content/ng-grid.min.css",
+                          "~/Content/ui-grid.min.css",
                           "~/Content/toaster.min.css",
                           "~/Content/site.css");
             var ceruleanStyle = new StyleBundle("~/Content/css").Include(
@@ -93,7 +93,7 @@ namespace Mundialito
                           "~/Content/angular-busy.min.css",
                           "~/Content/select2.min.css",
                           "~/Content/select2-bootstrap.min.css",
-                          "~/Content/ng-grid.min.css",
+                          "~/Content/ui-grid.min.css",
                           "~/Content/toaster.min.css",
                           "~/Content/site.css");
 
