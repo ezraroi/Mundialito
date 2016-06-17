@@ -114,7 +114,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
         var total = ($scope.gridData.data.length * rowHeight + headerHeight);
         $log.debug('Total Height: ' + total + ', Num of users:' + $scope.gridData.data.length);
         return {
-            height: ($scope.gridData.data.length * rowHeight + headerHeight) + "px"
+            height: total + "px"
         };
     };
 
