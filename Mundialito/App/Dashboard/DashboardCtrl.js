@@ -92,22 +92,43 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
 
     $scope.gridOptions = {
         data: 'users',
+        saveWidths: true,
+        saveVisible: true,
+        saveOrder: true,
         enableRowSelection: false,
         enableSelectAll: false,
         multiSelect: false,
         rowTemplate: getRowTemplate(),
         columnDefs: [
-            { field: 'Place', displayName: '', resizable: false, width: 30 },
-            { field: 'Name', displayName: 'Name', resizable: true },
+            { field: 'Place', displayName: '', resizable: false, maxWidth: 30 },
+            { field: 'Name', displayName: 'Name', resizable: true, minWidth: 150},
             { field: 'Results', displayName: 'Results', resizable: true },
             { field: 'Marks', displayName: 'Marks', resizable: true },
             { field: 'YellowCards', displayName: 'Yellow Cards Marks', resizable: true },
             { field: 'Corners', displayName: 'Corners Marks', resizable: true },
             { field: 'Points', displayName: 'Points', resizable: true },
-            { field: 'PlaceDiff', displayName: '', resizable: false, width: 50, cellTemplate: '<div ng-class="{\'text-success\': COL_FIELD.indexOf(\'+\') !== -1, \'text-danger\': (COL_FIELD.indexOf(\'+\') === -1) && (COL_FIELD !== \'0\')}"><div class="ngCellText">{{::COL_FIELD}}</div></div>' }
+            { field: 'PlaceDiff', displayName: '', resizable: false, maxWidth: 45, cellTemplate: '<div ng-class="{\'text-success\': COL_FIELD.indexOf(\'+\') !== -1, \'text-danger\': (COL_FIELD.indexOf(\'+\') === -1) && (COL_FIELD !== \'0\')}"><div class="ngCellText">{{::COL_FIELD}}</div></div>' }
         ],
+        onRegisterApi: function(gridApi){
+            $scope.gridApi = gridApi;
+            $scope.gridApi.colResizable.on.columnSizeChanged($scope, saveState);
+            $scope.gridApi.core.on.columnVisibilityChanged($scope, saveState);
+            $scope.gridApi.core.on.sortChanged($scope, saveState);
+        }
     };
-    
+
+    function saveState() {
+        var state = $scope.gridApi.saveState.save();
+        localStorage.setItem('gridState', state);
+    };
+
+    function restoreState() {
+        $timeout(function () {
+            var state = localStorage.getItem('gridState');
+            if (state) $scope.gridApi.saveState.restore($scope, state);
+        });
+    };
+
     $scope.getTableHeight = function () {
         var rowHeight = 30; // your row height
         var headerHeight = 30; // your header height
