@@ -10,67 +10,56 @@ namespace Mundialito
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //BundleTable.EnableOptimizations = true;
-            //BundleTable.EnableOptimizations = false;
-
             bundles.IgnoreList.Clear();
             AddDefaultIgnorePatterns(bundles.IgnoreList);
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
 
             //Angular
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+            bundles.Add(new ScriptBundle("~/bundles/external").Include(
+                                "~/Scripts/jquery-{version}.js",
                                "~/Scripts/angular.js",
                                "~/Scripts/angular-animate.js",
                                "~/Scripts/angular-sanitize.js",
                                "~/Scripts/angular-resource.js",
-                               "~/Scripts/angular-route.js"
+                               "~/Scripts/angular-route.js",
+                               "~/App/Lib/select2.js",
+                              "~/Scripts/bootstrap.min.js",
+                              "~/Scripts/bootstrap-select.min.js",
+                              "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+                              "~/Scripts/autofields-bootstrap.min.js",
+                              "~/Scripts/autofields.min.js",
+                              "~/Scripts/moment.min.js",
+                              "~/Scripts/angular-spa-security.js",
+                              "~/Scripts/promise-tracker.min.js",
+                              "~/Scripts/datetimepicker.min.js",
+                              "~/Scripts/angular-bootstrap-select.js",
+                              "~/Scripts/facebookPluginDirectives.min.js",
+                              "~/App/Lib/underscore.min.js",
+                              "~/App/Lib/d3.min.js",
+                              "~/App/Lib/line-chart.min.js",
+                              "~/Scripts/ui-grid.min.js",
+                              "~/App/Lib/angular-select2.js",
+                              "~/App/Lib/ng-google-chart.js",
+                              "~/App/Lib/angular-cache.min.js",
+                              "~/Scripts/toaster.min.js",
+                              "~/Scripts/angular-busy.min.js"
+
             ));
 
-            //App
-            bundles.Add(new ScriptBundle("~/bundles/app")
-                    .IncludeDirectory("~/App/", "*.js")
-                    .IncludeDirectory("~/App/Accounts", "*.js")
-                    .IncludeDirectory("~/App/Bets", "*.js")
-                    .IncludeDirectory("~/App/Dashboard", "*.js")
-                    .IncludeDirectory("~/App/Games", "*.js")
-                    .IncludeDirectory("~/App/General", "*.js")
-                    .IncludeDirectory("~/App/GeneralBets", "*.js")
-                    .IncludeDirectory("~/App/Stadiums", "*.js")
-                    .IncludeDirectory("~/App/Teams", "*.js")
-                    .IncludeDirectory("~/App/Users", "*.js")
-            );
-
-            // External Libs
-            bundles.Add(new ScriptBundle("~/bundles/external").Include(
-                      "~/App/Lib/select2.js",
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/bootstrap-select.min.js",
-                      "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
-                      "~/Scripts/autofields-bootstrap.min.js",
-                      "~/Scripts/autofields.min.js",
-                      "~/Scripts/moment.min.js",
-                      "~/Scripts/angular-spa-security.js",
-                      "~/Scripts/promise-tracker.min.js",
-                      "~/Scripts/datetimepicker.min.js",
-                      "~/Scripts/angular-bootstrap-select.js",
-                      "~/Scripts/facebookPluginDirectives.min.js",
-                      "~/App/Lib/underscore.min.js",
-                      "~/App/Lib/d3.min.js",
-                      "~/App/Lib/line-chart.min.js",
-                      "~/Scripts/ui-grid.min.js",
-                      //"~/App/Lib/ng-grid-flexible-height.js",
-                      "~/App/Lib/angular-select2.js",
-                      "~/App/Lib/ng-google-chart.js",
-                      "~/App/Lib/angular-cache.min.js",
-                      "~/Scripts/toaster.min.js",
-                      "~/Scripts/angular-busy.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory("~/App/", "*.js")
+                .IncludeDirectory("~/App/Accounts", "*.js")
+                .IncludeDirectory("~/App/Bets", "*.js")
+                .IncludeDirectory("~/App/Dashboard", "*.js")
+                .IncludeDirectory("~/App/Games", "*.js")
+                .IncludeDirectory("~/App/General", "*.js")
+                .IncludeDirectory("~/App/GeneralBets", "*.js")
+                .IncludeDirectory("~/App/Stadiums", "*.js")
+                .IncludeDirectory("~/App/Teams", "*.js")
+                .IncludeDirectory("~/App/Users", "*.js"));
 
             var spaceLabStyle = new StyleBundle("~/Content/css").Include(
                           "~/Content/bootstrap.css",
