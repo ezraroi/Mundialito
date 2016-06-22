@@ -45,6 +45,8 @@ namespace Mundialito.Models
         public int Results { get; private set; }
 
         public int Marks { get; private set; }
+        
+        public int TotalMarks { get; private set; }
 
         public int Corners { get; private set; }
 
