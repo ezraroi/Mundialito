@@ -102,6 +102,7 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
         columnDefs: [
             { field: 'Place', displayName: '', resizable: false, maxWidth: 30 },
             { field: 'Name', displayName: 'Name', resizable: true, minWidth: 150},
+            { field: 'TotalMarks', displayName: 'TotalMarks', resizable: true },
             { field: 'Results', displayName: 'Results', resizable: true },
             { field: 'Marks', displayName: 'Marks', resizable: true },
             { field: 'YellowCards', displayName: 'Yellow Cards Marks', resizable: true },
