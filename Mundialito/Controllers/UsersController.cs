@@ -130,6 +130,7 @@ namespace Mundialito.Controllers
                 res[i].Place = (i + 1).ToString();
                 var diff = yesterdayPlaces[res[i].Id] - (i + 1);
                 res[i].PlaceDiff = string.Format("{0}{1}", diff > 0 ? "+" : string.Empty, diff);
+                res[i].TotalMarks = res[i].Marks + res[i].Results;
             }
             return res;
         }
