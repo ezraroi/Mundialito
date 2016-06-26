@@ -47,7 +47,7 @@ namespace Mundialito.Tests.Models
         public void MarkNotPlayedTest()
         {
             var game = new Game();
-            game.Date = DateTime.Now.Add(TimeSpan.FromMinutes(5));
+            game.Date = DateTime.Now.ToUniversalTime().Add(TimeSpan.FromMinutes(5));
 
             Assert.AreEqual("Not Played", game.Mark());
         }
