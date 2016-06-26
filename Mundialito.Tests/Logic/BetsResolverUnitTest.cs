@@ -1,36 +1,32 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.Logic;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.Logic
 {
-    [TestClass]
+    [TestFixture]
     public class BetsResolverUnitTest
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestUnResolvedGame()
         {
 
             var betsRepository = new Mock<IBetsRepository>();
             var resolver = CreateTarget(betsRepository.Object, new DateTimeProvider());
-            resolver.ResolveBets(new Game()
+            Assert.Throws<ArgumentException>(() => resolver.ResolveBets(new Game()
             {
                 GameId = 1,
                 Date = new DateTime().AddDays(2)
-            });
+            }));
         }
 
-        [TestMethod]
+        [Test]
         public void TestBetResolving()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -64,7 +60,7 @@ namespace Mundialito.Tests.Logic
             betsRepository.Setup(res => res.UpdateBet(It.Is<Bet>(bet => bet.BetId == 4))).Throws(new Exception("Should not be called"));
         }
 
-        [TestMethod]
+        [Test]
         public void TestBetResolvingGameWithNoBets()
         {
             var betsRepository = new Mock<IBetsRepository>();

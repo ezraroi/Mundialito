@@ -1,21 +1,19 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mundialito.Logic;
 using Moq;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.Bets;
 using System.Collections.Generic;
-using Microsoft.AspNet.Identity;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.ActionLogs;
+using NUnit.Framework;
 
 namespace Mundialito.Tests.Logic
 {
-    [TestClass]
+    [TestFixture]
     public class BetValidatorUnitTest
     {
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestNewBetNonExistingGame()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -26,11 +24,10 @@ namespace Mundialito.Tests.Logic
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
-            betValidator.ValidateNewBet(newBet);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateNewBet(newBet));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestNewBetClosedGame()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -41,11 +38,10 @@ namespace Mundialito.Tests.Logic
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
-            betValidator.ValidateNewBet(newBet);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateNewBet(newBet));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestNewBetPendingUpdateGame()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -57,11 +53,10 @@ namespace Mundialito.Tests.Logic
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
-            betValidator.ValidateNewBet(newBet);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateNewBet(newBet));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestNewBetAlreadyExistingBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -76,11 +71,10 @@ namespace Mundialito.Tests.Logic
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
             newBet.User = new MundialitoUser() { Id = "1" };
-            betValidator.ValidateNewBet(newBet);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateNewBet(newBet));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestNewBetWithoutUserBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -94,11 +88,10 @@ namespace Mundialito.Tests.Logic
             var newBet = new Bet();
             newBet.Game = new Game();
             newBet.Game.GameId = 1;
-            betValidator.ValidateNewBet(newBet);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateNewBet(newBet));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestUpdateBetNonExistingBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -109,11 +102,10 @@ namespace Mundialito.Tests.Logic
             var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
-            betValidator.ValidateUpdateBet(betToUpdate);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateUpdateBet(betToUpdate));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestUpdateBetClosedGame()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -128,11 +120,10 @@ namespace Mundialito.Tests.Logic
             betToUpdate.BetId = 1;
             betToUpdate.Game = new Game();
             betToUpdate.Game.GameId = 1;
-            betValidator.ValidateUpdateBet(betToUpdate);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateUpdateBet(betToUpdate));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(UnauthorizedAccessException))]
+        [Test]
         public void TestUpdateBetNotMineBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -145,11 +136,10 @@ namespace Mundialito.Tests.Logic
             betToUpdate.BetId = 1;
             betToUpdate.GameId = 1;
             betToUpdate.UserId = "1";
-            betValidator.ValidateUpdateBet(betToUpdate);
+            Assert.Throws<UnauthorizedAccessException>(() => betValidator.ValidateUpdateBet(betToUpdate));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestUpdateBetWithoutUserBet()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -160,11 +150,10 @@ namespace Mundialito.Tests.Logic
             var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
             var betToUpdate = new Bet();
             betToUpdate.BetId = 1;
-            betValidator.ValidateUpdateBet(betToUpdate);
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateUpdateBet(betToUpdate));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestDeleteBetNotExists()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -173,11 +162,10 @@ namespace Mundialito.Tests.Logic
             var gamesRepository = new Mock<IGamesRepository>();
 
             var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
-            betValidator.ValidateDeleteBet(1, "");
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateDeleteBet(1, ""));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(UnauthorizedAccessException))]
+        [Test]
         public void TestDeleteBetOtherUser()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -186,11 +174,10 @@ namespace Mundialito.Tests.Logic
             var gamesRepository = new Mock<IGamesRepository>();
 
             var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
-            betValidator.ValidateDeleteBet(1, "1");
+            Assert.Throws<UnauthorizedAccessException>(() => betValidator.ValidateDeleteBet(1, "1"));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void TestDeleteBetClosedGame()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -201,7 +188,7 @@ namespace Mundialito.Tests.Logic
             gamesRepository.Setup(rep => rep.GetGame(It.IsAny<int>())).Returns(game); ;
 
             var betValidator = CreateTarget(gamesRepository.Object, betsRepository.Object, new DateTimeProvider());
-            betValidator.ValidateDeleteBet(1, "1");
+            Assert.Throws<ArgumentException>(() => betValidator.ValidateDeleteBet(1, "1"));
         }
 
         private static Game CreateClosedGame()

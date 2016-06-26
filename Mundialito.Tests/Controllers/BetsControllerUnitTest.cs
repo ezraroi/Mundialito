@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mundialito.Controllers;
 using Mundialito.DAL.Bets;
 using Moq;
@@ -13,16 +12,17 @@ using Mundialito.DAL.Games;
 using Mundialito.DAL.Teams;
 using System.Data.Entity.Core;
 using Mundialito.DAL.ActionLogs;
+using NUnit.Framework;
 
 namespace Mundialito.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class BetsControllerUnitTest
     {
         private Team homeTeam = new Team() { TeamId = 1, Name = "Team1", ShortName = "TA1" };
         private Team awayTeam = new Team() { TeamId = 1, Name = "Team2", ShortName = "TA2" };
 
-        [TestMethod]
+        [Test]
         public void PostBetTest()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -37,8 +37,7 @@ namespace Mundialito.Tests.Controllers
             betValidator.Verify(foo => foo.ValidateNewBet(It.IsAny<Bet>()), Times.Exactly(1), "ValidateNewBet must be called");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void GetNonExistingBetByIdTest()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -47,10 +46,10 @@ namespace Mundialito.Tests.Controllers
             betsRepository.Setup(rep => rep.GetBet(1)).Returns((Bet)null);
 
             var controller = CreateController(betsRepository.Object, betValidator.Object, userProvider.Object, new DateTimeProvider());
-            controller.GetBetById(1);
+            Assert.Throws<ObjectNotFoundException>(() => controller.GetBetById(1));
         }
 
-        [TestMethod]
+        [Test]
         public void GetBetByIdTest()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -77,7 +76,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(1, res.AwayScore);
         }
 
-        [TestMethod]
+        [Test]
         public void GetLoggedUserBets()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -101,7 +100,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(3, res.Count());
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserBets()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -127,7 +126,7 @@ namespace Mundialito.Tests.Controllers
             bets.ForEach(bet => Assert.IsFalse(bet.IsOpenForBetting()));
         }
 
-        [TestMethod]
+        [Test]
         public void UpdateBetTest()
         {
             var betsRepository = new Mock<IBetsRepository>();
@@ -142,7 +141,7 @@ namespace Mundialito.Tests.Controllers
             betsRepository.Verify(rep => rep.UpdateBet(It.IsAny<Bet>()), Times.Exactly(1), "UpdateBet must be called");
         }
 
-        [TestMethod]
+        [Test]
         public void DeleteBetTest()
         {
             var betsRepository = new Mock<IBetsRepository>();

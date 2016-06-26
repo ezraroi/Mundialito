@@ -1,27 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.GeneralBets;
-using Mundialito.DAL.Teams;
 using Mundialito.Logic;
 using Mundialito.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Configuration;
 
 namespace Mundialito.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class GeneralBetsControllerUnitTest
     {
     
-        [TestMethod]
+        [Test]
         public void GetAllGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -38,8 +34,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(2, res.Count());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetAllGeneralBetsBeofreCloseTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -52,10 +47,10 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1)));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            controller.GetAllGeneralBets();
+            Assert.Throws<ArgumentException>(() => controller.GetAllGeneralBets());
         }
 
-        [TestMethod]
+        [Test]
         public void GetGeneralBetsByIdTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -72,8 +67,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(1, res.GeneralBetId);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void GetGeneralBetsByNonExistIdTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -83,10 +77,10 @@ namespace Mundialito.Tests.Controllers
             repository.Setup(rep => rep.GetGeneralBet(1)).Returns((GeneralBet) null);
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            var res = controller.GetGeneralBetById(1);
+            Assert.Throws<ObjectNotFoundException>(() => controller.GetGeneralBetById(1));
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -103,7 +97,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(1, res.GeneralBetId);
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserGeneralBetsBevoreCloseTimeSameUserTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -121,8 +115,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(1, res.GeneralBetId);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetUserGeneralBetsBevoreCloseTimeTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -136,11 +129,10 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.Subtract(TimeSpan.FromDays(1)));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            controller.GetUserGeneralBet("ezraroi");
+            Assert.Throws<ArgumentException>(() => controller.GetUserGeneralBet("ezraroi"));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void GetNonExsitingUserGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -153,10 +145,10 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.SetupGet(item => item.UTCNow).Returns(TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            controller.GetUserGeneralBet("ezraroi");
+            Assert.Throws<ObjectNotFoundException>(() => controller.GetUserGeneralBet("ezraroi"));
         }
 
-        [TestMethod]
+        [Test]
         public void GetUserHasGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -169,7 +161,7 @@ namespace Mundialito.Tests.Controllers
             Assert.IsFalse(controller.HasBet("ezraroi"));
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -188,7 +180,7 @@ namespace Mundialito.Tests.Controllers
             repository.Verify(item => item.Save());
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveGeneralBets2Test()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -207,7 +199,7 @@ namespace Mundialito.Tests.Controllers
             repository.Verify(item => item.Save());
         }
 
-        [TestMethod]
+        [Test]
         public void ResolveGeneralBets3Test()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -226,8 +218,7 @@ namespace Mundialito.Tests.Controllers
             repository.Verify(item => item.Save());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void ResolveNotClosedGeneralBetsTest()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -239,12 +230,11 @@ namespace Mundialito.Tests.Controllers
 
             Assert.IsFalse(generalBet.IsResolved);
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = false, PlayerIsRight = false });
+            Assert.Throws<ArgumentException>(() => controller.ResolveGeneralBet(1, new ResolveGeneralBetModel() { TeamIsRight = false, PlayerIsRight = false }));
         }
 
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void AddAnotherGeneralBetFromSameUser()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -255,7 +245,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 6, 1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            controller.PostBet(new NewGeneralBetModel() { GoldenBootPlayer = "A", WinningTeamId = 1 });
+            Assert.Throws<ArgumentException>(() => controller.PostBet(new NewGeneralBetModel() { GoldenBootPlayer = "A", WinningTeamId = 1 }));
         }
 
         private GeneralBetsController CreateController(IGeneralBetsRepository repository, ILoggedUserProvider userProvider, IDateTimeProvider dateTimeProvider)

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.ActionLogs;
@@ -9,16 +8,15 @@ using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
 using Mundialito.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class GamesControllerUnitTest
     {
         private Team homeTeam = new Team() { TeamId = 1, Name = "Team1", ShortName = "TA1" };
@@ -26,14 +24,13 @@ namespace Mundialito.Tests.Controllers
         private Stadium stadium = new Stadium() { StadiumId = 1 };
         private Mock<ILoggedUserProvider> userProvider = new Mock<ILoggedUserProvider>();
 
-        [TestInitialize]
+        [SetUp]
         public void CreateLoggedUserMock()
         {
             userProvider.SetupGet(user => user.UserId).Returns("1");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetOpenGameBetsTest()
         {
             var gamesRepository = new Mock<IGamesRepository>();
@@ -43,11 +40,10 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
 
             var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            var res = controller.GetGameBets(1);
+            Assert.Throws<ArgumentException>(() => controller.GetGameBets(1));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void GetNonExistingGameBetsTest()
         {
             var gamesRepository = new Mock<IGamesRepository>();
@@ -56,10 +52,10 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
 
             var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            var res = controller.GetGameBets(1);
+            Assert.Throws<ObjectNotFoundException>(() => controller.GetGameBets(1));
         }
 
-        [TestMethod]
+        [Test]
         public void GetClosedGameBetsTest()
         {
             var gamesRepository = new Mock<IGamesRepository>();
@@ -76,8 +72,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(1, res.Count());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void UpdateOpenGameWithResultData()
         {
             var gamesRepository = new Mock<IGamesRepository>();
@@ -87,11 +82,10 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns(openGame);
 
             var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
+            Assert.Throws<ArgumentException>(() => controller.PutGame(1, new PutGameModel() { HomeScore = 1 }));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void UpdateNonExistingOpenGameWithResultData()
         {
             var gamesRepository = new Mock<IGamesRepository>();
@@ -100,10 +94,10 @@ namespace Mundialito.Tests.Controllers
             gamesRepository.Setup(rep => rep.GetGame(1)).Returns((Game)null);
 
             var controller = CreateController(gamesRepository.Object, betsRepository.Object, betsResolver.Object, userProvider.Object, new DateTimeProvider());
-            controller.PutGame(1, new PutGameModel() { HomeScore = 1 });
+            Assert.Throws<ObjectNotFoundException>(() => controller.PutGame(1, new PutGameModel() { HomeScore = 1 }));
         }
 
-        [TestMethod]
+        [Test]
         public void UpdateClosedGameWithResultData()
         {
             var gamesRepository = new Mock<IGamesRepository>();

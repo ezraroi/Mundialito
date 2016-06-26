@@ -1,14 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mundialito.Models;
 using Mundialito.DAL.Games;
+using NUnit.Framework;
 
 namespace Mundialito.Tests.Models
 {
-    [TestClass]
+    [TestFixture]
     public class GameUnitTest
     {
-        [TestMethod]
+        [Test]
         public void IsOpenSimpleTest()
         {
             var game = new Game();
@@ -17,7 +16,7 @@ namespace Mundialito.Tests.Models
             Assert.IsFalse(game.IsOpen(), "Game should not be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsOpenSameDateTest()
         {
             var game = new Game();
@@ -26,7 +25,7 @@ namespace Mundialito.Tests.Models
             Assert.IsTrue(game.IsOpen(), "Game should be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsOpenNotSameDateTest()
         {
             var game = new Game();
@@ -35,7 +34,7 @@ namespace Mundialito.Tests.Models
             Assert.IsFalse(game.IsOpen(), "Game should not be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsOpenNotSameDateTestPastTime()
         {
             var game = new Game();
@@ -44,7 +43,7 @@ namespace Mundialito.Tests.Models
             Assert.IsTrue(game.IsOpen(), "Game shouldb be open");
         }
 
-        [TestMethod]
+        [Test]
         public void MarkNotPlayedTest()
         {
             var game = new Game();
@@ -53,7 +52,7 @@ namespace Mundialito.Tests.Models
             Assert.AreEqual("Not Played", game.Mark());
         }
         
-        [TestMethod]
+        [Test]
         public void MarkDrawTest()
         {
             var game = new Game();
@@ -67,7 +66,7 @@ namespace Mundialito.Tests.Models
             Assert.AreEqual("X", game.Mark());
         }
 
-        [TestMethod]
+        [Test]
         public void MarkHomeWinTest()
         {
             var game = new Game();
@@ -81,7 +80,7 @@ namespace Mundialito.Tests.Models
             Assert.AreEqual("1", game.Mark());
         }
 
-        [TestMethod]
+        [Test]
         public void MarkAwayWinTest()
         {
             var game = new Game();
@@ -95,7 +94,7 @@ namespace Mundialito.Tests.Models
             Assert.AreEqual("2", game.Mark());
         }
 
-        [TestMethod]
+        [Test]
         public void MarkNotScoreTest()
         {
             var game = new Game();

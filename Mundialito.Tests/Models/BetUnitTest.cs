@@ -1,39 +1,35 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mundialito.DAL.Bets;
+﻿using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
+using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.Models
 {
-    [TestClass]
+    [TestFixture]
     public class BetUnitTest
     {
-        [TestMethod]
+        [Test]
         public void IsOpenSimpleTest()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow } };
             Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsOpenSimpleTest2()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow.AddMinutes(20) } };
             Assert.IsFalse(bet.IsOpenForBetting(), "Bet should not be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsOpenSimpleTest3()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow.AddMinutes(31) } };
             Assert.IsTrue(bet.IsOpenForBetting(), "Bet should be open");
         }
 
-        [TestMethod]
+        [Test]
         public void IsResolvedTest()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow } };
@@ -41,7 +37,7 @@ namespace Mundialito.Tests.Models
             Assert.IsFalse(bet.IsResolved(), " Bet should not be resolved");
         }
 
-        [TestMethod]
+        [Test]
         public void IsResolvedTest2()
         {
             var bet = new Bet() { Game = new Game() { Date = DateTime.UtcNow , HomeScore = 1, AwayScore = 1, CornersMark = "X", CardsMark = "1"} };

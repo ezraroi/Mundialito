@@ -1,22 +1,19 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using Mundialito.Controllers;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.ActionLogs;
 using Mundialito.Logic;
 using Mundialito.Models;
-using System;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class UsersControllerUnitTest
     {
-        [TestMethod]
+        [Test]
         public void PlaceDiffTest()
         {
             var usersRetriver = new Mock<IUsersRetriver>();
@@ -41,7 +38,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(res["3"].Place, "1");
         }
 
-        [TestMethod]
+        [Test]
         public void PlaceDiffTest2()
         {
             var usersRetriver = new Mock<IUsersRetriver>();

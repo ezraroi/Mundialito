@@ -1,20 +1,18 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
 using Mundialito.DAL.Teams;
 using Moq;
 using Mundialito.Controllers;
-using Mundialito.Models;
 using System.Collections.Generic;
 using Mundialito.DAL.ActionLogs;
+using NUnit.Framework;
 
 namespace Mundialito.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class TeamsControllerUnitTest
     {
 
-        [TestMethod]
+        [Test]
         public void GetAllTeamsTest()
         {
             var teamsRepository = new Mock<ITeamsRepository>();
@@ -25,7 +23,7 @@ namespace Mundialito.Tests.Controllers
             Assert.AreEqual(3, controller.GetAllTeams().ToList().Count);
         }
 
-        [TestMethod]
+        [Test]
         public void GetTeamByIdTest()
         {
             var teamsRepository = new Mock<ITeamsRepository>();

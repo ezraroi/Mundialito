@@ -1,26 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Mundialito.Controllers;
-using Mundialito.DAL;
-using Mundialito.DAL.Accounts;
-using Mundialito.DAL.Bets;
-using Mundialito.DAL.Games;
-using Mundialito.DAL.GeneralBets;
-using Mundialito.DAL.Stadiums;
+﻿using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
-using Mundialito.Logic;
 using Mundialito.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.AcceptenceTests
 {
-    [TestClass]
+    [TestFixture]
     public class AcceptenceTests
     {
         private Dictionary<String, UserModel> users;
@@ -28,7 +17,7 @@ namespace Mundialito.Tests.AcceptenceTests
         private List<GameViewModel> games;
         private List<Stadium> stadiums;
 
-        [TestInitialize]
+        [SetUp]
         public void CreateControllers()
         {
             AcceptenceTestsUtils.InitDatabase();
@@ -53,7 +42,7 @@ namespace Mundialito.Tests.AcceptenceTests
             return users["Admin"];
         }
 
-        [TestMethod]
+        [Test]
         public void MainAcceptenceTest()
         {
             TestUsersInitialState();
@@ -118,7 +107,7 @@ namespace Mundialito.Tests.AcceptenceTests
             Assert.AreEqual(5, games.Count(game => game.UserHasBet));
         }
 
-        [TestMethod]
+        [Test]
         public void AddAndEditGame()
         {
             var newGame = AcceptenceTestsUtils.GetGamesController(GetAdmin(), DateTime.UtcNow).PostGame(new NewGameModel() { AwayTeam = new GameTeamModel(teams[0]), HomeTeam = new GameTeamModel(teams[1]), Date = DateTime.UtcNow.AddHours(2), Stadium = stadiums[0] });

@@ -1,28 +1,25 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mundialito.Tests.Logic
 {
-    [TestClass]
+    [TestFixture]
     public class UsersRetriverTest
     {
         private Team homeTeam = new Team() { TeamId = 1, Name = "Team1", ShortName = "TA1"};
         private Team awayTeam = new Team() { TeamId = 1, Name = "Team2", ShortName = "TA2"};
 
-        [TestMethod]
-        [ExpectedException(typeof(ObjectNotFoundException))]
+        [Test]
         public void TestNonExistingUser()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
@@ -30,10 +27,10 @@ namespace Mundialito.Tests.Logic
             var usersRepository = new Mock<IUsersRepository>();
             usersRepository.Setup(item => item.GetUser(It.IsAny<String>())).Returns((MundialitoUser)null);
             var usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
-            usersRetriver.GetUser("roi", false);
+            Assert.Throws<ObjectNotFoundException>(() => usersRetriver.GetUser("roi", false));
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetNotLoggedUser()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
@@ -56,7 +53,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetNotLoggedUser2()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
@@ -78,7 +75,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks + user.Results);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetLoggedUser()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
@@ -101,7 +98,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(0, user.Corners + user.YellowCards + user.Marks);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetAllUsers()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
@@ -116,7 +113,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(2, res.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetAllUsersWithOpenBets()
         {
             var usersRepository = new Mock<IUsersRepository>();
@@ -157,7 +154,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(24, res[2].Points);
         }
 
-        [TestMethod]
+        [Test]
         public void TestGetAllUsersYesterdayPoints()
         {
             var dateTimeProvider = new Mock<IDateTimeProvider>();
@@ -202,7 +199,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(26, res.Sum(user => user.YesterdayPoints));
         }
 
-        [TestMethod]
+        [Test]
         public void TestUserTotalMarks()
         {
             var generalBetsRepository = new Mock<IGeneralBetsRepository>();
