@@ -170,8 +170,8 @@ namespace Mundialito.Tests.Logic
             usersRepository.Setup(item => item.AllUsers()).Returns(allUsers);
 
             var betsRepository = new Mock<IBetsRepository>();
-            var clsoedGame1 = new Game() { GameId = 1, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(1)), HomeTeam = homeTeam, AwayTeam = awayTeam };
-            var clsoedGame2 = new Game() { GameId = 2, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(2)), HomeTeam = homeTeam, AwayTeam = awayTeam };
+            var clsoedGame1 = new Game() { GameId = 1, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(1)), HomeTeam = homeTeam, AwayTeam = awayTeam };
+            var clsoedGame2 = new Game() { GameId = 2, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(2)), HomeTeam = homeTeam, AwayTeam = awayTeam };
 
             List<Bet> allBets = new List<Bet>();
             allBets.Add(new Bet(user1, clsoedGame1) { AwayScore = 1, HomeScore = 1, Points = 5 });
@@ -193,7 +193,7 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(18, res.Sum(user => user.YesterdayPoints));
 
             dateTimeProvider = new Mock<IDateTimeProvider>();
-            dateTimeProvider.Setup(item => item.UTCNow).Returns(DateTime.Now.AddDays(1));
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(DateTime.UtcNow.AddDays(1));
             usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, dateTimeProvider.Object);
             res = usersRetriver.GetAllUsers();
             Assert.AreEqual(26, res.Sum(user => user.YesterdayPoints));
@@ -235,12 +235,12 @@ namespace Mundialito.Tests.Logic
 
         private Game CreateOpenGame(int id)
         {
-            return new Game() { GameId = id, Date = (DateTime.Now).Add(TimeSpan.FromDays(1)), HomeTeam = homeTeam , AwayTeam = awayTeam};
+            return new Game() { GameId = id, Date = (DateTime.UtcNow).Add(TimeSpan.FromDays(1)), HomeTeam = homeTeam , AwayTeam = awayTeam};
         }
 
         private Game CreateClosedGame(int id)
         {
-            return new Game() { GameId = id, Date = (DateTime.Now).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, CornersMark = "X", CardsMark = "2",  HomeTeam = homeTeam, AwayTeam = awayTeam };
+            return new Game() { GameId = id, Date = (DateTime.UtcNow).Subtract(TimeSpan.FromDays(1)), HomeScore = 1, AwayScore = 1, CornersMark = "X", CardsMark = "2",  HomeTeam = homeTeam, AwayTeam = awayTeam };
         }
 
         private MundialitoUser CreateMundialtoUser(String id)
