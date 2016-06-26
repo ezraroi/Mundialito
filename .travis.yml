@@ -1,0 +1,8 @@
+language: csharp
+solution: Mundialito.sln
+install:
+  - nuget restore Mundialito.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release Mundialito.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./Mundialito.Tests/bin/Release/Mundialito.Tests.dll
