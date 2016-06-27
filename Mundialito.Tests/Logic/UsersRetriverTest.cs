@@ -188,7 +188,8 @@ namespace Mundialito.Tests.Logic
             Assert.AreEqual(0, res.Sum(user => user.YesterdayPoints));
 
             dateTimeProvider = new Mock<IDateTimeProvider>();
-            usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, new DateTimeProvider());
+            dateTimeProvider.Setup(item => item.UTCNow).Returns(DateTime.UtcNow.Subtract(TimeSpan.FromHours(1)));
+            usersRetriver = new UsersRetriver(betsRepository.Object, generalBetsRepository.Object, usersRepository.Object, dateTimeProvider.Object);
             res = usersRetriver.GetAllUsers();
             Assert.AreEqual(18, res.Sum(user => user.YesterdayPoints));
 
