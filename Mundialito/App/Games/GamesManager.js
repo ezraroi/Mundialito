@@ -31,7 +31,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', 
         _load: function(gameId, deferred) {
             var scope = this;
             $log.debug('GamesManager: will fetch game ' + gameId + ' from server');
-            $http.get('api/games/' + gameId, { tracker: 'getGame', cache: this._cacheManager  })
+            $http.get('api/games/' + gameId, { tracker: 'getGame'})
                 .success(function(gameData) {
                     var game = scope._retrieveInstance(gameData.GameId, gameData);
                     deferred.resolve(game);
@@ -103,7 +103,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', 
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all games from server');
-            $http.get('api/games', { tracker: 'getGames', cache: this._cacheManager })
+            $http.get('api/games', { tracker: 'getGames'})
                 .success(function(gamesArray) {
                     var games = [];
                     gamesArray.forEach(function(gameData) {
@@ -128,7 +128,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', 
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all open games from server');
-            $http.get('api/games/open', { tracker: 'getOpenGames', cache: this._cacheManager })
+            $http.get('api/games/open', { tracker: 'getOpenGames'})
                 .success(function(gamesArray) {
                     var games = [];
                     gamesArray.forEach(function(gameData) {
@@ -150,7 +150,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', 
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all games of team ' + teamId + '  from server');
-            $http.get('api/teams/' + teamId + '/games', { tracker: 'getTeamGames', cache: this._cacheManager })
+            $http.get('api/teams/' + teamId + '/games', { tracker: 'getTeamGames'})
                 .success(function(gamesArray) {
                     var games = [];
                     gamesArray.forEach(function(gameData) {
@@ -171,7 +171,7 @@ angular.module('mundialitoApp').factory('GamesManager', ['$http', '$q', 'Game', 
             var deferred = $q.defer();
             var scope = this;
             $log.debug('GamesManager: will fetch all games in stadium ' + stadiumId + '  from server');
-            $http.get('api/games/Stadium/' + stadiumId, { tracker: 'getStadiumGames', cache: this._cacheManager })
+            $http.get('api/games/Stadium/' + stadiumId, { tracker: 'getStadiumGames'})
                 .success(function(gamesArray) {
                     var games = [];
                     gamesArray.forEach(function(gameData) {
