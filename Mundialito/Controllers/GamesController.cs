@@ -228,13 +228,14 @@ namespace Mundialito.Controllers
                     Trace.TraceError("Monkey user {0} was not found, will not add monkey bet", monkeyUserName);
                 }
                 var randomResults = new RandomResults();
+                var result = randomResults.GetRandomResult();
                 betsRepository.InsertBet(new Bet()
                 {
                     
                     GameId = res.GameId,
                     UserId = monkeyUser.Id,
-                    HomeScore = randomResults.Key,
-                    AwayScore = randomResults.Value,
+                    HomeScore = result.Key,
+                    AwayScore = result.Value,
                     CardsMark = randomResults.GetRandomMark(),
                     CornersMark = randomResults.GetRandomMark()
                 });
