@@ -230,10 +230,11 @@ namespace Mundialito.Controllers
                 var randomResults = new RandomResults();
                 betsRepository.InsertBet(new Bet()
                 {
+                    
                     GameId = res.GameId,
                     UserId = monkeyUser.Id,
-                    HomeScore = 1,
-                    AwayScore = 1,
+                    HomeScore = randomResults.Key,
+                    AwayScore = randomResults.Value,
                     CardsMark = randomResults.GetRandomMark(),
                     CornersMark = randomResults.GetRandomMark()
                 });
