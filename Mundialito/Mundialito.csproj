@@ -240,6 +240,7 @@
     <Compile Include="DAL\TournamentCreators\ITournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Copa2015TournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Euro2016TournamentCreator.cs" />
+    <Compile Include="DAL\TournamentCreators\Mondial2018TournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Mondial2014TournamentCreator.cs" />
     <Compile Include="DAL\Games\GameExtensionMethods.cs" />
     <Compile Include="Logic\AdminManagment.cs" />
