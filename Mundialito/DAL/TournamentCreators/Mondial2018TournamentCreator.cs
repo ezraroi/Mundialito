@@ -53,36 +53,123 @@ namespace Mundialito.DAL.DBCreators
             var games = new List<Game>();
             games.Add(new Game
             {
-                HomeTeamId = teams["BRAZIL"].TeamId,
-                AwayTeamId = teams["CROATIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 12, 20, 0, 0)),
-                StadiumId = stadiums["Arena de Sao Paulo"].StadiumId
+                HomeTeamId = teams["RUSSIA"].TeamId,
+                AwayTeamId = teams["SAUDI ARABIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 14, 15 ,0, 0)),
+                StadiumId = stadiums["Luzhniki Stadium"].StadiumId
             });
 
             /* */
 
             games.Add(new Game
             {
-                HomeTeamId = teams["MEXICO"].TeamId,
-                AwayTeamId = teams["CAMEROON"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 13, 16, 0, 0)),
-                StadiumId = stadiums["Estadio das Dunas"].StadiumId
+                HomeTeamId = teams["EGYPT"].TeamId,
+                AwayTeamId = teams["URUGUAY"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 15, 12, 0, 0)),
+                StadiumId = stadiums["Ekaterinburg Arena"].StadiumId
             });
 
             games.Add(new Game
             {
-                HomeTeamId = teams["SPAIN"].TeamId,
-                AwayTeamId = teams["NETHERLANDS"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 13, 19, 0, 0)),
-                StadiumId = stadiums["Arena Fonte Nova"].StadiumId
+                HomeTeamId = teams["MOROCCO"].TeamId,
+                AwayTeamId = teams["IR IRAN"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 15, 15, 0, 0)),
+                StadiumId = stadiums["Saint Petersburg Stadium"].StadiumId
             });
 
             games.Add(new Game
             {
-                HomeTeamId = teams["CHILE"].TeamId,
+                HomeTeamId = teams["PORTUGAL"].TeamId,
+                AwayTeamId = teams["SPAIN"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 15, 18, 0, 0)),
+                StadiumId = stadiums["Fisht Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["FRANCE"].TeamId,
                 AwayTeamId = teams["AUSTRALIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 13, 22, 0, 0)),
-                StadiumId = stadiums["Arena Pantanal"].StadiumId
+                Date = GetFixedDate(new DateTime(2018, 6, 16, 10, 0, 0)),
+                StadiumId = stadiums["Kazan Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["ARGENTINA"].TeamId,
+                AwayTeamId = teams["ICELAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 16, 13, 0, 0)),
+                StadiumId = stadiums["Spartak Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["PERU"].TeamId,
+                AwayTeamId = teams["DENMARK"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 16, 16, 0, 0)),
+                StadiumId = stadiums["Mordovia Arena"].StadiumId
+            });
+            
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["CROATIA"].TeamId,
+                AwayTeamId = teams["NIGERIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 16, 19, 0, 0)),
+                StadiumId = stadiums["Kaliningrad Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["COSTA RICA"].TeamId,
+                AwayTeamId = teams["SERBIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 17, 12, 0, 0)),
+                StadiumId = stadiums["Samara Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["GERMANY"].TeamId,
+                AwayTeamId = teams["MEXICO"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 17, 15, 0, 0)),
+                StadiumId = stadiums["Luzhniki Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["BRAZIL"].TeamId,
+                AwayTeamId = teams["SWITZERLAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 17, 18, 0, 0)),
+                StadiumId = stadiums["Rostov Arena"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SWEDEN"].TeamId,
+                AwayTeamId = teams["KOREA REPUBLIC"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 18, 12, 0, 0)),
+                StadiumId = stadiums["Nizhny Novgorod Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["BELGIUM"].TeamId,
+                AwayTeamId = teams["PANAMA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 18, 15, 0, 0)),
+                StadiumId = stadiums["Fisht Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["TUNISIA"].TeamId,
+                AwayTeamId = teams["ENGLAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 18, 18, 0, 0)),
+                StadiumId = stadiums["Volgograd Arena"].StadiumId
             });
 
             /* */
@@ -90,343 +177,25 @@ namespace Mundialito.DAL.DBCreators
             games.Add(new Game
             {
                 HomeTeamId = teams["COLOMBIA"].TeamId,
-                AwayTeamId = teams["GREECE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 14, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["URUGUAY"].TeamId,
-                AwayTeamId = teams["COSTA RICA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 14, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Castelao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ENGLAND"].TeamId,
-                AwayTeamId = teams["ITALY"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 14, 22, 0, 0)),
-                StadiumId = stadiums["Arena Amazonia"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["CÔTE D'IVOIRE"].TeamId,
                 AwayTeamId = teams["JAPAN"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 1, 0, 0)),
-                StadiumId = stadiums["Arena Pernambuco"].StadiumId
+                Date = GetFixedDate(new DateTime(2018, 6, 19, 12, 0, 0)),
+                StadiumId = stadiums["Mordovia Arena"].StadiumId
             });
 
             games.Add(new Game
             {
-                HomeTeamId = teams["SWITZERLAND"].TeamId,
-                AwayTeamId = teams["ECUADOR"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Nacional de Brasilia"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["FRANCE"].TeamId,
-                AwayTeamId = teams["HONDURAS"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Beira-Rio"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ARGENTINA"].TeamId,
-                AwayTeamId = teams["BOSNIA AND HERZEGOVINA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 15, 22, 0, 0)),
-                StadiumId = stadiums["Estadio Do Maracana"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["GERMANY"].TeamId,
-                AwayTeamId = teams["PORTUGAL"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 16, 16, 0, 0)),
-                StadiumId = stadiums["Arena Fonte Nova"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["IRAN"].TeamId,
-                AwayTeamId = teams["NIGERIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 16, 19, 0, 0)),
-                StadiumId = stadiums["Arena da Baixada"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["GHANA"].TeamId,
-                AwayTeamId = teams["USA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 16, 22, 0, 0)),
-                StadiumId = stadiums["Estadio das Dunas"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["BELGIUM"].TeamId,
-                AwayTeamId = teams["ALGERIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 17, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["BRAZIL"].TeamId,
-                AwayTeamId = teams["MEXICO"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 17, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Castelao"].StadiumId
+                HomeTeamId = teams["POLAND"].TeamId,
+                AwayTeamId = teams["SENEGAL"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 19, 15, 0, 0)),
+                StadiumId = stadiums["Spartak Stadium"].StadiumId
             });
 
             games.Add(new Game
             {
                 HomeTeamId = teams["RUSSIA"].TeamId,
-                AwayTeamId = teams["KOREA REPUBLIC"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 17, 22, 0, 0)),
-                StadiumId = stadiums["Estadio das Dunas"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["AUSTRALIA"].TeamId,
-                AwayTeamId = teams["NETHERLANDS"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 18, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Beira-Rio"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["SPAIN"].TeamId,
-                AwayTeamId = teams["CHILE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 18, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Do Maracana"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["CAMEROON"].TeamId,
-                AwayTeamId = teams["CROATIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 18, 22, 0, 0)),
-                StadiumId = stadiums["Arena Amazonia"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["COLOMBIA"].TeamId,
-                AwayTeamId = teams["CÔTE D'IVOIRE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 19, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Nacional de Brasilia"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["URUGUAY"].TeamId,
-                AwayTeamId = teams["ENGLAND"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 19, 19, 0, 0)),
-                StadiumId = stadiums["Arena de Sao Paulo"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["JAPAN"].TeamId,
-                AwayTeamId = teams["GREECE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 19, 22, 0, 0)),
-                StadiumId = stadiums["Estadio das Dunas"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ITALY"].TeamId,
-                AwayTeamId = teams["COSTA RICA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 20, 16, 0, 0)),
-                StadiumId = stadiums["Arena Pernambuco"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["SWITZERLAND"].TeamId,
-                AwayTeamId = teams["FRANCE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 20, 19, 0, 0)),
-                StadiumId = stadiums["Arena Fonte Nova"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["HONDURAS"].TeamId,
-                AwayTeamId = teams["ECUADOR"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 20, 22, 0, 0)),
-                StadiumId = stadiums["Arena da Baixada"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ARGENTINA"].TeamId,
-                AwayTeamId = teams["IRAN"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 21, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["GERMANY"].TeamId,
-                AwayTeamId = teams["GHANA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 21, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Castelao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["NIGERIA"].TeamId,
-                AwayTeamId = teams["BOSNIA AND HERZEGOVINA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 21, 22, 0, 0)),
-                StadiumId = stadiums["Arena Pantanal"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["BELGIUM"].TeamId,
-                AwayTeamId = teams["RUSSIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 22, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["KOREA REPUBLIC"].TeamId,
-                AwayTeamId = teams["ALGERIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 22, 19, 0, 0)),
-                StadiumId = stadiums["Estadio Beira-Rio"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["USA"].TeamId,
-                AwayTeamId = teams["PORTUGAL"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 22, 22, 0, 0)),
-                StadiumId = stadiums["Estadio Do Maracana"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["NETHERLANDS"].TeamId,
-                AwayTeamId = teams["CHILE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 23, 16, 0, 0)),
-                StadiumId = stadiums["Arena de Sao Paulo"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["AUSTRALIA"].TeamId,
-                AwayTeamId = teams["SPAIN"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 23, 16, 0, 0)),
-                StadiumId = stadiums["Arena da Baixada"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["CAMEROON"].TeamId,
-                AwayTeamId = teams["BRAZIL"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 23, 20, 0, 0)),
-                StadiumId = stadiums["Estadio Nacional de Brasilia"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["CROATIA"].TeamId,
-                AwayTeamId = teams["MEXICO"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 23, 20, 0, 0)),
-                StadiumId = stadiums["Arena Pernambuco"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ITALY"].TeamId,
-                AwayTeamId = teams["URUGUAY"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 24, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["COSTA RICA"].TeamId,
-                AwayTeamId = teams["ENGLAND"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 24, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Mineirao"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["JAPAN"].TeamId,
-                AwayTeamId = teams["COLOMBIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 24, 20, 0, 0)),
-                StadiumId = stadiums["Arena Pantanal"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["GREECE"].TeamId,
-                AwayTeamId = teams["CÔTE D'IVOIRE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 24, 20, 0, 0)),
-                StadiumId = stadiums["Estadio Castelao"].StadiumId
-            });
-
-            /* */
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["NIGERIA"].TeamId,
-                AwayTeamId = teams["ARGENTINA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 25, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Beira-Rio"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["BOSNIA AND HERZEGOVINA"].TeamId,
-                AwayTeamId = teams["IRAN"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 25, 16, 0, 0)),
-                StadiumId = stadiums["Arena Fonte Nova"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["HONDURAS"].TeamId,
-                AwayTeamId = teams["SWITZERLAND"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 25, 20, 0, 0)),
-                StadiumId = stadiums["Arena Amazonia"].StadiumId
-            });
-
-            games.Add(new Game
-            {
-                HomeTeamId = teams["ECUADOR"].TeamId,
-                AwayTeamId = teams["FRANCE"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 25, 20, 0, 0)),
-                StadiumId = stadiums["Estadio Do Maracana"].StadiumId
+                AwayTeamId = teams["EGYPT"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 19, 18, 0, 0)),
+                StadiumId = stadiums["Saint Petersburg Stadium"].StadiumId
             });
 
             /* */
@@ -434,33 +203,265 @@ namespace Mundialito.DAL.DBCreators
             games.Add(new Game
             {
                 HomeTeamId = teams["PORTUGAL"].TeamId,
-                AwayTeamId = teams["GHANA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 26, 16, 0, 0)),
-                StadiumId = stadiums["Estadio Nacional de Brasilia"].StadiumId
+                AwayTeamId = teams["MOROCCO"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 20, 12, 0, 0)),
+                StadiumId = stadiums["Luzhniki Stadium"].StadiumId
             });
 
             games.Add(new Game
             {
-                HomeTeamId = teams["USA"].TeamId,
-                AwayTeamId = teams["GERMANY"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 26, 16, 0, 0)),
-                StadiumId = stadiums["Arena Pernambuco"].StadiumId
+                HomeTeamId = teams["URUGUAY"].TeamId,
+                AwayTeamId = teams["SAUDI ARABIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 20, 15, 0, 0)),
+                StadiumId = stadiums["Rostov Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["IR IRAN"].TeamId,
+                AwayTeamId = teams["SPAIN"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 20, 18, 0, 0)),
+                StadiumId = stadiums["Kazan Arena"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["DENMARK"].TeamId,
+                AwayTeamId = teams["AUSTRALIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 21, 12, 0, 0)),
+                StadiumId = stadiums["Samara Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["FRANCE"].TeamId,
+                AwayTeamId = teams["PERU"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 21, 15, 0, 0)),
+                StadiumId = stadiums["Ekaterinburg Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["ARGENTINA"].TeamId,
+                AwayTeamId = teams["CROATIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 21, 18, 0, 0)),
+                StadiumId = stadiums["Nizhny Novgorod Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["BRAZIL"].TeamId,
+                AwayTeamId = teams["COSTA RICA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 22, 12, 0, 0)),
+                StadiumId = stadiums["Saint Petersburg Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["NIGERIA"].TeamId,
+                AwayTeamId = teams["ICELAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 22, 15, 0, 0)),
+                StadiumId = stadiums["Volgograd Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SERBIA"].TeamId,
+                AwayTeamId = teams["SWITZERLAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 22, 18, 0, 0)),
+                StadiumId = stadiums["Kaliningrad Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["BELGIUM"].TeamId,
+                AwayTeamId = teams["TUNISIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 23, 12, 0, 0)),
+                StadiumId = stadiums["Spartak Stadium"].StadiumId
             });
 
             games.Add(new Game
             {
                 HomeTeamId = teams["KOREA REPUBLIC"].TeamId,
-                AwayTeamId = teams["BELGIUM"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 26, 20, 0, 0)),
-                StadiumId = stadiums["Arena de Sao Paulo"].StadiumId
+                AwayTeamId = teams["MEXICO"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 23, 15, 0, 0)),
+                StadiumId = stadiums["Rostov Arena"].StadiumId
             });
 
             games.Add(new Game
             {
-                HomeTeamId = teams["ALGERIA"].TeamId,
+                HomeTeamId = teams["GERMANY"].TeamId,
+                AwayTeamId = teams["SWEDEN"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 23, 18, 0, 0)),
+                StadiumId = stadiums["Fisht Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["ENGLAND"].TeamId,
+                AwayTeamId = teams["PANAMA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 24, 12, 0, 0)),
+                StadiumId = stadiums["Nizhny Novgorod Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["JAPAN"].TeamId,
+                AwayTeamId = teams["SENEGAL"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 24, 15, 0, 0)),
+                StadiumId = stadiums["Ekaterinburg Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["POLAND"].TeamId,
+                AwayTeamId = teams["COLOMBIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 24, 18, 0, 0)),
+                StadiumId = stadiums["Kazan Arena"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["URUGUAY"].TeamId,
                 AwayTeamId = teams["RUSSIA"].TeamId,
-                Date = GetFixedDate(new DateTime(2014, 6, 26, 20, 0, 0)),
-                StadiumId = stadiums["Arena da Baixada"].StadiumId
+                Date = GetFixedDate(new DateTime(2018, 6, 25, 14, 0, 0)),
+                StadiumId = stadiums["Samara Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SAUDI ARABIA"].TeamId,
+                AwayTeamId = teams["EGYPT"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 25, 14, 0, 0)),
+                StadiumId = stadiums["Volgograd Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["IR IRAN"].TeamId,
+                AwayTeamId = teams["PORTUGAL"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 25, 18, 0, 0)),
+                StadiumId = stadiums["Mordovia Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SPAIN"].TeamId,
+                AwayTeamId = teams["MOROCCO"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 25, 18, 0, 0)),
+                StadiumId = stadiums["Kaliningrad Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["DENMARK"].TeamId,
+                AwayTeamId = teams["FRANCE"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 26, 14, 0, 0)),
+                StadiumId = stadiums["Luzhniki Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["AUSTRALIA"].TeamId,
+                AwayTeamId = teams["PERU"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 26, 14, 0, 0)),
+                StadiumId = stadiums["Fisht Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["NIGERIA"].TeamId,
+                AwayTeamId = teams["ARGENTINA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 26, 18, 0, 0)),
+                StadiumId = stadiums["Saint Petersburg Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["ICELAND"].TeamId,
+                AwayTeamId = teams["CROATIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 26, 18, 0, 0)),
+                StadiumId = stadiums["Rostov Arena"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["MEXICO"].TeamId,
+                AwayTeamId = teams["SWEDEN"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 27, 14, 0, 0)),
+                StadiumId = stadiums["Ekaterinburg Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["KOREA REPUBLIC"].TeamId,
+                AwayTeamId = teams["GERMANY"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 27, 14, 0, 0)),
+                StadiumId = stadiums["Kazan Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SERBIA"].TeamId,
+                AwayTeamId = teams["BRAZIL"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 27, 18, 0, 0)),
+                StadiumId = stadiums["Spartak Stadium"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SWITZERLAND"].TeamId,
+                AwayTeamId = teams["COSTA RICA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 27, 18, 0, 0)),
+                StadiumId = stadiums["Nizhny Novgorod Stadium"].StadiumId
+            });
+
+            /* */
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["JAPAN"].TeamId,
+                AwayTeamId = teams["POLAND"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 28, 14, 0, 0)),
+                StadiumId = stadiums["Volgograd Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["SENEGAL"].TeamId,
+                AwayTeamId = teams["COLOMBIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 28, 14, 0, 0)),
+                StadiumId = stadiums["Samara Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["PANAMA"].TeamId,
+                AwayTeamId = teams["TUNISIA"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 28, 18, 0, 0)),
+                StadiumId = stadiums["Mordovia Arena"].StadiumId
+            });
+
+            games.Add(new Game
+            {
+                HomeTeamId = teams["ENGLAND"].TeamId,
+                AwayTeamId = teams["BELGIUM"].TeamId,
+                Date = GetFixedDate(new DateTime(2018, 6, 28, 18, 0, 0)),
+                StadiumId = stadiums["Kaliningrad Stadium"].StadiumId
             });
 
             return games;
@@ -487,8 +488,7 @@ namespace Mundialito.DAL.DBCreators
 
         private DateTime GetFixedDate(DateTime date)
         {
-            //return date;
-            return date.AddDays(65);
+            return date;
         }
 
         private Team CreateTeam(String name, String shortName)

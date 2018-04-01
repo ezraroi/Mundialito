@@ -17,8 +17,7 @@ using Mundialito.Logic;
 
 namespace Mundialito.DAL
 {
-    public class MundialitoContextInitializer : DropCreateDatabaseAlways<MundialitoContext>
-    //public class MundialitoContextInitializer : DropCreateDatabaseIfModelChanges<MundialitoContext>
+    public class MundialitoContextInitializer : DropCreateDatabaseIfModelChanges<MundialitoContext>
     {
         private Dictionary<String, Stadium> stadiumsDic = new Dictionary<string, Stadium>();
         private Dictionary<String, Team> teamsDic = new Dictionary<string, Team>();
