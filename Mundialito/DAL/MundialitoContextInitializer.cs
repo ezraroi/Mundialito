@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Mundialito.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL.Teams;
 using Mundialito.DAL.Stadiums;
-using Mundialito.DAL.Games;
 using Mundialito.DAL.Accounts;
 using System.Web.Configuration;
-using System.Configuration;
 using System.Collections.Generic;
 using Mundialito.DAL.DBCreators;
 using Mundialito.DAL.Bets;

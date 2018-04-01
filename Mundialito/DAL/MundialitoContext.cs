@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using Mundialito.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Games;
