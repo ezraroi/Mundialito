@@ -31,35 +31,35 @@ namespace Mundialito.Logic
             var bets = betsRepository.GetGameBets(game.GameId);
             foreach (Bet bet in bets)
             {
-                var points = 0;
+                bet.CornersWin = false;
+                bet.CardsWin = false;
+                bet.ResultWin = (bet.HomeScore == game.HomeScore) && (bet.AwayScore == game.AwayScore);
+                var points = 0.0m;
                 if (bet.Mark() == game.Mark(dateTimeProvider.UTCNow))
                 {
-                    points += 3;
+                    if (bet.HomeScore > bet.AwayScore) 
+                    {
+                        points += game.HomeRatio;   
+                    }
+                    if (bet.HomeScore == bet.AwayScore)
+                    {
+                        points += game.TieRatio;
+                    }
+                    if (bet.HomeScore > bet.AwayScore)
+                    {
+                        points += game.AwayRatio;
+                    }
+                    if (bet.ResultWin)
+                    {
+                        points *= 1.3m;
+                    }
                     bet.GameMarkWin = true;
                 }
                 else
+                {
                     bet.GameMarkWin = false;
-                if ((bet.HomeScore == game.HomeScore) && (bet.AwayScore == game.AwayScore))
-                {
-                    points += 2;
-                    bet.ResultWin = true;
                 }
-                else
-                    bet.ResultWin = false;
-                if (game.CardsMark == bet.CardsMark)
-                {
-                    points += 1;
-                    bet.CardsWin = true;
-                }
-                else
-                    bet.CardsWin = false;
-                if (game.CornersMark == bet.CornersMark)
-                {
-                    points += 1;
-                    bet.CornersWin = true;
-                }
-                else
-                    bet.CornersWin = false;
+
                 bet.Points = points;
                 betsRepository.UpdateBet(bet);
                 Trace.TraceInformation("{0} of {1} got {2} points", bet, game, points);
