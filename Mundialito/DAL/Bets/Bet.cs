@@ -52,7 +52,7 @@ namespace Mundialito.DAL.Bets
         [RegularExpression("[1X2]")]
         public String CardsMark { get; set; }
 
-        public int? Points { get; set; }
+        public decimal? Points { get; set; }
         
         public Boolean CornersWin { get; set; }
 

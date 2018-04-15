@@ -31,7 +31,7 @@ namespace Mundialito.Models
             ResultWin = bet.ResultWin;
             IsOpenForBetting = bet.IsOpenForBetting(now);
             IsResolved = bet.IsResolved(now);
-            Points = bet.Points.HasValue ? bet.Points.Value : 0;
+            Points = bet.Points.HasValue ? bet.Points.Value : 0m;
             Game = new BetGame(bet.Game);
             User = new BetUser(bet.User);
         }
@@ -54,7 +54,7 @@ namespace Mundialito.Models
 
         public Boolean ResultWin { get; set; }
 
-        public int Points { get; set; }
+        public decimal Points { get; set; }
 
         public BetUser User { get; set;}
 

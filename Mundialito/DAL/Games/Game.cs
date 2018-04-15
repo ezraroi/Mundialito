@@ -30,6 +30,10 @@ namespace Mundialito.DAL.Games
         [Range(0, 10)]
         public int? AwayScore { get; set; }
 
+        public decimal HomeRatio { get; set; }
+        public decimal TieRatio { get; set; }
+        public decimal AwayRatio { get; set; }
+
         [StringLength(1)]
         [RegularExpression("[1X2-]")]
         public String CornersMark { get; set; }
