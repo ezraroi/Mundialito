@@ -58,9 +58,7 @@
                         <label class="col-md-3 control-label" for="game_cards">Yellow Cards</label>
                         <div class="col-md-2">
                             <select id="game_cards" name="game_cards" ui-select2="{allowClear: false}" class="form-control" ng-model="game.CardsMark" required placeholder="Game Cards Mark">
-                                <option value="1">1</option>
                                 <option value="X">X</option>
-                                <option value="2">2</option>
                             </select>
                         </div>
                     </div>
@@ -69,12 +67,39 @@
                         <label class="col-md-3 control-label" for="game_corners">Corners</label>
                         <div class="col-md-2">
                             <select id="game_corners" name="game_corners" ui-select2="{allowClear: false}" class="form-control" ng-model="game.CornersMark" required placeholder="Game Corners Mark">
-                                <option value="1">1</option>
                                 <option value="X">X</option>
-                                <option value="2">2</option>
                             </select>
                         </div>
                     </div>
+
+
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameHomeRatio">
+                      <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameHomeRatio" name="GameHomeRatio" type="number" ng-model="game.HomeRatio" class="form-control" placeholder="Home Ratio" required min="0">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameTieRatio">
+                      <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" Tie ratio"></i> Tie Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameTieRatio" name="GameTieRatio" type="number" ng-model="game.TieRatio" class="form-control" placeholder="Tie Ratio" required min="0">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameAwayRatio">
+                      <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameAwayRatio" name="GameAwayRatio" type="number" ng-model="game.AwayRatio" class="form-control" placeholder="Away Ratio" required min="0">
+                    </div>
+                  </div>
+
+
                     <div class="form-group" ng-if="game.IsOpen">
                         <div class="dropdown">
                             <label class="col-md-3 control-label" for="Date">Date & Time</label>
