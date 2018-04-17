@@ -130,6 +130,10 @@ namespace Mundialito.Models
             AwayScore = game.AwayScore;
             CornersMark = game.CornersMark;
             CardsMark = game.CardsMark;
+            HomeRatio = game.HomeRatio;
+            TieRatio = game.TieRatio;
+            AwayRatio = game.AwayRatio;
+
         }
 
         public DateTime Date { get; set; }
@@ -141,6 +145,10 @@ namespace Mundialito.Models
         public String CornersMark { get; set; }
 
         public String CardsMark { get; set; }
+
+        public decimal HomeRatio { get; set; }
+        public decimal TieRatio { get; set; }
+        public decimal AwayRatio { get; set; }
 
     }
 

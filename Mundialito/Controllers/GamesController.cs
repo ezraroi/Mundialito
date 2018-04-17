@@ -169,6 +169,9 @@ namespace Mundialito.Controllers
 
             item.AwayScore = game.AwayScore;
             item.HomeScore = game.HomeScore;
+            item.HomeRatio = game.HomeRatio;
+            item.TieRatio = game.TieRatio;
+            item.AwayRatio = game.AwayRatio;
             item.CardsMark = game.CardsMark;
             item.CornersMark = game.CornersMark;
             item.Date = game.Date;
