@@ -26,9 +26,16 @@ namespace Mundialito.Models
             IsPendingUpdate = game.IsPendingUpdate();
             IsBetResolved = game.IsBetResolved();
             Mark = game.Mark();
+            HomeRatio = game.HomeRatio;
+            TieRatio = game.TieRatio;
+            AwayRatio = game.AwayRatio;
         }
 
         public int GameId { get; private set; }
+
+        public decimal HomeRatio { get; set; }
+        public decimal TieRatio { get; set; }
+        public decimal AwayRatio { get; set; }
 
         public GameTeamModel HomeTeam { get; private set; }
 
