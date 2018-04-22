@@ -49,7 +49,6 @@ namespace Mundialito.Logic
                     {
                         points += game.AwayRatio;
                     }
-                    points *= game.RatioWeight;
                     if (bet.ResultWin)
                     {
                         points *= 1.3m;
