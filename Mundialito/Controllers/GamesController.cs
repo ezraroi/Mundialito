@@ -172,7 +172,6 @@ namespace Mundialito.Controllers
             item.HomeRatio = game.HomeRatio;
             item.TieRatio = game.TieRatio;
             item.AwayRatio = game.AwayRatio;
-            item.RatioWeight = game.RatioWeight;
             item.CardsMark = game.CardsMark;
             item.CornersMark = game.CornersMark;
             item.Date = game.Date;
