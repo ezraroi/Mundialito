@@ -26,7 +26,6 @@ namespace Mundialito.Models
             IsPendingUpdate = game.IsPendingUpdate();
             IsBetResolved = game.IsBetResolved();
             Mark = game.Mark();
-            RatioWeight = game.RatioWeight;
             HomeRatio = game.HomeRatio;
             TieRatio = game.TieRatio;
             AwayRatio = game.AwayRatio;
@@ -34,7 +33,6 @@ namespace Mundialito.Models
 
         public int GameId { get; private set; }
 
-        public decimal RatioWeight { get; set; }
         public decimal HomeRatio { get; set; }
         public decimal TieRatio { get; set; }
         public decimal AwayRatio { get; set; }
@@ -139,7 +137,6 @@ namespace Mundialito.Models
             AwayScore = game.AwayScore;
             CornersMark = game.CornersMark;
             CardsMark = game.CardsMark;
-            RatioWeight = game.RatioWeight;
             HomeRatio = game.HomeRatio;
             TieRatio = game.TieRatio;
             AwayRatio = game.AwayRatio;
@@ -156,7 +153,6 @@ namespace Mundialito.Models
 
         public String CardsMark { get; set; }
 
-        public decimal RatioWeight { get; set; }
         public decimal HomeRatio { get; set; }
         public decimal TieRatio { get; set; }
         public decimal AwayRatio { get; set; }

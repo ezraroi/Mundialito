@@ -75,14 +75,6 @@
 
 
                   <div class="form-group">
-                    <label class="col-md-3 control-label" for="GameRatioWeight">
-                      Ratio Weight
-                    </label>
-                    <div class="col-md-2">
-                      <input id="GameRatioWeight" name="GameRatioWeight" type="number" ng-model="game.RatioWeight" class="form-control" placeholder="Home Ratio" required min="0">
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label class="col-md-3 control-label" for="GameHomeRatio">
                       <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Ratio
                     </label>
@@ -92,7 +84,7 @@
                   </div>
                   <div class="form-group">
                     <label class="col-md-3 control-label" for="GameTieRatio">
-                      Tie Ratio
+                      <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" Tie ratio"></i> Tie Ratio
                     </label>
                     <div class="col-md-2">
                       <input id="GameTieRatio" name="GameTieRatio" type="number" ng-model="game.TieRatio" class="form-control" placeholder="Tie Ratio" required min="0">
@@ -164,7 +156,7 @@
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                     </div>
-                    <div ng-show="false" class="form-group" ng-class="{'has-error' : cards.$error}">
+                    <div class="form-group" ng-class="{'has-error' : cards.$error}">
                         <label class="col-md-3 control-label" for="cards">Yellow Cards</label>
                         <div class="col-md-2">
                             <select id="cards" name="cards" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CardsMark" required placeholder="Game Cards Mark">
@@ -177,7 +169,7 @@
                             <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of yellow cards, <strong>1</strong> - More yellow cards for {{game.HomeTeam.Name}}, <strong>2</strong> - More yellow cards for {{game.AwayTeam.Name}}</small></span>
                         </div>
                     </div>
-                    <div ng-show="false" class="form-group" ng-class="{'has-error' : corners.$error}">
+                    <div class="form-group" ng-class="{'has-error' : corners.$error}">
                         <label class="col-md-3 control-label" for="corners">
                             Corners
                         </label>
@@ -218,12 +210,16 @@
                             <thead>
                                 <th style="cursor: pointer" ng-click="sort('user')"><i class="fa fa-user"></i> User</th>
                                 <th style="cursor: pointer" ng-click="sort('result')">Result</th>
+                                <th style="cursor: pointer" ng-click="sort('cards')"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
+                                <th style="cursor: pointer" ng-click="sort('corners')"><i class="fa fa-flag-o" tooltip="Corners Mark"></i></th>
                                 <th style="cursor: pointer" ng-click="sort('points')">Points</th>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="bet in gameBets">
                                     <td><a href="users/{{bet.User.UserName}}">{{bet.User.FirstName}} {{bet.User.LastName}}</a></td>
                                     <td>{{bet.HomeScore}} - {{bet.AwayScore}}</td>
+                                    <td>{{bet.CardsMark}}</td>
+                                    <td>{{bet.CornersMark}}</td>
                                     <td><span class="label label-{{bet.getClass()}}" ng-show="bet.IsResolved">{{bet.Points}}</span></td>
                                 </tr>
                             </tbody>
