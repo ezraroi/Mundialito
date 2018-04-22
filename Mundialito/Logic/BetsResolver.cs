@@ -45,7 +45,7 @@ namespace Mundialito.Logic
                     {
                         points += game.TieRatio;
                     }
-                    if (bet.HomeScore > bet.AwayScore)
+                    if (bet.HomeScore < bet.AwayScore)
                     {
                         points += game.AwayRatio;
                     }
