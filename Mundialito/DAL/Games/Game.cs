@@ -30,6 +30,7 @@ namespace Mundialito.DAL.Games
         [Range(0, 10)]
         public int? AwayScore { get; set; }
 
+        public decimal RatioWeight { get; set; }
         public decimal HomeRatio { get; set; }
         public decimal TieRatio { get; set; }
         public decimal AwayRatio { get; set; }
