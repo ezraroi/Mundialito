@@ -7,8 +7,8 @@
                                 <th class="col-md-2 text-center">Game</th>
                                 <th class="col-md-2 text-center">Home Score</th>
                                 <th class="col-md-2 text-center">Away Score</th>
-                                <th class="col-md-1 text-center"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> Cards</th>
-                                <th class="col-md-1 text-center"><i class="fa fa-arrows-alt" tooltip="Corners Mark"></i> Corners</th>
+                                <th class="col-md-2 text-center"><i class="fa fa-balance-scale" tooltip="[Weight]x[Home]:[Tie]:[Away]"></i> Ratio</th>
+                             
                                 <th class="col-md-2 text-center"><i class="fa fa-clock-o" tooltip="Close Time"></i></th>
                                 <th class="col-md-1 text-center">Shuffle</th>
 								<th class="col-md-1 text-center">Save</th>
@@ -28,19 +28,8 @@
                                     <td>
                                         <input class="form-control" name="awayScore" id="awayScore" type="number" ng-model="bets[game.GameId].AwayScore" placeholder="{{game.AwayTeam.Name}}" required min="0">
                                     </td>
-                                    <td>
-                                        <select id="cards" name="cards" ui-select2="{allowClear: false}" class="form-control" ng-model="bets[game.GameId].CardsMark" required>
-                                            <option value="1">1</option>
-                                            <option value="X">X</option>
-                                            <option value="2">2</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select id="corners" name="corners" ui-select2="{allowClear: false}" class="form-control" ng-model="bets[game.GameId].CornersMark" required>
-                                            <option value="1">1</option>
-                                            <option value="X">X</option>
-                                            <option value="2">2</option>
-                                        </select>
+                                    <td class="text-center">
+                                        {{game.RatioWeight}}x{{game.HomeRatio}}:{{game.TieRatio}}:{{game.AwayRatio}}
                                     </td>
                                     <td class="text-center">{{game.CloseTime | date:'dd/MM/yy @ H:mm' }}</td>
 									<td class="text-center">

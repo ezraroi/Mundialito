@@ -105,8 +105,6 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
             { field: 'TotalMarks', displayName: 'Total Marks', resizable: true },
             { field: 'Results', displayName: 'Results', resizable: true },
             { field: 'Marks', displayName: 'Marks', resizable: true },
-            { field: 'YellowCards', displayName: 'Yellow Cards Marks', resizable: true },
-            { field: 'Corners', displayName: 'Corners Marks', resizable: true },
             { field: 'Points', displayName: 'Points', resizable: true },
             { field: 'PlaceDiff', displayName: '', resizable: false, maxWidth: 45, cellTemplate: '<div ng-class="{\'text-success\': COL_FIELD.indexOf(\'+\') !== -1, \'text-danger\': (COL_FIELD.indexOf(\'+\') === -1) && (COL_FIELD !== \'0\')}"><div class="ngCellText">{{::COL_FIELD}}</div></div>' }
         ],
