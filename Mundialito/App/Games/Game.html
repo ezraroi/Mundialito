@@ -146,29 +146,40 @@
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                     </div>
-                    <div class="form-group" >
-                        <label class="col-md-3 control-label">Ratio</label>
-                        <div class="col-md-2 disabled">
-                          <ul class="pagination">
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" title="Ratio Weight">{{game.RatioWeight}}</a>
-                            </li>
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" title="Home Ratio">{{game.HomeRatio}}</a>
-                            </li>
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" title="Tie Ratio">{{game.TieRatio}}</a>
-                            </li>
-                            <li class="page-item disabled">
-                              <a class="page-link" href="#" title="Away Ratio">{{game.AwayRatio}}</a>
-                            </li>
 
-                          </ul>
-                        </div>
-                        <div class="col-md-7">
-                            <span class="help-block"><small>The Winner ratios with the following format: [Weight]x[Home]:[Tie]:[Away]</small></span>
-                        </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Ratio Weight
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.RatioWeight" class="form-control">
                     </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Home Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.HomeRatio" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Tie Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.TieRatio" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Away Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.AwayRatio" class="form-control">
+                    </div>
+                  </div>
 
                 </form>
                 <div class="col-md-2 col-xs-6 col-xs-offset-6 col-md-offset-10" ng-if="game.IsOpen">
