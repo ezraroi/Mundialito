@@ -143,6 +143,11 @@ namespace Mundialito.Controllers
             newGame.AwayTeamId = game.AwayTeam.TeamId;
             newGame.StadiumId = game.Stadium.StadiumId;
             newGame.Date = game.Date;
+            newGame.HomeRatio = game.HomeRatio;
+            newGame.TieRatio = game.TieRatio;
+            newGame.AwayRatio = game.AwayRatio;
+            newGame.RatioWeight = game.RatioWeight;
+
             var res = gamesRepository.InsertGame(newGame);
             Trace.TraceInformation("Posting new Game: {0}", game);
             gamesRepository.Save();
