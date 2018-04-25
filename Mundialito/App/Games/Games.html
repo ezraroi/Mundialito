@@ -125,37 +125,6 @@
                                 <div class="col-md-1">
                                     <input id="AwayScore_{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" required min="0">
                                 </div>
-
-
-
-                              <label class="col-md-2 control-label" for="RatioWeight_{{updatedGame.HomeTeam.TeamId}}">
-                                <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
-                              </label>
-                              <div class="col-md-1">
-                                <input id="RatioWeight_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.RatioWeight" class="form-control" required min="0">
-                              </div>
-                              <label class="col-md-2 control-label" for="HomeRatio_{{updatedGame.HomeTeam.TeamId}}">
-                                <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
-                              </label>
-                              <div class="col-md-1">
-                                <input id="HomeRatio_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeRatio" class="form-control" required min="0">
-                              </div>
-
-                              <label class="col-md-2 control-label" for="TieRatio_{{updatedGame.HomeTeam.TeamId}}">
-                                <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
-                              </label>
-                              <div class="col-md-1">
-                                <input id="TieRatio_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.TieRatio" class="form-control" required min="0">
-                              </div>
-
-                              <label class="col-md-2 control-label" for="AwayRatio_{{updatedGame.HomeTeam.TeamId}}">
-                                <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
-                              </label>
-                              <div class="col-md-1">
-                                <input id="AwayRatio_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.AwayRatio" class="form-control" required min="0">
-                              </div>
-
-
                                 <div class="col-md-2">
                                     <button type="button" ng-click="updateGame(updatedGame)" game="updatedGame" class="btn btn-success btn-block" ng-disabled="updateGame_{{updatedGame.GameId}}.$invalid"><i class="fa fa-save"></i></button>
                                 </div>
