@@ -123,6 +123,13 @@ namespace Mundialito.Models
         public Boolean IsOpen { get; set; }
 
         public Boolean IsPendingUpdate { get; set; }
+
+        public decimal RatioWeight { get; set; }
+        public decimal HomeRatio { get; set; }
+        public decimal TieRatio { get; set; }
+        public decimal AwayRatio { get; set; }
+
+
     }
 
     public class PutGameModel
