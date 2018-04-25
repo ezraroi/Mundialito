@@ -147,9 +147,23 @@
                         </div>
                     </div>
                     <div class="form-group" >
-                        <label class="col-md-3 control-label" for="ratio">Ratio</label>
+                        <label class="col-md-3 control-label">Ratio</label>
                         <div class="col-md-2 disabled">
-                            {{game.RatioWeight}}x{{game.HomeRatio}}:{{game.TieRatio}}:{{game.AwayRatio}}
+                          <ul class="pagination">
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" title="Ratio Weight">{{game.RatioWeight}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" title="Home Ratio">{{game.HomeRatio}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" title="Tie Ratio">{{game.TieRatio}}</a>
+                            </li>
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" title="Away Ratio">{{game.AwayRatio}}</a>
+                            </li>
+
+                          </ul>
                         </div>
                         <div class="col-md-7">
                             <span class="help-block"><small>The Winner ratios with the following format: [Weight]x[Home]:[Tie]:[Away]</small></span>
