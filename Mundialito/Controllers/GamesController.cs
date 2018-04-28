@@ -169,7 +169,7 @@ namespace Mundialito.Controllers
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("No such game with id '{0}'", id));
 
-            if (item.IsOpen(dateTimeProvider.UTCNow) && (game.HomeScore != null || game.AwayScore != null || game.CornersMark != null || game.CardsMark != null))
+            if (item.IsOpen(dateTimeProvider.UTCNow) && (game.HomeScore != null || game.AwayScore != null))
                 throw new ArgumentException("Open game can not be updated with results");
 
             item.AwayScore = game.AwayScore;

@@ -97,8 +97,6 @@ namespace Mundialito.Models
             GameId = bet.GameId;
             HomeScore = bet.HomeScore;
             AwayScore = bet.AwayScore;
-            CornersMark = bet.CornersMark;
-            CardsMark = bet.CardsMark;
             CornersMark = "X";
             CardsMark = "X";
         }
