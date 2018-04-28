@@ -52,7 +52,19 @@ namespace Mundialito.Logic
                     points *= game.RatioWeight;
                     if (bet.ResultWin)
                     {
-                        points *= 1.3m;
+                        var totalGoals = game.AwayScore + game.HomeScore;
+                        if (totalGoals < 2)
+                        {
+                            points *= 1.1m;
+                        }
+                        else if (totalGoals < 4)
+                        {
+                            points *= 1.2m;
+                        }
+                        else
+                        {
+                            points *= 1.3m;
+                        }
                     }
                     bet.GameMarkWin = true;
                 }
