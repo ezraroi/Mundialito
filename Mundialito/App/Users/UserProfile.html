@@ -86,23 +86,23 @@
                         <div class="list-group" ng-show="userGameBets.length > 0">
                             <a href="{{userBet.getGameUrl()}}" class="list-group-item" ng-repeat="userBet in userGameBets">
                                 <div class="row">
-                                    <div class="col-md-2 col-xs-1">
+                                    <div class="col-md-3 col-xs-2">
                                         <i ng-class="['flagsp','flagsp_{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
                                     </div>
-                                    <div class="col-md-2 col-xs-3">
+                                    <div class="col-md-3 col-xs-4">
                                         <div class="text-center">
                                             <span class="label" ng-class="{'label-default' : !userBet.IsResolved,'label-success' : userBet.ResultWin && userBet.IsResolved, 'label-info': userBet.GameMarkWin && !userBet.ResultWin, 'label-danger' : !userBet.ResultWin && !userBet.GameMarkWin && userBet.IsResolved}" >
                                                 <b>{{userBet.HomeScore}} - {{userBet.AwayScore}}</b>
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-xs-1">
+                                    <div class="col-md-3 col-xs-2">
                                         <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
                                     </div>
-                                    <div class="col-md-2 col-xs-2" ng-if="userBet.IsResolved">
+                                    <div class="col-md-3 col-xs-3" ng-if="userBet.IsResolved">
                                         <i class="fa fa-legal" tooltip="Points"></i> <b>{{userBet.Points}}</b>
                                     </div>
-                                    <div class="col-md-2 col-xs-2" ng-if="!userBet.IsResolved">
+                                    <div class="col-md-3 col-xs-3" ng-if="!userBet.IsResolved">
                                         <i class="fa fa-clock-o" tooltip="Not resolved yet"></i>
                                     </div>
                                 </div>
