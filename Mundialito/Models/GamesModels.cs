@@ -61,7 +61,7 @@ namespace Mundialito.Models
         {
             get
             {
-                return Date.Subtract(TimeSpan.FromMinutes(30));
+                return Date.Subtract(TimeSpan.FromMinutes(5));
             }
         }
        
