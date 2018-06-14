@@ -128,11 +128,10 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
         columnDefs: [
             { field: 'Place', displayName: '', resizable: false, maxWidth: 30 },
             { field: 'Name', displayName: 'Name', resizable: true, minWidth: 150},
-            { field: 'TotalMarks', displayName: 'Total Marks', resizable: true },
             { field: 'Results', displayName: 'Results', resizable: true },
             { field: 'Marks', displayName: 'Marks', resizable: true },
             { field: 'Points', displayName: 'Points', resizable: true },
-            { field: 'PlaceDiff', displayName: '', resizable: false, maxWidth: 45, cellTemplate: '<div ng-class="{\'text-success\': COL_FIELD.indexOf(\'+\') !== -1, \'text-danger\': (COL_FIELD.indexOf(\'+\') === -1) && (COL_FIELD !== \'0\')}"><div class="ngCellText">{{::COL_FIELD}}</div></div>' }
+            { field: 'PlaceDiff', displayName: 'Position Delta', resizable: false, maxWidth: 45, cellTemplate: '<div ng-class="{\'text-success\': COL_FIELD.indexOf(\'+\') !== -1, \'text-danger\': (COL_FIELD.indexOf(\'+\') === -1) && (COL_FIELD !== \'0\')}"><div class="ngCellText">{{::COL_FIELD}}</div></div>' }
         ],
         onRegisterApi: function(gridApi){
             $scope.gridApi = gridApi;
