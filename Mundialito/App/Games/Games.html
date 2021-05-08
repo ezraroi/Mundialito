@@ -75,13 +75,13 @@
                         <ng-form class="form-horizontal" novalidate name="updateGame_{{updatedGame.GameId}}">
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="HomeScore_{{updatedGame.HomeTeam.TeamId}}">
-                                    <i ng-class="['flagsp','flagsp_{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
+                                    <i ng-class="['flag','flag-fifa-{{updatedGame.HomeTeam.ShortName | lowercase}}']" title=" {{updatedGame.HomeTeam.Name}}"></i> {{updatedGame.HomeTeam.Name}}
                                 </label>
                                 <div class="col-md-1">
                                     <input id="HomeScore_{{updatedGame.HomeTeam.TeamId}}" type="number" ng-model="updatedGame.HomeScore" class="form-control" required min="0">
                                 </div>
                                 <label class="col-md-2 control-label" for="AwayScore_{{updatedGame.AwayTeam.TeamId}}">
-                                    <i ng-class="['flagsp','flagsp_{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}
+                                    <i ng-class="['flag','flag-fifa-{{updatedGame.AwayTeam.ShortName | lowercase}}']" title=" {{updatedGame.AwayTeam.Name}}"></i> {{updatedGame.AwayTeam.Name}}
                                 </label>
                                 <div class="col-md-1">
                                     <input id="AwayScore_{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" required min="0">

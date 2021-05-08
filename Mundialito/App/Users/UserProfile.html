@@ -104,7 +104,7 @@
                             <a href="{{userBet.getGameUrl()}}" class="list-group-item" ng-repeat="userBet in userGameBets">
                                 <div class="row">
                                     <div class="col-md-2 col-xs-1">
-                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
+                                        <i ng-class="['flag','flag-fifa-{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-2 col-xs-3">
                                         <div class="text-center">
@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-xs-1">
-                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
+                                        <i ng-class="['flag','flag-fifa-{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-2 col-xs-2">
                                         <span class="label" ng-class="{'label-default' : !userBet.IsResolved, 'label-success' : userBet.CardsWin && userBet.IsResolved, 'label-danger': !userBet.CardsWin && userBet.IsResolved}">
