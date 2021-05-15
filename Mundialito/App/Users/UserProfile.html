@@ -76,7 +76,9 @@
                     <div class="form-group">
                         <label for="goldenBootPlayer" class="col-md-3 col-xs-6 control-label">Golden Boot Player</label>
                         <div class="col-md-4 col-xs-6">
-                            <input name="goldenBootPlayer" id="goldenBootPlayer" ng-model="generalBet.GoldenBootPlayer" type="text" class="form-control" placeholder="Golden Boot Player" required ng-readonly="isGeneralBetReadOnly()">
+                            <select ui-select2="{allowClear: false}" class="form-control" ng-model="generalBet.GoldenBootPlayerId" ng-readonly="isGeneralBetReadOnly()" required>
+                                <option ng-repeat="player in players" value="{{player.PlayerId}}">{{player.Name}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="pull-right">

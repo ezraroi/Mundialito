@@ -59,6 +59,7 @@ namespace Mundialito
                 .IncludeDirectory("~/App/GeneralBets", "*.js")
                 .IncludeDirectory("~/App/Stadiums", "*.js")
                 .IncludeDirectory("~/App/Teams", "*.js")
+                .IncludeDirectory("~/App/Players", "*.js")
                 .IncludeDirectory("~/App/Users", "*.js"));
 
             var spaceLabStyle = new StyleBundle("~/Content/css").Include(

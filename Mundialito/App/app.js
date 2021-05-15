@@ -44,6 +44,9 @@
                     }],
                     generalBetsAreOpen : ['GeneralBetsManager', function (GeneralBetsManager) {
                         return GeneralBetsManager.canSubmtiGeneralBet();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).
@@ -59,6 +62,9 @@
                     }],
                     generalBets: ['GeneralBetsManager' , function (GeneralBetsManager) {
                         return GeneralBetsManager.loadAllGeneralBets();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).
