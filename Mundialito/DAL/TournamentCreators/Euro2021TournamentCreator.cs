@@ -379,7 +379,27 @@ namespace Mundialito.DAL.DBCreators
         public List<Player> GetPlayers()
         {
             var players = new List<Player>();
-            players.Add(new Player() { Name = "aa"});
+            players.Add(new Player() { Name = "Harry Kane" });
+            players.Add(new Player() { Name = "Romelu Lukaku" });
+            players.Add(new Player() { Name = "Kylian Mbappe" });
+            players.Add(new Player() { Name = "Cristiano Ronaldo" });
+            players.Add(new Player() { Name = "Ciro Immobile" });
+            players.Add(new Player() { Name = "Antoine Griezmann" });
+            players.Add(new Player() { Name = "Memphis Depay" });
+            players.Add(new Player() { Name = "Alvaro Morata" });
+            players.Add(new Player() { Name = "Timo Werner" });
+            players.Add(new Player() { Name = "Serge Gnabry" });
+            players.Add(new Player() { Name = "Raheem Sterling" });
+            players.Add(new Player() { Name = "Eden Hazard" });
+            players.Add(new Player() { Name = "Robert Lewandowski" });
+            players.Add(new Player() { Name = "Olivier Giroud" });
+            players.Add(new Player() { Name = "Marcus Rashford" });
+            players.Add(new Player() { Name = "Andrea Belotti" });
+            players.Add(new Player() { Name = "Kai Havertz" });
+            players.Add(new Player() { Name = "Rodrigo" });
+            players.Add(new Player() { Name = "Andre Silva" });
+            players.Add(new Player() { Name = "Gareth Bale" });
+            players.Add(new Player() { Name = "Other" });
             return players;
         }
 

@@ -15,6 +15,9 @@
                 resolve : {
                     teams : ['TeamsManager', function ( TeamsManager) {
                         return TeamsManager.loadAllTeams();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).
