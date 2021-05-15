@@ -226,7 +226,7 @@ namespace Mundialito.DAL.DBCreators
             return new Team() { Name = name, ShortName = shortName, Flag = string.Format("http://www.fifa.com/imgml/flags/reflected/m/{0}.png", shortName), Logo = string.Format("http://www.fifa.com/imgml/logos/xs/{0}.gif", shortName) };
         }
 
-        public List<Player> GetPlayers(Dictionary<string, Team> teams)
+        public List<Player> GetPlayers()
         {
             throw new NotImplementedException();
         }

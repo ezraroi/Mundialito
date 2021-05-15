@@ -1,7 +1,4 @@
-﻿using Mundialito.DAL.Games;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Mundialito.DAL.Players
 {
@@ -11,9 +8,6 @@ namespace Mundialito.DAL.Players
         
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public int TeamId { get; set; }
 
     }
 }

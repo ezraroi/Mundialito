@@ -12,6 +12,6 @@ namespace Mundialito.DAL.DBCreators
         List<Team> GetTeams();
         List<Game> GetGames(Dictionary<String, Stadium> stadiums, Dictionary<String, Team> teams);
         List<Stadium> GetStadiums();
-        List<Player> GetPlayers(Dictionary<String, Team> teams);
+        List<Player> GetPlayers();
     }
 }

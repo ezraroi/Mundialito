@@ -6,6 +6,7 @@ using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.GeneralBets;
+using Mundialito.DAL.Players;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -42,6 +43,11 @@ namespace Mundialito.Tests.AcceptenceTests
         public static StadiumsController GetStadiumsController()
         {
             return new StadiumsController(new StadiumsRepository(), new ActionLogsRepository());
+        }
+
+        public static PlayersController PlayersController()
+        {
+            return new PlayersController(new PlayersRepository());
         }
 
         public static TeamsController GetTeamsController()

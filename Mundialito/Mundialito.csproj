@@ -240,6 +240,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="DAL\ActionLogs\ActionLog.cs" />
     <Compile Include="DAL\ActionLogs\ActionLogsRepository.cs" />
     <Compile Include="DAL\ActionLogs\IActionLogsRepository.cs" />

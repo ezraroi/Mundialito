@@ -376,10 +376,10 @@ namespace Mundialito.DAL.DBCreators
             return stadiums;
         }
 
-        public List<Player> GetPlayers(Dictionary<String, Team> teams)
+        public List<Player> GetPlayers()
         {
             var players = new List<Player>();
-            players.Add(new Player() { Name = "aa", TeamId = teams["TURKEY"].TeamId });
+            players.Add(new Player() { Name = "aa"});
             return players;
         }
 
