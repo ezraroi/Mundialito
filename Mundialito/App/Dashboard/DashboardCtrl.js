@@ -1,14 +1,19 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '$location', '$timeout', 'GamesManager', 'UsersManager', 'GeneralBetsManager', 'teams', 
-    function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager, teams) {
+angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '$location', '$timeout', 'GamesManager', 'UsersManager', 'GeneralBetsManager', 'teams', 'players',
+    function ($scope, $log, $location, $timeout, GamesManager, UsersManager, GeneralBetsManager, teams, players) {
     $scope.generalBetsAreOpen = false;
     $scope.submittedGeneralBet = true;
     $scope.pendingUpdateGames = false;
 
     $scope.teamsDic = {};
+    $scope.playersDic = {};
 
     for (var i = 0; i < teams.length; i++) {
         $scope.teamsDic[teams[i].TeamId] = teams[i];
+    }
+
+    for (var i = 0; i < players.length; i++) {
+        $scope.playersDic[players[i].PlayerId] = players[i];
     }
 
     GamesManager.loadAllGames().then(function (games) {
@@ -36,11 +41,16 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
             GeneralBetsManager.loadAllGeneralBets().then(function (data) {
                 $scope.generalBets = data;
                 $scope.winningTeams = {};
+                $scope.winningPlayers = {};
                 for (var i = 0; i < $scope.generalBets.length ; i++) {
                     if (!angular.isDefined($scope.winningTeams[$scope.generalBets[i].WinningTeamId])) {
                         $scope.winningTeams[$scope.generalBets[i].WinningTeamId] = 0;
                     }
                     $scope.winningTeams[$scope.generalBets[i].WinningTeamId] += 1;
+                    if (!angular.isDefined($scope.winningPlayers[$scope.generalBets[i].GoldenBootPlayerId])) {
+                        $scope.winningPlayers[$scope.generalBets[i].GoldenBootPlayerId] = 0;
+                    }
+                    $scope.winningPlayers[$scope.generalBets[i].GoldenBootPlayerId] += 1;
                 }
 
                 var chart1 = {};
@@ -59,6 +69,22 @@ angular.module('mundialitoApp').controller('DashboardCtrl', ['$scope', '$log', '
                     chart1.data.push([$scope.teamsDic[teamId].Name, $scope.winningTeams[teamId]]);
                 }
                 $scope.chart = chart1;
+                chart1 = {};
+                chart1.type = "PieChart";
+                chart1.options = {
+                    displayExactValues: true,
+                    is3D: true,
+                    backgroundColor: { fill: 'transparent' },
+                    chartArea: { left: 10, top: 20, bottom: 0, height: "100%" },
+                    title: 'Winning Golden Boot Player Bets Distribution'
+                };
+                chart1.data = [
+                    ['Player', 'Number Of Users']
+                ];
+                for (var playerId in $scope.winningPlayers) {
+                    chart1.data.push([$scope.playersDic[playerId].Name, $scope.winningPlayers[playerId]]);
+                }
+                $scope.playersChart = chart1;
             });
         }
     });

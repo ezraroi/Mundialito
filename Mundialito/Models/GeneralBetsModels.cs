@@ -1,9 +1,5 @@
 ﻿using Mundialito.DAL.GeneralBets;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
 
 namespace Mundialito.Models
 {
@@ -14,7 +10,7 @@ namespace Mundialito.Models
         {
             GeneralBetId = bet.GeneralBetId;
             WinningTeamId = bet.WinningTeamId;
-            GoldenBootPlayer = bet.GoldBootPlayer;
+            GoldenBootPlayerId = bet.GoldBootPlayerId;
             IsResolved = bet.IsResolved;
             if (IsResolved)
                 Points = bet.PlayerPoints.Value + bet.TeamPoints.Value;
@@ -29,7 +25,7 @@ namespace Mundialito.Models
 
         public String OwnerName { get; private set; }
 
-        public String GoldenBootPlayer { get; set; }
+        public int GoldenBootPlayerId { get; set; }
 
         public Boolean IsResolved { get; set; }
 
@@ -44,7 +40,7 @@ namespace Mundialito.Models
     {
         public int WinningTeamId { get; set; }
 
-        public string GoldenBootPlayer { get; set; }
+        public int GoldenBootPlayerId { get; set; }
 
         public int GeneralBetId { get; set; }
     }
@@ -53,7 +49,7 @@ namespace Mundialito.Models
     {
         public int WinningTeamId { get; set; }
 
-        public string GoldenBootPlayer { get; set; }
+        public int GoldenBootPlayerId { get; set; }
     }
 
     public class ResolveGeneralBetModel

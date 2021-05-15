@@ -245,7 +245,7 @@ namespace Mundialito.Tests.Controllers
             dateTimeProvider.Setup(item => item.UTCNow).Returns(new DateTime(2014, 6, 1));
 
             var controller = CreateController(repository.Object, userProvider.Object, dateTimeProvider.Object);
-            Assert.Throws<ArgumentException>(() => controller.PostBet(new NewGeneralBetModel() { GoldenBootPlayer = "A", WinningTeamId = 1 }));
+            Assert.Throws<ArgumentException>(() => controller.PostBet(new NewGeneralBetModel() { GoldenBootPlayerId = 1, WinningTeamId = 1 }));
         }
 
         private GeneralBetsController CreateController(IGeneralBetsRepository repository, ILoggedUserProvider userProvider, IDateTimeProvider dateTimeProvider)

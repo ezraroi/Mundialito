@@ -3,6 +3,7 @@ using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using System;
 using System.Collections.Generic;
+using Mundialito.DAL.Players;
 
 namespace Mundialito.DAL.DBCreators
 {
@@ -492,6 +493,11 @@ namespace Mundialito.DAL.DBCreators
         private Team CreateTeam(String name, String shortName)
         {
             return new Team() { Name = name, ShortName = shortName, Flag = string.Format("http://www.fifa.com/imgml/flags/reflected/m/{0}.png", shortName), Logo = string.Format("http://www.fifa.com/imgml/logos/xs/{0}.gif", shortName) };
+        }
+
+        public List<Player> GetPlayers()
+        {
+            throw new NotImplementedException();
         }
     }
 }

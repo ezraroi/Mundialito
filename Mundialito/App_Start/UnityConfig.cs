@@ -9,6 +9,7 @@ using Mundialito.DAL.ActionLogs;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.Games;
 using Mundialito.DAL.GeneralBets;
+using Mundialito.DAL.Players;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using Mundialito.Logic;
@@ -30,6 +31,7 @@ namespace Mundialito
             container.RegisterType<ITeamsRepository, TeamsRepository>();
             container.RegisterType<IGamesRepository, GamesRepository>();
             container.RegisterType<IStadiumsRepository, StadiumsRepository>();
+            container.RegisterType<IPlayersRepository, PlayersRepository>();
             container.RegisterType<IBetsRepository, BetsRepository>();
             container.RegisterType<IGeneralBetsRepository, GeneralBetsRepository>();
             container.RegisterType<IUsersRepository, UsersRepository>();

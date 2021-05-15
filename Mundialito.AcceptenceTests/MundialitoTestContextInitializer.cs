@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
 using Mundialito.DAL.Games;
+using Mundialito.DAL.Players;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using System;
@@ -137,6 +138,11 @@ namespace Mundialito.Tests
                 Date = DateTime.UtcNow.AddDays(3),
                 Stadium = stadiumB
             });
+
+            context.Players.Add(new Player { Name = "A" });
+            context.Players.Add(new Player { Name = "B" });
+            context.Players.Add(new Player { Name = "C" });
+            context.Players.Add(new Player { Name = "D" });
         }
     }
 }

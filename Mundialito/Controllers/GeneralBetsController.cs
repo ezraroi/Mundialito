@@ -103,7 +103,7 @@ namespace Mundialito.Controllers
             generalBet.User = new MundialitoUser();
             generalBet.User.Id = userProivider.UserId;
             generalBet.WinningTeamId = newBet.WinningTeamId;
-            generalBet.GoldBootPlayer = newBet.GoldenBootPlayer;
+            generalBet.GoldBootPlayerId = newBet.GoldenBootPlayerId;
             var res = generalBetsRepository.InsertGeneralBet(generalBet);
             Trace.TraceInformation("Posting new General Bet: {0}", generalBet);
             generalBetsRepository.Save();
@@ -120,7 +120,7 @@ namespace Mundialito.Controllers
             var betToUpdate = new GeneralBet();
             betToUpdate.GeneralBetId = id;
             betToUpdate.WinningTeamId = bet.WinningTeamId;
-            betToUpdate.GoldBootPlayer = bet.GoldenBootPlayer;
+            betToUpdate.GoldBootPlayerId = bet.GoldenBootPlayerId;
             betToUpdate.User = new MundialitoUser();
             betToUpdate.User.Id = userProivider.UserId;
             generalBetsRepository.UpdateGeneralBet(betToUpdate);

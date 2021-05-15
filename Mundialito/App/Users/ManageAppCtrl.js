@@ -1,12 +1,17 @@
 'use strict';
-angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', 'Alert', 'users','teams', 'generalBets','UsersManager', function ($scope, $log, Alert, users, teams, generalBets, UsersManager) {
+angular.module('mundialitoApp').controller('ManageAppCtrl', ['$scope', '$log', 'Alert', 'users','teams', 'generalBets','UsersManager', 'players', function ($scope, $log, Alert, users, teams, generalBets, UsersManager, players) {
     $scope.users = users;
     $scope.generalBets = generalBets;
     $scope.privateKey = {};
     $scope.teamsDic = {};
+    $scope.playersDic = {};
 
     for(var i=0; i<teams.length; i++) {
         $scope.teamsDic[teams[i].TeamId] = teams[i];
+    }
+
+    for (var i = 0; i < players.length; i++) {
+        $scope.playersDic[players[i].PlayerId] = players[i];
     }
 
     $scope.deleteUser = function(user) {
