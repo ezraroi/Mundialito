@@ -1,10 +1,9 @@
 ﻿using Mundialito.DAL.Games;
+using Mundialito.DAL.Players;
 using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Teams;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Mundialito.DAL.DBCreators
 {
@@ -375,6 +374,13 @@ namespace Mundialito.DAL.DBCreators
             stadiums.Add(new Stadium() { Name = "Saint Petersburg Stadium", Capacity = 68000, City = "Saint Petersburg" });
             stadiums.Add(new Stadium() { Name = "Stadium La Cartuja Sevilla", Capacity = 60000, City = "Seville" });
             return stadiums;
+        }
+
+        public List<Player> GetPlayers(Dictionary<String, Team> teams)
+        {
+            var players = new List<Player>();
+            players.Add(new Player() { Name = "aa", TeamId = teams["TURKEY"].TeamId });
+            return players;
         }
 
         private DateTime GetFixedDate(DateTime date)

@@ -245,6 +245,9 @@
     <Compile Include="DAL\ActionLogs\IActionLogsRepository.cs" />
     <Compile Include="DAL\ActionLogs\ActionType.cs" />
     <Compile Include="DAL\Bets\BetExtensionMethods.cs" />
+    <Compile Include="DAL\Players\IPlayersRepository.cs" />
+    <Compile Include="DAL\Players\Player.cs" />
+    <Compile Include="DAL\Players\PlayersRepository.cs" />
     <Compile Include="DAL\TournamentCreators\Euro2021TournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\ITournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Copa2015TournamentCreator.cs" />

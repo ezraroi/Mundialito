@@ -14,7 +14,7 @@ using Mundialito.Logic;
 
 namespace Mundialito.DAL
 {
-    public class MundialitoContextInitializer : DropCreateDatabaseIfModelChanges<MundialitoContext>
+    public class MundialitoContextInitializer : DropCreateDatabaseAlways<MundialitoContext>
     {
         private Dictionary<String, Stadium> stadiumsDic = new Dictionary<string, Stadium>();
         private Dictionary<String, Team> teamsDic = new Dictionary<string, Team>();
@@ -40,8 +40,19 @@ namespace Mundialito.DAL
                 SetupStadiums(context, tournamentCreator);
 
                 SetupGames(context, tournamentCreator);
+
+                SetupPlayers(context, tournamentCreator);
             }
             base.Seed(context);
+        }
+
+        private void SetupPlayers(MundialitoContext context, ITournamentCreator tournamentCreator)
+        {
+            var players = tournamentCreator.GetPlayers(teamsDic);
+
+            players.ForEach(player => context.Players.Add(player));
+
+            context.SaveChanges();
         }
 
         private void SetupTeams(MundialitoContext context, ITournamentCreator tournamentCreator)
@@ -94,6 +105,8 @@ namespace Mundialito.DAL
                 context.SaveChanges();
             }
         }
+
+
 
         private void CreateAdminRoleAndUsers(MundialitoContext context)
         {
