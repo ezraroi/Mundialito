@@ -258,6 +258,7 @@
     <Compile Include="DAL\Games\GameExtensionMethods.cs" />
     <Compile Include="Logic\AdminManagment.cs" />
     <Compile Include="Logic\IAdminManagment.cs" />
+    <Compile Include="Logic\IEnumerableExtensions.cs" />
     <Compile Include="Logic\RandomResults.cs" />
     <Compile Include="Models\GamesModels.cs" />
     <Compile Include="TournamentTimesUtils.cs" />
