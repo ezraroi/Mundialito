@@ -65,7 +65,7 @@ namespace Mundialito.DAL.DBCreators
             {
                 HomeTeamId = teams["DENMARK"].TeamId,
                 AwayTeamId = teams["FINLAND"].TeamId,
-                Date = GetFixedDate(new DateTime(2021, 6, 11, 19, 0, 0)),
+                Date = GetFixedDate(new DateTime(2021, 6, 12, 19, 0, 0)),
                 StadiumId = stadiums["Parken Stadium"].StadiumId
             });
 
