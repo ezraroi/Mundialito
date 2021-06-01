@@ -1,8 +1,9 @@
 ﻿'use strict';
-angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log', '$routeParams', 'Alert','GeneralBetsManager', 'profileUser','userGameBets', 'teams', 'generalBetsAreOpen', function ($scope, $log, $routeParams, Alert, GeneralBetsManager, profileUser, userGameBets, teams, generalBetsAreOpen) {
+angular.module('mundialitoApp').controller('UserProfileCtrl', ['$scope', '$log', '$routeParams', 'Alert', 'GeneralBetsManager', 'profileUser', 'userGameBets', 'teams', 'generalBetsAreOpen', 'players', function ($scope, $log, $routeParams, Alert, GeneralBetsManager, profileUser, userGameBets, teams, generalBetsAreOpen, players) {
     $scope.profileUser = profileUser;
     $scope.userGameBets = userGameBets;
     $scope.teams = teams;
+    $scope.players = players;
     $scope.noGeneralBetWasSubmitted = false;
     $scope.generalBetsAreOpen = (generalBetsAreOpen === true);
     $log.debug('UserProfileCtrl: generalBetsAreOpen = ' + generalBetsAreOpen);

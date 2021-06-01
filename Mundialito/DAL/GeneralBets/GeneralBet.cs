@@ -1,11 +1,6 @@
 ﻿using Mundialito.DAL.Accounts;
-using Mundialito.DAL.Teams;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Mundialito.DAL.GeneralBets
 {
@@ -33,7 +28,7 @@ namespace Mundialito.DAL.GeneralBets
         public int WinningTeamId { get; set; }
 
         [Required]
-        public String GoldBootPlayer { get; set; }
+        public int GoldBootPlayerId { get; set; }
 
         public Boolean IsResolved { get; set; }
 
@@ -51,7 +46,7 @@ namespace Mundialito.DAL.GeneralBets
 
         public override string ToString()
         {
-            return string.Format("General Bet ID = {0}, Owner = {1}, WinningTeamId = {2}, GoldBootPlayer = {3}, TeamPoints = {4}, PlayerPoints = {5}", GeneralBetId, User == null ? "Unkown" : User.UserName, WinningTeamId, GoldBootPlayer, TeamPoints.HasValue ? TeamPoints.Value.ToString() : "NA", PlayerPoints.HasValue ? PlayerPoints.Value.ToString() : "NA");
+            return string.Format("General Bet ID = {0}, Owner = {1}, WinningTeamId = {2}, GoldBootPlayerId = {3}, TeamPoints = {4}, PlayerPoints = {5}", GeneralBetId, User == null ? "Unkown" : User.UserName, WinningTeamId, GoldBootPlayerId, TeamPoints.HasValue ? TeamPoints.Value.ToString() : "NA", PlayerPoints.HasValue ? PlayerPoints.Value.ToString() : "NA");
         }
     }
 }

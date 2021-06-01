@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>
-                    <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} <span ng-if="game.IsBetResolved">{{game.HomeScore}} - {{game.AwayScore}}</span><span ng-if="!game.IsBetResolved"> - </span>
-                    <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
+                    <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" title="{{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} <span ng-if="game.IsBetResolved">{{game.HomeScore}} - {{game.AwayScore}}</span><span ng-if="!game.IsBetResolved"> - </span>
+                    <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" title="{{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}}
                 </h3>
                 <h5 ng-if="game.IsBetResolved">
                     <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> {{game.CardsMark}}
@@ -40,7 +40,7 @@
                 <form role="form" name="editGameForm" class="form-horizontal" novalidate>
                     <div class="form-group" ng-if="!game.IsOpen">
                         <label class="col-md-3 control-label" for="GameHomeScore">
-                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Score
+                            <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input id="GameHomeScore" name="GameHomeScore" type="number" ng-model="game.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group" ng-if="!game.IsOpen">
                         <label class="col-md-3 control-label" for="GameAwayScore">
-                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Score
+                            <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input id="GameAwayScore" name="GameAwayScore" type="number" ng-model="game.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
@@ -132,7 +132,7 @@
                 <form class="form-horizontal" novalidate name="userBetFrom" ng-show="userBet.BetId != -1 || game.IsOpen">
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="{{game.HomeTeam.TeamId}}">
-                            <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Score
+                            <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input name="{{game.HomeTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.HomeTeam.TeamId}}" type="number" ng-model="userBet.HomeScore" class="form-control" placeholder="Home Team Score" required min="0">
@@ -140,7 +140,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="{{game.AwayTeam.TeamId}}">
-                            <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Score
+                            <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Score
                         </label>
                         <div class="col-md-2">
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">

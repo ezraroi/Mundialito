@@ -59,6 +59,7 @@ namespace Mundialito
                 .IncludeDirectory("~/App/GeneralBets", "*.js")
                 .IncludeDirectory("~/App/Stadiums", "*.js")
                 .IncludeDirectory("~/App/Teams", "*.js")
+                .IncludeDirectory("~/App/Players", "*.js")
                 .IncludeDirectory("~/App/Users", "*.js"));
 
             var spaceLabStyle = new StyleBundle("~/Content/css").Include(
@@ -66,7 +67,7 @@ namespace Mundialito
                           "~/Content/bootstrap-spacelab.min.css",
                           "~/Content/datetimepicker.css",
                           "~/Content/font-awesome.min.css",
-                          "~/Content/flags.css",
+                          "~/Content/flag-css.css",
                           "~/Content/angular-busy.min.css",
                           "~/Content/select2.min.css",
                           "~/Content/select2-bootstrap.min.css",
@@ -78,7 +79,7 @@ namespace Mundialito
                           "~/Content/bootstrap-cerulean.min.css",
                           "~/Content/datetimepicker.css",
                           "~/Content/font-awesome.min.css",
-                          "~/Content/flags.css",
+                          "~/Content/flag-css.css",
                           "~/Content/angular-busy.min.css",
                           "~/Content/select2.min.css",
                           "~/Content/select2-bootstrap.min.css",

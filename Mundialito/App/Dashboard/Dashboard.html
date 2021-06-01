@@ -14,12 +14,12 @@
                     <a class="list-group-item" ng-repeat="game in games | filter:isPendingUpdate()" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
                         <div class="row">
                             <div class="col-md-5 col-xs-3">
-                                <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
+                                <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
                             </div>
                             <div class="col-md-2 col-xs-6 text-center"> - </div>
                             <div class="col-md-5 col-xs-3">
                                 <span class="pull-right">
-                                     <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
+                                     <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
                                 </span>
                             </div>
                         </div>
@@ -38,12 +38,12 @@
                     <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}"  ng-repeat="game in games | filter:isOpenForBetting() | limitTo:10" href="{{game.getUrl()}}" tooltip="{{game.Date | date:'dd/MM/yy @ h:mma'}}">
                         <div class="row">
                             <div class="col-md-5 col-xs-3">
-                                <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
+                                <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i>  <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
                             </div>
                             <div class="col-md-2 col-xs-6 text-center"> - </div>
                             <div class="col-md-5 col-xs-3">
                                 <span class="pull-right">
-                                     <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
+                                     <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
                                 </span>
                             </div>
                         </div>
@@ -60,12 +60,12 @@
                     <a class="list-group-item" ng-class="{'list-group-item-warning' : !game.UserHasBet}" ng-repeat="game in games | filter:isDecided() | orderBy:'Date':true | limitTo:10" href="{{game.getUrl()}}">
                         <div class="row">
                             <div class="col-md-5 col-xs-3">
-                                <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
+                                <i ng-class="['flag','flag-fifa-{{game.HomeTeam.ShortName | lowercase}}']" tooltip="{{::game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{::game.HomeTeam.Name}}</span>
                             </div>
                             <div class="col-md-2 col-xs-6 text-center"> {{::game.HomeScore}} - {{::game.AwayScore}} </div>
                             <div class="col-md-5 col-xs-3">
                                 <span class="pull-right">
-                                    <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
+                                    <span class="hidden-xs">{{::game.AwayTeam.Name}}</span> <i ng-class="['flag','flag-fifa-{{game.AwayTeam.ShortName | lowercase}}']" tooltip="{{::game.AwayTeam.Name}}"></i>
                                 </span>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
 <div class="row" ng-show="!generalBetsAreOpen">
     <div class="col-md-12">
         <div class="panel panel-info">
-            <div class="panel-heading"><i class="fa fa-money"></i> General Bets</div>
+            <div class="panel-heading"><i class="fa fa-money"></i> General Bets - Team</div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -117,11 +117,49 @@
                                     <td>{{bet.OwnerName}}</td>
                                     </td>
                                     <td>{{teamsDic[bet.WinningTeamId].Name}}</td>
-                                    <td>{{bet.GoldenBootPlayer}}</td>
+                                    <td>{{playersDic[bet.GoldenBootPlayerId].Name}}</td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="!generalBetsAreOpen">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"><i class="fa fa-money"></i> General Bets - Golden Boot Player</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-xs-12">
+                                <div google-chart chart="playersChart">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <th>Name</th>
+                                    <th>Winning Team</th>
+                                    <th>Golden Boot Player</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="bet in generalBets">
+                                            <td>{{bet.OwnerName}}</td>
+                                            </td>
+                                            <td>{{teamsDic[bet.WinningTeamId].Name}}</td>
+                                            <td>{{playersDic[bet.GoldenBootPlayerId].Name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using Mundialito.DAL.DBCreators;
 using Mundialito.DAL.Bets;
 using Mundialito.Logic;
+using Mundialito.DAL.Players;
+using Mundialito.DAL.GeneralBets;
 
 namespace Mundialito.DAL
 {
@@ -18,6 +20,7 @@ namespace Mundialito.DAL
     {
         private Dictionary<String, Stadium> stadiumsDic = new Dictionary<string, Stadium>();
         private Dictionary<String, Team> teamsDic = new Dictionary<string, Team>();
+        private Dictionary<String, Player> playersDic = new Dictionary<string, Player>();
         private UserManager<MundialitoUser> userManager;
         private bool monkeyEnabled = false;
 
@@ -39,9 +42,21 @@ namespace Mundialito.DAL
 
                 SetupStadiums(context, tournamentCreator);
 
+                SetupPlayers(context, tournamentCreator);
+
                 SetupGames(context, tournamentCreator);
             }
             base.Seed(context);
+        }
+
+        private void SetupPlayers(MundialitoContext context, ITournamentCreator tournamentCreator)
+        {
+            var players = tournamentCreator.GetPlayers();
+
+            players.ForEach(player => context.Players.Add(player));
+
+            context.SaveChanges();
+            playersDic = context.Players.ToDictionary(player => player.Name, player => player);
         }
 
         private void SetupTeams(MundialitoContext context, ITournamentCreator tournamentCreator)
@@ -91,9 +106,24 @@ namespace Mundialito.DAL
                     context.Bets.Add(newBet);
                 });
 
+                Random rnd = new Random();
+                var index = rnd.Next(0, teamsDic.Count);
+                int teamId = teamsDic.Values.ElementAt(index).TeamId;
+                index = rnd.Next(0, playersDic.Count);
+                int playerId = playersDic.Values.ElementAt(index).PlayerId;
+
+                context.GeneralBets.Add(new GeneralBet
+                {
+                    GoldBootPlayerId = playerId,
+                    WinningTeamId = teamId,
+                    User = monkey
+                });
+
                 context.SaveChanges();
             }
         }
+
+
 
         private void CreateAdminRoleAndUsers(MundialitoContext context)
         {

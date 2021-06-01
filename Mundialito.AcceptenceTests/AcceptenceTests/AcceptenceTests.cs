@@ -270,9 +270,9 @@ namespace Mundialito.Tests.AcceptenceTests
 
         private void PostGeneralBets()
         {
-            AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[0].TeamId, GoldenBootPlayer = "PlayerA" });
-            AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User1"), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[1].TeamId, GoldenBootPlayer = "PlayerB" });
-            AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User2"), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[2].TeamId, GoldenBootPlayer = "PlayerA" });
+            AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[0].TeamId, GoldenBootPlayerId = 1 });
+            AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User1"), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[1].TeamId, GoldenBootPlayerId = 2 });
+            AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User2"), new DateTime(2014, 6, 1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[2].TeamId, GoldenBootPlayerId = 1 });
         }
 
         private void TryPostBetOnClosedGame()
@@ -320,7 +320,7 @@ namespace Mundialito.Tests.AcceptenceTests
             try
             {
                 var generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 2)).GetUserGeneralBet("Admin");
-                AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1)).UpdateBet(generalBet.GeneralBetId, new UpdateGenralBetModel() { WinningTeamId = teams[3].TeamId, GoldenBootPlayer = "PlayerD" });
+                AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1)).UpdateBet(generalBet.GeneralBetId, new UpdateGenralBetModel() { WinningTeamId = teams[3].TeamId, GoldenBootPlayerId = 4 });
                 throw new Exception("Operation should have failed");
             }
             catch (ArgumentException) { }
@@ -331,7 +331,7 @@ namespace Mundialito.Tests.AcceptenceTests
             
             try
             {
-                AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User3"), TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[1].TeamId, GoldenBootPlayer = "PlayerB" });
+                AcceptenceTestsUtils.GetGeneralBetsController(GetUser("User3"), TournamentTimesUtils.GeneralBetsCloseTime.AddDays(1)).PostBet(new NewGeneralBetModel() { WinningTeamId = teams[1].TeamId, GoldenBootPlayerId = 2 });
                 throw new Exception("Operation should have failed");
             }
             catch (ArgumentException) { }
@@ -340,12 +340,12 @@ namespace Mundialito.Tests.AcceptenceTests
         private void UpdateGeneralBet()
         {
             var generalBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 2)).GetUserGeneralBet("Admin");
-            AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 2)).UpdateBet(generalBet.GeneralBetId, new UpdateGenralBetModel() { WinningTeamId = teams[3].TeamId, GoldenBootPlayer = "PlayerD" });
+            AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 2)).UpdateBet(generalBet.GeneralBetId, new UpdateGenralBetModel() { WinningTeamId = teams[3].TeamId, GoldenBootPlayerId = 4 });
             var updatedGeneralBet = AcceptenceTestsUtils.GetGeneralBetsController(GetAdmin(), new DateTime(2014, 6, 2)).GetUserGeneralBet("Admin");
             Assert.AreEqual(generalBet.GeneralBetId, updatedGeneralBet.GeneralBetId);
             Assert.AreEqual(GetAdmin().Name, updatedGeneralBet.OwnerName);
             Assert.AreEqual(teams[3].TeamId, updatedGeneralBet.WinningTeamId);
-            Assert.AreEqual("PlayerD", updatedGeneralBet.GoldenBootPlayer);
+            Assert.AreEqual(4, updatedGeneralBet.GoldenBootPlayerId);
         }
 
         private void TestUsersInitialState()
