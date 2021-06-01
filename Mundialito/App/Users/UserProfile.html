@@ -33,7 +33,7 @@
                             <span class="help-block"><small>Number of games that the user guessed the game mark (1,X,2)</small></span>
                         </div>
                     </div>
-                   
+
                 </form>
             </div>
         </div>
@@ -59,7 +59,9 @@
                     <div class="form-group">
                         <label for="goldenBootPlayer" class="col-md-3 col-xs-6 control-label">Golden Boot Player</label>
                         <div class="col-md-4 col-xs-6">
-                            <input name="goldenBootPlayer" id="goldenBootPlayer" ng-model="generalBet.GoldenBootPlayer" type="text" class="form-control" placeholder="Golden Boot Player" required ng-readonly="isGeneralBetReadOnly()">
+                            <select ui-select2="{allowClear: false}" class="form-control" ng-model="generalBet.GoldenBootPlayerId" ng-readonly="isGeneralBetReadOnly()" required>
+                                <option ng-repeat="player in players" value="{{player.PlayerId}}">{{player.Name}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="pull-right">
@@ -87,7 +89,7 @@
                             <a href="{{userBet.getGameUrl()}}" class="list-group-item" ng-repeat="userBet in userGameBets">
                                 <div class="row">
                                     <div class="col-md-3 col-xs-2">
-                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
+                                        <i ng-class="['flag','flag-fifa-{{userBet.Game.HomeTeam.ShortName | lowercase}}']" tooltip="{{userBet.Game.HomeTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.HomeTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-3 col-xs-4">
                                         <div class="text-center">
@@ -97,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-xs-2">
-                                        <i ng-class="['flagsp','flagsp_{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
+                                        <i ng-class="['flag','flag-fifa-{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
                                     </div>
                                     <div class="col-md-3 col-xs-3" ng-if="userBet.IsResolved">
                                         <i class="fa fa-legal" tooltip="Points"></i> <b>{{userBet.Points}}</b>

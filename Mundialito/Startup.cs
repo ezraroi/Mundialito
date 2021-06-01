@@ -12,6 +12,7 @@ namespace Mundialito
     {
         public void Configuration(IAppBuilder app)
         {
+            app.UseStaticFiles("/flags");
             ConfigureAuth(app);
         }
     }

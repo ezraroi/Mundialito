@@ -15,6 +15,9 @@
                 resolve : {
                     teams : ['TeamsManager', function ( TeamsManager) {
                         return TeamsManager.loadAllTeams();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).
@@ -44,6 +47,9 @@
                     }],
                     generalBetsAreOpen : ['GeneralBetsManager', function (GeneralBetsManager) {
                         return GeneralBetsManager.canSubmtiGeneralBet();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).
@@ -59,6 +65,9 @@
                     }],
                     generalBets: ['GeneralBetsManager' , function (GeneralBetsManager) {
                         return GeneralBetsManager.loadAllGeneralBets();
+                    }],
+                    players: ['PlayersManager', function (PlayersManager) {
+                        return PlayersManager.loadAllPlayers();
                     }]
                 }
             }).

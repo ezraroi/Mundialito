@@ -7,6 +7,7 @@ using Mundialito.DAL.Stadiums;
 using Mundialito.DAL.Bets;
 using Mundialito.DAL.GeneralBets;
 using Mundialito.DAL.ActionLogs;
+using Mundialito.DAL.Players;
 
 namespace Mundialito.DAL
 {
@@ -19,7 +20,8 @@ namespace Mundialito.DAL
         public DbSet<Bet> Bets { get; set; }
         public DbSet<GeneralBet> GeneralBets { get; set; }
         public DbSet<ActionLog> ActionLogs { get; set; }
-        
+        public DbSet<Player> Players { get; set; }
+
         public MundialitoContext()
             : base(DataBaseConnectionProvider.GetConnection())
         {
