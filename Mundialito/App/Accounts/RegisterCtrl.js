@@ -10,8 +10,7 @@ angular.module('mundialitoApp').controller('RegisterCtrl', ['$scope', 'security'
             email: '',
             username: '',
             password: '',
-            confirmPassword: '',
-            privateKey: ''
+            confirmPassword: ''
         }
     }
 
@@ -32,7 +31,12 @@ angular.module('mundialitoApp').controller('RegisterCtrl', ['$scope', 'security'
             { property: 'email', label: 'Email Address', type: 'email', attr: { required: true } },
             { property: 'username', type: 'text', attr: { ngMinlength: 4, required: true } },
             { property: 'password', type: 'password', attr: { required: true } },
-            { property: 'confirmPassword', label: 'Confirm Password', type: 'password', attr: { confirmPassword: 'user.password', required: true } },
-            { property: 'privateKey', help: 'The Private Key was given in the e-mail of the payment confirmation', label: 'Private Key', type: 'text', attr: { required: true } }
+            { property: 'confirmPassword', label: 'Confirm Password', type: 'password', attr: { confirmPassword: 'user.password', required: true } }
     ];
+
+    if ($scope.mundialitoApp.protect === "true") {
+        $scope.user.privateKey = '';
+        $scope.schema.push({ property: 'privateKey', help: 'The Private Key was given in the e-mail of the payment confirmation', label: 'Private Key', type: 'text', attr: { required: true } });
+    }
+
 }]);

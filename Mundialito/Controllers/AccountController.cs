@@ -19,6 +19,7 @@ using Mundialito.Results;
 using Mundialito.DAL;
 using Mundialito.DAL.Accounts;
 using Mundialito.Logic;
+using System.Web.Configuration;
 
 namespace Mundialito.Controllers
 {
@@ -336,11 +337,15 @@ namespace Mundialito.Controllers
             {
                 return BadRequest("Tournament is not open for registration anymore");
             }
-            if (!PrivateKeyValidator.ValidatePrivateKey(model.PrivateKey, model.Email))
-            {
-                return BadRequest("Invalid private key");
-            }
 
+            var protect = WebConfigurationManager.AppSettings["PrivateKeyProtection"];
+            if (String.IsNullOrEmpty(protect) || Convert.ToBoolean(protect))
+            {
+                if (!PrivateKeyValidator.ValidatePrivateKey(model.PrivateKey, model.Email))
+                {
+                    return BadRequest("Invalid private key");
+                }
+            }
             MundialitoUser user = new MundialitoUser
             {
                 UserName = model.UserName,

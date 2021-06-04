@@ -19,7 +19,7 @@ namespace MundialitoDbBackupApp.EntityBackuper
 
         protected override List<string> GetFieldsToBackup()
         {
-            return new List<string>() { "GeneralBetId", "WinningTeamId", "GoldBootPlayer", "TeamPoints", "PlayerPoints", "User" };
+            return new List<string>() { "GeneralBetId", "WinningTeamId", "GoldBootPlayerId", "TeamPoints", "PlayerPoints", "User" };
         }
 
         protected override List<GeneralBet> GetAllEntites()
