@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mundialito", "Mundialito\Mundialito.csproj", "{C26C5E81-1BD5-452A-BB30-F8176D770B9C}"
 EndProject
@@ -24,6 +24,7 @@ Global
 		{C26C5E81-1BD5-452A-BB30-F8176D770B9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C26C5E81-1BD5-452A-BB30-F8176D770B9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14F62FEE-D307-4F4B-A82B-903420C67265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F62FEE-D307-4F4B-A82B-903420C67265}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C099A4F-81FF-4A29-B859-520D66801E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,10 +36,14 @@ Global
 		{D1B3875B-E9E7-4F94-ADAA-0B3FF7F03903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1B3875B-E9E7-4F94-ADAA-0B3FF7F03903}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F00A336-6554-4F9B-AD8F-F4E38473A483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F00A336-6554-4F9B-AD8F-F4E38473A483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F00A336-6554-4F9B-AD8F-F4E38473A483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F00A336-6554-4F9B-AD8F-F4E38473A483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAF0F43F-6063-4938-85D3-A35B83A29410}
 	EndGlobalSection
 EndGlobal
