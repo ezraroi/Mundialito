@@ -45,7 +45,7 @@
     </div>
     <!-- End of App Loading message -->
     <!-- Main Content -->
-    <div class="body-content ng-cloak" ng-hide="mundialitoApp.loading || mundialitoApp.authenticating" ng-init='mundialitoApp.appName = "@System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]"'>
+    <div class="body-content ng-cloak" ng-hide="mundialitoApp.loading || mundialitoApp.authenticating" ng-init='mundialitoApp.appName = "@System.Web.Configuration.WebConfigurationManager.AppSettings["ApplicationName"]"; mundialitoApp.protect = "@System.Web.Configuration.WebConfigurationManager.AppSettings["PrivateKeyProtection"]"'>
         <!-- Fixed navbar -->
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">

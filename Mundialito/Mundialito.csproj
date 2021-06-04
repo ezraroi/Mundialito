@@ -1086,6 +1086,8 @@
     <Content Include="Content\ui-grid.woff" />
     <Content Include="Content\ui-grid.ttf" />
     <Content Include="Content\ui-grid.eot" />
+    <None Include="Properties\PublishProfiles\eurochamp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\eurochamp - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\eurolito - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\eurolito - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mundialito.pubxml" />
