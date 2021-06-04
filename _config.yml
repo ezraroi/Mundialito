@@ -1,0 +1,8 @@
+title: Mundialito
+description: Social Football Betting Web Application
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
