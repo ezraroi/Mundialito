@@ -1,17 +1,10 @@
-﻿using Mundialito.DAL;
-using Mundialito.DAL.Accounts;
-using Mundialito.DAL.Games;
+﻿using Mundialito.DAL.Games;
 using MundialitoDbBackupApp.EntityBackuper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MundialitoDbBackupApp
 {
@@ -19,23 +12,6 @@ namespace MundialitoDbBackupApp
     {
         static void Main(string[] args)
         {
-            /* Testing send grid account
-            string sendGridUsername = "apikey";
-            string sendGridPassword = "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";
-            string linkAddress = "a";
-            string fromAddress = "ezraroi@gmail.com";
-            MailMessage message = new MailMessage();
-            message.To.Add(new MailAddress("ezraroi@gmail.com", "Roi Ezra"));
-            message.From = new MailAddress(fromAddress, "Eurolito");
-            message.Subject = string.Format("WARNING: ");
-            string content1 = string.Format("Please submit your bet as soon as possible");
-            message.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(content1, (Encoding)null, "text/plain"));
-            SmtpClient smtpClient = new SmtpClient("smtp.sendgrid.net", Convert.ToInt32(587));
-            NetworkCredential networkCredential = new NetworkCredential(sendGridUsername, sendGridPassword);
-            smtpClient.Credentials = (ICredentialsByHost)networkCredential;
-            smtpClient.Send(message);
-            */
-
             WriteLine("Mundialito Database backup app started runnig");
             AutoResetEvent autoEvent = new AutoResetEvent(false);
             WriteLine("Starting first manual backup");
