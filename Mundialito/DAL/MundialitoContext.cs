@@ -44,6 +44,10 @@ namespace Mundialito.DAL
                         .HasForeignKey(m => m.AwayTeamId)
                         .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<MundialitoUser>()
+                        .HasIndex(u => u.Email)
+                        .IsUnique();
+
             /*
             modelBuilder.Entity<Game>().HasRequired(x => x.HomeTeam) //or HasOptional
                                        .WithMany() //Unidirectional

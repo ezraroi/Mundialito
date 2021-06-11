@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mundialito.DAL.Accounts
 {
@@ -13,6 +11,8 @@ namespace Mundialito.DAL.Accounts
 
         public string LastName { get; set; }
 
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(50)]
         public string Email { get; set; }
     }
 }
