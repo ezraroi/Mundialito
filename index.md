@@ -1,14 +1,87 @@
-### Welcome to GitHub Pages.
-This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here [using GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/), select a template crafted by a designer, and publish. After your page is generated, you can check out the new `gh-pages` branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.
+ Mundialito by ezraroi     
 
-### Designer Templates
-We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.
+Mundialito
+==========
 
-### Creating pages manually
-If you prefer to not use the automatic generator, push a branch named `gh-pages` to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.
+Social Football Betting Web Application
+---------------------------------------
 
-### Authors and Contributors
-You can @mention a GitHub username to generate a link to their profile. The resulting `<a>` element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (@defunkt), PJ Hyett (@pjhyett), and Tom Preston-Werner (@mojombo) founded GitHub.
+[View on GitHub](https://github.com/ezraroi/Mundialito) [Download .zip](https://github.com/ezraroi/Mundialito/zipball/master) [Download .tar.gz](https://github.com/ezraroi/Mundialito/tarball/master)
 
-### Support or Contact
-Having trouble with Pages? Check out our [documentation](https://help.github.com/pages) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### [](#welcome-to-github-pages)Welcome to Mundialito.
+
+Mundialito is a uniqe open source application that allows you to manage a competition between you and your friends on soccer games.
+
+### [](#designer-templates)How to Start
+
+Just fork the repository and deploy it to [Microsoft Azure](https://portal.azure.com/) as `App Service` and connect your forked repository to the application. Connect the `App Service` to a database in Azure and That it! You can start playing with your friends
+
+### [](#creating-pages-manually)Configuration
+
+You can config the following values in the `Web.config` file in your repository (Mundialito folder) or in the app settings panel in Azure portal:
+
+*   **AdminUserName** - The user name of admin user that will be created in the database
+*   **AdminFirstName** - The first name of the admin user
+*   **AdminLastName** - The last name of the admim user
+*   **AdminEmail** - The email address of the admin user
+*   **FacebookAppId** - The Application ID in facebook if exists (Used for the Facebook Social Plugin) - Optional
+*   **SpotIMSiteID** - The Application ID in Spot.IM platform (Used for the Spot.IM plugin) - Optional
+*   **TournamentStartDate** - The start date of the tournament. Registration is blocked one day before this date and global bets must be placed before it also
+*   **TournamentEndDate** - The end date of the tournament. Global bets can be resolved only after that date
+*   **ApplicationName** - The name of the application. Will be displayed in several places in the web site
+*   **TournamentDBCreatorName** - Name of class which implements the `ITournamentCreator` interface for creating the games, teams and stadiums in the application - Optional
+*   **Theme** - Name of the theme you want for the web site. Can be one of the following: `cerulean`, `spaceLab` - Optional
+*   **MonkeyUserName** - The name of the monkey user. The monkey user is a user which automaticly submit bets on all games in a random way - Optional
+*   **fromAddress** - The address that will be displayed on mails sent by the application
+*   **PrivateKeyProtection** - Enabled by default. Set to `false` if you want to remove the Private Key protection and enable any user in the world to register for the website
+*   **SendBetMail** - Set to `true` if you want the application to send email to the user on each bet he is placing - Optional
+
+### [](#authors-and-contributors)Rules
+
+The competition has several rules:
+
+*   **Global Bets** - Bets on the winning team and the golden boot player must be placed 1 day before the `TournamentStartDate` and equals 12 points each
+*   **Game Bets** - Bets on games can be submitted until 30 minutes before the game start time. Once the game is closed for betting, other users bets will be displayed.
+*   **Game Scoring** - Guessing the mark of the game (1,X,2) - 3 points. Guessing the result - 5 points. Mark of yellow cards and corenrs - 1 point each -> Max of 7 points per game
+
+### [](#authors-and-contributors)Administration
+
+TODO
+
+### [](#authors-and-contributors)Screenshots
+
+![Dashbord](images/Dashbord.png "Dashbord")
+
+  
+
+* * *
+
+![Dashbord](images/Dashbord2.png "Dashbord")
+
+  
+
+* * *
+
+![Closed Game View](images/Game.png "Closed Game View")
+
+  
+
+* * *
+
+![Bets Center](images/BetsCenter.png "Bets Center")
+
+  
+
+* * *
+
+![User Profile](images/Profile.png "User Profile")
+
+  
+
+* * *
+
+### [](#authors-and-contributors)Enabling Mail Sender
+
+TODO
+
+[Mundialito](https://github.com/ezraroi/Mundialito) is maintained by [ezraroi](https://github.com/ezraroi). This page was generated by [GitHub Pages](https://pages.github.com) using the [Cayman theme](https://github.com/jasonlong/cayman-theme) by [Jason Long](https://twitter.com/jasonlong).
