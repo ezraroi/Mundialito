@@ -74,7 +74,7 @@ namespace Mundialito.DAL.DBCreators
             players.Add(new Player() { Name = "Miguel Bruno Fernandes" });
             players.Add(new Player() { Name = "Antoine Griezmann" });
             players.Add(new Player() { Name = "Memphis Depay" });
-            players.Add(new Player() { Name = "Raheem Sterling" });§
+            players.Add(new Player() { Name = "Raheem Sterling" });
             players.Add(new Player() { Name = "Edinson Cavani" });
             players.Add(new Player() { Name = "Diogo Jota" });
             players.Add(new Player() { Name = "Fernando Gabriel Jesus" });
