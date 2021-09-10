@@ -12,6 +12,38 @@ namespace Mundialito.DAL.DBCreators
         public List<Team> GetTeams()
         {
             var teams = new List<Team>();
+            teams.Add(CreateTeam("AFC Ajax", "NED"));
+            teams.Add(CreateTeam("Atalanta BC", "ITA"));
+            teams.Add(CreateTeam("Club Atlético de Madrid", "ESP"));
+            teams.Add(CreateTeam("FC Barcelona", "ESP"));
+            teams.Add(CreateTeam("FC Bayern München", "GER"));
+            teams.Add(CreateTeam("SL Benfica", "POR"));
+            teams.Add(CreateTeam("Beşiktaş JK", "TUR"));
+            teams.Add(CreateTeam("Chelsea FC", "ENG"));
+            teams.Add(CreateTeam("Club Brugge", "BEL"));
+            teams.Add(CreateTeam("Borussia Dortmund", "GER"));
+            teams.Add(CreateTeam("FC Dynamo Kyiv", "UKR"));
+            teams.Add(CreateTeam("FC Internazionale Milano", "ITA"));
+            teams.Add(CreateTeam("Juventus", "ITA"));
+            teams.Add(CreateTeam("RB Leipzig", "GER"));
+            teams.Add(CreateTeam("Liverpool FC", "ENG"));
+            teams.Add(CreateTeam("LOSC Lille", "FRA"));
+            teams.Add(CreateTeam("Malmö FF", "SWE"));
+            teams.Add(CreateTeam("Manchester City FC", "ENG"));
+            teams.Add(CreateTeam("Manchester United", "ENG"));
+            teams.Add(CreateTeam("AC Milan", "ITA"));
+            teams.Add(CreateTeam("Paris Saint-Germain", "FRA"));
+            teams.Add(CreateTeam("FC Porto", "POR"));
+            teams.Add(CreateTeam("Real Madrid CF", "ESP"));
+            teams.Add(CreateTeam("FC Salzburg", "AUT"));
+            teams.Add(CreateTeam("Sevilla FC", "ESP"));
+            teams.Add(CreateTeam("FC Shakhtar Donetsk", "UKR"));
+            teams.Add(CreateTeam("FC Sheriff Tiraspol", "MDA"));
+            teams.Add(CreateTeam("Sporting Clube de Portugal", "POR"));
+            teams.Add(CreateTeam("Villarreal CF", "ESP"));
+            teams.Add(CreateTeam("VfL Wolfsburg", "GER"));
+            teams.Add(CreateTeam("BSC Young Boys", "SUI"));
+            teams.Add(CreateTeam("FC Zenit", "RUS"));
             return teams;
         }
 
@@ -42,7 +74,7 @@ namespace Mundialito.DAL.DBCreators
             players.Add(new Player() { Name = "Miguel Bruno Fernandes" });
             players.Add(new Player() { Name = "Antoine Griezmann" });
             players.Add(new Player() { Name = "Memphis Depay" });
-            players.Add(new Player() { Name = "Raheem Sterling" });
+            players.Add(new Player() { Name = "Raheem Sterling" });§
             players.Add(new Player() { Name = "Edinson Cavani" });
             players.Add(new Player() { Name = "Diogo Jota" });
             players.Add(new Player() { Name = "Fernando Gabriel Jesus" });
