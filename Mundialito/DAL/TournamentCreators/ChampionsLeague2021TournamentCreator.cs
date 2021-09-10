@@ -50,12 +50,22 @@ namespace Mundialito.DAL.DBCreators
         public List<Game> GetGames(Dictionary<String, Stadium> stadiums, Dictionary<String, Team> teams)
         {
             var games = new List<Game>();
+            games.Add(new Game
+            {
+                HomeTeamId = teams["BSC Young Boys"].TeamId,
+                AwayTeamId = teams["Manchester United"].TeamId,
+                Date = GetFixedDate(new DateTime(2021, 9, 14, 19, 45, 0)),
+                StadiumId = stadiums["Stadion Wankdorf"].StadiumId
+            });
             return games;
         }
 
         public List<Stadium> GetStadiums()
         {
             var stadiums = new List<Stadium>();
+            stadiums.Add(new Stadium() { Name = "Stadion Wankdorf", Capacity = 10000, City = "Berne" });
+
+
             return stadiums;
         }
 
