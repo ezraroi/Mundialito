@@ -98,7 +98,7 @@
       <Version>4.2.1408.717</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="NUnit">
       <Version>3.13.2</Version>
