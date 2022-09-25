@@ -249,6 +249,7 @@
     <Compile Include="DAL\Players\Player.cs" />
     <Compile Include="DAL\Players\PlayersRepository.cs" />
     <Compile Include="DAL\TournamentCreators\ChampionsLeague2021TournamentCreator.cs" />
+    <Compile Include="DAL\TournamentCreators\MundialT2023ournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Euro2021TournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\ITournamentCreator.cs" />
     <Compile Include="DAL\TournamentCreators\Copa2015TournamentCreator.cs" />
