@@ -1,9 +1,0 @@
-﻿{
-  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
-  "webJobName": "MailSenderWebJob",
-  "startTime": "2018-06-11T00:00:00+02:00",
-  "endTime": "2018-07-14T00:00:00+02:00",
-  "jobRecurrenceFrequency": "Minute",
-  "interval": 30,
-  "runMode": "Continuous"
-}

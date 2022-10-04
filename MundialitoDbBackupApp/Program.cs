@@ -1,15 +1,10 @@
-﻿using Mundialito.DAL;
-using Mundialito.DAL.Accounts;
-using Mundialito.DAL.Games;
+﻿using Mundialito.DAL.Games;
 using MundialitoDbBackupApp.EntityBackuper;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MundialitoDbBackupApp
 {
@@ -28,7 +23,7 @@ namespace MundialitoDbBackupApp
             while(openGames.Count > 0)
             {
                 autoEvent.Reset();
-                var timer = new Timer(BackupDatabase, autoEvent, GetMilliscecondsToSleep(openGames[0]), System.Threading.Timeout.Infinite);
+                var timer = new Timer(BackupDatabase, autoEvent, GetMilliscecondsToSleep(openGames[0]), Timeout.Infinite);
                 autoEvent.WaitOne();
                 openGames = GetOpenGames();
             }
