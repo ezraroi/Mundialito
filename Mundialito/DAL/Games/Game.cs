@@ -30,6 +30,11 @@ namespace Mundialito.DAL.Games
         [Range(0, 10)]
         public int? AwayScore { get; set; }
 
+        public decimal RatioWeight { get; set; }
+        public decimal HomeRatio { get; set; }
+        public decimal TieRatio { get; set; }
+        public decimal AwayRatio { get; set; }
+
         [StringLength(1)]
         [RegularExpression("[1X2-]")]
         public String CornersMark { get; set; }
@@ -47,7 +52,7 @@ namespace Mundialito.DAL.Games
         {
             get
             {
-                return Date.Subtract(TimeSpan.FromMinutes(30));
+                return Date.Subtract(TimeSpan.FromMinutes(5));
             }
         }
        

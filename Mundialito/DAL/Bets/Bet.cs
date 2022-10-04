@@ -45,14 +45,14 @@ namespace Mundialito.DAL.Bets
         [Required]
         [StringLength(1)]
         [RegularExpression("[1X2]")]
-        public String CornersMark { get; set; }
+        public String CornersMark { get { return "X";  } set {  } }
 
         [Required]
         [StringLength(1)]
         [RegularExpression("[1X2]")]
-        public String CardsMark { get; set; }
+        public String CardsMark { get { return "X"; } set { } }
 
-        public int? Points { get; set; }
+        public decimal? Points { get; set; }
         
         public Boolean CornersWin { get; set; }
 

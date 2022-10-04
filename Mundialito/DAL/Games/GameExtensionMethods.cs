@@ -26,7 +26,7 @@ namespace Mundialito.DAL.Games
         {
             if (game.IsOpen(now))
                 return false;
-            return game.HomeScore == null || game.AwayScore == null || game.CardsMark == null || game.CornersMark == null;
+            return game.HomeScore == null || game.AwayScore == null;
         }
 
         public static Boolean IsBetResolved(this Game game)

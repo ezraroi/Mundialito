@@ -115,8 +115,8 @@ namespace Mundialito.Controllers
             betToUpdate.BetId = id;
             betToUpdate.HomeScore = bet.HomeScore;
             betToUpdate.AwayScore = bet.AwayScore;
-            betToUpdate.CornersMark = bet.CornersMark;
-            betToUpdate.CardsMark = bet.CardsMark;
+            betToUpdate.CornersMark = "X";
+            betToUpdate.CardsMark = "X";
             betToUpdate.GameId = bet.GameId;
             betToUpdate.UserId = userProivider.UserId;
             betValidator.ValidateUpdateBet(betToUpdate);

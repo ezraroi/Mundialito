@@ -35,7 +35,7 @@ namespace MundialitoDbBackupApp
             var gamesRepository = new GamesRepository();
             var allGames = gamesRepository.Get().ToList();
             WriteLine(string.Format("Got {0} games from database", allGames.Count));
-            var openGames = allGames.OrderBy(game => game.Date).Where(game => game.Date.Subtract(TimeSpan.FromMinutes(30)) > DateTime.UtcNow).ToList();
+            var openGames = allGames.OrderBy(game => game.Date).Where(game => game.Date.Subtract(TimeSpan.FromMinutes(5)) > DateTime.UtcNow).ToList();
             WriteLine(string.Format("{0} games are still open", openGames.Count));
             return openGames;
         }
