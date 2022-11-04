@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'mundialito22'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_699E21F4A2514AC1B10342B195E92718 }}
           package: .
