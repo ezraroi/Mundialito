@@ -9,6 +9,8 @@ angular.module('mundialitoApp').factory('Team', ['$http','$log', function($http,
     Team.prototype = {
         setData: function(teamData) {
             angular.extend(this, teamData);
+            this.Logo = this.Logo.toLowerCase();
+            this.Flag = this.Flag.toLowerCase();
         },
         delete: function() {
             if (confirm('Are you sure you would like to delete team ' + this.Name)) {
