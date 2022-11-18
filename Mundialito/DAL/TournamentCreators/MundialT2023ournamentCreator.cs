@@ -502,6 +502,7 @@ namespace Mundialito.DAL.DBCreators
             players.Add(new Player() { Name = "Robert Lewandowski" });
             players.Add(new Player() { Name = "Kai Havertz" });
             players.Add(new Player() { Name = "Serge Gnabry" });
+            players.Add(new Player() { Name = "Julian Albert" });
             players.Add(new Player() { Name = "Other" });
             return players;
         }
