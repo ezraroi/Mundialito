@@ -2,7 +2,7 @@
     <div class="col-md-10 col-xs-10">
         <div class="media">
                 <span class="pull-left">
-                    <img class="media-object" ng-src="{{team.Logo}}">
+                    <img class="media-object" ng-src="{{team.Logo.toLowerCase()}}">
                 </span>
             <div class="media-body">
                 <h4>{{team.Name}} ({{team.ShortName}})</h4>
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-2 col-xs-2">
             <span class="pull-right">
-                <img class="media-object" ng-src="{{team.Flag}}">
+                <img class="media-object" ng-src="{{team.Flag.toLowerCase()}}">
             </span>
     </div>
 </div>
