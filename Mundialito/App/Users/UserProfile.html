@@ -21,7 +21,7 @@
                             <p class="form-control-static">{{profileUser.Results}}</p>
                         </div>
                         <div class="col-md-8 hidden-xs">
-                            <span class="help-block"><small>Number of games that the user guessed the game result - 5 Points(3 for the Mark + 2)</small></span>
+                            <span class="help-block"><small>Number of games that the user guessed the game exact result</small></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -30,27 +30,10 @@
                             <p class="form-control-static">{{profileUser.Marks}}</p>
                         </div>
                         <div class="col-md-8 hidden-xs">
-                            <span class="help-block"><small>Number of games that the user guessed the game mark (1,X,2) - 3 Points</small></span>
+                            <span class="help-block"><small>Number of games that the user guessed the game mark (1,X,2)</small></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 col-xs-9 control-label">Yellow Cards</label>
-                        <div class="col-md-1 col-xs-3">
-                            <p class="form-control-static">{{profileUser.YellowCards}}</p>
-                        </div>
-                        <div class="col-md-8 hidden-xs">
-                            <span class="help-block"><small>Number of games that the user guessed the game yellow cards mark (1,X,2) - 1 Point</small></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 col-xs-9 control-label">Corners</label>
-                        <div class="col-md-1 col-xs-3">
-                            <p class="form-control-static">{{profileUser.Corners}}</p>
-                        </div>
-                        <div class="col-md-8 hidden-xs">
-                            <span class="help-block"><small>Number of games that the user guessed the game corners mark (1,X,2) - 1 Point</small></span>
-                        </div>
-                    </div>
+                   
                 </form>
             </div>
         </div>
@@ -117,16 +100,6 @@
                                     </div>
                                     <div class="col-md-2 col-xs-1">
                                         <i ng-class="['flag','flag-fifa-{{userBet.Game.AwayTeam.ShortName | lowercase}}']" tooltip=" {{userBet.Game.AwayTeam.Name}}"></i> <span class="hidden-xs">{{userBet.Game.AwayTeam.Name}}</span>
-                                    </div>
-                                    <div class="col-md-2 col-xs-2">
-                                        <span class="label" ng-class="{'label-default' : !userBet.IsResolved, 'label-success' : userBet.CardsWin && userBet.IsResolved, 'label-danger': !userBet.CardsWin && userBet.IsResolved}">
-                                            <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i> <b>{{userBet.CardsMark}}</b>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-2 col-xs-2">
-                                        <span class="label" ng-class="{'label-default' : !userBet.IsResolved,'label-success' : userBet.CornersWin && userBet.IsResolved, 'label-danger': !userBet.CornersWin && userBet.IsResolved}">
-                                            <i class="fa fa-flag-o" tooltip="Corners Mark"></i> <b>{{userBet.CornersMark}}</b>
-                                        </span>
                                     </div>
                                     <div class="col-md-2 col-xs-2" ng-if="userBet.IsResolved">
                                         <i class="fa fa-legal" tooltip="Points"></i> <b>{{userBet.Points}}</b>

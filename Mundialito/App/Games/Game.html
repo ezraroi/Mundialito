@@ -54,27 +54,42 @@
                             <input id="GameAwayScore" name="GameAwayScore" type="number" ng-model="game.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                     </div>
-                    <div class="form-group" ng-if="!game.IsOpen">
-                        <label class="col-md-3 control-label" for="game_cards">Yellow Cards</label>
-                        <div class="col-md-2">
-                            <select id="game_cards" name="game_cards" ui-select2="{allowClear: false}" class="form-control" ng-model="game.CardsMark" required placeholder="Game Cards Mark">
-                                <option value="1">1</option>
-                                <option value="X">X</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="form-group" ng-if="!game.IsOpen">
-                        <label class="col-md-3 control-label" for="game_corners">Corners</label>
-                        <div class="col-md-2">
-                            <select id="game_corners" name="game_corners" ui-select2="{allowClear: false}" class="form-control" ng-model="game.CornersMark" required placeholder="Game Corners Mark">
-                                <option value="1">1</option>
-                                <option value="X">X</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameRatioWeight">
+                      Ratio Weight
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameRatioWeight" name="GameRatioWeight" type="number" ng-model="game.RatioWeight" class="form-control" placeholder="Ratio Weight" required min="0">
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameHomeRatio">
+                      <i ng-class="['flagsp','flagsp_{{game.HomeTeam.ShortName | lowercase}}']" title=" {{game.HomeTeam.Name}}"></i> {{game.HomeTeam.Name}} Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameHomeRatio" name="GameHomeRatio" type="number" ng-model="game.HomeRatio" class="form-control" placeholder="Home Ratio" required min="0">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameTieRatio">
+                      Tie Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameTieRatio" name="GameTieRatio" type="number" ng-model="game.TieRatio" class="form-control" placeholder="Tie Ratio" required min="0">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label" for="GameAwayRatio">
+                      <i ng-class="['flagsp','flagsp_{{game.AwayTeam.ShortName | lowercase}}']" title=" {{game.AwayTeam.Name}}"></i> {{game.AwayTeam.Name}} Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input id="GameAwayRatio" name="GameAwayRatio" type="number" ng-model="game.AwayRatio" class="form-control" placeholder="Away Ratio" required min="0">
+                    </div>
+                  </div>
+
+
                     <div class="form-group" ng-if="game.IsOpen">
                         <div class="dropdown">
                             <label class="col-md-3 control-label" for="Date">Date & Time</label>
@@ -131,34 +146,41 @@
                             <input name="{{game.AwayTeam.TeamId}}" ng-readonly="!game.IsOpen" id="{{game.AwayTeam.TeamId}}" type="number" ng-model="userBet.AwayScore" class="form-control" placeholder="Away Team Score" required min="0">
                         </div>
                     </div>
-                    <div class="form-group" ng-class="{'has-error' : cards.$error}">
-                        <label class="col-md-3 control-label" for="cards">Yellow Cards</label>
-                        <div class="col-md-2">
-                            <select id="cards" name="cards" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CardsMark" required placeholder="Game Cards Mark">
-                                <option value="1">1</option>
-                                <option value="X">X</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of yellow cards, <strong>1</strong> - More yellow cards for {{game.HomeTeam.Name}}, <strong>2</strong> - More yellow cards for {{game.AwayTeam.Name}}</small></span>
-                        </div>
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Ratio Weight
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.RatioWeight" class="form-control">
                     </div>
-                    <div class="form-group" ng-class="{'has-error' : corners.$error}">
-                        <label class="col-md-3 control-label" for="corners">
-                            Corners
-                        </label>
-                        <div class="col-md-2">
-                            <select id="corners" name="corners" ng-readonly="!game.IsOpen" ui-select2="{allowClear: false}" class="form-control" ng-model="userBet.CornersMark" required placeholder="Game Corners Mark">
-                                <option value="1">1</option>
-                                <option value="X">X</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <span class="help-block"><small><strong>X</strong> - Both teams will have the same number of corners, <strong>1</strong> - More corners for {{game.HomeTeam.Name}}, <strong>2</strong> - More corners for {{game.AwayTeam.Name}}</small></span>
-                        </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Home Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.HomeRatio" class="form-control">
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Tie Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.TieRatio" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-3 control-label">
+                      Away Ratio
+                    </label>
+                    <div class="col-md-2">
+                      <input ng-readonly="true" type="number" ng-model="game.AwayRatio" class="form-control">
+                    </div>
+                  </div>
+
                 </form>
                 <div class="col-md-2 col-xs-6 col-xs-offset-6 col-md-offset-10" ng-if="game.IsOpen">
                     <span class="pull-right">
@@ -185,16 +207,12 @@
                             <thead>
                                 <th style="cursor: pointer" ng-click="sort('user')"><i class="fa fa-user"></i> User</th>
                                 <th style="cursor: pointer" ng-click="sort('result')">Result</th>
-                                <th style="cursor: pointer" ng-click="sort('cards')"><i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i></th>
-                                <th style="cursor: pointer" ng-click="sort('corners')"><i class="fa fa-flag-o" tooltip="Corners Mark"></i></th>
                                 <th style="cursor: pointer" ng-click="sort('points')">Points</th>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="bet in gameBets">
                                     <td><a href="users/{{bet.User.UserName}}">{{bet.User.FirstName}} {{bet.User.LastName}}</a></td>
                                     <td>{{bet.HomeScore}} - {{bet.AwayScore}}</td>
-                                    <td>{{bet.CardsMark}}</td>
-                                    <td>{{bet.CornersMark}}</td>
                                     <td><span class="label label-{{bet.getClass()}}" ng-show="bet.IsResolved">{{bet.Points}}</span></td>
                                 </tr>
                             </tbody>

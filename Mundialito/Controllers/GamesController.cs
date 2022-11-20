@@ -143,6 +143,11 @@ namespace Mundialito.Controllers
             newGame.AwayTeamId = game.AwayTeam.TeamId;
             newGame.StadiumId = game.Stadium.StadiumId;
             newGame.Date = game.Date;
+            newGame.HomeRatio = game.HomeRatio;
+            newGame.TieRatio = game.TieRatio;
+            newGame.AwayRatio = game.AwayRatio;
+            newGame.RatioWeight = game.RatioWeight;
+
             var res = gamesRepository.InsertGame(newGame);
             Trace.TraceInformation("Posting new Game: {0}", game);
             gamesRepository.Save();
@@ -164,11 +169,15 @@ namespace Mundialito.Controllers
             if (item == null)
                 throw new ObjectNotFoundException(string.Format("No such game with id '{0}'", id));
 
-            if (item.IsOpen(dateTimeProvider.UTCNow) && (game.HomeScore != null || game.AwayScore != null || game.CornersMark != null || game.CardsMark != null))
+            if (item.IsOpen(dateTimeProvider.UTCNow) && (game.HomeScore != null || game.AwayScore != null))
                 throw new ArgumentException("Open game can not be updated with results");
 
             item.AwayScore = game.AwayScore;
             item.HomeScore = game.HomeScore;
+            item.HomeRatio = game.HomeRatio;
+            item.TieRatio = game.TieRatio;
+            item.AwayRatio = game.AwayRatio;
+            item.RatioWeight = game.RatioWeight;
             item.CardsMark = game.CardsMark;
             item.CornersMark = game.CornersMark;
             item.Date = game.Date;

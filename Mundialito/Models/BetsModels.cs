@@ -25,13 +25,13 @@ namespace Mundialito.Models
             AwayScore = bet.AwayScore;
             CornersWin = bet.CornersWin;
             CardsWin = bet.CardsWin;
-            CornersMark = bet.CornersMark;
-            CardsMark = bet.CardsMark;
+            CornersMark =  "X";
+            CardsMark = "X";
             GameMarkWin = bet.GameMarkWin;
             ResultWin = bet.ResultWin;
             IsOpenForBetting = bet.IsOpenForBetting(now);
             IsResolved = bet.IsResolved(now);
-            Points = bet.Points.HasValue ? bet.Points.Value : 0;
+            Points = bet.Points.HasValue ? bet.Points.Value : 0m;
             Game = new BetGame(bet.Game);
             User = new BetUser(bet.User);
         }
@@ -54,7 +54,7 @@ namespace Mundialito.Models
 
         public Boolean ResultWin { get; set; }
 
-        public int Points { get; set; }
+        public decimal Points { get; set; }
 
         public BetUser User { get; set;}
 
@@ -97,8 +97,8 @@ namespace Mundialito.Models
             GameId = bet.GameId;
             HomeScore = bet.HomeScore;
             AwayScore = bet.AwayScore;
-            CornersMark = bet.CornersMark;
-            CardsMark = bet.CardsMark;
+            CornersMark = "X";
+            CardsMark = "X";
         }
 
         public int BetId { get; set; }
@@ -114,15 +114,9 @@ namespace Mundialito.Models
         [Range(0, 10)]
         public int AwayScore { get; set; }
 
-        [Required]
-        [StringLength(1)]
-        [RegularExpression("[1X2]")]
-        public String CornersMark { get; set; }
+        public String CornersMark { get { return "X"; } set { } }
 
-        [Required]
-        [StringLength(1)]
-        [RegularExpression("[1X2]")]
-        public String CardsMark { get; set; }
+        public String CardsMark { get { return "X"; } set { } }
     }
 
     public class UpdateBetModel

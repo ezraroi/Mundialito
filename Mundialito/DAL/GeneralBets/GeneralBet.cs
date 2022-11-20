@@ -15,8 +15,8 @@ namespace Mundialito.DAL.GeneralBets
         public void Resolve(Boolean player, Boolean team)
         {
             IsResolved = true;
-            TeamPoints = team ? 12 : 0;
-            PlayerPoints = player ? 12 : 0;
+            TeamPoints = team ? 0 : 0;
+            PlayerPoints = player ? 0 : 0;
         }
 
         public int GeneralBetId { get; set; }

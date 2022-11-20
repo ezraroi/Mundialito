@@ -42,6 +42,45 @@
                             <option ng-repeat="stadium in stadiums" value="{{stadium}}">{{stadium.Name}}</option>
                         </select>
                     </div>
+
+
+
+                  <div class="form-group select">
+                    <label class="control-label" for="GameRatioWeight">
+                      Ratio Weight
+                    </label>
+                    <div>
+                      <input id="GameRatioWeight" name="GameRatioWeight" type="number" ng-model="newGame.RatioWeight" class="form-control" placeholder="Ratio Weight" min="0">
+                    </div>
+                  </div>
+                  <div class="form-group select">
+                    <label class="control-label" for="GameHomeRatio">
+                      Home Ratio
+                    </label>
+                    <div>
+                      <input id="GameHomeRatio" name="GameHomeRatio" type="number" ng-model="newGame.HomeRatio" class="form-control" placeholder="Home Ratio" min="0">
+                    </div>
+                  </div>
+                  <div class="form-group select">
+                    <label class="control-label" for="GameTieRatio">
+                      Tie Ratio
+                    </label>
+                    <div>
+                      <input id="GameTieRatio" name="GameTieRatio" type="number" ng-model="newGame.TieRatio" class="form-control" placeholder="Tie Ratio" min="0">
+                    </div>
+                  </div>
+                  <div class="form-group select">
+                    <label class="control-label" for="GameAwayRatio">
+                      Away Ratio
+                    </label>
+                    <div>
+                      <input id="GameAwayRatio" name="GameAwayRatio" type="number" ng-model="newGame.AwayRatio" class="form-control" placeholder="Away Ratio" min="0">
+                    </div>
+                  </div>
+
+
+
+
                     <div class="form-group select">
                         <div class="dropdown">
                             <label for="Date">Date & Time</label>
@@ -85,26 +124,6 @@
                                 </label>
                                 <div class="col-md-1">
                                     <input id="AwayScore_{{updatedGame.AwayTeam.TeamId}}" ng-model="updatedGame.AwayScore" type="number" class="form-control" required min="0">
-                                </div>
-                                <label class="col-md-1 control-label" for="Cards_{{updatedGame.AwayTeam.TeamId}}">
-                                    <i class="fa fa-stop" style="color: #ffff00" tooltip="Yellow Cards Mark"></i>
-                                </label>
-                                <div class="col-md-1">
-                                    <select id="Cards_{{updatedGame.AwayTeam.TeamId}}" name="Cards_{{updatedGame.AwayTeam.TeamId}}" ui-select2="{allowClear: false}" class="form-control" ng-model="updatedGame.CardsMark" required placeholder="Game Corners Mark">
-                                        <option value="1">1</option>
-                                        <option value="X">X</option>
-                                        <option value="2">2</option>
-                                    </select>
-                                </div>
-                                <label class="col-md-1 control-label" for="Corners_{{updatedGame.AwayTeam.TeamId}}">
-                                    <i class="fa fa-flag-o" tooltip="Corners Mark"></i>
-                                </label>
-                                <div class="col-md-1">
-                                    <select id="Corners_{{updatedGame.AwayTeam.TeamId}}" name="Corners_{{updatedGame.AwayTeam.TeamId}}" ui-select2="{allowClear: false}" class="form-control" ng-model="updatedGame.CornersMark" required placeholder="Game Corners Mark">
-                                        <option value="1">1</option>
-                                        <option value="X">X</option>
-                                        <option value="2">2</option>
-                                    </select>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" ng-click="updateGame(updatedGame)" game="updatedGame" class="btn btn-success btn-block" ng-disabled="updateGame_{{updatedGame.GameId}}.$invalid"><i class="fa fa-save"></i></button>

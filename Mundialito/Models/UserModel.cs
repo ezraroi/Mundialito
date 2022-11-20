@@ -38,9 +38,9 @@ namespace Mundialito.Models
 
         public String Name { get; set; }
 
-        public int Points { get; set; }
+        public decimal Points { get; set; }
 
-        public int YesterdayPoints { get; set; }
+        public decimal YesterdayPoints { get; set; }
 
         public int Results { get; private set; }
 
