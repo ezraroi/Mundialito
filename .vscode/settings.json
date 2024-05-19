@@ -1,0 +1,5 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/38cb4de4-9858-4bbb-87ad-64681eb23790/resourceGroups/mundialito/providers/Microsoft.Web/sites/mundialito",
+    "appService.deploySubpath": "Mundialito",
+    "dotnet.preferCSharpExtension": true
+}
