@@ -1,7 +1,3 @@
-Mundialito [![Build Status](https://travis-ci.org/ezraroi/Mundialito.svg?branch=master)](https://travis-ci.org/ezraroi/Mundialito)
-==========
+*This repo is not active anymore as the `.NET` version that this project is using is not supported anymore*
 
-Mundialito Web App Code
-
-Hello
-
+Please refer to this repo instead: https://github.com/ezraroi/MundialitoV2
